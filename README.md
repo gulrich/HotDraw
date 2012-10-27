@@ -3,7 +3,7 @@ HotDraw
 
 
 ##[JHotDraw](https://github.com/gulrich/HotDraw/tree/master/JHotDraw%20[Java]) [Java]##
-* Based on the 6th version of JHotDraw
+* Based on the 6th version of [JHotDraw](http://www.jhotdraw.org/)
 * Remove the unused classes and functionalities
 * Use java collections instead of the custom collections (collection factory)
 
