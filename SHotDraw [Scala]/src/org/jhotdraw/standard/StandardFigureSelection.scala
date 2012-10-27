@@ -1,0 +1,92 @@
+/*
+ * @(#)FigureSelection.java
+ *
+ * Project:		JHotdraw - a GUI framework for technical drawings
+ *				http://www.jhotdraw.org
+ *				http://jhotdraw.sourceforge.net
+ * Copyright:	� by the original author(s) and all contributors
+ * License:		Lesser GNU Public License (LGPL)
+ *				http://www.opensource.org/licenses/lgpl-license.html
+ */
+package org.jhotdraw.standard
+
+import org.jhotdraw.framework._
+import org.jhotdraw.util._
+import java.io._
+import java.lang.Object
+
+/**
+ * FigureSelection enables to transfer the selected figures
+ * to a clipboard.<p>
+ * Will soon be converted to the JDK 1.1 Transferable interface.
+ *
+ * @see Clipboard
+ *
+ * @version <$CURRENT_VERSION$>
+ */
+object StandardFigureSelection {
+  def duplicateFigures(toBeCloned: FigureEnumeration, figureCount: Int): FigureEnumeration = {
+    val duplicater: StandardFigureSelection = new StandardFigureSelection(toBeCloned, figureCount)
+    duplicater.getData(duplicater.getType).asInstanceOf[FigureEnumeration]
+  }
+
+  private final val serialVersionUID: Long = 6440287075102928657L
+  /**
+   * The type identifier of the selection.
+   */
+  final val TYPE: String = "org.jhotdraw.Figures"
+}
+
+class StandardFigureSelection extends FigureSelection with Serializable {
+  import StandardFigureSelection._
+  /**
+   * Constructes the Figure selection for the FigureEnumeration.
+   */
+  def this(fe: FigureEnumeration, figureCount: Int) {
+    this()
+    val output: ByteArrayOutputStream = new ByteArrayOutputStream(200)
+    val writer: StorableOutput = new StorableOutput(output)
+    writer.writeInt(figureCount)
+    fe foreach {
+      writer.writeStorable(_)
+    }
+    writer.close
+    fData = output.toByteArray
+  }
+
+  /**
+   * Gets the type of the selection.
+   */
+  def getType: String = TYPE
+
+  /**
+   * Gets the data of the selection. The result is returned
+   * as a FigureEnumeration of Figures.
+   *
+   * @return a copy of the figure selection.
+   */
+  def getData(tpe: String): Any = {
+    if (tpe == TYPE) {
+      val input: InputStream = new ByteArrayInputStream(fData)
+      var result: List[Figure] = List[Figure]()
+      val reader: StorableInput = new StorableInput(input)
+      val count: Int = reader.readInt
+      for(numRead <- 0 to count-1) {
+        try {
+          val newFigure: Figure = reader.readStorable.asInstanceOf[Figure]
+          result ::= newFigure
+        } catch {
+          case e: IOException => {
+            error(e.toString)
+          }
+        }
+      }
+      new FigureEnumerator(result)
+    }
+    return null
+  }
+
+  private var fData: Array[Byte] = null
+}
+
+
