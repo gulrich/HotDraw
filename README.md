@@ -33,4 +33,5 @@ HotDraw
   * Event. use virtual classes
 * Remove code from the figure objects to put it in a super Trait, in order to reduce the code duplication.
   * Create for instance a RectangularFigure for Figure with a rectangular DisplayBox (Rectangle, Ellipse, Triangle, etc.)
-* Remove HandleEnumerator and FigureEnumerator and replace them with Seq
+* Remove HandleEnumerator and FigureEnumerator
+* Replace Iterator with Seq
