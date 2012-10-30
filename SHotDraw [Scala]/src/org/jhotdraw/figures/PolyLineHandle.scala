@@ -12,10 +12,9 @@ package org.jhotdraw.figures
 
 import org.jhotdraw.framework._
 import org.jhotdraw.standard.LocatorHandle
-import org.jhotdraw.standard.SingleFigureEnumerator
 import org.jhotdraw.util.Undoable
 import org.jhotdraw.util.UndoableAdapter
-import java.awt._
+import java.awt.Point
 
 /**
  * A handle for a node on the polyline.
@@ -44,7 +43,7 @@ object PolyLineHandle {
     }
 
     protected def movePointToOldLocation: Boolean = {
-      val fe: FigureEnumeration = getAffectedFigures
+      val fe: Iterator[Figure] = getAffectedFigures.iterator
       if (!fe.hasNext) {
         return false
       }
@@ -77,7 +76,7 @@ class PolyLineHandle(owner: PolyLineFigure, l: Locator, fIndex: Int) extends Loc
 
   override def invokeStart(x: Int, y: Int, view: DrawingView) {
     setUndoActivity(createUndoActivity(view, fIndex))
-    getUndoActivity.setAffectedFigures(new SingleFigureEnumerator(owner))
+    getUndoActivity.setAffectedFigures(List(owner))
     (getUndoActivity.asInstanceOf[PolyLineHandle.UndoActivity]).setOldPoint(new Point(x, y))
   }
 

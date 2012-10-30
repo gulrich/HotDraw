@@ -14,7 +14,6 @@ import java.awt.datatransfer.DataFlavor
 import java.awt.dnd._
 import java.lang.Object
 import org.jhotdraw.util.UndoableAdapter
-import org.jhotdraw.standard.FigureEnumerator
 
 /**
  *
@@ -64,7 +63,7 @@ object JHDDropTargetListener {
           f.release
         }
       }
-      setAffectedFigures(FigureEnumerator.getEmptyEnumeration)
+      setAffectedFigures(Seq())
     }
 
     private var undone: Boolean = false
@@ -140,7 +139,7 @@ class JHDDropTargetListener(drawingEditor: DrawingEditor, drawingView: DrawingVi
           val dx: Int = newP.x - theO.x
           val dy: Int = newP.y - theO.y
           log("mouse at " + newP)
-          val fe: FigureEnumeration = view.insertFigures(getTargetUndoActivity.getAffectedFigures, dx, dy, false)
+          val fe: Seq[Figure] = view.insertFigures(getTargetUndoActivity.getAffectedFigures, dx, dy, false)
           getTargetUndoActivity.setAffectedFigures(fe)
           if (dtde.getDropAction == DnDConstants.ACTION_MOVE) {
             view.addToSelectionAll(getTargetUndoActivity.getAffectedFigures)

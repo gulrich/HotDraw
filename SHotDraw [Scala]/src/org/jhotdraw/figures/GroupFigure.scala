@@ -13,13 +13,10 @@ package org.jhotdraw.figures
 import java.awt.Point
 import java.awt.Rectangle
 import org.jhotdraw.framework.FigureAttributeConstant
-import org.jhotdraw.framework.FigureEnumeration
 import org.jhotdraw.framework.Handle
-import org.jhotdraw.framework.HandleEnumeration
 import org.jhotdraw.standard.CompositeFigure
-import org.jhotdraw.standard.FigureEnumerator
-import org.jhotdraw.standard.HandleEnumerator
 import org.jhotdraw.standard.RelativeLocator
+import org.jhotdraw.framework.Figure
 
 /**
  * A Figure that groups a collection of figures.
@@ -48,16 +45,16 @@ class GroupFigure extends CompositeFigure {
 
   def basicDisplayBox(origin: Point, corner: Point) {}
 
-  override def decompose: FigureEnumeration = new FigureEnumerator(fFigures)
+  override def decompose: Seq[Figure] = fFigures
 
   /**
    * Gets the handles for the GroupFigure.
    */
-  def handles: HandleEnumeration = {
-    new HandleEnumerator(new GroupHandle(this, RelativeLocator.northWest) ::
+  def handles: Seq[Handle] = {
+    new GroupHandle(this, RelativeLocator.northWest) ::
         new GroupHandle(this, RelativeLocator.northEast) ::
         new GroupHandle(this, RelativeLocator.southWest) ::
-        new GroupHandle(this, RelativeLocator.southEast) :: Nil)
+        new GroupHandle(this, RelativeLocator.southEast) :: Nil
   }
 
   /**

@@ -22,21 +22,20 @@ import java.io.ObjectInput
 import java.io.ObjectInputStream
 import java.io.ObjectOutput
 import java.io.ObjectOutputStream
+import java.lang.Object
+
 import org.jhotdraw.framework.ConnectionFigure
 import org.jhotdraw.framework.Connector
 import org.jhotdraw.framework.Figure
 import org.jhotdraw.framework.FigureAttributeConstant
 import org.jhotdraw.framework.FigureChangeEvent
 import org.jhotdraw.framework.FigureChangeListener
-import org.jhotdraw.framework.FigureEnumeration
 import org.jhotdraw.framework.FigureVisitor
 import org.jhotdraw.framework.Handle
-import org.jhotdraw.framework.HandleEnumeration
 import org.jhotdraw.framework.Locator
 import org.jhotdraw.util.Geom
 import org.jhotdraw.util.StorableInput
 import org.jhotdraw.util.StorableOutput
-import java.lang.Object
 
 /**
  * AbstractFigure provides default implementations for
@@ -111,13 +110,13 @@ abstract class AbstractFigure extends Figure {
    * @return a type-safe iterator of handles
    * @see Handle
    */
-  def handles: HandleEnumeration
+  def handles: Seq[Handle]
 
   /**
    * Returns an Enumeration of the figures contained in this figure.
    * @see CompositeFigure
    */
-  def figures: FigureEnumeration = FigureEnumerator.getEmptyEnumeration
+  def figures: Seq[Figure] = Seq[Figure]()
 
   /**
    * Gets the size of the figure. A convenience method.
@@ -166,12 +165,12 @@ abstract class AbstractFigure extends Figure {
   def includes(figure: Figure): Boolean = figure == this
 
   /**
-   * Decomposes a figure into its parts. It returns a FigureEnumeration
+   * Decomposes a figure into its parts. It returns a Seq[Figure]
    * that contains itself.
    * @return an Enumeration with itself as the only element.
    */
-  def decompose: FigureEnumeration = new FigureEnumerator(List(this))
-
+  def decompose: Seq[Figure] = Seq(this)
+  
   /**
    * Sets the Figure's container and registers the container
    * as a figure change listener. A figure's container can be
@@ -404,7 +403,7 @@ abstract class AbstractFigure extends Figure {
     }
   }
 
-  def getDependendFigures: FigureEnumeration = new FigureEnumerator(myDependendFigures)
+  def getDependendFigures: Seq[Figure] = myDependendFigures
 
   def addDependendFigure(newDependendFigure: Figure) {
     myDependendFigures ::= newDependendFigure

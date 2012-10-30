@@ -118,7 +118,7 @@ abstract trait DrawingView extends ImageObserver with DrawingChangeListener {
    *
    * @return an enumeration with the currently selected figures.
    */
-  def selection: FigureEnumeration
+  def selection: Seq[Figure]
 
   /**
    * Gets the currently seleced figures in Z order.
@@ -128,7 +128,7 @@ abstract trait DrawingView extends ImageObserver with DrawingChangeListener {
    * @see #selection
    * @return an enumeration with the currently selected figures.
    */
-  def selectionZOrdered: FigureEnumeration
+  def selectionZOrdered: Seq[Figure]
 
   /**
    * Gets the number of selected figures.
@@ -151,9 +151,9 @@ abstract trait DrawingView extends ImageObserver with DrawingChangeListener {
   def addToSelectionAll(figures: Collection[Figure])
 
   /**
-   * Adds a FigureEnumeration to the current selection.
+   * Adds a Seq[Figure] to the current selection.
    */
-  def addToSelectionAll(fe: FigureEnumeration)
+  def addToSelectionAll(fe: Seq[Figure])
 
   /**
    * Removes a figure from the selection.
@@ -247,7 +247,7 @@ abstract trait DrawingView extends ImageObserver with DrawingChangeListener {
    * The view has three layers: background, drawing, handles.
    * The layers are drawn in back to front order.
    */
-  def draw(g: Graphics, fe: FigureEnumeration)
+  def draw(g: Graphics, fe: Seq[Figure])
 
   /**
    * Draws the currently active handles.
@@ -296,9 +296,9 @@ abstract trait DrawingView extends ImageObserver with DrawingChangeListener {
   def removeFigureSelectionListener(fsl: FigureSelectionListener)
 
   /**
-   * Returns a FigureEnumeration of connection figures
+   * Returns a Seq[Figure] of connection figures
    */
-  def getConnectionFigures(inFigure: Figure): FigureEnumeration
+  def getConnectionFigures(inFigure: Figure): Seq[Figure]
 
   /**
    * Inserts figures in a drawing at given offset. Optional check for connection figures
@@ -306,7 +306,7 @@ abstract trait DrawingView extends ImageObserver with DrawingChangeListener {
    * @return enumeration which has been added to the drawing. The figures in the enumeration
    *         can have changed during adding them (e.g. they could have been decorated).
    */
-  def insertFigures(inFigures: FigureEnumeration, dx: Int, dy: Int, bCheck: Boolean): FigureEnumeration
+  def insertFigures(inFigures: Seq[Figure], dx: Int, dy: Int, bCheck: Boolean): Seq[Figure]
 
   /**
    * Check whether the DrawingView is interactive, i.e. whether it accepts user input

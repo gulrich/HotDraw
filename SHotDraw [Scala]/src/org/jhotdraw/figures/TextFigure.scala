@@ -25,8 +25,8 @@ import org.jhotdraw.framework.FigureAttributeConstant
 import org.jhotdraw.framework.FigureChangeEvent
 import org.jhotdraw.framework.FigureChangeListener
 import org.jhotdraw.framework.Handle
-import org.jhotdraw.framework.HandleEnumeration
-import org.jhotdraw.standard.HandleEnumerator
+
+
 import org.jhotdraw.standard.NullHandle
 import org.jhotdraw.standard.OffsetLocator
 import org.jhotdraw.standard.RelativeLocator
@@ -315,11 +315,11 @@ class TextFigure extends AttributeFigure with FigureChangeListener with TextHold
   /**
    * @see org.jhotdraw.framework.Figure#handles()
    */
-  def handles: HandleEnumeration = {
-    new HandleEnumerator(new NullHandle(this, RelativeLocator.northWest) ::
+  def handles: Seq[Handle] = {
+    new NullHandle(this, RelativeLocator.northWest) ::
         new NullHandle(this, RelativeLocator.northEast) ::
         new NullHandle(this, RelativeLocator.southEast) ::
-        new FontSizeHandle(this, RelativeLocator.southWest) :: Nil)
+        new FontSizeHandle(this, RelativeLocator.southWest) :: Nil
   }
 
   /**

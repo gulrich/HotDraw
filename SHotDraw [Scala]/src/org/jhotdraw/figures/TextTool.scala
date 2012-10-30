@@ -15,8 +15,10 @@ import org.jhotdraw.standard._
 import org.jhotdraw.util.FloatingTextField
 import org.jhotdraw.util.UndoableAdapter
 import org.jhotdraw.util.Undoable
-import java.awt._
 import java.awt.event._
+import java.awt.Dimension
+import java.awt.Rectangle
+import java.awt.Container
 
 /**
  * Tool to create new or edit existing text figures.
@@ -155,16 +157,16 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
       if (getAddedFigure != null) {
         if (!isDeleteTextFigure) {
           setUndoActivity(createPasteUndoActivity)
-          getUndoActivity.setAffectedFigures(new SingleFigureEnumerator(getAddedFigure))
+          getUndoActivity.setAffectedFigures(List(getAddedFigure))
           getTypingTarget.setText(getFloatingTextField.getText)
         }
       } else if (isDeleteTextFigure) {
         setUndoActivity(createDeleteUndoActivity)
-        getUndoActivity.setAffectedFigures(new SingleFigureEnumerator(getSelectedFigure))
+        getUndoActivity.setAffectedFigures(List(getSelectedFigure))
         getUndoActivity.redo
       } else {
         setUndoActivity(createUndoActivity)
-        getUndoActivity.setAffectedFigures(new SingleFigureEnumerator(getTypingTarget.getRepresentingFigure))
+        getUndoActivity.setAffectedFigures(List(getTypingTarget.getRepresentingFigure))
         getTypingTarget.setText(getFloatingTextField.getText)
         (getUndoActivity.asInstanceOf[TextTool.UndoActivity]).setBackupText(getTypingTarget.getText)
       }

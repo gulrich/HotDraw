@@ -19,10 +19,9 @@ import org.jhotdraw.figures.AttributeFigure
 import org.jhotdraw.framework.Connector
 import org.jhotdraw.framework.Figure
 import org.jhotdraw.framework.Handle
-import org.jhotdraw.framework.HandleEnumeration
 import org.jhotdraw.framework.Locator
 import org.jhotdraw.standard.AbstractLocator
-import org.jhotdraw.standard.HandleEnumerator
+
 import org.jhotdraw.util.Geom
 import org.jhotdraw.util.StorableInput
 import org.jhotdraw.util.StorableOutput
@@ -132,13 +131,13 @@ class PolygonFigure extends AttributeFigure {
 
   override def isEmpty: Boolean = ((pointCount < 3) || ((size.width < TOO_CLOSE) && (size.height < TOO_CLOSE)))
 
-  def handles: HandleEnumeration = {
+  def handles: Seq[Handle] = {
     var handles: List[Handle] = List[Handle]()
     for(i <- 0 to pointCount-1) {
       handles ::= new PolygonHandle(this, locator(i), i) 
     }
     handles ::= new PolygonScaleHandle(this)
-    new HandleEnumerator(handles)
+    handles
   }
 
   def basicDisplayBox(origin: Point, corner: Point) {

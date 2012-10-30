@@ -13,11 +13,11 @@ package org.jhotdraw.standard
 import java.awt.Rectangle
 import org.jhotdraw.framework.DrawingEditor
 import org.jhotdraw.framework.DrawingView
-import org.jhotdraw.framework.FigureEnumeration
 import org.jhotdraw.framework.FigureSelection
 import org.jhotdraw.util.Clipboard
 import org.jhotdraw.util.Undoable
 import org.jhotdraw.util.UndoableAdapter
+import org.jhotdraw.framework.Figure
 
 /**
  * Command to insert the clipboard into the drawing.
@@ -63,14 +63,14 @@ class PasteCommand(name: String, newDrawingEditor: DrawingEditor) extends Figure
     val selection: FigureSelection = Clipboard.getClipboard.getContents.asInstanceOf[FigureSelection]
     if (selection != null) {
       setUndoActivity(createUndoActivity)
-      getUndoActivity.setAffectedFigures(selection.getData(StandardFigureSelection.TYPE).asInstanceOf[FigureEnumerator])
-      if (!getUndoActivity.getAffectedFigures.hasNext) {
+      getUndoActivity.setAffectedFigures(selection.getData(StandardFigureSelection.TYPE))
+      if (getUndoActivity.getAffectedFigures.isEmpty) {
         setUndoActivity(null)
         return
       }
       val r: Rectangle = getBounds(getUndoActivity.getAffectedFigures)
       view.clearSelection
-      val fe: FigureEnumeration = insertFigures(getUndoActivity.getAffectedFigures, r.x + 20, r.y + 20)
+      val fe: Seq[Figure] = insertFigures(getUndoActivity.getAffectedFigures, r.x + 20, r.y + 20)
       getUndoActivity.setAffectedFigures(fe)
       view.checkDamage
     }
@@ -78,7 +78,7 @@ class PasteCommand(name: String, newDrawingEditor: DrawingEditor) extends Figure
 
   override def isExecutableWithView: Boolean = Clipboard.getClipboard.getContents != null
 
-  private def getBounds(fe: FigureEnumeration): Rectangle = {
+  private def getBounds(fe: Seq[Figure]): Rectangle = {
     val r: Rectangle = new Rectangle
     fe foreach { f =>
       r.add(f.displayBox)

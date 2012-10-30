@@ -148,7 +148,7 @@ abstract class ChangeConnectionHandle(owner: ConnectionFigure) extends AbstractH
     if ((oldConnector == null) || (target == null) || (oldConnector.owner eq target.owner)) {
       setUndoActivity(null)
     } else {
-      getUndoActivity.setAffectedFigures(new SingleFigureEnumerator(getConnection))
+      getUndoActivity.setAffectedFigures(Seq[Figure](getConnection))
     }
     if (getTargetFigure != null) {
       getTargetFigure.connectorVisibility(false, null)

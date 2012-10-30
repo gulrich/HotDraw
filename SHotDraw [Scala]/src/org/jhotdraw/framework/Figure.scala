@@ -104,7 +104,7 @@ abstract trait Figure extends Storable with Cloneable with Serializable {
    * @return an type-safe iterator of handles
    * @see Handle
    */
-  def handles: HandleEnumeration
+  def handles: Seq[Handle]
 
   /**
    * Gets the size of the figure
@@ -124,7 +124,7 @@ abstract trait Figure extends Storable with Cloneable with Serializable {
   /**
    * Returns an Enumeration of the figures contained in this figure
    */
-  def figures: FigureEnumeration
+  def figures: Seq[Figure]
 
   /**
    * Returns the figure that contains the given point.
@@ -158,7 +158,7 @@ abstract trait Figure extends Storable with Cloneable with Serializable {
    * Decomposes a figure into its parts. A figure is considered
    * as a part of itself.
    */
-  def decompose: FigureEnumeration
+  def decompose: Seq[Figure]
 
   /**
    * Sets the Figure's container and registers the container
@@ -187,7 +187,7 @@ abstract trait Figure extends Storable with Cloneable with Serializable {
   /**
    * Get an enumeration of all <a href="#dependent_figure">dependent figures</a>.
    */
-  def getDependendFigures: FigureEnumeration
+  def getDependendFigures: Seq[Figure]
 
   /**
    * Gets the Figure's listeners.

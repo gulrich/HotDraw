@@ -41,11 +41,9 @@ import org.jhotdraw.framework.DrawingChangeListener
 import org.jhotdraw.framework.DrawingEditor
 import org.jhotdraw.framework.DrawingView
 import org.jhotdraw.framework.Figure
-import org.jhotdraw.framework.FigureEnumeration
 import org.jhotdraw.framework.FigureSelection
 import org.jhotdraw.framework.FigureSelectionListener
 import org.jhotdraw.framework.Handle
-import org.jhotdraw.framework.HandleEnumeration
 import org.jhotdraw.framework.Painter
 import org.jhotdraw.framework.PointConstrainer
 import org.jhotdraw.framework.Tool
@@ -264,20 +262,20 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   /**
    * Check existance of figure in the drawing
    */
-  def figureExists(inf: Figure, fe: FigureEnumeration): Boolean = {
+  def figureExists(inf: Figure, fe: Seq[Figure]): Boolean = {
     fe.find(figure => figure.includes(inf)).isDefined
   }
 
   /**
-   * Inserts a FigureEnumeration of figures and translates them by the
+   * Inserts a Seq[Figure] of figures and translates them by the
    * given offset. This function is used to insert figures from clipboards (cut/copy)
    *
    * @return enumeration which has been added to the drawing. The figures in the enumeration
    *         can have changed during adding them (e.g. they could have been decorated).
    */
-  def insertFigures(fe: FigureEnumeration, dx: Int, dy: Int, bCheck: Boolean): FigureEnumeration = {
+  def insertFigures(fe: Seq[Figure], dx: Int, dy: Int, bCheck: Boolean): Seq[Figure] = {
     if (fe == null) {
-      return FigureEnumerator.getEmptyEnumeration
+      return Seq[Figure]()
     }
     var vCF: List[ConnectionFigure] = List[ConnectionFigure]()
     val visitor: InsertIntoDrawingVisitor = new InsertIntoDrawingVisitor(drawing)
@@ -310,9 +308,9 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   }
 
   /**
-   * Returns a FigureEnumeration of connectionfigures attached to this figure
+   * Returns a Seq[Figure] of connectionfigures attached to this figure
    */
-  def getConnectionFigures(inFigure: Figure): FigureEnumeration = {
+  def getConnectionFigures(inFigure: Figure): Seq[Figure] = {
     if (inFigure == null || !inFigure.canConnect) {
       return null
     }
@@ -322,7 +320,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
         if (cf.startFigure.includes(inFigure) || cf.endFigure.includes(inFigure)) result ::= f
       case _ =>
     })
-    new FigureEnumerator(result)
+    result
   }
 
   /**
@@ -346,15 +344,15 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    *
    * @return an enumeration with the currently selected figures.
    */
-  def selection: FigureEnumeration = selectionZOrdered
+  def selection: Seq[Figure] = selectionZOrdered
 
   /**
    * Gets the currently selected figures in Z order.
    * @see #selection
-   * @return a FigureEnumeration with the selected figures. The enumeration
+   * @return a Seq[Figure] with the selected figures. The enumeration
    *         represents a snapshot of the current selection.
    */
-  def selectionZOrdered: FigureEnumeration = new ReverseFigureEnumerator(fSelection)
+  def selectionZOrdered: Seq[Figure] = fSelection.reverse
 
   /**
    * Gets the number of selected figures.
@@ -391,13 +389,13 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * Adds a Collection of figures to the current selection.
    */
   def addToSelectionAll(figures: Collection[Figure]) {
-    addToSelectionAll(new FigureEnumerator(figures))
+    addToSelectionAll(figures)
   }
 
   /**
-   * Adds a FigureEnumeration to the current selection.
+   * Adds a Seq[Figure] to the current selection.
    */
-  def addToSelectionAll(fe: FigureEnumeration) {
+  def addToSelectionAll(fe: Seq[Figure]) {
     var changed: Boolean = false
     fe foreach { f => changed |= addToSelectionImpl(f)}
     if (changed) {
@@ -448,7 +446,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   /**
    * Gets an enumeration of the currently active handles.
    */
-  protected def selectionHandles: HandleEnumeration = {
+  protected def selectionHandles: Seq[Handle] = {
     if (fSelectionHandles == null) {
       fSelectionHandles = List[Handle]()
       selection foreach { f =>
@@ -457,7 +455,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
         }
       }
     }
-    new HandleEnumerator(fSelectionHandles)
+    fSelectionHandles
   }
 
   /**
@@ -603,7 +601,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * The layers are drawn in back to front order.
    * No background is drawn.
    */
-  def draw(g: Graphics, fe: FigureEnumeration) {
+  def draw(g: Graphics, fe: Seq[Figure]) {
     val isPrinting: Boolean = g.isInstanceOf[PrintGraphics]
     if ((fBackgrounds != null) && !isPrinting) {
       drawPainters(g, fBackgrounds)

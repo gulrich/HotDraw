@@ -122,15 +122,15 @@ class NullDrawingView(var myDrawingEditor: DrawingEditor) extends JPanel with Dr
    *
    * @return an enumeration with the currently selected figures.
    */
-  def selection: FigureEnumeration = FigureEnumerator.getEmptyEnumeration
+  def selection: Seq[Figure] = Seq()
 
   /**
    * Gets the currently seleced figures in Z order.
    * @see #selection
-   * @return a FigureEnumeration with the selected figures. This enumeration
+   * @return a Seq[Figure] with the selected figures. This enumeration
    *         represents a snapshot of the current selection.
    */
-  def selectionZOrdered: FigureEnumeration = FigureEnumerator.getEmptyEnumeration
+  def selectionZOrdered: Seq[Figure] = Seq()
 
   /**
    * Gets the number of selected figures.
@@ -153,9 +153,9 @@ class NullDrawingView(var myDrawingEditor: DrawingEditor) extends JPanel with Dr
   def addToSelectionAll(figures: Collection[Figure]) {}
 
   /**
-   * Adds a FigureEnumeration to the current selection.
+   * Adds a Seq[Figure] to the current selection.
    */
-  def addToSelectionAll(fe: FigureEnumeration) {}
+  def addToSelectionAll(fe: Seq[Figure]) {}
 
   /**
    * Removes a figure from the selection.
@@ -251,7 +251,7 @@ class NullDrawingView(var myDrawingEditor: DrawingEditor) extends JPanel with Dr
    * The view has three layers: background, drawing, handles.
    * The layers are drawn in back to front order.
    */
-  def draw(g: Graphics, fe: FigureEnumeration) {}
+  def draw(g: Graphics, fe: Seq[Figure]) {}
 
   /**
    * Draws the currently active handles.
@@ -300,9 +300,9 @@ class NullDrawingView(var myDrawingEditor: DrawingEditor) extends JPanel with Dr
   def removeFigureSelectionListener(fsl: FigureSelectionListener) {}
 
   /**
-   * Returns a FigureEnumeration of connection figures
+   * Returns a Seq[Figure] of connection figures
    */
-  def getConnectionFigures(inFigure: Figure): FigureEnumeration = FigureEnumerator.getEmptyEnumeration
+  def getConnectionFigures(inFigure: Figure): Seq[Figure] = Seq()
 
   /**
    * Inserts figures in a drawing at given offset. Optional check for connection figures
@@ -310,7 +310,7 @@ class NullDrawingView(var myDrawingEditor: DrawingEditor) extends JPanel with Dr
    * @return enumeration which has been added to the drawing. The figures in the enumeration
    *         can have changed during adding them (e.g. they could have been decorated).
    */
-  def insertFigures(inFigures: FigureEnumeration, dx: Int, dy: Int, bCheck: Boolean): FigureEnumeration = FigureEnumerator.getEmptyEnumeration
+  def insertFigures(inFigures: Seq[Figure], dx: Int, dy: Int, bCheck: Boolean): Seq[Figure] = Seq()
 
   def drawingInvalidated(e: DrawingChangeEvent) {}
 

@@ -31,7 +31,6 @@ object AllTests {
     suite.addTest(new TestSuite(classOf[OffsetLocatorTest]))
     suite.addTest(new TestSuite(classOf[RelativeLocatorTest]))
     suite.addTest(new TestSuite(classOf[SimpleUpdateStrategyTest]))
-    suite.addTest(new TestSuite(classOf[SingleFigureEnumeratorTest]))
     suite.addTest(new TestSuite(classOf[StandardDrawingTest]))
     suite
   }

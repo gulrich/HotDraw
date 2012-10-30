@@ -12,7 +12,6 @@ package org.jhotdraw.standard
 
 import org.jhotdraw.framework.DrawingEditor
 import org.jhotdraw.framework.Figure
-import org.jhotdraw.framework.FigureEnumeration
 import org.jhotdraw.util.Undoable
 import org.jhotdraw.util.UndoableAdapter
 
@@ -31,7 +30,7 @@ object DeleteCommand {
      * @see org.jhotdraw.util.Undoable#undo()
      */
     override def undo: Boolean = {
-      if (super.undo && getAffectedFigures.hasNext) {
+      if (super.undo && !getAffectedFigures.isEmpty) {
         getDrawingView.clearSelection
         setAffectedFigures(myCommand.insertFigures(getAffectedFiguresReversed, 0, 0))
         true
@@ -59,10 +58,10 @@ class DeleteCommand(name: String, newDrawingEditor: DrawingEditor) extends Figur
   override def execute {
     super.execute
     setUndoActivity(createUndoActivity)
-    var fe: FigureEnumeration = view.selection
+    var fe: Seq[Figure] = view.selection
     var affected: List[Figure] = List[Figure]()
     var f: Figure = null
-    var dfe: FigureEnumeration = null
+    var dfe: Seq[Figure] = null
     fe foreach { f =>
       affected ::= f
       dfe = f.getDependendFigures
@@ -72,7 +71,7 @@ class DeleteCommand(name: String, newDrawingEditor: DrawingEditor) extends Figur
         }
       }
     }
-    getUndoActivity.setAffectedFigures(new FigureEnumerator(affected))
+    getUndoActivity.setAffectedFigures(affected)
     deleteFigures(getUndoActivity.getAffectedFigures)
     view.checkDamage
   }

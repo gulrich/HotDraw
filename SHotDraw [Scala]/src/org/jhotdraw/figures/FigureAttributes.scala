@@ -10,7 +10,6 @@
  */
 package org.jhotdraw.figures
 
-import _root_.scala.Boolean
 import java.awt.Color
 import java.io.IOException
 import java.io.Serializable
@@ -59,7 +58,7 @@ class FigureAttributes extends Object with Cloneable with Serializable {
    */
   def set(attributeConstant: FigureAttributeConstant, value: Any) {
     if (value != null) {
-      fMap += ((attributeConstant, value))
+      fMap.put(attributeConstant, value)
     }
     else {
       fMap.remove(attributeConstant)

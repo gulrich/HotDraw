@@ -44,20 +44,20 @@ abstract trait Drawing extends Storable with FigureChangeListener with Serializa
    * Returns an enumeration to iterate in
    * Z-order back to front over the figures.
    */
-  def figures: FigureEnumeration
+  def figures: Seq[Figure]
 
   /**
    * Returns an enumeration to iterate in
    * Z-order back to front over the figures
    * that lie within the absolute bounds.
    */
-  def figures(viewRectangle: Rectangle): FigureEnumeration
+  def figures(viewRectangle: Rectangle): Seq[Figure]
 
   /**
    * Returns an enumeration to iterate in
    * Z-order front to back over the figures.
    */
-  def figuresReverse: FigureEnumeration
+  def figuresReverse: Seq[Figure]
 
   /**
    * Finds a top level Figure. Use this call for hit detection that
@@ -154,17 +154,17 @@ abstract trait Drawing extends Storable with FigureChangeListener with Serializa
   /**
    * Adds a list of figures.
    *
-   * @deprecated use addAll(FigureEnumeration) instead
+   * @deprecated use addAll(Seq[Figure]) instead
    */
   def addAll(newFigures: List[Figure])
 
   /**
-   * Adds a FigureEnumeration of figures.
+   * Adds a Seq[Figure] of figures.
    *
    * @param fe (unused) enumeration containing all figures to be added
    * @see #add
    */
-  def addAll(fe: FigureEnumeration)
+  def addAll(fe: Seq[Figure])
 
   /**
    * Removes the figure from the drawing and releases it.
@@ -188,30 +188,30 @@ abstract trait Drawing extends Storable with FigureChangeListener with Serializa
    * without releasing the figures.
    *
    * @see #orphan
-   * @deprecated use orphanAll(FigureEnumeration) instead
+   * @deprecated use orphanAll(Seq[Figure]) instead
    */
   def orphanAll(orphanFigures: List[Figure])
 
   /**
-   * Removes a FigureEnumeration of figures from the figure's list
+   * Removes a Seq[Figure] of figures from the figure's list
    * without releasing the figures.
    * @see #orphan
    */
-  def orphanAll(fe: FigureEnumeration)
+  def orphanAll(fe: Seq[Figure])
 
   /**
    * Removes a list of figures .
    *
    * @see #remove
-   * @deprecated use removeAll(FigureEnumeration) instead
+   * @deprecated use removeAll(Seq[Figure]) instead
    */
   def removeAll(figures: List[Figure])
 
   /**
-   * Removes a FigureEnumeration of figures.
+   * Removes a Seq[Figure] of figures.
    * @see #remove
    */
-  def removeAll(fe: FigureEnumeration)
+  def removeAll(fe: Seq[Figure])
 
   /**
    * Replaces a figure in the drawing without removing it from the drawing.
@@ -286,7 +286,7 @@ abstract trait Drawing extends Storable with FigureChangeListener with Serializa
   /**
    * Draws only the given figures.
    */
-  def draw(g: Graphics, fe: FigureEnumeration)
+  def draw(g: Graphics, fe: Seq[Figure])
 
   /**
    * Acquires the drawing lock.

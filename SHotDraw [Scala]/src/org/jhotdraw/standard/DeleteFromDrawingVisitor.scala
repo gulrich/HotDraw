@@ -13,7 +13,6 @@ package org.jhotdraw.standard
 import org.jhotdraw.framework.Drawing
 import org.jhotdraw.framework.Figure
 import org.jhotdraw.framework.FigureChangeListener
-import org.jhotdraw.framework.FigureEnumeration
 import org.jhotdraw.framework.FigureVisitor
 import org.jhotdraw.framework.Handle
 
@@ -42,7 +41,7 @@ class DeleteFromDrawingVisitor(newDrawing: Drawing) extends FigureVisitor {
 
   def visitFigureChangeListener(hostFigureChangeListener: FigureChangeListener) {}
 
-  def getDeletedFigures: FigureEnumeration = new FigureEnumerator(myDeletedFigures)
+  def getDeletedFigures: Seq[Figure] = myDeletedFigures.foldLeft(List[Figure]())((x,y) => y::x)
 
   private var myDeletedFigures: Set[Figure] = null
   private var myDrawing: Drawing = null

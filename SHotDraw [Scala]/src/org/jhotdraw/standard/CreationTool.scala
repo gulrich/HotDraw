@@ -132,7 +132,7 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
       setUndoActivity(null)
     } else {
       setUndoActivity(createUndoActivity)
-      getUndoActivity.setAffectedFigures(new FigureEnumerator(getAddedFigures))
+      getUndoActivity.setAffectedFigures(getAddedFigures)
     }
     editor.toolDone
   }

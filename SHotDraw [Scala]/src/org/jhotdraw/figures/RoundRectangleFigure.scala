@@ -63,7 +63,7 @@ class RoundRectangleFigure(origin: Point, corner: Point) extends AttributeFigure
    */
   def getArc: Point = new Point(fArcWidth, fArcHeight)
 
-  def handles: HandleEnumeration = new HandleEnumerator(BoxHandleKit.addHandles(this, List()) ::: List(new RadiusHandle(this)))
+  def handles: Seq[Handle] = BoxHandleKit.addHandles(this, List()) ::: List(new RadiusHandle(this))
 
   def displayBox: Rectangle = new Rectangle(fDisplayBox.x, fDisplayBox.y, fDisplayBox.width, fDisplayBox.height)
 

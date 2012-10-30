@@ -15,7 +15,10 @@ import org.jhotdraw.standard._
 import org.jhotdraw.util.Geom
 import org.jhotdraw.util.Undoable
 import org.jhotdraw.util.UndoableAdapter
-import java.awt._
+import java.awt.Rectangle
+import java.awt.Point
+import java.awt.Graphics
+import java.awt.Color
 
 /**
  * A Handle to manipulate the radius of a round corner rectangle.
@@ -34,7 +37,7 @@ object RadiusHandle {
     override def redo: Boolean = isRedoable && resetRadius
 
     protected def resetRadius: Boolean = {
-      val fe: FigureEnumeration = getAffectedFigures
+      val fe: Iterator[Figure] = getAffectedFigures.iterator
       if (!fe.hasNext) {
         return false
       }
@@ -60,7 +63,7 @@ class RadiusHandle(owner: RoundRectangleFigure) extends AbstractHandle(owner) {
   import RadiusHandle._
   override def invokeStart(x: Int, y: Int, view: DrawingView) {
     setUndoActivity(createUndoActivity(view))
-    getUndoActivity.setAffectedFigures(new SingleFigureEnumerator(owner))
+    getUndoActivity.setAffectedFigures(List(owner))
     (getUndoActivity.asInstanceOf[RadiusHandle.UndoActivity]).setOldRadius((owner.asInstanceOf[RoundRectangleFigure]).getArc)
   }
 

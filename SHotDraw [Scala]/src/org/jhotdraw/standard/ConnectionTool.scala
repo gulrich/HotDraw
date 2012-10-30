@@ -156,7 +156,7 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
         getConnection.connectEnd(getEndConnector)
         getConnection.updateConnection
         setUndoActivity(createUndoActivity)
-        getUndoActivity.setAffectedFigures(new SingleFigureEnumerator(getAddedFigure))
+        getUndoActivity.setAffectedFigures(Seq[Figure](getAddedFigure))
       }
     }
     else if (getConnection != null) {

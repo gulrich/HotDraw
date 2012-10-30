@@ -15,7 +15,11 @@ import org.jhotdraw.standard._
 import org.jhotdraw.util.Geom
 import org.jhotdraw.util.Undoable
 import org.jhotdraw.util.UndoableAdapter
-import java.awt._
+import java.awt.Polygon
+import java.awt.Rectangle
+import java.awt.Point
+import java.awt.Graphics
+import java.awt.Color
 
 /**
  * A Handle to scale and rotate a PolygonFigure
@@ -35,7 +39,7 @@ object PolygonScaleHandle {
     override def redo: Boolean = isRedoable && resetPolygon
 
     protected def resetPolygon: Boolean = {
-      val fe: FigureEnumeration = getAffectedFigures
+      val fe: Iterator[Figure] = getAffectedFigures.iterator
       if (!fe.hasNext) {
         return false
       }
@@ -70,7 +74,7 @@ class PolygonScaleHandle(owner: PolygonFigure) extends AbstractHandle(owner) {
     fCurrent = new Point(x, y)
     val activity: PolygonScaleHandle.UndoActivity = createUndoActivity(view).asInstanceOf[PolygonScaleHandle.UndoActivity]
     setUndoActivity(activity)
-    activity.setAffectedFigures(new SingleFigureEnumerator(owner))
+    activity.setAffectedFigures(List(owner))
     activity.setPolygon(owner.getPolygon)
   }
 

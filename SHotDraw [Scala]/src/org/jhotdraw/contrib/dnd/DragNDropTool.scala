@@ -228,14 +228,14 @@ class DragNDropTool(editor: DrawingEditor) extends AbstractTool(editor) {
         if (c.isInstanceOf[DrawingView]) {
           var found: Boolean = false
           val dv: DrawingView = c.asInstanceOf[DrawingView]
-          val selectedElements: FigureEnumeration = dv.selection
+          val selectedElements: Iterator[Figure] = dv.selection.iterator
           if (!selectedElements.hasNext) {
             return
           }
           val p: Point = dge.getDragOrigin
           found = selectedElements.find(f => f.containsPoint(p.x, p.y)).isDefined
           if (found) {
-            val dndff: DNDFigures = new DNDFigures(dv.selection, p)
+            val dndff: DNDFigures = new DNDFigures(dv.selection.toList, p)
             val trans: DNDFiguresTransferable = new DNDFiguresTransferable(dndff)
             if (c.isInstanceOf[JComponent]) {
               (c.asInstanceOf[JComponent]).setAutoscrolls(false)

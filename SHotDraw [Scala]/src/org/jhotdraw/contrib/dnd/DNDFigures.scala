@@ -13,8 +13,6 @@ package org.jhotdraw.contrib.dnd
 import java.awt.Point
 import java.io.Serializable
 import org.jhotdraw.framework.Figure
-import org.jhotdraw.framework.FigureEnumeration
-import org.jhotdraw.standard.FigureEnumerator
 
 /**
  * @author  C.L.Gilbert <dnoyeb@sourceforge.net>
@@ -24,11 +22,11 @@ object DNDFigures {
   private final val serialVersionUID: Long = 5964365585838817845L
 }
 
-class DNDFigures(fe: FigureEnumeration, newOrigin: Point) extends Serializable {
+class DNDFigures(fe: List[Figure], newOrigin: Point) extends Serializable {
 
   fe foreach { f => figures ::= f}
 
-  def getFigures: FigureEnumeration = new FigureEnumerator(figures)
+  def getFigures: List[Figure] = figures
 
   def getOrigin: Point = origin
 

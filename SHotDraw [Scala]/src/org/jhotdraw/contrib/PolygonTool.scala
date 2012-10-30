@@ -13,8 +13,8 @@ package org.jhotdraw.contrib
 import org.jhotdraw.framework._
 import org.jhotdraw.standard._
 import org.jhotdraw.util.Undoable
-import java.awt._
 import java.awt.event.MouseEvent
+import java.awt.Point
 
 /**
  * Based on ScribbleTool
@@ -60,7 +60,7 @@ class PolygonTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDrawi
       if (fPolygon != null) {
         fPolygon.smoothPoints
         setUndoActivity(createUndoActivity)
-        getUndoActivity.setAffectedFigures(new SingleFigureEnumerator(getAddedFigure))
+        getUndoActivity.setAffectedFigures(List(getAddedFigure))
         editor.toolDone
       }
       fPolygon = null

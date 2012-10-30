@@ -190,13 +190,13 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    * PolyLineHandles but adds ChangeConnectionHandles at the
    * start and end.
    */
-  override def handles: HandleEnumeration = {
+  override def handles: Seq[Handle] = {
     var handles: List[Handle] = List[Handle](new ChangeConnectionStartHandle(this))
     for(i <- 0 to fPoints.size - 2) {
       handles ::= new PolyLineHandle(this, PolyLineFigure.locator(i), i)
     }
     handles ::= new ChangeConnectionEndHandle(this)
-    new HandleEnumerator(handles)
+    handles
   }
 
   /**

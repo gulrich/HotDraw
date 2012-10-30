@@ -12,9 +12,6 @@ package org.jhotdraw.util
 
 import org.jhotdraw.framework.DrawingView
 import org.jhotdraw.framework.Figure
-import org.jhotdraw.framework.FigureEnumeration
-import org.jhotdraw.standard.FigureEnumerator
-import org.jhotdraw.standard.ReverseFigureEnumerator
 import org.jhotdraw.standard.StandardFigureSelection
 
 /**
@@ -47,23 +44,23 @@ class UndoableAdapter(newDrawingView: DrawingView) extends Undoable {
 
   def setRedoable(newIsRedoable: Boolean) {myIsRedoable = newIsRedoable}
 
-  def setAffectedFigures(newAffectedFigures: FigureEnumeration) {
+  def setAffectedFigures(newAffectedFigures: Seq[Figure]) {
     if (newAffectedFigures == null) {
       throw new IllegalArgumentException
     }
     rememberFigures(newAffectedFigures)
   }
 
-  def getAffectedFigures: FigureEnumeration = {
-    if (myAffectedFigures == null) new FigureEnumerator(List[Figure]())
-    else new FigureEnumerator(myAffectedFigures)
+  def getAffectedFigures: Seq[Figure] = {
+    if (myAffectedFigures == null) Seq()
+    else myAffectedFigures
   }
 
-  def getAffectedFiguresReversed: FigureEnumeration = new ReverseFigureEnumerator(myAffectedFigures)
+  def getAffectedFiguresReversed: Seq[Figure] = myAffectedFigures.reverse
 
   def getAffectedFiguresCount: Int = myAffectedFigures.size
 
-  protected def rememberFigures(toBeRemembered: FigureEnumeration) {
+  protected def rememberFigures(toBeRemembered: Seq[Figure]) {
     myAffectedFigures = List[Figure]()
     toBeRemembered foreach { e =>
       myAffectedFigures ::= e
@@ -75,7 +72,7 @@ class UndoableAdapter(newDrawingView: DrawingView) extends Undoable {
    */
   def release {
     getAffectedFigures foreach { e => e release}
-    setAffectedFigures(FigureEnumerator.getEmptyEnumeration)
+    setAffectedFigures(Seq())
   }
 
   /**
@@ -89,10 +86,8 @@ class UndoableAdapter(newDrawingView: DrawingView) extends Undoable {
     setAffectedFigures(StandardFigureSelection.duplicateFigures(getAffectedFigures, getAffectedFiguresCount))
   }
 
-  def getDrawingView: DrawingView = {
-     myDrawingView
-  }
-
+  def getDrawingView: DrawingView = myDrawingView
+  
   protected def setDrawingView(newDrawingView: DrawingView) {
     myDrawingView = newDrawingView
   }

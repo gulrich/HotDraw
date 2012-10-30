@@ -60,19 +60,19 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    * Adds a list of figures.
    *
    * @see #add
-   * @deprecated use addAll(FigureEnumeration) instead
+   * @deprecated use addAll(Seq[Figure]) instead
    */
   def addAll(newFigures: List[Figure]) {
-    addAll(new FigureEnumerator(newFigures))
+    addAll(newFigures)
   }
 
   /**
-   * Adds a FigureEnumeration of figures.
+   * Adds a Seq[Figure] of figures.
    *
    * @see #add
    * @param fe (unused) enumeration containing all figures to be added
    */
-  def addAll(fe: FigureEnumeration) {
+  def addAll(fe: Seq[Figure]) {
     fe foreach (add(_))
   }
 
@@ -95,17 +95,17 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    * Removes a list of figures.
    *
    * @see #remove
-   * @deprecated use removeAll(FigureEnumeration) instead
+   * @deprecated use removeAll(Seq[Figure]) instead
    */
   def removeAll(figures: List[Figure]) {
-    removeAll(new FigureEnumerator(figures))
+    removeAll(figures)
   }
 
   /**
-   * Removes a FigureEnumeration of figures.
+   * Removes a Seq[Figure] of figures.
    * @see #remove
    */
-  def removeAll(fe: FigureEnumeration) {
+  def removeAll(fe: Seq[Figure]) {
     fe foreach(remove(_))
   }
 
@@ -140,13 +140,13 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    * without releasing the figures.
    *
    * @see #orphan
-   * @deprecated use orphanAll(FigureEnumeration) instead
+   * @deprecated use orphanAll(Seq[Figure]) instead
    */
   def orphanAll(newFigures: List[Figure]) {
-    orphanAll(new FigureEnumerator(newFigures))
+    orphanAll(newFigures)
   }
 
-  def orphanAll(fe: FigureEnumeration) {
+  def orphanAll(fe: Seq[Figure]) {
     fe foreach(orphan(_))
   }
 
@@ -305,7 +305,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    * Draws only the given figures
    * @see Figure#draw
    */
-  def draw(g: Graphics, fe: FigureEnumeration) {
+  def draw(g: Graphics, fe: Seq[Figure]) {
     fe foreach(_.draw(g))
   }
 
@@ -321,21 +321,21 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    * changes of the CompositeFigure into account.
    * The figures are returned in the drawing order.
    */
-  override def figures: FigureEnumeration = new FigureEnumerator(fFigures)  
+  override def figures: Seq[Figure] = fFigures  
 
   /**
    * Returns an enumeration to iterate in
    * Z-order back to front over the figures
    * that lie within the given bounds.
    */
-  def figures(viewRectangle: Rectangle): FigureEnumeration = {
+  def figures(viewRectangle: Rectangle): Seq[Figure] = {
     if (_theQuadTree != null) {
-      val fe: FigureEnumeration = _theQuadTree.getAllWithin(new Bounds(viewRectangle).asRectangle2D)
+      val fe: Seq[Figure] = _theQuadTree.getAllWithin(new Bounds(viewRectangle).asRectangle2D)
       var l2: List[OrderedFigureElement] = List()
       fe foreach(f => l2 ::= new OrderedFigureElement(f, f.getZValue))
       l2 = l2.sort((e1, e2) => e1.compareTo(e2) < 0)
       val l3: List[Figure] = l2.foldLeft(List[Figure]())((x,y) => x:::List(y.getFigure))
-      new FigureEnumerator(l3)
+      l3
     } else figures
   }
 
@@ -353,7 +353,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    * Returns an Enumeration for accessing the contained figures
    * in the reverse drawing order.
    */
-  final def figuresReverse: FigureEnumeration = new ReverseFigureEnumerator(fFigures)
+  final def figuresReverse: Seq[Figure] = fFigures.reverse
 
   /**
    * Finds a top level Figure. Use this call for hit detection that
@@ -538,7 +538,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
   private def readObject(s: ObjectInputStream) {
     s.defaultReadObject
     figures foreach(_.addToContainer(this))
-    val fe: FigureEnumeration = figures
+    val fe: Seq[Figure] = figures
     init(new Rectangle(0, 0))
   }
 

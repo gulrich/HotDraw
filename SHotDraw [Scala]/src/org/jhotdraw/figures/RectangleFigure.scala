@@ -15,9 +15,9 @@ import java.awt.Point
 import java.awt.Rectangle
 import java.io.IOException
 import org.jhotdraw.framework.Handle
-import org.jhotdraw.framework.HandleEnumeration
+
 import org.jhotdraw.standard.BoxHandleKit
-import org.jhotdraw.standard.HandleEnumerator
+
 import org.jhotdraw.util.StorableInput
 import org.jhotdraw.util.StorableOutput
 
@@ -42,7 +42,7 @@ class RectangleFigure(origin: Point, corner: Point) extends AttributeFigure {
     fDisplayBox.add(corner)
   }
 
-  def handles: HandleEnumeration = new HandleEnumerator(BoxHandleKit.addHandles(this, List()))
+  def handles: Seq[Handle] = BoxHandleKit.addHandles(this, List())
 
   def displayBox: Rectangle = new Rectangle(fDisplayBox.x, fDisplayBox.y, fDisplayBox.width, fDisplayBox.height)
 

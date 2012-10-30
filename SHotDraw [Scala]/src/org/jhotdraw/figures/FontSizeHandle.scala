@@ -14,7 +14,10 @@ import org.jhotdraw.framework._
 import org.jhotdraw.standard._
 import org.jhotdraw.util.Undoable
 import org.jhotdraw.util.UndoableAdapter
-import java.awt._
+import java.awt.Font
+import java.awt.Rectangle
+import java.awt.Graphics
+import java.awt.Color
 
 /**
  * A Handle to change the font size by direct manipulation.
@@ -82,7 +85,7 @@ class FontSizeHandle(owner: TextFigure, l: Locator) extends LocatorHandle(owner,
 
   override def invokeStart(x: Int, y: Int, view: DrawingView) {
     setUndoActivity(createUndoActivity(view))
-    getUndoActivity.setAffectedFigures(new SingleFigureEnumerator(owner))
+    getUndoActivity.setAffectedFigures(List(owner))
   }
 
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {

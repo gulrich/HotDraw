@@ -12,7 +12,6 @@ package org.jhotdraw.standard
 
 import org.jhotdraw.framework.DrawingEditor
 import org.jhotdraw.framework.Figure
-import org.jhotdraw.framework.FigureEnumeration
 import org.jhotdraw.util.Undoable
 import org.jhotdraw.util.UndoableAdapter
 
@@ -35,7 +34,7 @@ object CutCommand {
      * @see org.jhotdraw.util.Undoable#undo()
      */
     override def undo: Boolean = {
-      if (super.undo && getAffectedFigures.hasNext) {
+      if (super.undo && !getAffectedFigures.isEmpty) {
         getDrawingView.clearSelection
         myCommand.insertFigures(getAffectedFiguresReversed, 0, 0)
         true
@@ -57,7 +56,7 @@ object CutCommand {
      * Preserve the selection of figures the moment the command was executed.
      * @param newSelectedFigures
      */
-    def setSelectedFigures(newSelectedFigures: FigureEnumeration) {
+    def setSelectedFigures(newSelectedFigures: Seq[Figure]) {
       rememberSelectedFigures(newSelectedFigures)
     }
 
@@ -65,7 +64,7 @@ object CutCommand {
      * Preserve a copy of the enumeration in a private list.
      * @param toBeRemembered
      */
-    protected def rememberSelectedFigures(toBeRemembered: FigureEnumeration) {
+    protected def rememberSelectedFigures(toBeRemembered: Seq[Figure]) {
       mySelectedFigures = List[Figure]()
       toBeRemembered foreach {mySelectedFigures ::= _}
     }
@@ -74,7 +73,7 @@ object CutCommand {
      * Returns the selection of figures to perform the command on.
      * @return
      */
-    def getSelectedFigures: FigureEnumeration = new FigureEnumerator(mySelectedFigures)
+    def getSelectedFigures: Seq[Figure] = mySelectedFigures
 
     /**
      * Returns the size of the selection.
@@ -88,7 +87,7 @@ object CutCommand {
     override def release {
       super.release
       getSelectedFigures foreach (_.release)
-      setSelectedFigures(FigureEnumerator.getEmptyEnumeration)
+      setSelectedFigures(Seq[Figure]())
     }
 
     private var mySelectedFigures: List[Figure] = List()
@@ -104,10 +103,10 @@ class CutCommand(name: String, newDrawingEditor: DrawingEditor) extends FigureTr
   override def execute {
     super.execute
     setUndoActivity(createUndoActivity)
-    var fe: FigureEnumeration = view.selection
+    var fe: Seq[Figure] = view.selection
     var affected: List[Figure] = List[Figure]()
     var f: Figure = null
-    var dfe: FigureEnumeration = null
+    var dfe: Seq[Figure] = null
     fe foreach {f =>
       affected ::= f
       dfe = f.getDependendFigures
@@ -115,7 +114,7 @@ class CutCommand(name: String, newDrawingEditor: DrawingEditor) extends FigureTr
         dfe foreach (affected ::= _)
       }
     }
-    fe = new FigureEnumerator(affected)
+    fe = affected
     getUndoActivity.setAffectedFigures(fe)
     val ua: CutCommand.UndoActivity = getUndoActivity.asInstanceOf[CutCommand.UndoActivity]
     ua.setSelectedFigures(view.selection)

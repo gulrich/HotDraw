@@ -29,11 +29,11 @@ abstract trait FigureSelection {
 
   /**
    * Gets the data of the selection. The result is returned
-   * as a FigureEnumeration of Figures.
+   * as a Seq[Figure] of Figures.
    *
    * @return a copy of the figure selection.
    */
-  def getData(tpe: String): Any
+  def getData(tpe: String): Seq[Figure]
 }
 
 

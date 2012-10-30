@@ -18,10 +18,10 @@ import java.io.IOException
 import org.jhotdraw.framework.Connector
 import org.jhotdraw.framework.FigureAttributeConstant
 import org.jhotdraw.framework.Handle
-import org.jhotdraw.framework.HandleEnumeration
+
 import org.jhotdraw.framework.Locator
 import org.jhotdraw.standard.AbstractFigure
-import org.jhotdraw.standard.HandleEnumerator
+
 import org.jhotdraw.util.Geom
 import org.jhotdraw.util.StorableInput
 import org.jhotdraw.util.StorableOutput
@@ -81,10 +81,10 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
     return (size.width < 3) && (size.height < 3)
   }
 
-  def handles: HandleEnumeration = {
+  def handles: Seq[Handle] = {
     var handles: List[Handle] = List()
     for(i <- 0 to fPoints.size-1) handles ::= new PolyLineHandle(this, locator(i), i)
-    new HandleEnumerator(handles)
+    handles
   }
 
   def basicDisplayBox(origin: Point, corner: Point) {

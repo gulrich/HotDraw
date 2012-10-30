@@ -11,7 +11,6 @@ import org.jhotdraw.util.Undoable
 import java.awt.Component
 import java.awt.dnd._
 import javax.swing.JComponent
-import org.jhotdraw.standard.FigureEnumerator
 
 
 /**
@@ -29,7 +28,7 @@ object JHDDragSourceListener {
 
     override def undo: Boolean = {
       if (isUndoable) {
-        if (getAffectedFigures.hasNext) {
+        if (getAffectedFigures.iterator.hasNext) {
           log("RemoveUndoActivity undo")
           getDrawingView.clearSelection
           setAffectedFigures(getDrawingView.insertFigures(getAffectedFigures, 0, 0, false))
@@ -66,7 +65,7 @@ object JHDDragSourceListener {
           f.release
         }
       }
-      setAffectedFigures(FigureEnumerator.getEmptyEnumeration)
+      setAffectedFigures(Seq())
     }
 
     private var undone: Boolean = false

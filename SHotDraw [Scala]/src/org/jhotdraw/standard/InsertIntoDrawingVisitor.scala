@@ -13,7 +13,6 @@ package org.jhotdraw.standard
 import org.jhotdraw.framework.Drawing
 import org.jhotdraw.framework.Figure
 import org.jhotdraw.framework.FigureChangeListener
-import org.jhotdraw.framework.FigureEnumeration
 import org.jhotdraw.framework.FigureVisitor
 import org.jhotdraw.framework.Handle
 
@@ -40,7 +39,7 @@ class InsertIntoDrawingVisitor(var myDrawing: Drawing) extends FigureVisitor {
 
   def visitFigureChangeListener(hostFigureChangeListener: FigureChangeListener) {}
 
-  def getInsertedFigures: FigureEnumeration = new FigureEnumerator(myInsertedFigures)
+  def getInsertedFigures: Seq[Figure] = myInsertedFigures.foldLeft(List[Figure]())((x,y) => y::x)
 
   private var myInsertedFigures: Set[Figure] = Set()
 }

@@ -80,7 +80,7 @@ object ChangeAttributeCommand {
       myOriginalValues = null
     }
 
-    override def setAffectedFigures(fe: FigureEnumeration) {
+    override def setAffectedFigures(fe: Seq[Figure]) {
       super.setAffectedFigures(fe)
       getAffectedFigures foreach { f =>
         val attributeValue: Any = f.getAttribute(getAttribute)

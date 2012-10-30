@@ -37,6 +37,7 @@ class UndoCommand(name: String, newDrawingEditor: DrawingEditor) extends Abstrac
     if (hasBeenUndone && lastUndoable.isRedoable) {
       um.pushRedo(lastUndoable)
     }
+    println(lastUndoable)
     lastUndoable.getDrawingView.checkDamage
     getDrawingEditor.figureSelectionChanged(lastUndoable.getDrawingView)
   }

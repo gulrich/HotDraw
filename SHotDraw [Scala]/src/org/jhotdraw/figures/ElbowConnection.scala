@@ -14,12 +14,12 @@ import java.awt.Point
 import java.awt.Rectangle
 import org.jhotdraw.framework.Figure
 import org.jhotdraw.framework.Handle
-import org.jhotdraw.framework.HandleEnumeration
+
 import org.jhotdraw.framework.Locator
 import org.jhotdraw.standard.AbstractLocator
 import org.jhotdraw.standard.ChangeConnectionEndHandle
 import org.jhotdraw.standard.ChangeConnectionStartHandle
-import org.jhotdraw.standard.HandleEnumerator
+
 import org.jhotdraw.standard.NullHandle
 import org.jhotdraw.util.Geom
 
@@ -45,12 +45,12 @@ class ElbowConnection extends LineConnection {
   /**
    * Gets the handles of the figure.
    */
-  override def handles: HandleEnumeration = {
+  override def handles: Seq[Handle] = {
     var handles: List[Handle] = List(new ChangeConnectionStartHandle(this))
     for(i <- 0 to fPoints.size - 2) handles ::= new NullHandle(this, PolyLineFigure.locator(i))
     handles ::= new ChangeConnectionEndHandle(this)
     for(i <- 0 to fPoints.size - 2) handles ::= new ElbowHandle(this, i)
-    new HandleEnumerator(handles)
+    handles
   }
 
   override def connectedTextLocator(f: Figure): Locator = new ElbowTextLocator

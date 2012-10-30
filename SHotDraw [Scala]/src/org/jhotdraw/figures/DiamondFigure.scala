@@ -19,9 +19,9 @@ import java.awt.geom.GeneralPath
 import java.io.IOException
 import org.jhotdraw.framework.Connector
 import org.jhotdraw.framework.Handle
-import org.jhotdraw.framework.HandleEnumeration
+
 import org.jhotdraw.standard.BoxHandleKit
-import org.jhotdraw.standard.HandleEnumerator
+
 import org.jhotdraw.util.StorableInput
 import org.jhotdraw.util.StorableOutput
 
@@ -42,7 +42,7 @@ class DiamondFigure(origin: Point, corner: Point) extends AttributeFigure {
     this(new Point(0, 0), new Point(0, 0))
   }
   
-  def handles: HandleEnumeration = new HandleEnumerator(BoxHandleKit.addHandles(this, List()))
+  def handles: Seq[Handle] = BoxHandleKit.addHandles(this, List())
 
   def basicDisplayBox(origin: Point, corner: Point) {
     fDisplayBox = new Rectangle(origin)

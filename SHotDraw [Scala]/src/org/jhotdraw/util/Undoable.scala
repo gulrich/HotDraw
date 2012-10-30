@@ -9,9 +9,8 @@
  * http://www.opensource.org/licenses/lgpl-license.html
  */
 package org.jhotdraw.util
-
-import org.jhotdraw.framework.FigureEnumeration
 import org.jhotdraw.framework.DrawingView
+import org.jhotdraw.framework.Figure
 
 /**
  * @author  Wolfram Kaiser <mrfloppy@sourceforge.net>
@@ -41,9 +40,9 @@ abstract trait Undoable {
 
   def getDrawingView: DrawingView
 
-  def setAffectedFigures(newAffectedFigures: FigureEnumeration)
+  def setAffectedFigures(newAffectedFigures: Seq[Figure])
 
-  def getAffectedFigures: FigureEnumeration
+  def getAffectedFigures: Seq[Figure]
 
   def getAffectedFiguresCount: Int
 }

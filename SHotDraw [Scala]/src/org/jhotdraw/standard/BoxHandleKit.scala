@@ -67,7 +67,7 @@ object ResizeHandle {
 
 
     private def resetDisplayBox: Boolean = {
-      val fe: FigureEnumeration = getAffectedFigures
+      val fe: Iterator[Figure] = getAffectedFigures.iterator
       if (!fe.hasNext) {
         return false
       }
@@ -92,7 +92,7 @@ class ResizeHandle(owner: Figure, loc: Locator) extends LocatorHandle(owner, loc
 
   override def invokeStart(x: Int, y: Int, view: DrawingView) {
     setUndoActivity(createUndoActivity(view))
-    getUndoActivity.setAffectedFigures(new SingleFigureEnumerator(owner))
+    getUndoActivity.setAffectedFigures(Seq[Figure](owner))
     (getUndoActivity.asInstanceOf[ResizeHandle.UndoActivity]).setOldDisplayBox(owner.displayBox)
   }
 

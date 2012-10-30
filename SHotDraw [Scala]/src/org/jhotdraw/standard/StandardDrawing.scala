@@ -20,9 +20,7 @@ import org.jhotdraw.framework.DrawingChangeListener
 import org.jhotdraw.framework.Figure
 import org.jhotdraw.framework.FigureChangeEvent
 import org.jhotdraw.framework.FigureChangeListener
-import org.jhotdraw.framework.FigureEnumeration
 import org.jhotdraw.framework.Handle
-import org.jhotdraw.framework.HandleEnumeration
 
 /**
  * The standard implementation of the Drawing interface.
@@ -118,11 +116,11 @@ class StandardDrawing extends CompositeFigure with Drawing {
    * Return's the figure's handles. This is only used when a drawing
    * is nested inside another drawing.
    */
-  def handles: HandleEnumeration = {
-    return new HandleEnumerator(new NullHandle(this, RelativeLocator.northWest) ::
+  def handles: Seq[Handle] = {
+    new NullHandle(this, RelativeLocator.northWest) ::
         new NullHandle(this, RelativeLocator.northEast) ::
         new NullHandle(this, RelativeLocator.southWest) ::
-        new NullHandle(this, RelativeLocator.southEast) :: Nil)
+        new NullHandle(this, RelativeLocator.southEast) :: Nil
   }
 
   /**

@@ -24,16 +24,16 @@ class FigureTransferCommand(name: String, newDrawingEditor: DrawingEditor) exten
   /**
    * Deletes the selection from the drawing.
    */
-  private[standard] def deleteFigures(fe: FigureEnumeration) {
+  private[standard] def deleteFigures(fe: Seq[Figure]) {
     val deleteVisitor: DeleteFromDrawingVisitor = new DeleteFromDrawingVisitor(view.drawing)
     fe foreach {_.visit(deleteVisitor)}
     view.clearSelection
   }
 
   /**
-   * Copies the FigureEnumeration to the clipboard.
+   * Copies the Seq[Figure] to the clipboard.
    */
-  private[standard] def copyFigures(fe: FigureEnumeration, figureCount: Int) {
+  private[standard] def copyFigures(fe: Seq[Figure], figureCount: Int) {
     Clipboard.getClipboard.setContents(new StandardFigureSelection(fe, figureCount))
   }
 
@@ -46,7 +46,7 @@ class FigureTransferCommand(name: String, newDrawingEditor: DrawingEditor) exten
    *       package scope I didn't know about. dnoyeb.
    *       Bug - [ 673096 ] FigureTransferCommand has a wrong method
    */
-  def insertFigures(fe: FigureEnumeration, dx: Int, dy: Int): FigureEnumeration = view.insertFigures(fe, dx, dy, false)
+  def insertFigures(fe: Seq[Figure], dx: Int, dy: Int): Seq[Figure] = view.insertFigures(fe, dx, dy, false)
 }
 
 

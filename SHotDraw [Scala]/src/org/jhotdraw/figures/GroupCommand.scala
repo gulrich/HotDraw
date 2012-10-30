@@ -39,7 +39,7 @@ object GroupCommand {
         getDrawingView.addToSelectionAll(f.figures)
         f.figures foreach {affectedFigures ::= _}
       }
-      setAffectedFigures(new FigureEnumerator(affectedFigures))
+      setAffectedFigures(affectedFigures)
       true
     }
 
@@ -57,7 +57,7 @@ object GroupCommand {
       group.addAll(getAffectedFigures)
       val figure: Figure = getDrawingView.drawing.add(group)
       getDrawingView.addToSelection(figure)
-      setAffectedFigures(new FigureEnumerator(List(figure)))
+      setAffectedFigures(List(figure))
     }
   }
 

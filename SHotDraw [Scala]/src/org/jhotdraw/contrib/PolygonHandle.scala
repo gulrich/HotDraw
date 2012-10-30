@@ -28,7 +28,7 @@ object PolygonHandle {
   class UndoActivity(newView: DrawingView, newPointIndex: Int) extends PolyLineHandle.UndoActivity(newView, newPointIndex) {
 
     protected override def movePointToOldLocation: Boolean = {
-      val fe: FigureEnumeration = getAffectedFigures
+      val fe: Iterator[Figure] = getAffectedFigures.iterator
       if (!fe.hasNext) {
         return false
       }
@@ -47,7 +47,7 @@ class PolygonHandle(owner: PolygonFigure, fLocator: Locator, fIndex: Int) extend
   
   override def invokeStart(x: Int, y: Int, view: DrawingView) {
     setUndoActivity(createUndoActivity(view, fIndex))
-    getUndoActivity.setAffectedFigures(new SingleFigureEnumerator(owner))
+    getUndoActivity.setAffectedFigures(List(owner))
     (getUndoActivity.asInstanceOf[PolygonHandle.UndoActivity]).setOldPoint(new Point(x, y))
   }
 

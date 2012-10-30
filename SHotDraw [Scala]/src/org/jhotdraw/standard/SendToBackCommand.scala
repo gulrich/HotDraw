@@ -57,7 +57,7 @@ object SendToBackCommand {
       case _ => -1
     }
 
-    override def setAffectedFigures(fe: FigureEnumeration) {
+    override def setAffectedFigures(fe: Seq[Figure]) {
       super.setAffectedFigures(fe)
       getAffectedFigures foreach { f =>
         val originalLayer: Int = getDrawingView.drawing.getLayer(f)

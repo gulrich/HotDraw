@@ -24,7 +24,7 @@ class DuplicateCommand(name: String, newDrawingEditor: DrawingEditor) extends Fi
     super.execute
     setUndoActivity(createUndoActivity)
     val selection: FigureSelection = view.getFigureSelection
-    val figures: FigureEnumeration = selection.getData(StandardFigureSelection.TYPE).asInstanceOf[FigureEnumeration]
+    val figures: Seq[Figure] = selection.getData(StandardFigureSelection.TYPE).asInstanceOf[Seq[Figure]]
     getUndoActivity.setAffectedFigures(figures)
     view.clearSelection
     getUndoActivity.setAffectedFigures(insertFigures(getUndoActivity.getAffectedFigures, 10, 10))

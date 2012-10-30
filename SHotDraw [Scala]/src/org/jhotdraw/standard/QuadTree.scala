@@ -133,7 +133,7 @@ class QuadTree(nMaxTreeDepth: Int, absoluteBoundingRectangle2D: Rectangle2D) ext
 
   def getMaxTreeDepth: Int = _nMaxTreeDepth
 
-  def getAllWithin(r: Rectangle2D): FigureEnumerator = {
+  def getAllWithin(r: Rectangle2D): Seq[Figure] = {
     var l: List[Figure] = List[Figure]()
     _outsideHashtable foreach { case (fig,rect) =>
       if (rect.intersects(r)) l ::= fig
@@ -143,10 +143,10 @@ class QuadTree(nMaxTreeDepth: Int, absoluteBoundingRectangle2D: Rectangle2D) ext
         if (rect.intersects(r)) l ::= fig
       }
       if (_nMaxTreeDepth > 1) {
-        return new FigureEnumerator(l).addAll(_nwQuadTree.getAllWithin(r)).addAll(_neQuadTree.getAllWithin(r)).addAll(_swQuadTree.getAllWithin(r)).addAll(_seQuadTree.getAllWithin(r))
+        return l  ++ _nwQuadTree.getAllWithin(r) ++ _neQuadTree.getAllWithin(r) ++ _swQuadTree.getAllWithin(r) ++ _seQuadTree.getAllWithin(r)
       }
     }
-    new FigureEnumerator(l)
+    l
   }
 
   def getAbsoluteBoundingRectangle2D: Rectangle2D = _absoluteBoundingRectangle2D  

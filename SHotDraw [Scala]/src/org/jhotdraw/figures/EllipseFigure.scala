@@ -36,7 +36,7 @@ class EllipseFigure(origin: Point, corner: Point) extends AttributeFigure {
     this(new Point(0, 0), new Point(0, 0))
   }
 
-  def handles: HandleEnumeration = new HandleEnumerator(BoxHandleKit.addHandles(this, List()))  
+  def handles: Seq[Handle] = BoxHandleKit.addHandles(this, List())  
 
   def basicDisplayBox(origin: Point, corner: Point) {
     fDisplayBox = new Rectangle(origin)

@@ -60,7 +60,7 @@ object DragTracker {
     def getOriginalPoint: Point = myOriginalPoint
 
     def moveAffectedFigures(startPoint: Point, endPoint: Point) {
-      val figures: FigureEnumeration = getAffectedFigures
+      val figures: Seq[Figure] = getAffectedFigures
       figures foreach {f =>
         f.moveBy(endPoint.x - startPoint.x, endPoint.y - startPoint.y)
       }

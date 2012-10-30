@@ -25,9 +25,9 @@ import java.lang.Object
  * @version <$CURRENT_VERSION$>
  */
 object StandardFigureSelection {
-  def duplicateFigures(toBeCloned: FigureEnumeration, figureCount: Int): FigureEnumeration = {
+  def duplicateFigures(toBeCloned: Seq[Figure], figureCount: Int): Seq[Figure] = {
     val duplicater: StandardFigureSelection = new StandardFigureSelection(toBeCloned, figureCount)
-    duplicater.getData(duplicater.getType).asInstanceOf[FigureEnumeration]
+    duplicater.getData(duplicater.getType).asInstanceOf[Seq[Figure]]
   }
 
   private final val serialVersionUID: Long = 6440287075102928657L
@@ -40,9 +40,9 @@ object StandardFigureSelection {
 class StandardFigureSelection extends FigureSelection with Serializable {
   import StandardFigureSelection._
   /**
-   * Constructes the Figure selection for the FigureEnumeration.
+   * Constructes the Figure selection for the Seq[Figure].
    */
-  def this(fe: FigureEnumeration, figureCount: Int) {
+  def this(fe: Seq[Figure], figureCount: Int) {
     this()
     val output: ByteArrayOutputStream = new ByteArrayOutputStream(200)
     val writer: StorableOutput = new StorableOutput(output)
@@ -61,11 +61,11 @@ class StandardFigureSelection extends FigureSelection with Serializable {
 
   /**
    * Gets the data of the selection. The result is returned
-   * as a FigureEnumeration of Figures.
+   * as a Seq[Figure] of Figures.
    *
    * @return a copy of the figure selection.
    */
-  def getData(tpe: String): Any = {
+  def getData(tpe: String): Seq[Figure] = {
     if (tpe == TYPE) {
       val input: InputStream = new ByteArrayInputStream(fData)
       var result: List[Figure] = List[Figure]()
@@ -81,7 +81,7 @@ class StandardFigureSelection extends FigureSelection with Serializable {
           }
         }
       }
-      new FigureEnumerator(result)
+      result
     }
     return null
   }
