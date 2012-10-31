@@ -13,6 +13,7 @@ package org.jhotdraw.util
 import org.jhotdraw.framework.DrawingView
 import org.jhotdraw.framework.Figure
 import org.jhotdraw.standard.StandardFigureSelection
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Most basic implementation for an Undoable activity. Subclasses should override
@@ -22,6 +23,7 @@ import org.jhotdraw.standard.StandardFigureSelection
  * @version <$CURRENT_VERSION$>
  */
 class UndoableAdapter(newDrawingView: DrawingView) extends Undoable {
+  private var myDrawingView: DrawingView = null
   setDrawingView(newDrawingView)
 
   /**
@@ -61,9 +63,9 @@ class UndoableAdapter(newDrawingView: DrawingView) extends Undoable {
   def getAffectedFiguresCount: Int = myAffectedFigures.size
 
   protected def rememberFigures(toBeRemembered: Seq[Figure]) {
-    myAffectedFigures = List[Figure]()
+    myAffectedFigures = ArrayBuffer[Figure]()
     toBeRemembered foreach { e =>
-      myAffectedFigures ::= e
+      myAffectedFigures += e
     }
   }
 
@@ -92,8 +94,7 @@ class UndoableAdapter(newDrawingView: DrawingView) extends Undoable {
     myDrawingView = newDrawingView
   }
 
-  private var myAffectedFigures: List[Figure] = null
+  private var myAffectedFigures: ArrayBuffer[Figure] = ArrayBuffer()
   private var myIsUndoable: Boolean = false
   private var myIsRedoable: Boolean = false
-  private var myDrawingView: DrawingView = null
 }

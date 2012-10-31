@@ -18,14 +18,13 @@ import java.io.IOException
 import org.jhotdraw.framework.Connector
 import org.jhotdraw.framework.FigureAttributeConstant
 import org.jhotdraw.framework.Handle
-
 import org.jhotdraw.framework.Locator
 import org.jhotdraw.standard.AbstractFigure
-
 import org.jhotdraw.util.Geom
 import org.jhotdraw.util.StorableInput
 import org.jhotdraw.util.StorableOutput
 import java.lang.Object
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * A poly line figure consists of a list of points.
@@ -53,7 +52,7 @@ object PolyLineFigure {
 class PolyLineFigure(fSize: Int) extends AbstractFigure {
   import PolyLineFigure._
   
-  protected var fPoints: List[Point] = List()
+  protected var fPoints: ArrayBuffer[Point] = ArrayBuffer()
   protected var fStartDecoration: LineDecoration = null
   protected var fEndDecoration: LineDecoration = null
   protected var fFrameColor: Color = Color.black
@@ -64,7 +63,7 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
 
   def this(x: Int, y: Int) {
     this()
-    fPoints = List(new Point(x, y))
+    fPoints = ArrayBuffer(new Point(x, y))
   }
 
   def displayBox: Rectangle = {
@@ -82,8 +81,8 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
   }
 
   def handles: Seq[Handle] = {
-    var handles: List[Handle] = List()
-    for(i <- 0 to fPoints.size-1) handles ::= new PolyLineHandle(this, locator(i), i)
+    var handles: ArrayBuffer[Handle] = ArrayBuffer()
+    for(i <- 0 to fPoints.size-1) handles += new PolyLineHandle(this, locator(i), i)
     handles
   }
 
@@ -94,7 +93,7 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
    * Adds a node to the list of points.
    */
   def addPoint(x: Int, y: Int) {
-    fPoints ::= new Point(x, y)
+    fPoints += new Point(x, y)
     changed
   }
 
@@ -120,14 +119,14 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
    */
   def insertPointAt(p: Point, i: Int) {
     val (l, r) = fPoints.splitAt(i)
-    fPoints = l ::: p :: r
+    fPoints = l + p ++ r
     changed
   }
 
   def removePointAt(i: Int) {
     willChange
     val (l, r) = fPoints.splitAt(i)
-    fPoints = l ::: r.tail
+    fPoints = l ++ r.tail
     changed
   }
 
@@ -338,11 +337,11 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
   override def read(dr: StorableInput) {
     super.read(dr)
     val size: Int = dr.readInt
-    fPoints = List[Point]()
+    fPoints = ArrayBuffer[Point]()
     for(i <- 0 to size-1) {
       val x: Int = dr.readInt
       val y: Int = dr.readInt
-      fPoints ::= new Point(x, y)
+      fPoints += new Point(x, y)
     }
     setStartDecoration(dr.readStorable.asInstanceOf[LineDecoration])
     setEndDecoration(dr.readStorable.asInstanceOf[LineDecoration])

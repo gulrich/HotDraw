@@ -23,8 +23,6 @@ import java.awt.event.InputEvent
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
 import java.io.IOException
-import java.util.ArrayList
-import java.util.ListIterator
 import javax.swing.JFileChooser
 import javax.swing.JFrame
 import javax.swing.JMenu
@@ -84,7 +82,8 @@ import org.jhotdraw.util.VersionControlStrategy
 import org.jhotdraw.util.VersionManagement
 import org.jhotdraw.util.VersionRequester
 import java.lang.reflect.InvocationTargetException
-import scala.collection.JavaConversions._
+import scala.collection.mutable.ArrayBuffer
+import java.util.ListIterator
 
 
 /**
@@ -645,7 +644,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * interface, this will happen when a new drawing is created.
    */
   def addViewChangeListener(vsl: ViewChangeListener) {
-    listeners ::= vsl
+    listeners += vsl
   }
 
   /**
@@ -662,27 +661,15 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * usually not needed in SDI environments.
    */
   protected def fireViewSelectionChangedEvent(oldView: DrawingView, newView: DrawingView) {
-    val li: ListIterator[ViewChangeListener] = listeners.listIterator(listeners.size)
-    while (li.hasPrevious) {
-      val vsl: ViewChangeListener = li.previous.asInstanceOf[ViewChangeListener]
-      vsl.viewSelectionChanged(oldView, newView)
-    }
+    listeners.reverse foreach { vsl => vsl.viewSelectionChanged(oldView, newView) }
   }
 
   protected def fireViewCreatedEvent(view: DrawingView) {
-    val li: ListIterator[ViewChangeListener] = listeners.listIterator(listeners.size)
-    while (li.hasPrevious) {
-      val vsl: ViewChangeListener = li.previous.asInstanceOf[ViewChangeListener]
-      vsl.viewCreated(view)
-    }
+    listeners.reverse foreach { vsl => vsl.viewCreated(view)}
   }
 
   protected def fireViewDestroyingEvent(view: DrawingView) {
-    val li: ListIterator[ViewChangeListener] = listeners.listIterator(listeners.size)
-    while (li.hasPrevious) {
-      val vsl: ViewChangeListener = li.previous.asInstanceOf[ViewChangeListener]
-      vsl.viewDestroying(view)
-    }
+    listeners.reverse foreach { vsl => vsl.viewDestroying(view) }
   }
 
   /**
@@ -1006,7 +993,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * safely synchronize the few methods that use this by synchronizing on
    * the List object itself.
    */
-  private var listeners: List[ViewChangeListener] = List()
+  private var listeners: ArrayBuffer[ViewChangeListener] = ArrayBuffer()
   private var fDesktopListener: DesktopListener = null
   /**
    * This component acts as a desktop for the content.

@@ -21,10 +21,10 @@ import org.jhotdraw.framework.Figure
 import org.jhotdraw.framework.Handle
 import org.jhotdraw.framework.Locator
 import org.jhotdraw.standard.AbstractLocator
-
 import org.jhotdraw.util.Geom
 import org.jhotdraw.util.StorableInput
 import org.jhotdraw.util.StorableOutput
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * A scalable, rotatable polygon with an arbitrary number of points
@@ -132,11 +132,11 @@ class PolygonFigure extends AttributeFigure {
   override def isEmpty: Boolean = ((pointCount < 3) || ((size.width < TOO_CLOSE) && (size.height < TOO_CLOSE)))
 
   def handles: Seq[Handle] = {
-    var handles: List[Handle] = List[Handle]()
+    var handles: ArrayBuffer[Handle] = ArrayBuffer[Handle]()
     for(i <- 0 to pointCount-1) {
-      handles ::= new PolygonHandle(this, locator(i), i) 
+      handles += new PolygonHandle(this, locator(i), i) 
     }
-    handles ::= new PolygonScaleHandle(this)
+    handles += new PolygonScaleHandle(this)
     handles
   }
 
@@ -163,12 +163,12 @@ class PolygonFigure extends AttributeFigure {
 
   override def center: Point = PolygonFigure.center(getInternalPolygon)
 
-  def points: Iterator[Point] = {
-    var pts: List[Point] = List[Point]()
+  def points: Seq[Point] = {
+    var pts: ArrayBuffer[Point] = ArrayBuffer[Point]()
     for(i <- 0 to pointCount-1) {
-      pts ::= new Point(getInternalPolygon.xpoints(i), getInternalPolygon.ypoints(i))
+      pts += new Point(getInternalPolygon.xpoints(i), getInternalPolygon.ypoints(i))
     }
-    pts.iterator
+    pts
   }
 
   def pointCount: Int = getInternalPolygon.npoints

@@ -15,6 +15,7 @@ import org.jhotdraw.framework._
 import org.jhotdraw.standard._
 import org.jhotdraw.util._
 import java.awt.Point
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * A LineConnection is a standard implementation of the
@@ -152,7 +153,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    */
   def startPoint(x: Int, y: Int) {
     willChange
-    if (fPoints.size == 0) fPoints ::= new Point(x, y)
+    if (fPoints.size == 0) fPoints += new Point(x, y)
     else fPoints = fPoints.updated(0, new Point(x, y))    
     changed
   }
@@ -162,7 +163,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    */
   def endPoint(x: Int, y: Int) {
     willChange
-    if (fPoints.size < 2) fPoints ::= new Point(x, y)
+    if (fPoints.size < 2) fPoints += new Point(x, y)
     else fPoints = fPoints.updated(fPoints.size-1, new Point(x, y)) 
     changed
   }
@@ -191,11 +192,11 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    * start and end.
    */
   override def handles: Seq[Handle] = {
-    var handles: List[Handle] = List[Handle](new ChangeConnectionStartHandle(this))
+    var handles: ArrayBuffer[Handle] = ArrayBuffer[Handle](new ChangeConnectionStartHandle(this))
     for(i <- 0 to fPoints.size - 2) {
-      handles ::= new PolyLineHandle(this, PolyLineFigure.locator(i), i)
+      handles += new PolyLineHandle(this, PolyLineFigure.locator(i), i)
     }
-    handles ::= new ChangeConnectionEndHandle(this)
+    handles += new ChangeConnectionEndHandle(this)
     handles
   }
 

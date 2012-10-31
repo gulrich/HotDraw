@@ -18,6 +18,7 @@ import java.io.InputStreamReader
 import java.io.Reader
 import java.io.StreamTokenizer
 import java.lang.Object
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * An input stream that can be used to resurrect Storable objects.
@@ -31,7 +32,7 @@ import java.lang.Object
 class StorableInput(stream: InputStream) {
   
   private var fTokenizer: StreamTokenizer = new StreamTokenizer(new BufferedReader(new InputStreamReader(stream)))
-  private var fMap: List[Storable] = List()
+  private var fMap: ArrayBuffer[Storable] = ArrayBuffer()
   
   fTokenizer.wordChars('$', '$')
 
@@ -134,7 +135,7 @@ class StorableInput(stream: InputStream) {
 
   private def map(storable: Storable) {
     if (!fMap.contains(storable)) {
-      fMap ::= storable
+      fMap += storable
     }
   }
 

@@ -11,6 +11,7 @@
 package org.jhotdraw.util
 
 import org.jhotdraw.framework.DrawingView
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * This class manages all the undoable commands. It keeps track of all
@@ -35,23 +36,23 @@ class UndoManager(maxStackCapacity: Int) {
   def pushUndo(undoActivity: Undoable) {
     if (undoActivity.isUndoable) {
       undoStack = removeFirstElementInFullList(undoStack)
-      undoStack ::= undoActivity
-    } else undoStack = List()
+      undoStack += undoActivity
+    } else undoStack = ArrayBuffer()
   }
 
   def pushRedo(redoActivity: Undoable) {
     if (redoActivity.isRedoable) {
       redoStack = removeFirstElementInFullList(redoStack)
       if ((getRedoSize == 0) || (peekRedo != redoActivity)) {
-        redoStack ::= redoActivity
+        redoStack += redoActivity
       }
-    } else redoStack = List()
+    } else redoStack = ArrayBuffer()
   }
 
   /**
    * If buffersize exceeds, remove the oldest command
    */
-  private def removeFirstElementInFullList(l: List[Undoable]): List[Undoable] = {
+  private def removeFirstElementInFullList(l: ArrayBuffer[Undoable]): ArrayBuffer[Undoable] = {
     if (l.size >= maxStackCapacity) {
       l.head.release
       l.tail
@@ -59,7 +60,7 @@ class UndoManager(maxStackCapacity: Int) {
     l
   }
 
-  private def getLastElement(l: List[Undoable]): Option[Undoable] = l.lastOption
+  private def getLastElement(l: ArrayBuffer[Undoable]): Option[Undoable] = l.lastOption
 
   def isUndoable: Boolean = getLastElement(undoStack).isDefined && getLastElement(undoStack).get.isUndoable
 
@@ -102,29 +103,29 @@ class UndoManager(maxStackCapacity: Int) {
     lastUndoable
   }
 
-  def clearUndos {undoStack = List()}
+  def clearUndos {undoStack = ArrayBuffer()}
 
-  def clearRedos {redoStack = List()}
+  def clearRedos {redoStack = ArrayBuffer()}
 
   /**
    * Removes all undo activities that operate on the given DrawingView.
    * @param checkDV DrawingView which is compared undo's DrawingView
    */
-  def clearUndos(checkDV: DrawingView) {undoStack.remove(e => e.getDrawingView == checkDV)}
+  def clearUndos(checkDV: DrawingView) {undoStack = undoStack diff undoStack.filter(e => e.getDrawingView == checkDV)}
 
   /**
    * Removes all redo activities that operate on the given DrawingView.
    * @param checkDV DrawingView which is compared redo's DrawingView
    */
-  def clearRedos(checkDV: DrawingView) {redoStack.remove(e => e.getDrawingView == checkDV)}
+  def clearRedos(checkDV: DrawingView) {redoStack = redoStack diff redoStack.filter(e => e.getDrawingView == checkDV)}
 
   /**
    * Collection of undo activities
    */
-  private var redoStack: List[Undoable] = List[Undoable]()
+  private var redoStack: ArrayBuffer[Undoable] = ArrayBuffer[Undoable]()
   /**
    * Collection of undo activities
    */
-  private var undoStack: List[Undoable] = List[Undoable]()
+  private var undoStack: ArrayBuffer[Undoable] = ArrayBuffer[Undoable]()
 }
 

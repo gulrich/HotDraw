@@ -14,6 +14,7 @@ import java.io._
 import java.awt.Color
 import java.util.ArrayList
 import java.util.List
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * An output stream that can be used to flatten Storable objects.
@@ -24,16 +25,7 @@ import java.util.List
  *
  * @version <$CURRENT_VERSION$>
  */
-class StorableOutput extends Object {
-  /**
-   * Initializes the StorableOutput with the given output stream.
-   */
-  def this(stream: OutputStream) {
-    this()
-    fStream = new PrintWriter(stream)
-    fMap = new ArrayList[Storable]
-    fIndent = 0
-  }
+class StorableOutput(stream: OutputStream) extends Object {
 
   /**
    * Writes a storable object to the output stream.
@@ -143,7 +135,7 @@ class StorableOutput extends Object {
 
   private def map(storable: Storable) {
     if (!fMap.contains(storable)) {
-      fMap.add(storable)
+      fMap += storable
     }
   }
 
@@ -173,8 +165,8 @@ class StorableOutput extends Object {
     fStream.print(' ')
   }
 
-  private var fStream: PrintWriter = null
-  private var fMap: List[Storable] = null
+  private var fStream: PrintWriter = new PrintWriter(stream)
+  private var fMap: ArrayBuffer[Storable] = ArrayBuffer()
   private var fIndent: Int = 0
 }
 

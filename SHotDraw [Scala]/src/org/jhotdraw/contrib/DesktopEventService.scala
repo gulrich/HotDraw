@@ -17,6 +17,7 @@ import java.awt.event.ContainerEvent
 import java.awt.event.ContainerListener
 import org.jhotdraw.framework.DrawingView
 import org.jhotdraw.standard.NullDrawingView
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * @author  Wolfram Kaiser <mrfloppy@users.sourceforge.net>
@@ -53,7 +54,7 @@ class DesktopEventService(var myDesktop: Desktop, var myContainer: Container) {
   }
 
   def addDesktopListener(dpl: DesktopListener) {
-    listeners ::= dpl
+    listeners += dpl
   }
 
   def removeDesktopListener(dpl: DesktopListener) {
@@ -141,7 +142,7 @@ class DesktopEventService(var myDesktop: Desktop, var myContainer: Container) {
    * Current usage of this List is not thread safe, nor should it need to be.
    * If it ever does we can synchronize on the List itself to provide safety.
    */
-  private var listeners: List[DesktopListener] = List()
+  private var listeners: ArrayBuffer[DesktopListener] = ArrayBuffer()
   private var mySelectedView: DrawingView = null
 }
 

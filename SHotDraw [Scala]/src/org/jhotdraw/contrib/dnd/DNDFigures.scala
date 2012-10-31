@@ -13,6 +13,7 @@ package org.jhotdraw.contrib.dnd
 import java.awt.Point
 import java.io.Serializable
 import org.jhotdraw.framework.Figure
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * @author  C.L.Gilbert <dnoyeb@sourceforge.net>
@@ -24,12 +25,12 @@ object DNDFigures {
 
 class DNDFigures(fe: List[Figure], newOrigin: Point) extends Serializable {
 
-  fe foreach { f => figures ::= f}
+  fe foreach { f => figures += f}
 
-  def getFigures: List[Figure] = figures
+  def getFigures: ArrayBuffer[Figure] = figures
 
   def getOrigin: Point = origin
 
-  private var figures: List[Figure] = List[Figure]()
+  private var figures: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
   private var origin: Point = null
 }

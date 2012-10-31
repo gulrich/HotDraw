@@ -13,6 +13,7 @@ package org.jhotdraw.figures
 import org.jhotdraw.framework._
 import org.jhotdraw.standard._
 import org.jhotdraw.util._
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Command to group the selection into a GroupFigure.
@@ -33,11 +34,11 @@ object GroupCommand {
       }
       getDrawingView.clearSelection
       getDrawingView.drawing.orphanAll(getAffectedFigures)
-      var affectedFigures: List[Figure] = List[Figure]()
+      var affectedFigures: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
       getAffectedFigures foreach { f =>
         getDrawingView.drawing.addAll(f.figures)
         getDrawingView.addToSelectionAll(f.figures)
-        f.figures foreach {affectedFigures ::= _}
+        f.figures foreach {affectedFigures += _}
       }
       setAffectedFigures(affectedFigures)
       true

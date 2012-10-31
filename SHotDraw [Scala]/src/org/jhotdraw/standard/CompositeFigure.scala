@@ -16,6 +16,7 @@ import java.io._
 import java.util.Collections
 import java.awt.Rectangle
 import java.awt.Graphics
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * A Figure that is composed of several figures. A CompositeFigure
@@ -49,7 +50,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
     if (!containsFigure(figure)) {
       _nHighestZ += 1
       figure.setZValue(_nHighestZ)
-      fFigures ::= figure
+      fFigures += figure
       figure.addToContainer(this)
       _addToQuadTree(figure)
     }
@@ -115,7 +116,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    */
   def removeAll {
     figures foreach (_.removeFromContainer(this))
-    fFigures = List()
+    fFigures = ArrayBuffer()
     _clearQuadTree
     _nLowestZ = 0
     _nHighestZ = 0
@@ -179,7 +180,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
   def sendToBack(figure: Figure) {
     if (containsFigure(figure)) {
       fFigures = fFigures diff List(figure)
-      fFigures ::= figure
+      fFigures += figure
       _nLowestZ -= 1
       figure.setZValue(_nLowestZ)
       figure.changed
@@ -194,7 +195,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
   def bringToFront(figure: Figure) {
     if (containsFigure(figure)) {
       fFigures = fFigures diff List(figure)
-      fFigures ::= figure
+      fFigures += figure
       _nHighestZ += 1
       figure.setZValue(_nHighestZ)
       figure.changed
@@ -235,8 +236,8 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
         assignFiguresToSuccessorZValue(nr, figureLayer - 1)
       }
       fFigures = fFigures diff List(figure)
-      val split = fFigures.splitAt(nr-1)
-      fFigures = split._1 ::: figure :: split._2 
+      val (l,r) = fFigures.splitAt(nr-1)
+      fFigures = l + figure ++ r 
       figure.setZValue(layerFigureZValue)
       figure.changed
     }
@@ -530,7 +531,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
   override def read(dr: StorableInput) {
     super.read(dr)
     val size: Int = dr.readInt
-    fFigures = List()
+    fFigures = ArrayBuffer()
     for(i <- 0 to size-1) {add(dr.readStorable.asInstanceOf[Figure])}
     init(displayBox)
   }
@@ -588,7 +589,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    * @see #add
    * @see #remove
    */
-  protected var fFigures: List[Figure] = List()
+  protected var fFigures: ArrayBuffer[Figure] = ArrayBuffer()
   @transient
   private var _theQuadTree: QuadTree = null
   protected var _nLowestZ: Int = 0

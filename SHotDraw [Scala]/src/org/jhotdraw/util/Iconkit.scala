@@ -17,6 +17,7 @@ import java.awt.Toolkit
 import java.awt.image.ImageProducer
 import java.net.URL
 import javax.swing.ImageIcon
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * The Iconkit class supports the sharing of images. It maintains
@@ -79,7 +80,7 @@ class Iconkit {
    * @see #loadRegisteredImages
    */
   def registerImage(fileName: String) {
-    fRegisteredImages ::= fileName
+    fRegisteredImages += fileName
   }
 
   /**
@@ -132,7 +133,7 @@ class Iconkit {
   private def basicGetImage(filename: String): Option[Image] = fMap.get(filename)
 
   private var fMap: Map[String, Image] = Map()
-  private var fRegisteredImages: List[String] = List()
+  private var fRegisteredImages: ArrayBuffer[String] = ArrayBuffer()
   private var fgIconkit: Iconkit = null
   private var fComponent: Component = null
   private var fgDebug: Boolean = false

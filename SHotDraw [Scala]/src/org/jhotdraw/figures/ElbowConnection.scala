@@ -14,14 +14,13 @@ import java.awt.Point
 import java.awt.Rectangle
 import org.jhotdraw.framework.Figure
 import org.jhotdraw.framework.Handle
-
 import org.jhotdraw.framework.Locator
 import org.jhotdraw.standard.AbstractLocator
 import org.jhotdraw.standard.ChangeConnectionEndHandle
 import org.jhotdraw.standard.ChangeConnectionStartHandle
-
 import org.jhotdraw.standard.NullHandle
 import org.jhotdraw.util.Geom
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * A LineConnection that constrains a connection to
@@ -46,10 +45,10 @@ class ElbowConnection extends LineConnection {
    * Gets the handles of the figure.
    */
   override def handles: Seq[Handle] = {
-    var handles: List[Handle] = List(new ChangeConnectionStartHandle(this))
-    for(i <- 0 to fPoints.size - 2) handles ::= new NullHandle(this, PolyLineFigure.locator(i))
-    handles ::= new ChangeConnectionEndHandle(this)
-    for(i <- 0 to fPoints.size - 2) handles ::= new ElbowHandle(this, i)
+    var handles: ArrayBuffer[Handle] = ArrayBuffer(new ChangeConnectionStartHandle(this))
+    for(i <- 0 to fPoints.size - 2) handles += new NullHandle(this, PolyLineFigure.locator(i))
+    handles += new ChangeConnectionEndHandle(this)
+    for(i <- 0 to fPoints.size - 2) handles += new ElbowHandle(this, i)
     handles
   }
 
@@ -59,22 +58,22 @@ class ElbowConnection extends LineConnection {
     willChange
     val start: Point = startPoint
     val end: Point = endPoint
-    fPoints = List()
-    fPoints ::= start
+    fPoints = ArrayBuffer()
+    fPoints += start
     if (start.x == end.x || start.y == end.y) {
-      fPoints ::= end
+      fPoints += end
     } else {
       val r1: Rectangle = getStartConnector.owner.displayBox
       val r2: Rectangle = getEndConnector.owner.displayBox
       val dir: Int = Geom.direction(r1.x + r1.width / 2, r1.y + r1.height / 2, r2.x + r2.width / 2, r2.y + r2.height / 2)
       if (dir == Geom.NORTH || dir == Geom.SOUTH) {
-        fPoints ::= new Point(start.x, (start.y + end.y) / 2)
-        fPoints ::= new Point(end.x, (start.y + end.y) / 2)
+        fPoints += new Point(start.x, (start.y + end.y) / 2)
+        fPoints += new Point(end.x, (start.y + end.y) / 2)
       } else {
-        fPoints ::= new Point((start.x + end.x) / 2, start.y)
-        fPoints ::= new Point((start.x + end.x) / 2, end.y)
+        fPoints += new Point((start.x + end.x) / 2, start.y)
+        fPoints += new Point((start.x + end.x) / 2, end.y)
       }
-      fPoints ::= end
+      fPoints += end
     }
     changed
   }
