@@ -335,7 +335,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
       var l2: List[OrderedFigureElement] = List()
       fe foreach(f => l2 ::= new OrderedFigureElement(f, f.getZValue))
       l2 = l2.sort((e1, e2) => e1.compareTo(e2) < 0)
-      val l3: List[Figure] = l2.foldLeft(List[Figure]())((x,y) => x:::List(y.getFigure))
+      val l3: ArrayBuffer[Figure] = l2.foldLeft(ArrayBuffer[Figure]())((x,y) => x+y.getFigure)
       l3
     } else figures
   }

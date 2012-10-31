@@ -14,6 +14,7 @@ import java.awt.geom.Rectangle2D
 import java.io.Serializable
 import org.jhotdraw.framework.Figure
 import java.lang.Object
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * @author WMG (INIT Copyright (C) 2000 All rights reserved)
@@ -134,13 +135,13 @@ class QuadTree(nMaxTreeDepth: Int, absoluteBoundingRectangle2D: Rectangle2D) ext
   def getMaxTreeDepth: Int = _nMaxTreeDepth
 
   def getAllWithin(r: Rectangle2D): Seq[Figure] = {
-    var l: List[Figure] = List[Figure]()
+    var l: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
     _outsideHashtable foreach { case (fig,rect) =>
-      if (rect.intersects(r)) l ::= fig
+      if (rect.intersects(r)) l += fig
     }
     if (_absoluteBoundingRectangle2D.intersects(r)) {
       _theHashtable foreach { case (fig, rect) =>
-        if (rect.intersects(r)) l ::= fig
+        if (rect.intersects(r)) l += fig
       }
       if (_nMaxTreeDepth > 1) {
         return l  ++ _nwQuadTree.getAllWithin(r) ++ _neQuadTree.getAllWithin(r) ++ _swQuadTree.getAllWithin(r) ++ _seQuadTree.getAllWithin(r)

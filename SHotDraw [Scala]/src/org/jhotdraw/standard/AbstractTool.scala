@@ -21,6 +21,7 @@ import org.jhotdraw.framework.Tool
 import org.jhotdraw.framework.ToolListener
 import org.jhotdraw.framework.ViewChangeListener
 import org.jhotdraw.util.Undoable
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Default implementation support for Tools.
@@ -60,7 +61,7 @@ object AbstractTool {
 
     def addToolListener(newToolListener: ToolListener) {
       if (!myRegisteredListeners.contains(newToolListener)) {
-        myRegisteredListeners ::= newToolListener
+        myRegisteredListeners += newToolListener
       }
     }
 
@@ -70,7 +71,7 @@ object AbstractTool {
       }
     }
 
-    private var myRegisteredListeners: List[ToolListener] = List()
+    private var myRegisteredListeners: ArrayBuffer[ToolListener] = ArrayBuffer()
   }
 
 }

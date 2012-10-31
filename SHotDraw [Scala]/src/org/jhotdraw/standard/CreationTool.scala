@@ -16,6 +16,7 @@ import org.jhotdraw.framework.DrawingEditor
 import org.jhotdraw.framework.Figure
 import org.jhotdraw.framework.JHotDrawRuntimeException
 import org.jhotdraw.util.Undoable
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * A tool to create new figures. The figure to be
@@ -42,7 +43,7 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
    * maintaining SHIFT down and clicking. However, this class still
    * maintains its normal behavior of creating only one figure.
    */
-  private var fAddedFigures: List[Figure] = List()
+  private var fAddedFigures: ArrayBuffer[Figure] = ArrayBuffer()
   /**
    * the currently created figure
    */
@@ -75,7 +76,7 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
     if (isUsable) {
       getActiveView.setCursor(new AWTCursor(java.awt.Cursor.CROSSHAIR_CURSOR))
     }
-    setAddedFigures(List[Figure]())
+    setAddedFigures(ArrayBuffer[Figure]())
   }
 
   /**
@@ -124,7 +125,7 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
    */
   override def mouseUp(e: MouseEvent, x: Int, y: Int) {
     if (getAddedFigure != null && !getCreatedFigure.isEmpty) {
-      fAddedFigures ::= getAddedFigure
+      fAddedFigures += getAddedFigure
     } else {
       getActiveView.remove(getAddedFigure)
     }
@@ -158,12 +159,12 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
   /**
    * Gets the list of currently added figure
    */
-  protected def getAddedFigures: List[Figure] = fAddedFigures
+  protected def getAddedFigures: ArrayBuffer[Figure] = fAddedFigures
 
   /**
    * Sets the addedFigures attribute of the CreationTool object
    */
-  protected def setAddedFigures(newAddedFigures: List[Figure]) {
+  protected def setAddedFigures(newAddedFigures: ArrayBuffer[Figure]) {
     fAddedFigures = newAddedFigures
   }
 

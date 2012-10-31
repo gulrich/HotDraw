@@ -14,6 +14,7 @@ import org.jhotdraw.framework._
 import org.jhotdraw.util._
 import java.io._
 import java.lang.Object
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * FigureSelection enables to transfer the selected figures
@@ -68,13 +69,13 @@ class StandardFigureSelection extends FigureSelection with Serializable {
   def getData(tpe: String): Seq[Figure] = {
     if (tpe == TYPE) {
       val input: InputStream = new ByteArrayInputStream(fData)
-      var result: List[Figure] = List[Figure]()
+      var result: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
       val reader: StorableInput = new StorableInput(input)
       val count: Int = reader.readInt
       for(numRead <- 0 to count-1) {
         try {
           val newFigure: Figure = reader.readStorable.asInstanceOf[Figure]
-          result ::= newFigure
+          result += newFigure
         } catch {
           case e: IOException => {
             error(e.toString)
@@ -83,7 +84,7 @@ class StandardFigureSelection extends FigureSelection with Serializable {
       }
       result
     }
-    return null
+    null
   }
 
   private var fData: Array[Byte] = null

@@ -14,6 +14,7 @@ import org.jhotdraw.framework.DrawingEditor
 import org.jhotdraw.framework.Figure
 import org.jhotdraw.util.Undoable
 import org.jhotdraw.util.UndoableAdapter
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Command to delete the selection.
@@ -59,15 +60,15 @@ class DeleteCommand(name: String, newDrawingEditor: DrawingEditor) extends Figur
     super.execute
     setUndoActivity(createUndoActivity)
     var fe: Seq[Figure] = view.selection
-    var affected: List[Figure] = List[Figure]()
+    var affected: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
     var f: Figure = null
     var dfe: Seq[Figure] = null
     fe foreach { f =>
-      affected ::= f
+      affected += f
       dfe = f.getDependendFigures
       if (dfe != null) {
         dfe foreach {
-          affected ::=  _
+          affected +=  _
         }
       }
     }

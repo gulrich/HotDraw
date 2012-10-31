@@ -14,6 +14,7 @@ import org.jhotdraw.framework.DrawingEditor
 import org.jhotdraw.framework.Figure
 import org.jhotdraw.util.Undoable
 import org.jhotdraw.util.UndoableAdapter
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Delete the selection and move the selected figures to
@@ -65,8 +66,8 @@ object CutCommand {
      * @param toBeRemembered
      */
     protected def rememberSelectedFigures(toBeRemembered: Seq[Figure]) {
-      mySelectedFigures = List[Figure]()
-      toBeRemembered foreach {mySelectedFigures ::= _}
+      mySelectedFigures = ArrayBuffer[Figure]()
+      toBeRemembered foreach {mySelectedFigures += _}
     }
 
     /**
@@ -90,7 +91,7 @@ object CutCommand {
       setSelectedFigures(Seq[Figure]())
     }
 
-    private var mySelectedFigures: List[Figure] = List()
+    private var mySelectedFigures: ArrayBuffer[Figure] = ArrayBuffer()
   }
 
 }
@@ -104,14 +105,14 @@ class CutCommand(name: String, newDrawingEditor: DrawingEditor) extends FigureTr
     super.execute
     setUndoActivity(createUndoActivity)
     var fe: Seq[Figure] = view.selection
-    var affected: List[Figure] = List[Figure]()
+    var affected: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
     var f: Figure = null
     var dfe: Seq[Figure] = null
     fe foreach {f =>
-      affected ::= f
+      affected += f
       dfe = f.getDependendFigures
       if (dfe != null) {
-        dfe foreach (affected ::= _)
+        dfe foreach (affected += _)
       }
     }
     fe = affected

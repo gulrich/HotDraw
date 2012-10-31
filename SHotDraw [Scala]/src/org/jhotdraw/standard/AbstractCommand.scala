@@ -19,6 +19,7 @@ import org.jhotdraw.util.Command
 import org.jhotdraw.util.CommandListener
 import org.jhotdraw.util.Undoable
 import java.util.EventObject
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * @author Helge Horch
@@ -49,7 +50,7 @@ object AbstractCommand {
 
     def addCommandListener(newCommandListener: CommandListener) {
       if (!myRegisteredListeners.contains(newCommandListener)) {
-        myRegisteredListeners ::= newCommandListener
+        myRegisteredListeners += newCommandListener
       }
     }
 
@@ -59,7 +60,7 @@ object AbstractCommand {
       }
     }
 
-    private var myRegisteredListeners: List[CommandListener] = List()
+    private var myRegisteredListeners: ArrayBuffer[CommandListener] = ArrayBuffer()
   }
 
 }

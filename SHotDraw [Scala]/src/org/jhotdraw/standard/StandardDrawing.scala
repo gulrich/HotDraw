@@ -21,6 +21,7 @@ import org.jhotdraw.framework.Figure
 import org.jhotdraw.framework.FigureChangeEvent
 import org.jhotdraw.framework.FigureChangeListener
 import org.jhotdraw.framework.Handle
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * The standard implementation of the Drawing interface.
@@ -41,9 +42,9 @@ class StandardDrawing extends CompositeFigure with Drawing {
    */
   def addDrawingChangeListener(listener: DrawingChangeListener) {
     if (fListeners == null) {
-      fListeners = List[DrawingChangeListener]()
+      fListeners = ArrayBuffer[DrawingChangeListener]()
     }
-    fListeners ::= listener
+    fListeners += listener
   }
 
   /**
@@ -167,7 +168,7 @@ class StandardDrawing extends CompositeFigure with Drawing {
 
   private def readObject(s: ObjectInputStream) {
     s.defaultReadObject
-    fListeners = List[DrawingChangeListener]()
+    fListeners = ArrayBuffer[DrawingChangeListener]()
   }
 
   def getTitle: String = myTitle
@@ -180,7 +181,7 @@ class StandardDrawing extends CompositeFigure with Drawing {
    * the registered listeners
    */
   @transient
-  private var fListeners: List[DrawingChangeListener] = List()
+  private var fListeners: ArrayBuffer[DrawingChangeListener] = ArrayBuffer()
   /**
    * boolean that serves as a condition variable
    * to lock the access to the drawing.

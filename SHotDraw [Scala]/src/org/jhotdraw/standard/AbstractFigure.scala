@@ -23,7 +23,6 @@ import java.io.ObjectInputStream
 import java.io.ObjectOutput
 import java.io.ObjectOutputStream
 import java.lang.Object
-
 import org.jhotdraw.framework.ConnectionFigure
 import org.jhotdraw.framework.Connector
 import org.jhotdraw.framework.Figure
@@ -36,6 +35,7 @@ import org.jhotdraw.framework.Locator
 import org.jhotdraw.util.Geom
 import org.jhotdraw.util.StorableInput
 import org.jhotdraw.util.StorableOutput
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * AbstractFigure provides default implementations for
@@ -406,7 +406,7 @@ abstract class AbstractFigure extends Figure {
   def getDependendFigures: Seq[Figure] = myDependendFigures
 
   def addDependendFigure(newDependendFigure: Figure) {
-    myDependendFigures ::= newDependendFigure
+    myDependendFigures += newDependendFigure
   }
 
   def removeDependendFigure(oldDependendFigure: Figure) {
@@ -429,7 +429,7 @@ abstract class AbstractFigure extends Figure {
   /**
    * The dependend figures which have been added to this container.
    */
-  private var myDependendFigures: List[Figure] = List()
+  private var myDependendFigures: ArrayBuffer[Figure] = ArrayBuffer()
   private var _nZ: Int = 0
 }
 

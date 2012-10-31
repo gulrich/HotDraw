@@ -51,6 +51,7 @@ import org.jhotdraw.util.Command
 import org.jhotdraw.util.Geom
 import org.jhotdraw.util.UndoableCommand
 import java.lang.Object
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * The standard implementation of DrawingView.
@@ -92,7 +93,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * the registered listeners for selection changes
    */
   @transient
-  private var fSelectionListeners: List[FigureSelectionListener] = List[FigureSelectionListener]()
+  private var fSelectionListeners: ArrayBuffer[FigureSelectionListener] = ArrayBuffer[FigureSelectionListener]()
   /**
    * The shown drawing.
    */
@@ -106,12 +107,12 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * The list of currently selected figures.
    */
   @transient
-  private var fSelection: List[Figure] = List[Figure]()
+  private var fSelection: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
   /**
    * The shown selection handles.
    */
   @transient
-  private var fSelectionHandles: List[Handle] = null
+  private var fSelectionHandles: ArrayBuffer[Handle] = ArrayBuffer()
   /**
    * The position of the last mouse click
    * inside the view.
@@ -122,13 +123,13 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * view painters that are drawn before the contents,
    * that is in the background.
    */
-  private var fBackgrounds: List[Painter] = null
+  private var fBackgrounds: ArrayBuffer[Painter] = ArrayBuffer()
   /**
    * A List of optional foregrounds. The list contains
    * view painters that are drawn after the contents,
    * that is in the foreground.
    */
-  private var fForegrounds: List[Painter] = null
+  private var fForegrounds: ArrayBuffer[Painter] = ArrayBuffer()
   /**
    * The update strategy used to repair the view.
    */
@@ -162,11 +163,11 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   
   setAutoscrolls(true)
   setPreferredSize(new Dimension(width, height))
-  fSelectionListeners = List[FigureSelectionListener]()
+  fSelectionListeners = ArrayBuffer[FigureSelectionListener]()
   addFigureSelectionListener(fEditor)
   setLastClick(new Point(0, 0))
   fConstrainer = null
-  fSelection = List()
+  fSelection = ArrayBuffer()
   setDisplayUpdate(createDisplayUpdate)
   setBackground(Color.lightGray)
   addMouseListener(createMouseListener)
@@ -277,10 +278,10 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     if (fe == null) {
       return Seq[Figure]()
     }
-    var vCF: List[ConnectionFigure] = List[ConnectionFigure]()
+    var vCF: ArrayBuffer[ConnectionFigure] = ArrayBuffer[ConnectionFigure]()
     val visitor: InsertIntoDrawingVisitor = new InsertIntoDrawingVisitor(drawing)
     fe foreach (f => f match {
-      case cf: ConnectionFigure => vCF ::= cf
+      case cf: ConnectionFigure => vCF += cf
       case _ if f != null => 
         f.moveBy(dx, dy)
         f.visit(visitor)
@@ -314,10 +315,10 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     if (inFigure == null || !inFigure.canConnect) {
       return null
     }
-    var result: List[Figure] = List[Figure]()
+    var result: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
     drawing.figures foreach (f => f match {
       case cf: ConnectionFigure if !(isFigureSelected(f)) =>
-        if (cf.startFigure.includes(inFigure) || cf.endFigure.includes(inFigure)) result ::= f
+        if (cf.startFigure.includes(inFigure) || cf.endFigure.includes(inFigure)) result += f
       case _ =>
     })
     result
@@ -377,7 +378,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   protected def addToSelectionImpl(figure: Figure): Boolean = {
     var changed: Boolean = false
     if (!isFigureSelected(figure) && drawing.includes(figure)) {
-      fSelection ::= figure
+      fSelection += figure
       fSelectionHandles = null
       figure.invalidate
       changed = true
@@ -438,7 +439,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     selection foreach { f =>
       f.invalidate
     }
-    fSelection = List[Figure]()
+    fSelection = ArrayBuffer[Figure]()
     fSelectionHandles = null
     fireSelectionChanged
   }
@@ -448,10 +449,10 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    */
   protected def selectionHandles: Seq[Handle] = {
     if (fSelectionHandles == null) {
-      fSelectionHandles = List[Handle]()
+      fSelectionHandles = ArrayBuffer[Handle]()
       selection foreach { f =>
         f.handles foreach { h =>
-          fSelectionHandles ::= h
+          fSelectionHandles += h
         }
       }
     }
@@ -639,7 +640,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     g.fillRect(0, 0, this.getBounds().width, this.getBounds().height)
   }
 
-  protected def drawPainters(g: Graphics, v: List[Painter]) {
+  protected def drawPainters(g: Graphics, v: ArrayBuffer[Painter]) {
     v foreach {_.draw(g,this)}
   }
 
@@ -648,9 +649,9 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    */
   def addBackground(painter: Painter) {
     if (fBackgrounds == null) {
-      fBackgrounds = List[Painter]()
+      fBackgrounds = ArrayBuffer[Painter]()
     }
-    fBackgrounds ::= painter
+    fBackgrounds += painter
     this.repaint()
   }
 
@@ -664,7 +665,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     this.repaint()
   }
 
-  protected def getBackgrounds: List[Painter] = fBackgrounds
+  protected def getBackgrounds: ArrayBuffer[Painter] = fBackgrounds
 
   /**
    * Removes a foreground.
@@ -681,13 +682,13 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    */
   def addForeground(painter: Painter) {
     if (fForegrounds == null) {
-      fForegrounds = List[Painter]()
+      fForegrounds = ArrayBuffer[Painter]()
     }
-    fForegrounds ::= painter
+    fForegrounds += painter
     this.repaint()
   }
 
-  protected def getForegrounds: List[Painter] = fForegrounds
+  protected def getForegrounds: ArrayBuffer[Painter] = fForegrounds
   
   /**
    * Freezes the view by acquiring the drawing lock.
@@ -707,11 +708,11 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
 
   private def readObject(s: ObjectInputStream) {
     s.defaultReadObject
-    fSelection = List[Figure]()
+    fSelection = ArrayBuffer[Figure]()
     if (drawing != null) {
       drawing.addDrawingChangeListener(this)
     }
-    fSelectionListeners = List[FigureSelectionListener]()
+    fSelectionListeners = ArrayBuffer[FigureSelectionListener]()
   }
 
   protected def checkMinimumSize {
@@ -757,7 +758,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * @param fsl jhotdraw.framework.FigureSelectionListener
    */
   def addFigureSelectionListener(fsl: FigureSelectionListener) {
-    fSelectionListeners ::= fsl
+    fSelectionListeners += fsl
   }
 
   /**
