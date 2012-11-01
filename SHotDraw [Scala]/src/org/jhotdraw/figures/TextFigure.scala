@@ -44,35 +44,7 @@ import java.lang.Object
  * @version <$CURRENT_VERSION$>
  */
 object TextFigure {
-  /**
-   * Creates the current font to be used for new text figures.
-   */
-  def createCurrentFont: Font = new Font(fgCurrentFontName, fgCurrentFontStyle, fgCurrentFontSize)
 
-  /**
-   * Sets the current font name
-   */
-  def setCurrentFontName(name: String) {
-    fgCurrentFontName = name
-  }
-
-  /**
-   * Sets the current font size.
-   */
-  def setCurrentFontSize(size: Int) {
-    fgCurrentFontSize = size
-  }
-
-  /**
-   * Sets the current font style.
-   */
-  def setCurrentFontStyle(style: Int) {
-    fgCurrentFontStyle = style
-  }
-
-  private var fgCurrentFontName: String = "Helvetica"
-  private var fgCurrentFontSize: Int = 12
-  private var fgCurrentFontStyle: Int = Font.PLAIN
   private final val serialVersionUID: Long = 4599820785949456124L
 }
 
@@ -87,7 +59,7 @@ class TextFigure extends AttributeFigure with FigureChangeListener with TextHold
   @transient
   private var fHeight: Int = 0
   private var fText: String = ""
-  private var fFont: Font = TextFigure.createCurrentFont
+  private var fFont: Font = new Font(getFontName, getFontStyle, getFontSize)
   private var fIsReadOnly: Boolean = false
   private var fObservedFigure: Figure = null
   private var fLocator: OffsetLocator = null
@@ -167,6 +139,21 @@ class TextFigure extends AttributeFigure with FigureChangeListener with TextHold
     fFont = newFont
     markDirty
     changed
+  }
+  
+  override def setFontStyle(value: Int) {
+    super.setFontStyle(value)
+    setFont(new Font(getFont.getName, value, getFont.getSize))
+  }
+  
+  override def setFontName(value: String) {
+    super.setFontName(value)
+    setFont(new Font(value, getFont.getStyle, getFont.getSize))
+  }
+  
+  override def setFontSize(value: Int) {
+    super.setFontSize(value)
+    setFont(new Font(getFont.getName, getFont.getStyle, value))
   }
 
   /**

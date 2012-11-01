@@ -26,9 +26,8 @@ import java.awt.Color
  */
 object FontSizeHandle {
 
-  class UndoActivity(newView: DrawingView, newFont: Font) extends UndoableAdapter(newView) {
-    setFont(newFont)
-    setOldFontSize(getFont.getSize)
+  class UndoActivity(newView: DrawingView, var myFont: Font) extends UndoableAdapter(newView) {
+    private var myOldFontSize: Int = getFont.getSize
     setUndoable(true)
     setRedoable(true)
 
@@ -74,9 +73,6 @@ object FontSizeHandle {
     }
 
     def getOldFontSize: Int = myOldFontSize
-
-    private var myFont: Font = null
-    private var myOldFontSize: Int = 0
   }
 
 }

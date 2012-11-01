@@ -21,8 +21,8 @@ import org.jhotdraw.framework.Handle
  * @version <$CURRENT_VERSION$>
  */
 class DeleteFromDrawingVisitor(newDrawing: Drawing) extends FigureVisitor {
-  myDeletedFigures = Set[Figure]()
-  setDrawing(newDrawing)
+  private var myDeletedFigures: Set[Figure] = Set[Figure]()
+  private var myDrawing: Drawing = newDrawing
 
   private def setDrawing(newDrawing: Drawing) {
     myDrawing = newDrawing
@@ -41,9 +41,6 @@ class DeleteFromDrawingVisitor(newDrawing: Drawing) extends FigureVisitor {
 
   def visitFigureChangeListener(hostFigureChangeListener: FigureChangeListener) {}
 
-  def getDeletedFigures: Seq[Figure] = myDeletedFigures.foldLeft(List[Figure]())((x,y) => y::x)
-
-  private var myDeletedFigures: Set[Figure] = null
-  private var myDrawing: Drawing = null
+  def getDeletedFigures: Seq[Figure] = myDeletedFigures.foldLeft(List[Figure]())((x,y) => y::x)  
 }
 
