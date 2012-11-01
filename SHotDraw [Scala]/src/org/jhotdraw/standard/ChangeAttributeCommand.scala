@@ -22,14 +22,10 @@ import java.lang.Object
  */
 object ChangeAttributeCommand {
 
-  class UndoActivity(newDrawingView: DrawingView, newUndoAttribute: FigureAttributeConstant, newUndoValue: Any) extends UndoableAdapter(newDrawingView) {
+  class UndoActivity[T](newDrawingView: DrawingView, var myUndoAttribute: FigureAttributeConstant[T], var myUndoValue: T) extends UndoableAdapter(newDrawingView) {
+        
+    private var myOriginalValues: Map[Figure, T] = Map()
     
-    
-    private var myUndoAttribute: FigureAttributeConstant = null
-    private var myOriginalValues: Map[Figure, Any] = Map()
-    private var myUndoValue: Any = null
-    
-    setBackupValue(newUndoValue)
     setUndoable(true)
     setRedoable(true)
 
@@ -39,7 +35,7 @@ object ChangeAttributeCommand {
       }
       getAffectedFigures foreach { f =>
         if (getOriginalValue(f) != null) {
-          f.setAttribute(getAttribute, getOriginalValue(f))
+          myUndoAttribute.setAttribute(f, getOriginalValue(f))
         }
       }
       true
@@ -51,39 +47,42 @@ object ChangeAttributeCommand {
       }
       getAffectedFigures foreach { f =>
         if (getBackupValue != null) {
-          f.setAttribute(getAttribute, getBackupValue)
+          myUndoAttribute.setAttribute(f, getBackupValue)
         }
       }
       true
     }
 
-    protected def addOriginalValue(affectedFigure: Figure, newOriginalValue: Any) {
+    protected def addOriginalValue(affectedFigure: Figure, newOriginalValue: T) {
       myOriginalValues += ((affectedFigure, newOriginalValue))
     }
 
-    protected def getOriginalValue(lookupAffectedFigure: Figure): Any = myOriginalValues.get(lookupAffectedFigure)
+    protected def getOriginalValue(lookupAffectedFigure: Figure): T = myOriginalValues.get(lookupAffectedFigure) match {
+      case Some(value) => value
+      case _ => error("ChangeAttributeCommand: Figure " + lookupAffectedFigure + " not found in myOriginalValues")
+    }
 
-    protected def setAttribute(newUndoAttribute: FigureAttributeConstant) {
+    protected def setAttribute(newUndoAttribute: FigureAttributeConstant[T]) {
       myUndoAttribute = newUndoAttribute
     }
 
-    def getAttribute: FigureAttributeConstant = myUndoAttribute
+    def getAttribute: FigureAttributeConstant[T] = myUndoAttribute
 
-    protected def setBackupValue(newUndoValue: Any) {
+    protected def setBackupValue(newUndoValue: T) {
       myUndoValue = newUndoValue
     }
 
-    def getBackupValue: Any = myUndoValue
+    def getBackupValue: T = myUndoValue
 
     override def release {
       super.release
-      myOriginalValues = null
+      myOriginalValues = Map()
     }
 
     override def setAffectedFigures(fe: Seq[Figure]) {
       super.setAffectedFigures(fe)
       getAffectedFigures foreach { f =>
-        val attributeValue: Any = f.getAttribute(getAttribute)
+        val attributeValue: T = myUndoAttribute.getAttribute(f)
         if (attributeValue != null) {
           addOriginalValue(f, attributeValue)
         }
@@ -94,13 +93,13 @@ object ChangeAttributeCommand {
 
 }
 
-class ChangeAttributeCommand(name: String, fAttribute: FigureAttributeConstant, fValue: Any, newDrawingEditor: DrawingEditor) extends AbstractCommand(name, newDrawingEditor) {
+class ChangeAttributeCommand[T](name: String, fAttribute: FigureAttributeConstant[T], fValue: T, newDrawingEditor: DrawingEditor) extends AbstractCommand(name, newDrawingEditor) {
 
   override def execute {
     super.execute
     setUndoActivity(createUndoActivity)
     getUndoActivity.setAffectedFigures(view.selection)
-    getUndoActivity.getAffectedFigures foreach(_.setAttribute(fAttribute, fValue))
+    getUndoActivity.getAffectedFigures foreach(f => fAttribute.setAttribute(f,fValue))
   }
 
   override def isExecutableWithView: Boolean = view.selectionCount > 0

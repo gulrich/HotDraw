@@ -30,7 +30,6 @@ object FrameworkSuite {
   def suite: Test = {
     var suite: TestSuite = null
     suite = new TestSuite("org.jhotdraw.test.framework")
-    suite.addTestSuite(classOf[FigureAttributeConstantTest])
     suite.addTestSuite(classOf[FigureChangeEventTest])
     suite.addTestSuite(classOf[DrawingChangeEventTest])
     suite

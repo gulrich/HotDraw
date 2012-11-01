@@ -33,6 +33,9 @@ object AbstractHandle {
 
 abstract class AbstractHandle(fOwner: Figure) extends Handle {
   import AbstractHandle._
+  
+  private var myUndoableActivity: Undoable = null
+  
   /**
    * @param x the x position where the interaction started
    * @param y the y position where the interaction started
@@ -146,6 +149,5 @@ abstract class AbstractHandle(fOwner: Figure) extends Handle {
    */
   def getCursor: Cursor = new AWTCursor(java.awt.Cursor.DEFAULT_CURSOR)
 
-  private var myUndoableActivity: Undoable = null
 }
 

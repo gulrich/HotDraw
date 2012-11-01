@@ -36,6 +36,7 @@ import org.jhotdraw.util.Geom
 import org.jhotdraw.util.StorableInput
 import org.jhotdraw.util.StorableOutput
 import scala.collection.mutable.ArrayBuffer
+import org.jhotdraw.figures.FigureAttributes
 
 /**
  * AbstractFigure provides default implementations for
@@ -59,7 +60,7 @@ object AbstractFigure {
 }
 
 abstract class AbstractFigure extends Figure {
-
+  
   /**
    * Moves the figure by the given offset.
    */
@@ -304,38 +305,6 @@ abstract class AbstractFigure extends Figure {
   def connectedTextLocator(text: Figure): Locator = RelativeLocator.center
 
   /**
-   * Returns the named attribute or null if a
-   * a figure doesn't have an attribute.
-   * By default figures don't have any attributes so getAttribute
-   * returns null.
-   *
-   * @deprecated use getAttribute(FigureAttributeConstant) instead
-   */
-  def getAttribute(name: String): Any = null
-
-  /**
-   * Returns the named attribute or null if a
-   * a figure doesn't have an attribute.
-   * By default figures don't have any attributes getAttribute
-   * returns null.
-   */
-  def getAttribute(attributeConstant: FigureAttributeConstant): Any = null
-
-  /**
-   * Sets the named attribute to the new value. By default
-   * figures don't have any attributes and the request is ignored.
-   *
-   * @deprecated use setAttribute(FigureAttributeConstant, Object) instead
-   */
-  def setAttribute(name: String, value: Any) {}
-
-  /**
-   * Sets the named attribute to the new value. By default
-   * figures don't have any attributes and the request is ignored.
-   */
-  def setAttribute(attributeConstant: FigureAttributeConstant, value: Any) {}
-
-  /**
    * Clones a figure. Creates a clone by using the storable
    * mechanism to flatten the Figure to stream followed by
    * resurrecting it from the same stream.
@@ -367,16 +336,6 @@ abstract class AbstractFigure extends Figure {
     }
     clone
   }
-
-  /**
-   * Stores the Figure to a StorableOutput.
-   */
-  def write(dw: StorableOutput) {}
-
-  /**
-   * Reads the Figure from a StorableInput.
-   */
-  def read(dr: StorableInput) {}
 
   /**
    * Gets the z value (back-to-front ordering) of this figure.

@@ -77,6 +77,7 @@ object TextFigure {
 }
 
 class TextFigure extends AttributeFigure with FigureChangeListener with TextHolder {
+  setFillColor(ColorMap.color("None"));
   private var fOriginX: Int = 0
   private var fOriginY: Int = 0
   @transient
@@ -90,7 +91,6 @@ class TextFigure extends AttributeFigure with FigureChangeListener with TextHold
   private var fIsReadOnly: Boolean = false
   private var fObservedFigure: Figure = null
   private var fLocator: OffsetLocator = null
-  setAttribute(FigureAttributeConstant.FILL_COLOR, ColorMap.color("None"))
 
   /**
    * @see org.jhotdraw.framework.Figure#moveBy(int, int)
@@ -177,65 +177,6 @@ class TextFigure extends AttributeFigure with FigureChangeListener with TextHold
     super.changed
   }
 
-  /**
-   * A text figure understands the "FontSize", "FontStyle", and "FontName"
-   * attributes.
-   *
-   * @see org.jhotdraw.framework.Figure#getAttribute(java.lang.String)
-   * @deprecated use getAttribute(FigureAttributeConstant) instead
-   */
-  override def getAttribute(name: String): Any = getAttribute(FigureAttributeConstant.getConstant(name))
-
-  /**
-   * A text figure understands the "FontSize", "FontStyle", and "FontName"
-   * attributes.
-   * @see org.jhotdraw.framework.Figure#getAttribute(org.jhotdraw.framework.FigureAttributeConstant)
-   */
-  override def getAttribute(attributeConstant: FigureAttributeConstant): Option[Any] = {
-    val font: Font = getFont
-    if (attributeConstant == FigureAttributeConstant.FONT_SIZE) Some(font.getSize)
-    else if (attributeConstant == FigureAttributeConstant.FONT_STYLE) Some(font.getStyle)
-    else if (attributeConstant == FigureAttributeConstant.FONT_NAME) Some(font.getName)
-    else super.getAttribute(attributeConstant)
-  }
-
-  /**
-   * A text figure understands the "FontSize", "FontStyle", and "FontName"
-   * attributes.
-   *
-   * @see org.jhotdraw.framework.Figure#setAttribute(java.lang.String, java.lang.Object)
-   * @deprecated use setAttribute(FigureAttributeConstant, Object) instead
-   */
-  override def setAttribute(name: String, value: Any) {
-    setAttribute(FigureAttributeConstant.getConstant(name), value)
-  }
-
-  /**
-   * A text figure understands the "FontSize", "FontStyle", and "FontName"
-   * attributes.
-   * @see org.jhotdraw.framework.Figure#setAttribute(org.jhotdraw.framework.FigureAttributeConstant, java.lang.Object)
-   */
-  override def setAttribute(attributeConstant: FigureAttributeConstant, value: Any) {
-    val font: Font = getFont
-    if (attributeConstant == FigureAttributeConstant.FONT_SIZE) {
-      val s: Integer = value.asInstanceOf[Integer]
-      setFont(new Font(font.getName, font.getStyle, s.intValue))
-    } else if (attributeConstant == FigureAttributeConstant.FONT_STYLE) {
-      val s: Integer = value.asInstanceOf[Integer]
-      var style: Int = font.getStyle
-      if (s.intValue == Font.PLAIN) {
-        style = Font.PLAIN
-      } else {
-        style = style ^ s.intValue
-      }
-      setFont(new Font(font.getName, style, font.getSize))
-    } else if (attributeConstant == FigureAttributeConstant.FONT_NAME) {
-      val n: String = value.asInstanceOf[String]
-      setFont(new Font(n, font.getStyle, font.getSize))
-    } else {
-      super.setAttribute(attributeConstant, value)
-    }
-  }
 
   /**
    * Gets the text shown by the text figure.
@@ -275,10 +216,7 @@ class TextFigure extends AttributeFigure with FigureChangeListener with TextHold
    */
   override def drawFrame(g: Graphics) {
     g.setFont(fFont)
-    getAttribute(FigureAttributeConstant.TEXT_COLOR) match {
-      case Some(c: Color) => g.setColor(c)
-      case other => error("Color exptected, but " + other + " found")
-    }
+    g.setColor(getTextColor)
     val metrics: FontMetrics = g.getFontMetrics(fFont)
     val r: Rectangle = displayBox
     g.drawString(getText, r.x, r.y + metrics.getAscent)

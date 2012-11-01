@@ -14,12 +14,12 @@ import java.awt.Color
 import java.io.IOException
 import java.io.Serializable
 import org.jhotdraw.framework.Figure
-import org.jhotdraw.framework.FigureAttributeConstant
 import org.jhotdraw.util.Storable
 import org.jhotdraw.util.StorableInput
 import org.jhotdraw.util.StorableOutput
 import scala.collection.mutable.Map
 import javax.swing.JPopupMenu
+import java.awt.Font
 
 /**
  * A container for a figure's attributes. The attributes are stored
@@ -30,59 +30,49 @@ import javax.swing.JPopupMenu
  * @version <$CURRENT_VERSION$>
  */
 object FigureAttributes {
-  def writeColor(dw: StorableOutput, colorName: String, color: Color) {
-    if (color != null) {
-      dw.writeString(colorName)
-      dw.writeInt(color.getRed)
-      dw.writeInt(color.getGreen)
-      dw.writeInt(color.getBlue)
-    }
-  }
-
-  def readColor(dr: StorableInput): Color = new Color(dr.readInt, dr.readInt, dr.readInt)
-
   private final val serialVersionUID: Long = -6886355144423666716L
 }
 
-class FigureAttributes extends Object with Cloneable with Serializable {
+trait FigureAttributes extends Serializable {
   import FigureAttributes._
-  /**
-   * Gets the attribute with the given name.
-   * @return attribute or null if the key is not defined
-   */
-  def get(attributeConstant: FigureAttributeConstant): Option[Any] = fMap.get(attributeConstant)
-
-  /**
-   * Sets the attribute with the given name and
-   * overwrites its previous value.
-   */
-  def set(attributeConstant: FigureAttributeConstant, value: Any) {
-    if (value != null) {
-      fMap.put(attributeConstant, value)
-    }
-    else {
-      fMap.remove(attributeConstant)
-    }
+  
+  private var frameColor: Color = Color.BLACK
+  private var fillColor: Color = Color.BLUE
+  private var textColor: Color = Color.BLACK
+  private var arrowMode: Int = PolyLineFigure.ARROW_TIP_BOTH
+  private var fontName: String = "Helvetica"
+  private var fontSize: Int = 12
+  private var fontStyle: Int = Font.PLAIN
+  
+  
+  def getFrameColor: Color = frameColor
+  def getFillColor: Color = fillColor
+  def getTextColor: Color = textColor
+  def getArrowMode: Int = arrowMode
+  def getFontName: String = fontName
+  def getFontSize: Int = fontSize
+  def getFontStyle: Int = fontStyle
+  
+  def setFrameColor(value: Color) {
+    frameColor = value
   }
-
-  /**
-   * Tests if an attribute is defined.
-   */
-  def hasDefined(attributeConstant: FigureAttributeConstant): Boolean = fMap.exists{ case (attr, obj) => attr == attributeConstant}
-
-  /**
-   * Clones the attributes.
-   */
-  override def clone: java.lang.Object = {
-    try {
-      val a: FigureAttributes = super.clone.asInstanceOf[FigureAttributes]
-      a.fMap = fMap.clone
-      a
-    } catch {
-      case e: CloneNotSupportedException => {
-        throw new InternalError
-      }
-    }
+  def setFillColor(value: Color) {
+    fillColor = value
+  }
+  def setTextColor(value: Color) {
+    textColor = value
+  }
+  def setArrowMode(value: Int) {
+    arrowMode = value
+  }
+  def setFontName(value: String) {
+    fontName = value
+  }
+  def setFontSize(value: Int) {
+    fontSize = value
+  }
+  def setFontStyle(value: Int) {
+    fontStyle = value
   }
 
   /**
@@ -99,28 +89,13 @@ class FigureAttributes extends Object with Cloneable with Serializable {
     if (!(s.toLowerCase == "attributes")) {
       throw new IOException("Attributes expected")
     }
-    fMap = Map()
-    val size: Int = dr.readInt
-    for(i <- 0 to size-1) {
-      val key: String = dr.readString
-      val valtype: String = dr.readString
-      var vl: Any = null
-      if (valtype == "Color") {
-        vl = new Color(dr.readInt, dr.readInt, dr.readInt)
-      } else if (valtype == "Boolean") {
-        vl = new java.lang.Boolean(dr.readString)
-      } else if (valtype == "String") {
-        vl = dr.readString
-      } else if (valtype == "Int") {
-        vl = new Integer(dr.readInt)
-      } else if (valtype == "Storable") {
-        vl = dr.readStorable
-      }
-      if (!(valtype == Figure.POPUP_MENU || valtype == "UNKNOWN")) {
-        val attributeConstant: FigureAttributeConstant = FigureAttributeConstant.getConstant(key)
-        set(attributeConstant, vl)
-      }
-    }
+    frameColor = dr.readColor
+    fillColor = dr.readColor
+    textColor = dr.readColor
+    arrowMode = dr.readInt
+    fontName = dr.readString
+    fontSize = dr.readInt
+    fontStyle = dr.readInt
   }
 
   /**
@@ -134,33 +109,13 @@ class FigureAttributes extends Object with Cloneable with Serializable {
    */
   def write(dw: StorableOutput) {
     dw.writeString("attributes")
-    dw.writeInt(fMap.size)
-    fMap foreach { case (fac, attr) =>
-      val attributeName: String = fac.getName
-      dw.writeString(attributeName)
-      attr match {
-        case s: String =>
-          dw.writeString("String")
-          dw.writeString(s)
-        case c: Color => writeColor(dw, "Color", c)
-        case b: Boolean =>
-          dw.writeString("Boolean")
-          if (b) dw.writeString("TRUE")
-          else dw.writeString("FALSE")
-        case i: Int =>
-          dw.writeString("Int")
-          dw.writeInt(i)
-        case s: Storable =>
-          dw.writeString("Storable")
-          dw.writeStorable(s)
-        case jpm: JPopupMenu => dw.writeString(Figure.POPUP_MENU)
-        case _ =>
-          error("Unknown attribute: " + attr)
-          dw.writeString("UNKNOWN")
-      }
-    }
+    dw.writeColor(frameColor)
+    dw.writeColor(fillColor)
+    dw.writeColor(textColor)
+    dw.writeInt(arrowMode)
+    dw.writeString(fontName)
+    dw.writeInt(fontSize)
+    dw.writeInt(fontStyle)
   }
-
-  private var fMap: Map[FigureAttributeConstant, Any] = Map()
 }
 

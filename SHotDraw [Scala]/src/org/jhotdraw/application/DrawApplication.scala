@@ -84,6 +84,16 @@ import org.jhotdraw.util.VersionRequester
 import java.lang.reflect.InvocationTargetException
 import scala.collection.mutable.ArrayBuffer
 import java.util.ListIterator
+import org.jhotdraw.framework.FillColor
+import org.jhotdraw.framework.FrameColor
+import org.jhotdraw.framework.TextColor
+import org.jhotdraw.framework.FigureAttributeConstant
+import org.jhotdraw.framework.ArrowMode
+import org.jhotdraw.framework.FigureAttributeConstant
+import org.jhotdraw.framework.FontName
+import org.jhotdraw.framework.FontSize
+import org.jhotdraw.framework.FontStyle
+import org.jhotdraw.framework.FigureAttributeConstant
 
 
 /**
@@ -326,21 +336,21 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    */
   protected def createAttributesMenu: JMenu = {
     val menu: JMenu = new JMenu("Attributes")
-    menu.add(createColorMenu("Fill Color", FigureAttributeConstant.FILL_COLOR))
-    menu.add(createColorMenu("Pen Color", FigureAttributeConstant.FRAME_COLOR))
+    menu.add(createColorMenu("Fill Color", FillColor))
+    menu.add(createColorMenu("Pen Color", FrameColor))
     menu.add(createArrowMenu)
     menu.addSeparator
     menu.add(createFontMenu)
     menu.add(createFontSizeMenu)
     menu.add(createFontStyleMenu)
-    menu.add(createColorMenu("Text Color", FigureAttributeConstant.TEXT_COLOR))
+    menu.add(createColorMenu("Text Color", TextColor))
     menu
   }
 
   /**
    * Creates the color menu.
    */
-  protected def createColorMenu(title: String, attribute: FigureAttributeConstant): JMenu = {
+  protected def createColorMenu(title: String, attribute: FigureAttributeConstant[Color]): JMenu = {
     val menu: CommandMenu = new CommandMenu(title)
     ColorMap.fMap foreach { case (name, color) =>
       menu.add(new UndoableCommand(new ChangeAttributeCommand(name, attribute, color, this)))
@@ -352,12 +362,11 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * Creates the arrows menu.
    */
   protected def createArrowMenu: JMenu = {
-    val arrowMode: FigureAttributeConstant = FigureAttributeConstant.ARROW_MODE
     val menu: CommandMenu = new CommandMenu("Arrow")
-    menu.add(new UndoableCommand(new ChangeAttributeCommand("none", arrowMode, new Integer(PolyLineFigure.ARROW_TIP_NONE), this)))
-    menu.add(new UndoableCommand(new ChangeAttributeCommand("at Start", arrowMode, new Integer(PolyLineFigure.ARROW_TIP_START), this)))
-    menu.add(new UndoableCommand(new ChangeAttributeCommand("at End", arrowMode, new Integer(PolyLineFigure.ARROW_TIP_END), this)))
-    menu.add(new UndoableCommand(new ChangeAttributeCommand("at Both", arrowMode, new Integer(PolyLineFigure.ARROW_TIP_BOTH), this)))
+    menu.add(new UndoableCommand(new ChangeAttributeCommand("none", ArrowMode, PolyLineFigure.ARROW_TIP_NONE, this)))
+    menu.add(new UndoableCommand(new ChangeAttributeCommand("at Start", ArrowMode, PolyLineFigure.ARROW_TIP_START, this)))
+    menu.add(new UndoableCommand(new ChangeAttributeCommand("at End", ArrowMode, PolyLineFigure.ARROW_TIP_END, this)))
+    menu.add(new UndoableCommand(new ChangeAttributeCommand("at Both", ArrowMode, PolyLineFigure.ARROW_TIP_BOTH, this)))
     menu
   }
 
@@ -369,7 +378,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     val menu: CommandMenu = new CommandMenu("Font")
     val fonts: Array[String] = GraphicsEnvironment.getLocalGraphicsEnvironment.getAvailableFontFamilyNames
     fonts foreach { f =>
-      menu.add(new UndoableCommand(new ChangeAttributeCommand(f, FigureAttributeConstant.FONT_NAME, f, this)))
+      menu.add(new UndoableCommand(new ChangeAttributeCommand(f, FontName, f, this)))
     }
     menu
   }
@@ -378,11 +387,10 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * Creates the font style menu with entries (Plain, Italic, Bold).
    */
   protected def createFontStyleMenu: JMenu = {
-    val fontStyle: FigureAttributeConstant = FigureAttributeConstant.FONT_STYLE
     val menu: CommandMenu = new CommandMenu("Font Style")
-    menu.add(new UndoableCommand(new ChangeAttributeCommand("Plain", fontStyle, new Integer(Font.PLAIN), this)))
-    menu.add(new UndoableCommand(new ChangeAttributeCommand("Italic", fontStyle, new Integer(Font.ITALIC), this)))
-    menu.add(new UndoableCommand(new ChangeAttributeCommand("Bold", fontStyle, new Integer(Font.BOLD), this)))
+    menu.add(new UndoableCommand(new ChangeAttributeCommand("Plain", FontStyle, Font.PLAIN, this)))
+    menu.add(new UndoableCommand(new ChangeAttributeCommand("Italic", FontStyle, Font.ITALIC, this)))
+    menu.add(new UndoableCommand(new ChangeAttributeCommand("Bold", FontStyle, Font.BOLD, this)))
     menu
   }
 
@@ -393,7 +401,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     val menu: CommandMenu = new CommandMenu("Font Size")
     val sizes: List[Int] = List(9, 10, 12, 14, 16, 18, 20, 24, 36, 48, 72)
     sizes foreach { e =>
-      menu.add(new UndoableCommand(new ChangeAttributeCommand(e.toString, FigureAttributeConstant.FONT_SIZE, e, this)))
+      menu.add(new UndoableCommand(new ChangeAttributeCommand(e.toString, FontSize, e, this)))
     }
     menu
   }

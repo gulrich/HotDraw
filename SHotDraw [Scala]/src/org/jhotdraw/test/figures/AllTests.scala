@@ -28,7 +28,6 @@ object AllTests {
     suite.addTest(new TestSuite(classOf[ChopEllipseConnectorTest]))
     suite.addTest(new TestSuite(classOf[ElbowConnectionTest]))
     suite.addTest(new TestSuite(classOf[EllipseFigureTest]))
-    suite.addTest(new TestSuite(classOf[FigureAttributesTest]))
     suite.addTest(new TestSuite(classOf[GroupFigureTest]))
     suite.addTest(new TestSuite(classOf[LineConnectionTest]))
     suite.addTest(new TestSuite(classOf[LineFigureTest]))

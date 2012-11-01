@@ -17,6 +17,7 @@ import java.util.Collections
 import java.awt.Rectangle
 import java.awt.Graphics
 import scala.collection.mutable.ArrayBuffer
+import java.awt.Color
 
 /**
  * A Figure that is composed of several figures. A CompositeFigure
@@ -582,6 +583,41 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
     if (_theQuadTree != null) {
       _theQuadTree.clear
     }
+  }
+  
+  override def setFillColor(value: Color) {
+    super.setFillColor(value)
+    fFigures foreach { _.setFillColor(value) }
+  }
+  
+  override def setFrameColor(value: Color) {
+    super.setFrameColor(value)
+    fFigures foreach { _.setFrameColor(value) }
+  }
+  
+  override def setTextColor(value: Color) {
+    super.setTextColor(value)
+    fFigures foreach { _.setTextColor(value) }
+  }
+  
+  override def setFontSize(value: Int) {
+    super.setFontSize(value)
+    fFigures foreach { _.setFontSize(value) }
+  }
+  
+  override def setFontName(value: String) {
+    super.setFontName(value)
+    fFigures foreach { _.setFontName(value) }
+  }
+  
+  override def setFontStyle(value: Int) {
+    super.setFontStyle(value)
+    fFigures foreach { _.setFontStyle(value) }
+  }
+  
+  override def setArrowMode(value: Int) {
+    super.setArrowMode(value)
+    fFigures foreach { _.setArrowMode(value) }
   }
 
   /**

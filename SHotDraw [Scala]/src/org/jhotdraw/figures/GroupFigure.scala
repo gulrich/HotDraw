@@ -56,22 +56,5 @@ class GroupFigure extends CompositeFigure {
         new GroupHandle(this, RelativeLocator.southWest) ::
         new GroupHandle(this, RelativeLocator.southEast) :: Nil
   }
-
-  /**
-   * Sets the attribute of all the contained figures.
-   * @deprecated see setAttribute(FigureAttributeConstant,Object)
-   */
-  override def setAttribute(name: String, value: Any) {
-    super.setAttribute(name, value)
-    figures foreach {_.setAttribute(name, value)}
-  }
-
-  /**
-   * Sets the attribute of the GroupFigure as well as all contained Figures.
-   */
-  override def setAttribute(fac: FigureAttributeConstant, obj: Any) {
-    super.setAttribute(fac, obj)
-    figures foreach {_.setAttribute(fac, obj)}
-  }
 }
 

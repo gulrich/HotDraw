@@ -25,7 +25,6 @@ object AllTests {
   def suite: Test = {
     val suite: TestSuite = new TestSuite("Test for org.jhotdraw.test.framework")
     suite.addTest(new TestSuite(classOf[DrawingChangeEventTest]))
-    suite.addTest(new TestSuite(classOf[FigureAttributeConstantTest]))
     suite.addTest(new TestSuite(classOf[FigureChangeEventTest]))
     suite
   }

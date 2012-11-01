@@ -17,6 +17,7 @@ import java.awt.Insets
 import java.awt.Graphics
 import org.jhotdraw.standard.TextHolder
 import java.awt.Dimension
+import org.jhotdraw.figures.FigureAttributes
 
 /**
  * The interface of a graphical figure. A figure knows
@@ -46,15 +47,7 @@ import java.awt.Dimension
  *
  * @version <$CURRENT_VERSION$>
  */
-object Figure {
-  /**
-   * Constant that allows to identify a popup menu assigned
-   * as an attribute.
-   */
-  final val POPUP_MENU: String = "POPUP_MENU"
-}
-
-abstract trait Figure extends Storable with Cloneable with Serializable {
+abstract trait Figure extends FigureAttributes with Storable with Cloneable {
   /**
    * Moves the Figure to a new location.
    * @param dx the x delta
@@ -276,36 +269,6 @@ abstract trait Figure extends Storable with Cloneable with Serializable {
    * Returns the locator used to located connected text.
    */
   def connectedTextLocator(text: Figure): Locator
-
-  /**
-   * Returns the named attribute or null if a
-   * a figure doesn't have an attribute.
-   * All figures support the attribute names
-   * FillColor and FrameColor
-   *
-   * @deprecated use getAttribute(FigureAttributeConstant) instead
-   */
-  def getAttribute(name: String): Any
-
-  /**
-   * Returns the named attribute or null if a
-   * a figure doesn't have an attribute.
-   * All figures support the attribute names
-   * FillColor and FrameColor
-   */
-  def getAttribute(attributeConstant: FigureAttributeConstant): Any
-
-  /**
-   * Sets the named attribute to the new value
-   *
-   * @deprecated use setAttribute(FigureAttributeConstant, Object) instead
-   */
-  def setAttribute(name: String, value: Any)
-
-  /**
-   * Sets the named attribute to the new value
-   */
-  def setAttribute(attributeConstant: FigureAttributeConstant, value: Any)
 
   /**
    * Gets the z value (back-to-front ordering) of this figure.

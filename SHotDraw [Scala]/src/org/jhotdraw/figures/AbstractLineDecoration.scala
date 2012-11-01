@@ -24,10 +24,12 @@ import org.jhotdraw.util._
  */
 object AbstractLineDecoration {
   private[figures] final val serialVersionUID: Long = 1577970039258356627L
+  private val FILL_COLOR: String = "fill_color"
+  private val FRAME_COLOR: String = "frame_color"
 }
 
 abstract class AbstractLineDecoration extends LineDecoration {
-
+  import AbstractLineDecoration._
   /**
    * Draws the arrow tip in the direction specified by the given two
    * points.. (template method)
@@ -76,14 +78,14 @@ abstract class AbstractLineDecoration extends LineDecoration {
    */
   def write(dw: StorableOutput) {
     if (getFillColor != null) {
-      FigureAttributes.writeColor(dw, FigureAttributeConstant.FILL_COLOR.getName, getFillColor)
+      dw.writeColor(getFillColor)
     } else {
-      dw.writeString("no" + FigureAttributeConstant.FILL_COLOR.getName)
+      dw.writeString("no" + FILL_COLOR)
     }
     if (getBorderColor != null) {
-      FigureAttributes.writeColor(dw, FigureAttributeConstant.FRAME_COLOR.getName, getBorderColor)
+      dw.writeColor(getBorderColor)
     } else {
-      dw.writeString("no" + FigureAttributeConstant.FRAME_COLOR.getName)
+      dw.writeString("no" + FRAME_COLOR)
     }
   }
 
@@ -92,12 +94,12 @@ abstract class AbstractLineDecoration extends LineDecoration {
    */
   def read(dr: StorableInput) {
     val fillColorId: String = dr.readString
-    if (fillColorId == FigureAttributeConstant.FRAME_COLOR.getName) {
-      setFillColor(FigureAttributes.readColor(dr))
+    if (fillColorId == FRAME_COLOR) {
+      setFillColor(dr.readColor)
     }
     val borderColorId: String = dr.readString
-    if ((borderColorId == "BorderColor") || (borderColorId == FigureAttributeConstant.FRAME_COLOR.getName)) {
-      setBorderColor(FigureAttributes.readColor(dr))
+    if ((borderColorId == "BorderColor") || (borderColorId == FRAME_COLOR)) {
+      setBorderColor(dr.readColor)
     }
   }
 

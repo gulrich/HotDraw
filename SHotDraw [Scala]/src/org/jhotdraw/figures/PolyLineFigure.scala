@@ -55,7 +55,6 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
   protected var fPoints: ArrayBuffer[Point] = ArrayBuffer()
   protected var fStartDecoration: LineDecoration = null
   protected var fEndDecoration: LineDecoration = null
-  protected var fFrameColor: Color = Color.black
   
   def this() {
     this(4)
@@ -251,77 +250,6 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
     }
   }
 
-  /**
-   * Gets the attribute with the given name.
-   * PolyLineFigure maps "ArrowMode"to a
-   * line decoration.
-   *
-   * @deprecated use getAttribute(FigureAttributeConstant) instead
-   */
-  override def getAttribute(name: String): Any = getAttribute(FigureAttributeConstant.getConstant(name))
-
-  /**
-   * Gets the attribute with the given name.
-   * PolyLineFigure maps "ArrowMode"to a
-   * line decoration.
-   */
-  override def getAttribute(attributeConstant: FigureAttributeConstant): Any = {
-    if (attributeConstant == FigureAttributeConstant.FRAME_COLOR) {
-      return getFrameColor
-    } else if (attributeConstant == FigureAttributeConstant.ARROW_MODE) {
-      var value: Int = 0
-      if (getStartDecoration != null) {
-        value |= ARROW_TIP_START
-      }
-      if (getEndDecoration != null) {
-        value |= ARROW_TIP_END
-      }
-      return value
-    }
-    return super.getAttribute(attributeConstant)
-  }
-
-  /**
-   * Sets the attribute with the given name.
-   * PolyLineFigure interprets "ArrowMode"to set
-   * the line decoration.
-   *
-   * @deprecated use setAttribute(FigureAttributeConstant, Object) instead
-   */
-  override def setAttribute(name: String, value: Any) {
-    setAttribute(FigureAttributeConstant.getConstant(name), value)
-  }
-
-  /**
-   * Sets the attribute with the given name.
-   * PolyLineFigure interprets "ArrowMode"to set
-   * the line decoration.
-   */
-  override def setAttribute(attributeConstant: FigureAttributeConstant, value: Any) {
-    if (attributeConstant == FigureAttributeConstant.FRAME_COLOR) {
-      setFrameColor(value.asInstanceOf[Color])
-      changed
-    } else if (attributeConstant == FigureAttributeConstant.ARROW_MODE) {
-      val intObj: Integer = value.asInstanceOf[Integer]
-      if (intObj != null) {
-        val decoration: Int = intObj.intValue
-        if ((decoration & ARROW_TIP_START) != 0) {
-          setStartDecoration(new ArrowTip)
-        } else {
-          setStartDecoration(null)
-        }
-        if ((decoration & ARROW_TIP_END) != 0) {
-          setEndDecoration(new ArrowTip)
-        } else {
-          setEndDecoration(null)
-        }
-      }
-      changed
-    } else {
-      super.setAttribute(attributeConstant, value)
-    }
-  }
-
   override def write(dw: StorableOutput) {
     super.write(dw)
     dw.writeInt(fPoints.size)
@@ -331,7 +259,7 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
     }
     dw.writeStorable(fStartDecoration)
     dw.writeStorable(fEndDecoration)
-    dw.writeColor(fFrameColor)
+    dw.writeColor(getFrameColor)
   }
 
   override def read(dr: StorableInput) {
@@ -345,13 +273,6 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
     }
     setStartDecoration(dr.readStorable.asInstanceOf[LineDecoration])
     setEndDecoration(dr.readStorable.asInstanceOf[LineDecoration])
-    fFrameColor = dr.readColor
-  }
-
-  protected def getFrameColor: Color = fFrameColor 
-
-  protected def setFrameColor(c: Color) {
-    fFrameColor = c
   }
 
   /**
