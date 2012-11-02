@@ -39,8 +39,7 @@ class ChopBoxConnector(owner: Figure) extends AbstractConnector(owner) {
     var r2c: Point = null
     if (connection.pointCount == 2) {
       r2c = new Point(r2.x + r2.width / 2, r2.y + r2.height / 2)
-    }
-    else {
+    } else {
       r2c = connection.pointAt(1)
     }
     chop(startFigure, r2c)
@@ -52,8 +51,7 @@ class ChopBoxConnector(owner: Figure) extends AbstractConnector(owner) {
     var r1c: Point = null
     if (connection.pointCount == 2) {
       r1c = new Point(r1.x + r1.width / 2, r1.y + r1.height / 2)
-    }
-    else {
+    } else {
       r1c = connection.pointAt(connection.pointCount - 2)
     }
     chop(endFigure, r1c)

@@ -29,13 +29,13 @@ object BoxHandleKit {
    * Fills the given collection with handles at each corner of a
    * figure.
    */
-  def addCornerHandles(f: Figure, handles: List[Handle]): List[Handle] = handles ::: List(southEast(f)) ::: List(southWest(f)) ::: List(northEast(f)) ::: List(northWest(f))
+  def addCornerHandles(f: Figure, handles: List[Handle]): List[Handle] = handles ::: List(southEast(f), southWest(f), northEast(f), northWest(f))
 
   /**
    * Fills the given collection with handles at each corner
    * and the north, south, east, and west of the figure.
    */
-  def addHandles(f: Figure, handles: List[Handle]): List[Handle] = handles ::: List(south(f)) ::: List(north(f)) ::: List(east(f)) ::: List(west(f))
+  def addHandles(f: Figure, handles: List[Handle]): List[Handle] = addCornerHandles(f, handles) ::: List(south(f), north(f), east(f), west(f))
 
   def south(owner: Figure): Handle = new SouthHandle(owner)
 

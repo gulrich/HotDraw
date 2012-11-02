@@ -26,6 +26,9 @@ object ArrowTip {
 }
 
 class ArrowTip(angle: Double, outerRadius: Double, innerRadius: Double) extends AbstractLineDecoration {
+  private var fAngle: Double = .0
+  private var fOuterRadius: Double = .0
+  private var fInnerRadius: Double = .0
   setAngle(angle)
   setOuterRadius(outerRadius)
   setInnerRadius(innerRadius)
@@ -113,13 +116,10 @@ class ArrowTip(angle: Double, outerRadius: Double, innerRadius: Double) extends 
     fOuterRadius = newOuterRadius
   }
 
+    
   /**
    * Returns the outer radius
    */
   protected def getOuterRadius: Double = fOuterRadius
-
-  private var fAngle: Double = .0
-  private var fOuterRadius: Double = .0
-  private var fInnerRadius: Double = .0
 }
 

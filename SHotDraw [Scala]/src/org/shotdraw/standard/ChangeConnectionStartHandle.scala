@@ -64,7 +64,9 @@ class ChangeConnectionStartHandle(owner: ConnectionFigure) extends ChangeConnect
   /**
    * Returns the start point of the connection.
    */
-  def locate: Point = getConnection.startPoint
+  def locate: Point = {
+    getConnection.startPoint
+  }
 
   /**
    * Factory method for undo activity

@@ -19,11 +19,10 @@ import java.awt.geom.GeneralPath
 import java.io.IOException
 import org.shotdraw.framework.Connector
 import org.shotdraw.framework.Handle
-
 import org.shotdraw.standard.BoxHandleKit
-
 import org.shotdraw.util.StorableInput
 import org.shotdraw.util.StorableOutput
+import org.shotdraw.standard.AbstractConnector
 
 /**
  * An triangle figure.
@@ -87,7 +86,7 @@ class TriangleFigure(origin: Point, corner: Point) extends AttributeFigure {
     new Insets(cy, cx, cy, cx)
   }
 
-  override def connectorAt(x: Int, y: Int): Connector = new ChopEllipseConnector(this)
+  override def connectorAt(x: Int, y: Int): Connector = new AbstractConnector(this) {}
 
   override def write(dw: StorableOutput) {
     super.write(dw)

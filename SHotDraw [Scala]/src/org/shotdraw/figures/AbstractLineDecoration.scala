@@ -30,6 +30,11 @@ object AbstractLineDecoration {
 
 abstract class AbstractLineDecoration extends LineDecoration {
   import AbstractLineDecoration._
+  
+  private var fFillColor: Color = null
+  private var fBorderColor: Color = null
+  @transient
+  private var myBounds: Rectangle = null
   /**
    * Draws the arrow tip in the direction specified by the given two
    * points.. (template method)
@@ -127,9 +132,5 @@ abstract class AbstractLineDecoration extends LineDecoration {
    */
   def getBorderColor: Color = fBorderColor
 
-  private var fFillColor: Color = null
-  private var fBorderColor: Color = null
-  @transient
-  private var myBounds: Rectangle = null
 }
 

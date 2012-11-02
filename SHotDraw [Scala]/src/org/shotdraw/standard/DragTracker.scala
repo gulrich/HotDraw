@@ -27,6 +27,8 @@ import java.awt.event.MouseEvent
 object DragTracker {
 
   class UndoActivity(newDrawingView: DrawingView, newOriginalPoint: Point) extends UndoableAdapter(newDrawingView) {
+    private var myOriginalPoint: Point = null
+    private var myBackupPoint: Point = null
     setOriginalPoint(newOriginalPoint)
     setUndoable(true)
     setRedoable(true)
@@ -66,8 +68,6 @@ object DragTracker {
       }
     }
 
-    private var myOriginalPoint: Point = null
-    private var myBackupPoint: Point = null
   }
 
 }

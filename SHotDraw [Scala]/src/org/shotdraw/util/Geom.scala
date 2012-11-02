@@ -129,11 +129,11 @@ object Geom {
   def range(min: Int, max: Int, value: Int): Int = {
     if (value < min) {
       min
-    }
-    if (value > max) {
+    } else if (value > max) {
       max
+    } else {
+      value
     }
-    value
   }
 
   /**
@@ -152,27 +152,27 @@ object Geom {
   def pointToAngle(r: Rectangle, p: Point): Double = {
     val px: Int = p.x - (r.x + r.width / 2)
     val py: Int = p.y - (r.y + r.height / 2)
-    Math.atan2(py * r.width, px * r.height)
+    math.atan2(py * r.width, px * r.height)
   }
 
   /**
    * Gets the point on a rectangle that corresponds to the given angle.
    */
   def angleToPoint(r: Rectangle, angle: Double): Point = {
-    val si: Double = Math.sin(angle)
-    val co: Double = Math.cos(angle)
+    val si: Double = math.sin(angle)
+    val co: Double = math.cos(angle)
     val e: Double = 0.0001
     var x: Int = 0
     var y: Int = 0
-    if (Math.abs(si) > e) {
-      x = ((1.0 + co / Math.abs(si)) / 2.0 * r.width).asInstanceOf[Int]
+    if (math.abs(si) > e) {
+      x = ((1.0 + co / math.abs(si)) / 2.0 * r.width).toInt
       x = range(0, r.width, x)
     }
     else if (co >= 0.0) {
       x = r.width
     }
-    if (Math.abs(co) > e) {
-      y = ((1.0 + si / Math.abs(co)) / 2.0 * r.height).asInstanceOf[Int]
+    if (math.abs(co) > e) {
+      y = ((1.0 + si / math.abs(co)) / 2.0 * r.height).toInt
       y = range(0, r.height, y)
     }
     else if (si >= 0.0) {

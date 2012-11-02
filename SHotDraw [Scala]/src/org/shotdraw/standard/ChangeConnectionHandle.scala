@@ -71,6 +71,11 @@ object ChangeConnectionHandle {
 }
 
 abstract class ChangeConnectionHandle(owner: ConnectionFigure) extends AbstractHandle(owner) {
+ 
+  private var fOriginalTarget: Connector = null
+  private var myTarget: Figure = null
+  private var myConnection: ConnectionFigure = owner
+  
   /**
    * Returns the target connector of the change.
    */
@@ -207,8 +212,5 @@ abstract class ChangeConnectionHandle(owner: ConnectionFigure) extends AbstractH
    */
   protected def createUndoActivity(newView: DrawingView): Undoable
 
-  private var fOriginalTarget: Connector = null
-  private var myTarget: Figure = null
-  private var myConnection: ConnectionFigure = null
 }
 
