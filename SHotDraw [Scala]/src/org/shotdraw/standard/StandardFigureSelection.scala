@@ -39,6 +39,7 @@ object StandardFigureSelection {
 
 class StandardFigureSelection extends FigureSelection with Serializable {
   import StandardFigureSelection._
+  private var fData: Array[Byte] = null
   /**
    * Constructes the Figure selection for the Seq[Figure].
    */
@@ -82,11 +83,10 @@ class StandardFigureSelection extends FigureSelection with Serializable {
         }
       }
       result
+    } else {
+      null
     }
-    null
   }
-
-  private var fData: Array[Byte] = null
 }
 
 

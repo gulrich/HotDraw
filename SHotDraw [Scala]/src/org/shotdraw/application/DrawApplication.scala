@@ -362,10 +362,10 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    */
   protected def createArrowMenu: JMenu = {
     val menu: CommandMenu = new CommandMenu("Arrow")
-    menu.add(new UndoableCommand(new ChangeAttributeCommand("none", ArrowMode, PolyLineFigure.ARROW_TIP_NONE, this)))
-    menu.add(new UndoableCommand(new ChangeAttributeCommand("at Start", ArrowMode, PolyLineFigure.ARROW_TIP_START, this)))
-    menu.add(new UndoableCommand(new ChangeAttributeCommand("at End", ArrowMode, PolyLineFigure.ARROW_TIP_END, this)))
-    menu.add(new UndoableCommand(new ChangeAttributeCommand("at Both", ArrowMode, PolyLineFigure.ARROW_TIP_BOTH, this)))
+    menu.add(new UndoableCommand(new ChangeAttributeCommand("none", ArrowMode, PolyLineFigure.ArrowTipNone, this)))
+    menu.add(new UndoableCommand(new ChangeAttributeCommand("at Start", ArrowMode, PolyLineFigure.ArrowTipStart, this)))
+    menu.add(new UndoableCommand(new ChangeAttributeCommand("at End", ArrowMode, PolyLineFigure.ArrowTipEnd, this)))
+    menu.add(new UndoableCommand(new ChangeAttributeCommand("at Both", ArrowMode, PolyLineFigure.ArrowTipBoth, this)))
     menu
   }
 

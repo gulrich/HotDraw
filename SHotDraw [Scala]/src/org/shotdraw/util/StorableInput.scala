@@ -61,7 +61,7 @@ class StorableInput(stream: InputStream) {
   def readString: String = {
     val token: Int = fTokenizer.nextToken
     if (token == StreamTokenizer.TT_WORD || token == '"') {
-      fTokenizer.sval
+      return fTokenizer.sval
     }
     val msg: String = "String expected in line: " + fTokenizer.lineno
     throw new IOException(msg)

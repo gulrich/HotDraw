@@ -11,15 +11,12 @@
 package org.shotdraw.figures
 
 import java.awt.Color
+import java.awt.Font
 import java.io.IOException
 import java.io.Serializable
-import org.shotdraw.framework.Figure
-import org.shotdraw.util.Storable
+
 import org.shotdraw.util.StorableInput
 import org.shotdraw.util.StorableOutput
-import scala.collection.mutable.Map
-import javax.swing.JPopupMenu
-import java.awt.Font
 
 /**
  * A container for a figure's attributes. The attributes are stored
@@ -30,10 +27,12 @@ import java.awt.Font
  * @version <$CURRENT_VERSION$>
  */
 trait FigureAttributes extends Serializable {  
+  import PolyLineFigure._
+  
   private var frameColor: Color = Color.BLACK
   private var fillColor: Color = Color.BLUE
   private var textColor: Color = Color.BLACK
-  private var arrowMode: Int = PolyLineFigure.ARROW_TIP_BOTH
+  private var arrowMode: ArrowType = ArrowTipBoth
   private var fontName: String = "Helvetica"
   private var fontSize: Int = 12
   private var fontStyle: Int = Font.PLAIN
@@ -42,7 +41,7 @@ trait FigureAttributes extends Serializable {
   def getFrameColor: Color = frameColor
   def getFillColor: Color = fillColor
   def getTextColor: Color = textColor
-  def getArrowMode: Int = arrowMode
+  def getArrowMode: PolyLineFigure.ArrowType = arrowMode
   def getFontName: String = fontName
   def getFontSize: Int = fontSize
   def getFontStyle: Int = fontStyle
@@ -56,7 +55,7 @@ trait FigureAttributes extends Serializable {
   def setTextColor(value: Color) {
     textColor = value
   }
-  def setArrowMode(value: Int) {
+  def setArrowMode(value: PolyLineFigure.ArrowType) {
     arrowMode = value
   }
   def setFontName(value: String) {
@@ -86,7 +85,13 @@ trait FigureAttributes extends Serializable {
     frameColor = dr.readColor
     fillColor = dr.readColor
     textColor = dr.readColor
-    arrowMode = dr.readInt
+    arrowMode = dr.readInt match {
+      case 0 => ArrowTipNone
+      case 1 => ArrowTipStart
+      case 2 => ArrowTipEnd
+      case 3 => ArrowTipBoth
+      case _ => sys.error("Unknown arrow tip")
+    }
     fontName = dr.readString
     fontSize = dr.readInt
     fontStyle = dr.readInt
@@ -106,7 +111,12 @@ trait FigureAttributes extends Serializable {
     dw.writeColor(frameColor)
     dw.writeColor(fillColor)
     dw.writeColor(textColor)
-    dw.writeInt(arrowMode)
+    dw.writeInt(arrowMode match {
+      case ArrowTipNone => 0  
+      case ArrowTipBoth => 1
+      case ArrowTipEnd => 2
+      case ArrowTipStart => 3
+    })
     dw.writeString(fontName)
     dw.writeInt(fontSize)
     dw.writeInt(fontStyle)

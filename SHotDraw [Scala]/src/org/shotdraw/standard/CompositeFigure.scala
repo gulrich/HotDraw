@@ -18,6 +18,7 @@ import java.awt.Rectangle
 import java.awt.Graphics
 import scala.collection.mutable.ArrayBuffer
 import java.awt.Color
+import org.shotdraw.figures.PolyLineFigure.ArrowType
 
 /**
  * A Figure that is composed of several figures. A CompositeFigure
@@ -610,7 +611,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
     fFigures foreach { _.setFontStyle(value) }
   }
   
-  override def setArrowMode(value: Int) {
+  override def setArrowMode(value: ArrowType) {
     super.setArrowMode(value)
     fFigures foreach { _.setArrowMode(value) }
   }

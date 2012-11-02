@@ -29,6 +29,8 @@ object Clipboard {
 }
 
 class Clipboard {
+    private var fContents: Any = null
+
   /**
    * Sets the contents of the clipboard.
    */
@@ -40,7 +42,5 @@ class Clipboard {
    * Gets the contents of the clipboard.
    */
   def getContents: Any = fContents
-
-  private var fContents: Any = null
 }
 

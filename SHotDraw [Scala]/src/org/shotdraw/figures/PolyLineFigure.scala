@@ -38,14 +38,13 @@ object PolyLineFigure {
   /**
    * Creates a locator for the point with the given index.
    */
-  def locator(pointIndex: Int): Locator = {
-    return new PolyLineLocator(pointIndex)
-  }
-
-  final val ARROW_TIP_NONE: Int = 0
-  final val ARROW_TIP_START: Int = 1
-  final val ARROW_TIP_END: Int = 2
-  final val ARROW_TIP_BOTH: Int = 3
+  def locator(pointIndex: Int): Locator = new PolyLineLocator(pointIndex)
+    
+  sealed trait ArrowType
+  case object ArrowTipNone extends ArrowType
+  case object ArrowTipBoth extends ArrowType
+  case object ArrowTipEnd extends ArrowType
+  case object ArrowTipStart extends ArrowType
 }
 
 class PolyLineFigure(fSize: Int) extends AbstractFigure {
@@ -175,6 +174,25 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
    */
   def setEndDecoration(l: LineDecoration) {
     fEndDecoration = l
+  }
+  
+  override def setArrowMode(value: ArrowType): Unit = {
+    willChange
+    value match {
+      case ArrowTipNone =>
+        setStartDecoration(null)
+        setEndDecoration(null)
+      case ArrowTipStart =>
+        setStartDecoration(ArrowTip.instance)
+        setEndDecoration(null)
+      case ArrowTipEnd =>
+        setStartDecoration(null)
+        setEndDecoration(ArrowTip.instance)
+      case ArrowTipBoth =>
+        setStartDecoration(ArrowTip.instance)
+        setEndDecoration(ArrowTip.instance)
+    }
+    changed
   }
 
   /**

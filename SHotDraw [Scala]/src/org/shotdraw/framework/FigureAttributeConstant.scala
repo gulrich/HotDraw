@@ -1,6 +1,7 @@
 package org.shotdraw.framework
 import org.shotdraw.figures.FigureAttributes
 import java.awt.Color
+import org.shotdraw.figures.PolyLineFigure.ArrowType
 
 trait FigureAttributeConstant[T] {
   def setAttribute(figAttr: FigureAttributes, value: T)
@@ -28,11 +29,11 @@ case object TextColor extends FigureAttributeConstant[Color] {
   def getAttribute(figAttr: FigureAttributes): Color = figAttr.getTextColor
 }
 
-case object ArrowMode extends FigureAttributeConstant[Int] {
-  def setAttribute(figAttr: FigureAttributes, value: Int) {
+case object ArrowMode extends FigureAttributeConstant[ArrowType] {
+  def setAttribute(figAttr: FigureAttributes, value: ArrowType) {
     figAttr.setArrowMode(value)
   }
-  def getAttribute(figAttr: FigureAttributes): Int = figAttr.getArrowMode
+  def getAttribute(figAttr: FigureAttributes): ArrowType = figAttr.getArrowMode
 }
 
 case object FontName extends FigureAttributeConstant[String] {

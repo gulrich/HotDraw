@@ -27,18 +27,20 @@ import scala.collection.mutable.ArrayBuffer
  */
 class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
 
-  setStartDecoration(new ArrowTip)
-  setEndDecoration(new ArrowTip)
+  protected var myStartConnector: Connector = null
+  protected var myEndConnector: Connector = null
+  
+  setArrowMode(getArrowMode)
 
   /**
    * Tests whether a figure can be a connection target.
    * ConnectionFigures cannot be connected and return false.
    */
   override def canConnect: Boolean = false
-
+  
   /**
    * Ensures that a connection is updated if the connection
-   * was moved.
+   * was moved.synthesia
    */
   protected override def basicMoveBy(dx: Int, dy: Int) {
     for(i <- 0 to fPoints.size - 2) pointAt(i).translate(dx, dy)
@@ -318,7 +320,5 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
     release
   }
 
-  protected var myStartConnector: Connector = null
-  protected var myEndConnector: Connector = null
 }
 
