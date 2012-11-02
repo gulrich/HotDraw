@@ -149,7 +149,7 @@ class StandardStorageFormat extends StorageFormat {
       val input: StorableInput = new StorableInput(stream)
       input.readStorable match {
         case d: Drawing => d
-        case _ => error(fileName + " is not a Drawing")
+        case _ => sys.error(fileName + " is not a Drawing")
       }
     }
   }

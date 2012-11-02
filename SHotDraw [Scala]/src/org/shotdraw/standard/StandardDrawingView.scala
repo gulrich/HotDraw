@@ -253,7 +253,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   /**
    * Adds a Collection of figures to the drawing.
    */
-  def addAll(figures: Collection[Figure]) {
+  def addAll(figures: Iterable[Figure]) {
     figures foreach { f => add(f)}
   }
 
@@ -386,7 +386,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   /**
    * Adds a Collection of figures to the current selection.
    */
-  def addToSelectionAll(figures: Collection[Figure]) {
+  def addToSelectionAll(figures: Iterable[Figure]) {
     addToSelectionAll(figures)
   }
 
@@ -731,8 +731,8 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     if (drawing != null) {
       drawing.figures foreach { f =>
         val r: Rectangle = f.displayBox
-        d.width = Math.max(d.width, r.x + r.width)
-        d.height = Math.max(d.height, r.y + r.height)
+        d.width = math.max(d.width, r.x + r.width)
+        d.height = math.max(d.height, r.y + r.height)
       }
     }
     d

@@ -116,15 +116,13 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
    * Insert a node at the given point.
    */
   def insertPointAt(p: Point, i: Int) {
-    val (l, r) = fPoints.splitAt(i)
-    fPoints = l + p ++ r
+    fPoints.insert(i,p)
     changed
   }
 
   def removePointAt(i: Int) {
-    willChange
-    val (l, r) = fPoints.splitAt(i)
-    fPoints = l ++ r.tail
+    willChange    
+    fPoints.remove(i)
     changed
   }
 

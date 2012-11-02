@@ -257,8 +257,8 @@ class PolygonFigure extends AttributeFigure {
     if (anchorLen > 0.0) {
       val newLen: Double = Geom.length(ctr.x, ctr.y, p.x, p.y)
       val ratio: Double = newLen / anchorLen
-      val anchorAngle: Double = Math.atan2(anchor.y - ctr.y, anchor.x - ctr.x)
-      val newAngle: Double = Math.atan2(p.y - ctr.y, p.x - ctr.x)
+      val anchorAngle: Double = math.atan2(anchor.y - ctr.y, anchor.x - ctr.x)
+      val newAngle: Double = math.atan2(p.y - ctr.y, p.x - ctr.x)
       val rotation: Double = newAngle - anchorAngle
       val n: Int = originalPolygon.npoints
       val xs: Array[Int] = new Array[Int](n)
@@ -268,9 +268,9 @@ class PolygonFigure extends AttributeFigure {
         val x: Int = originalPolygon.xpoints(i)
         val y: Int = originalPolygon.ypoints(i)
         val l: Double = Geom.length(ctr.x, ctr.y, x, y) * ratio
-        val a: Double = Math.atan2(y - ctr.y, x - ctr.x) + rotation
-        xs(i) = (ctr.x + l * Math.cos(a) + 0.5).toInt
-        ys(i) = (ctr.y + l * Math.sin(a) + 0.5).toInt
+        val a: Double = math.atan2(y - ctr.y, x - ctr.x) + rotation
+        xs(i) = (ctr.x + l * math.cos(a) + 0.5).toInt
+        ys(i) = (ctr.y + l * math.sin(a) + 0.5).toInt
       }
       setInternalPolygon(new Polygon(xs, ys, n))
     }

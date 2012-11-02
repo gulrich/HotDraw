@@ -26,7 +26,7 @@ class ReverseListEnumerator(var myList: List[Figure]) extends Iterator[Figure] {
     case Some(fig) =>
       myList = myList.init
       fig
-    case None => error("ReverseListEnumerator: No such element exception")
+    case None => sys.error("ReverseListEnumerator: No such element exception")
   }
 
   def remove {

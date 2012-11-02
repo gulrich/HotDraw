@@ -25,7 +25,7 @@ class DrawingChangeEvent(newSource: Drawing, myRectangle: Rectangle) extends Eve
    */
   def getDrawing: Drawing = getSource match {
     case d: Drawing => d
-    case _ => error("Drawing expected")
+    case _ => sys.error("Drawing expected")
   }
 
   /**

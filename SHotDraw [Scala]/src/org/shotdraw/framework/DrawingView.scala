@@ -82,7 +82,7 @@ abstract trait DrawingView extends ImageObserver with DrawingChangeListener {
   /**
    * Adds a collections of figures to the drawing.
    */
-  def addAll(figures: Collection[Figure])
+  def addAll(figures: Iterable[Figure])
 
   /**
    * Gets the size of the drawing.
@@ -148,7 +148,7 @@ abstract trait DrawingView extends ImageObserver with DrawingChangeListener {
   /**
    * Adds a collections of figures to the current selection.
    */
-  def addToSelectionAll(figures: Collection[Figure])
+  def addToSelectionAll(figures: Iterable[Figure])
 
   /**
    * Adds a Seq[Figure] to the current selection.

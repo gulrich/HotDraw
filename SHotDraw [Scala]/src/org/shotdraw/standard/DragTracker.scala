@@ -95,7 +95,7 @@ class DragTracker(newDrawingEditor: DrawingEditor, anchor: Figure) extends Abstr
 
   override def mouseDrag(e: MouseEvent, x: Int, y: Int) {
     super.mouseDrag(e, x, y)
-    setHasMoved((Math.abs(x - getAnchorX) > 4) || (Math.abs(y - getAnchorY) > 4))
+    setHasMoved((math.abs(x - getAnchorX) > 4) || (math.abs(y - getAnchorY) > 4))
     if (hasMoved) {
       getUndoActivity.getAffectedFigures foreach {f =>
         f.moveBy(x - getLastMouseX, y - getLastMouseY)

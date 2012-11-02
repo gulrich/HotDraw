@@ -35,16 +35,16 @@ object Geom {
     var x: Double = .0
     var y: Double = .0
     if (x1 == x2) {
-      return (Math.abs(px - x1) < 3)
+      return (math.abs(px - x1) < 3)
     }
     if (y1 == y2) {
-      return (Math.abs(py - y1) < 3)
+      return (math.abs(py - y1) < 3)
     }
     a = (y1 - y2) / (x1 - x2)
     b = y1 - a * x1
     x = (py - b) / a
     y = a * px + b
-    (Math.min(Math.abs(x - px), Math.abs(y - py)) < 4)
+    (math.min(math.abs(x - px), math.abs(y - py)) < 4)
   }
 
   /**
@@ -144,7 +144,7 @@ object Geom {
   /**
    * Gets the distance between to points
    */
-  def length(x1: Int, y1: Int, x2: Int, y2: Int): Long = Math.sqrt(length2(x1, y1, x2, y2)).asInstanceOf[Long]
+  def length(x1: Int, y1: Int, x2: Int, y2: Int): Long = math.sqrt(length2(x1, y1, x2, y2)).asInstanceOf[Long]
 
   /**
    * Gets the angle of a point relative to a rectangle.
@@ -185,8 +185,8 @@ object Geom {
    * Converts a polar to a point
    */
   def polarToPoint(angle: Double, fx: Double, fy: Double): Point = {
-    val si: Double = Math.sin(angle)
-    val co: Double = Math.cos(angle)
+    val si: Double = math.sin(angle)
+    val co: Double = math.cos(angle)
     new Point((fx * co + 0.5).asInstanceOf[Int], (fy * si + 0.5).asInstanceOf[Int])
   }
 
@@ -253,7 +253,7 @@ object Geom {
     val yi: Double = ya + r * ydiff
     val xd: Double = xc - xi
     val yd: Double = yc - yi
-    Math.sqrt(xd * xd + yd * yd)
+    math.sqrt(xd * xd + yd * yd)
   }
 
   /**

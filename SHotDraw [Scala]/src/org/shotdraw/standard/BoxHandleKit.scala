@@ -112,56 +112,56 @@ class ResizeHandle(owner: Figure, loc: Locator) extends LocatorHandle(owner, loc
 class NorthEastHandle(owner: Figure) extends ResizeHandle(owner, RelativeLocator.northEast) {
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
     val r: Rectangle = owner.displayBox
-    owner.displayBox(new Point(r.x, Math.min(r.y + r.height, y)), new Point(Math.max(r.x, x), r.y + r.height))
+    owner.displayBox(new Point(r.x, math.min(r.y + r.height, y)), new Point(math.max(r.x, x), r.y + r.height))
   }
 }
 
 class EastHandle(owner: Figure) extends ResizeHandle(owner, RelativeLocator.east) {
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
     val r: Rectangle = owner.displayBox
-    owner.displayBox(new Point(r.x, r.y), new Point(Math.max(r.x, x), r.y + r.height))
+    owner.displayBox(new Point(r.x, r.y), new Point(math.max(r.x, x), r.y + r.height))
   }
 }
 
 class NorthHandle(owner: Figure) extends ResizeHandle(owner, RelativeLocator.north) {
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
     val r: Rectangle = owner.displayBox
-    owner.displayBox(new Point(r.x, Math.min(r.y + r.height, y)), new Point(r.x + r.width, r.y + r.height))
+    owner.displayBox(new Point(r.x, math.min(r.y + r.height, y)), new Point(r.x + r.width, r.y + r.height))
   }
 }
 
 class NorthWestHandle(owner: Figure) extends ResizeHandle(owner, RelativeLocator.northWest) {
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
     val r: Rectangle = owner.displayBox
-    owner.displayBox(new Point(Math.min(r.x + r.width, x), Math.min(r.y + r.height, y)), new Point(r.x + r.width, r.y + r.height))
+    owner.displayBox(new Point(math.min(r.x + r.width, x), math.min(r.y + r.height, y)), new Point(r.x + r.width, r.y + r.height))
   }
 }
 
 class SouthEastHandle(owner: Figure) extends ResizeHandle(owner, RelativeLocator.southEast) {
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
     val r: Rectangle = owner.displayBox
-    owner.displayBox(new Point(r.x, r.y), new Point(Math.max(r.x, x), Math.max(r.y, y)))
+    owner.displayBox(new Point(r.x, r.y), new Point(math.max(r.x, x), math.max(r.y, y)))
   }
 }
 
 class SouthHandle(owner: Figure) extends ResizeHandle(owner, RelativeLocator.south) {
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
     val r: Rectangle = owner.displayBox
-    owner.displayBox(new Point(r.x, r.y), new Point(r.x + r.width, Math.max(r.y, y)))
+    owner.displayBox(new Point(r.x, r.y), new Point(r.x + r.width, math.max(r.y, y)))
   }
 }
 
 class SouthWestHandle(owner: Figure) extends ResizeHandle(owner, RelativeLocator.southWest) {
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
     val r: Rectangle = owner.displayBox
-    owner.displayBox(new Point(Math.min(r.x + r.width, x), r.y), new Point(r.x + r.width, Math.max(r.y, y)))
+    owner.displayBox(new Point(math.min(r.x + r.width, x), r.y), new Point(r.x + r.width, math.max(r.y, y)))
   }
 }
 
 class WestHandle(owner: Figure) extends ResizeHandle(owner, RelativeLocator.west) {
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
     val r: Rectangle = owner.displayBox
-    owner.displayBox(new Point(Math.min(r.x + r.width, x), r.y), new Point(r.x + r.width, r.y + r.height))
+    owner.displayBox(new Point(math.min(r.x + r.width, x), r.y), new Point(r.x + r.width, r.y + r.height))
   }
 }
 

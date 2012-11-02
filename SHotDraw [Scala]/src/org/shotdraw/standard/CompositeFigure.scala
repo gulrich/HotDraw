@@ -233,8 +233,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
         assignFiguresToSuccessorZValue(nr, figureLayer - 1)
       }
       fFigures = fFigures diff List(figure)
-      val (l,r) = fFigures.splitAt(nr-1)
-      fFigures = l + figure ++ r 
+      fFigures.insert(nr-1, figure) 
       figure.setZValue(layerFigureZValue)
       figure.changed
     }
@@ -331,8 +330,8 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
       val fe: Seq[Figure] = _theQuadTree.getAllWithin(new Bounds(viewRectangle).asRectangle2D)
       var l2: List[OrderedFigureElement] = List()
       fe foreach(f => l2 ::= new OrderedFigureElement(f, f.getZValue))
-      l2 = l2.sort((e1, e2) => e1.compareTo(e2) < 0)
-      val l3: ArrayBuffer[Figure] = l2.foldLeft(ArrayBuffer[Figure]())((x,y) => x+y.getFigure)
+      l2 = l2.sortWith((e1, e2) => e1.compareTo(e2) < 0)
+      val l3: ArrayBuffer[Figure] = l2.foldLeft(ArrayBuffer[Figure]())((x,y) => x+=y.getFigure)
       l3
     } else figures
   }

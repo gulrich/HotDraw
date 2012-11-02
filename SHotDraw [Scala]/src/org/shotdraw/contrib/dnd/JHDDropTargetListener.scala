@@ -106,7 +106,7 @@ class JHDDropTargetListener(drawingEditor: DrawingEditor, drawingView: DrawingVi
     if (supportDropTargetDragEvent(dtde) == true) {
       val x: Int = dtde.getLocation.x
       val y: Int = dtde.getLocation.y
-      if ((Math.abs(x - fLastX) > 0) || (Math.abs(y - fLastY) > 0)) {
+      if ((math.abs(x - fLastX) > 0) || (math.abs(y - fLastY) > 0)) {
         fLastX = x
         fLastY = y
       }

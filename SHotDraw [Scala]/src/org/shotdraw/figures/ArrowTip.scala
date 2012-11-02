@@ -37,7 +37,7 @@ class ArrowTip(angle: Double, outerRadius: Double, innerRadius: Double) extends 
    * Calculates the outline of an arrow tip.
    */
   def outline(x1: Int, y1: Int, x2: Int, y2: Int): Polygon = {
-    val dir: Double = math.Pi / 2 - Math.atan2(x2 - x1, y2 - y1)
+    val dir: Double = math.Pi / 2 - math.atan2(x2 - x1, y2 - y1)
     outline(x1, y1, dir)
   }
 
@@ -52,7 +52,7 @@ class ArrowTip(angle: Double, outerRadius: Double, innerRadius: Double) extends 
   }
 
   private def addPointRelative(shape: Polygon, x: Int, y: Int, radius: Double, angle: Double) {
-    shape.addPoint(x + (radius * Math.cos(angle)).asInstanceOf[Int], y + (radius * Math.sin(angle)).asInstanceOf[Int])
+    shape.addPoint(x + (radius * math.cos(angle)).asInstanceOf[Int], y + (radius * math.sin(angle)).asInstanceOf[Int])
   }
 
   /**

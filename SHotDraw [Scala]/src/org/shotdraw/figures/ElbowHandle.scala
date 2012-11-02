@@ -59,7 +59,7 @@ class ElbowHandle(owner: LineConnection, fSegment: Int) extends AbstractHandle(o
 
   def locate: Point = {
     val line: LineConnection = ownerConnection
-    val segment: Int = Math.min(fSegment, line.pointCount - 2)
+    val segment: Int = math.min(fSegment, line.pointCount - 2)
     val p1: Point = line.pointAt(segment)
     val p2: Point = line.pointAt(segment + 1)
     new Point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2)

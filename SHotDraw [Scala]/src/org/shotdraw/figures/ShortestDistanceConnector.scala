@@ -76,8 +76,8 @@ class ShortestDistanceConnector(owner: Figure) extends AbstractConnector(owner) 
       x1 = r1x
       x2 = r2x + r2width
     } else {
-      xmax = Math.max(r1x, r2x)
-      xmin = Math.min(r1x + r1width, r2x + r2width)
+      xmax = math.max(r1x, r2x)
+      xmin = math.min(r1x + r1width, r2x + r2width)
       x1 = (xmax + xmin) / 2
       x2 = x1      
     }
@@ -92,8 +92,8 @@ class ShortestDistanceConnector(owner: Figure) extends AbstractConnector(owner) 
       y1 = r1y
       y2 = r2y + r2height
     } else {
-      ymax = Math.max(r1y, r2y)
-      ymin = Math.min(r1y + r1height, r2y + r2height)
+      ymax = math.max(r1y, r2y)
+      ymin = math.min(r1y + r1height, r2y + r2height)
       y1 = (ymax + ymin) / 2
       y2 = y1
     }

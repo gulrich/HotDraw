@@ -69,7 +69,7 @@ class SerializationStorageFormat extends StandardStorageFormat {
       val input: ObjectInput = new ObjectInputStream(stream)
       input.readObject match {
         case d: Drawing => d
-        case None => error(fileName + " is not a Drawing")
+        case None => sys.error(fileName + " is not a Drawing")
       }
     } catch {
       case exception: ClassNotFoundException => {

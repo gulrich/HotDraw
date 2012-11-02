@@ -33,7 +33,7 @@ class FigureChangeEvent(newSource: Figure, myRectangle: Rectangle, myNestedEvent
    */
   def getFigure: Figure = getSource match {
     case f:Figure => f
-    case _ => error("Figure expected")
+    case _ => sys.error("Figure expected")
   }
 
   /**

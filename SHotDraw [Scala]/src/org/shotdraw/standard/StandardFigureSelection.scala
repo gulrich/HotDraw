@@ -77,7 +77,7 @@ class StandardFigureSelection extends FigureSelection with Serializable {
           result += newFigure
         } catch {
           case e: IOException => {
-            error(e.toString)
+            sys.error(e.toString)
           }
         }
       }

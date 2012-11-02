@@ -59,7 +59,7 @@ object ChangeAttributeCommand {
 
     protected def getOriginalValue(lookupAffectedFigure: Figure): T = myOriginalValues.get(lookupAffectedFigure) match {
       case Some(value) => value
-      case _ => error("ChangeAttributeCommand: Figure " + lookupAffectedFigure + " not found in myOriginalValues")
+      case _ => sys.error("ChangeAttributeCommand: Figure " + lookupAffectedFigure + " not found in myOriginalValues")
     }
 
     protected def setAttribute(newUndoAttribute: FigureAttributeConstant[T]) {

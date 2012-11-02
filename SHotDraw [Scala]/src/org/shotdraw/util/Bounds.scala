@@ -56,13 +56,13 @@ class Bounds(var x1: Double, var y1: Double, var x2: Double, var y2: Double) ext
     this(0, 0, aDimension.width, aDimension.height)
   }
 
-  def getLesserX: Double = Math.min(x1, x2)
+  def getLesserX: Double = math.min(x1, x2)
 
-  def getGreaterX: Double = Math.max(x1, x2)
+  def getGreaterX: Double = math.max(x1, x2)
 
-  def getLesserY: Double = Math.min(y1, y2)
+  def getLesserY: Double = math.min(y1, y2)
 
-  def getGreaterY: Double = Math.max(y1, y2)
+  def getGreaterY: Double = math.max(y1, y2)
 
   def getWest: Double = getLesserX
 
@@ -183,10 +183,10 @@ class Bounds(var x1: Double, var y1: Double, var x2: Double, var y2: Double) ext
   }
 
   def intersect(aBounds: Bounds) {
-    this.x1 = Math.max(this.x1, aBounds.getLesserX)
-    this.y1 = Math.max(this.y1, aBounds.getLesserY)
-    this.x2 = Math.min(this.x2, aBounds.getGreaterX)
-    this.y2 = Math.min(this.y2, aBounds.getGreaterY)
+    this.x1 = math.max(this.x1, aBounds.getLesserX)
+    this.y1 = math.max(this.y1, aBounds.getLesserY)
+    this.x2 = math.min(this.x2, aBounds.getGreaterX)
+    this.y2 = math.min(this.y2, aBounds.getGreaterY)
     if (this.x1 > this.x2) {
       this.x1 = this.x2
     }
@@ -257,7 +257,7 @@ class Bounds(var x1: Double, var y1: Double, var x2: Double, var y2: Double) ext
     }
   }
 
-  def completelyContainsLine(x1: Double, y1: Double, x2: Double, y2: Double): Boolean = (this.x1 > Math.min(x1, x2)) && (this.x2 < Math.max(x1, x2)) && (this.y1 > Math.min(y1, y2)) && (this.y2 < Math.max(y1, y2))
+  def completelyContainsLine(x1: Double, y1: Double, x2: Double, y2: Double): Boolean = (this.x1 > math.min(x1, x2)) && (this.x2 < math.max(x1, x2)) && (this.y1 > math.min(y1, y2)) && (this.y2 < math.max(y1, y2))
 
   def isCompletelyInside(aBounds: Bounds): Boolean = (this.x1 > aBounds.getLesserX) && (this.x2 < aBounds.getGreaterX) && (this.y1 > aBounds.getLesserY) && (this.y2 < aBounds.getGreaterY)
 
@@ -370,7 +370,7 @@ class Bounds(var x1: Double, var y1: Double, var x2: Double, var y2: Double) ext
   }
 
   override def hashCode: Int = {
-    var temp: Double = Math.abs(x1 + x2 + y1 + y2)
+    var temp: Double = math.abs(x1 + x2 + y1 + y2)
     while ((temp != 0) && (temp < 1)) {
       temp *= 4
     }
@@ -379,9 +379,9 @@ class Bounds(var x1: Double, var y1: Double, var x2: Double, var y2: Double) ext
 
   override def toString: String = x1 + " " + y1 + " " + x2 + " " + y2
 
-  private def min(x1: Double, x2: Double, x3: Double): Double = Math.min(Math.min(x1, x2), x3)
+  private def min(x1: Double, x2: Double, x3: Double): Double = math.min(math.min(x1, x2), x3)
 
-  private def max(x1: Double, x2: Double, x3: Double): Double = Math.max(Math.max(x1, x2), x3)
+  private def max(x1: Double, x2: Double, x3: Double): Double = math.max(math.max(x1, x2), x3)
 
 }
 

@@ -163,7 +163,7 @@ class BoundsTest(name: String) extends TestCase(name) {
     val original: Point2D = bounds.getCenter
     try {
       bounds.setCenter(null)
-      error("IllegalArgumentException expected")
+      sys.error("IllegalArgumentException expected")
     }
     catch {
       case ok: IllegalArgumentException => {

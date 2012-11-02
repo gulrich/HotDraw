@@ -105,7 +105,7 @@ class Iconkit {
 
   def loadImage(filename: String, waitForLoad: Boolean): Option[Image] = loadImage(filename) match {
     case Some(image) if waitForLoad => Some(new ImageIcon(image).getImage)
-    case e: Option[Image] => e
+    case e => e
   }
 
   def loadImageResource(resourcename: String): Option[Image] = {

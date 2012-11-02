@@ -83,7 +83,7 @@ class NullDrawingView(var myDrawingEditor: DrawingEditor) extends JPanel with Dr
   /**
    * Adds a collection of figures to the drawing.
    */
-  def addAll(figures: Collection[Figure]) {}
+  def addAll(figures: Iterable[Figure]) {}
 
   /**
    * Gets the size of the drawing.
@@ -149,7 +149,7 @@ class NullDrawingView(var myDrawingEditor: DrawingEditor) extends JPanel with Dr
   /**
    * Adds a Collection of figures to the current selection.
    */
-  def addToSelectionAll(figures: Collection[Figure]) {}
+  def addToSelectionAll(figures: Iterable[Figure]) {}
 
   /**
    * Adds a Seq[Figure] to the current selection.
