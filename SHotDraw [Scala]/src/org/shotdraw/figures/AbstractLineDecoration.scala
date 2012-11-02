@@ -23,7 +23,6 @@ import org.shotdraw.util._
  * @version <$CURRENT_VERSION$>
  */
 object AbstractLineDecoration {
-  private[figures] final val serialVersionUID: Long = 1577970039258356627L
   private val FILL_COLOR: String = "fill_color"
   private val FRAME_COLOR: String = "frame_color"
 }

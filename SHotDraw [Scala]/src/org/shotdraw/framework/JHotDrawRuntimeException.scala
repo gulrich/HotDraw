@@ -15,10 +15,6 @@ package org.shotdraw.framework
  *
  * @version <$CURRENT_VERSION$>
  */
-object JHotDrawRuntimeException {
-  private final val serialVersionUID: Long = -4178620794728304854L
-}
-
 class JHotDrawRuntimeException(msg: String) extends RuntimeException(msg) {
 
   def this(nestedException: Exception) {

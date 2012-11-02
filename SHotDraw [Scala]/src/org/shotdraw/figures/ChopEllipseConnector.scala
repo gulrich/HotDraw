@@ -22,10 +22,6 @@ import org.shotdraw.util.Geom
  *
  * @version <$CURRENT_VERSION$>
  */
-object ChopEllipseConnector {
-  private final val serialVersionUID: Long = -3165091511154766610L
-}
-
 class ChopEllipseConnector(owner: Figure) extends ChopBoxConnector(owner) {
   def this() {
     this(null)

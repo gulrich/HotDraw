@@ -30,10 +30,6 @@ import scala.collection.mutable.ArrayBuffer
  *
  * @version <$CURRENT_VERSION$>
  */
-object StandardDrawing {
-  private final val serialVersionUID: Long = -2602151437447962046L
-}
-
 class StandardDrawing extends CompositeFigure with Drawing {
   init(new Rectangle(-500, -500, 2000, 2000))
 

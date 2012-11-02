@@ -43,8 +43,6 @@ object JHotDraw extends DrawApplication {
     val window: DrawApplication = JHotDraw
     window.open
   }
-
-  private final val serialVersionUID: Long = -2982180306746332521L
   
   override protected def createTools(palette: JToolBar) {
     super.createTools(palette)

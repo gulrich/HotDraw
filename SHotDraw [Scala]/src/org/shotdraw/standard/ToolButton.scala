@@ -24,10 +24,6 @@ import java.lang.Object
  *
  * @version <$CURRENT_VERSION$>
  */
-object ToolButton {
-  private final val serialVersionUID: Long = 3855069815261312755L
-}
-
 class ToolButton(listener: PaletteListener, iconName: String, myName: String, var myTool: Tool) extends PaletteButton(listener) with ToolListener {
   private var myIcon: PaletteIcon = null
 

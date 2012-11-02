@@ -28,10 +28,6 @@ import java.lang.Object
  *
  * @version <$CURRENT_VERSION$>
  */
-object AttributeFigure {
-  private final val serialVersionUID: Long = -10857585979273442L
-}
-
 abstract class AttributeFigure extends AbstractFigure {
   
   /**

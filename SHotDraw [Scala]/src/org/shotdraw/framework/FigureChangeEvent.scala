@@ -18,15 +18,10 @@ import java.util.EventObject
  *
  * @version <$CURRENT_VERSION$>
  */
-object FigureChangeEvent {
-  private final val serialVersionUID: Long = 665951480886293118L
-  private final val EMPTY_RECTANGLE: Rectangle = new Rectangle(0, 0, 0, 0)
-}
-
 class FigureChangeEvent(newSource: Figure, myRectangle: Rectangle, myNestedEvent: FigureChangeEvent) extends EventObject(newSource) {
 
   def this(newSource: Figure) {
-    this(newSource, FigureChangeEvent.EMPTY_RECTANGLE, null) 
+    this(newSource, new Rectangle, null) 
   }
 
   def this(newSource: Figure, newRect: Rectangle) {

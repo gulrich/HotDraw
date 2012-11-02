@@ -17,10 +17,6 @@ import java.awt._
  *
  * @version <$CURRENT_VERSION$>
  */
-object LineFigure {
-  private final val serialVersionUID: Long = 511503575249212371L
-}
-
 class LineFigure extends PolyLineFigure {
   addPoint(0, 0)
   addPoint(0, 0)  

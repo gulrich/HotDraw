@@ -28,10 +28,6 @@ import java.awt.Point
  *
  * @version <$CURRENT_VERSION$>
  */
-object ShortestDistanceConnector {
-  private final val serialVersionUID: Long = -2273446020593433887L
-}
-
 class ShortestDistanceConnector(owner: Figure) extends AbstractConnector(owner) {
 
   override def findStart(connection: ConnectionFigure): Point = findPoint(connection, true)

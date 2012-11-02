@@ -23,10 +23,6 @@ import org.shotdraw.util._
  *
  * @version <$CURRENT_VERSION$>
  */
-object AbstractConnector {
-  private final val serialVersionUID: Long = -5170007865562687545L
-}
-
 class AbstractConnector(var fOwner: Figure) extends Connector {
   /**
    * Constructs a connector that has no owner. It is only

@@ -43,11 +43,6 @@ import java.lang.Object
  *
  * @version <$CURRENT_VERSION$>
  */
-object TextFigure {
-
-  private final val serialVersionUID: Long = 4599820785949456124L
-}
-
 class TextFigure extends AttributeFigure with FigureChangeListener with TextHolder {
   setFillColor(ColorMap.color("None"));
   private var fOriginX: Int = 0

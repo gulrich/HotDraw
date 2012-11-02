@@ -29,13 +29,7 @@ import java.awt.Font
  *
  * @version <$CURRENT_VERSION$>
  */
-object FigureAttributes {
-  private final val serialVersionUID: Long = -6886355144423666716L
-}
-
-trait FigureAttributes extends Serializable {
-  import FigureAttributes._
-  
+trait FigureAttributes extends Serializable {  
   private var frameColor: Color = Color.BLACK
   private var fillColor: Color = Color.BLUE
   private var textColor: Color = Color.BLACK

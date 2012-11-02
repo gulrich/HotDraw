@@ -25,7 +25,6 @@ import java.lang.Object
  * @version <$CURRENT_VERSION$>
  */
 object PaletteButton {
-  private final val serialVersionUID: Long = -218921317221815794L
   protected final val NORMAL: Int = 1
   protected final val PRESSED: Int = 2
   protected final val SELECTED: Int = 3

@@ -26,10 +26,6 @@ import java.io.Serializable
  * @author WMG (28.02.1999)
  * @version <$CURRENT_VERSION$>
  */
-object Bounds {
-  private final val serialVersionUID: Long = 3266038289411731929L
-}
-
 class Bounds(var x1: Double, var y1: Double, var x2: Double, var y2: Double) extends Serializable {
 
   def this(x: Double, y: Double) {

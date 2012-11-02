@@ -28,7 +28,6 @@ import java.awt.Graphics
  */
 object RoundRectangleFigure {
   private final val DEFAULT_ARC: Int = 8
-  private final val serialVersionUID: Long = 7907900248924036885L
 }
 
 class RoundRectangleFigure(origin: Point, corner: Point) extends AttributeFigure {

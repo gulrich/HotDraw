@@ -17,10 +17,6 @@ import java.util.EventObject
  * @author  C.L.Gilbert <dnoyeb@users.sourceforge.net>
  * @version <$CURRENT_VERSION$>
  */
-object DesktopEvent {
-  private final val serialVersionUID: Long = 1L
-}
-
 class DesktopEvent(newSource: Desktop, var myDrawingView: DrawingView, var myPreviousDrawingView: DrawingView) extends EventObject(newSource) {
   def this(newSource: Desktop, newDrawingView: DrawingView) {
     this(newSource, newDrawingView, null)

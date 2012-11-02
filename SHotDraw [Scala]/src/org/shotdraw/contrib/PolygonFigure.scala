@@ -111,7 +111,6 @@ object PolygonFigure {
    * Distance threshold for smoothing away or locating points
    **/
   private[contrib] final val TOO_CLOSE: Int = 2
-  private final val serialVersionUID: Long = 6254089689239215026L
 }
 
 class PolygonFigure extends AttributeFigure {

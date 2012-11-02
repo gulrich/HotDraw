@@ -55,10 +55,6 @@ import org.shotdraw.figures.FigureAttributes
  *
  * @version <$CURRENT_VERSION$>
  */
-object AbstractFigure {
-  private final val serialVersionUID: Long = -10857585979273442L
-}
-
 abstract class AbstractFigure extends Figure {
   
   /**

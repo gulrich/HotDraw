@@ -34,10 +34,6 @@ import java.awt.Color
  *
  * @version <$CURRENT_VERSION$>
  */
-object CompositeFigure {
-  private final val serialVersionUID: Long = 7408153435700021866L
-}
-
 abstract class CompositeFigure extends AbstractFigure with FigureChangeListener {
 
   /**

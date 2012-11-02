@@ -46,7 +46,6 @@ object PolyLineFigure {
   final val ARROW_TIP_START: Int = 1
   final val ARROW_TIP_END: Int = 2
   final val ARROW_TIP_BOTH: Int = 3
-  private final val serialVersionUID: Long = -7951352179906577773L
 }
 
 class PolyLineFigure(fSize: Int) extends AbstractFigure {

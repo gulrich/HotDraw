@@ -25,10 +25,6 @@ import scala.collection.mutable.ArrayBuffer
  *
  * @version <$CURRENT_VERSION$>
  */
-object LineConnection {
-  private final val serialVersionUID: Long = 6883731614578414801L
-}
-
 class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
 
   setStartDecoration(new ArrowTip)

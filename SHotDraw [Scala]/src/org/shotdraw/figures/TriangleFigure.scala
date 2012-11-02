@@ -29,10 +29,6 @@ import org.shotdraw.standard.AbstractConnector
  *
  * @version <$CURRENT_VERSION$>
  */
-object TriangleFigure {
-  private final val serialVersionUID: Long = 3383263140602976509L
-}
-
 class TriangleFigure(origin: Point, corner: Point) extends AttributeFigure {
   private var fDisplayBox: Rectangle = null
   basicDisplayBox(origin, corner)

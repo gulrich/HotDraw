@@ -31,7 +31,6 @@ object StandardFigureSelection {
     duplicater.getData(duplicater.getType).asInstanceOf[Seq[Figure]]
   }
 
-  private final val serialVersionUID: Long = 6440287075102928657L
   /**
    * The type identifier of the selection.
    */

@@ -111,7 +111,6 @@ import org.shotdraw.framework.FigureAttributeConstant
  * @version <$CURRENT_VERSION$>
  */
 object DrawApplication {
-  private final val serialVersionUID: Long = 4741862790087996224L
   val TITLE: String = "SHotDraw"
   private final val fgDrawPath: String = "/org/shotdraw/"
   val IMAGES: String = fgDrawPath + "images/"

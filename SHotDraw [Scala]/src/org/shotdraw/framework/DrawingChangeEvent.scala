@@ -18,10 +18,6 @@ import java.util.EventObject
  *
  * @version <$CURRENT_VERSION$>
  */
-object DrawingChangeEvent {
-  private final val serialVersionUID: Long = -4596608121983022792L
-}
-
 class DrawingChangeEvent(newSource: Drawing, myRectangle: Rectangle) extends EventObject(newSource) {
 
   /**

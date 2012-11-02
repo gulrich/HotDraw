@@ -22,10 +22,6 @@ import java.awt.Component
  * @author  C.L.Gilbert <dnoyeb@users.sourceforge.net>
  * @version <$CURRENT_VERSION$>
  */
-object JPanelDesktop {
-  private final val serialVersionUID: Long = -8942268023126149074L
-}
-
 class JPanelDesktop extends JPanel with Desktop {
   def this(newDrawApplication: DrawApplication) {
     this()

@@ -27,10 +27,6 @@ import scala.collection.mutable.{Map => MutableMap}
  *
  * @version <$CURRENT_VERSION$>
  */
-object CommandMenu {
-  private final val serialVersionUID: Long = 4711447162033387533L
-}
-
 class CommandMenu(name: String) extends JMenu(name) with ActionListener with CommandListener {
 
   /**

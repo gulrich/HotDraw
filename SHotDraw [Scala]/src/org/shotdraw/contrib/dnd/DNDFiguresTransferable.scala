@@ -19,7 +19,6 @@ import java.lang.Object
  * @version <$CURRENT_VERSION$>
  */
 object DNDFiguresTransferable {
-  private final val serialVersionUID: Long = 2686363771176477776L
   var DNDFiguresFlavor: DataFlavor = new DataFlavor(classOf[DNDFigures], "DNDFigures")
 }
 

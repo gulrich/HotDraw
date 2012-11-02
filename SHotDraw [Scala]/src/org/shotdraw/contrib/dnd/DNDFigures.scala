@@ -19,10 +19,6 @@ import scala.collection.mutable.ArrayBuffer
  * @author  C.L.Gilbert <dnoyeb@sourceforge.net>
  * @version <$CURRENT_VERSION$>
  */
-object DNDFigures {
-  private final val serialVersionUID: Long = 5964365585838817845L
-}
-
 class DNDFigures(fe: List[Figure], newOrigin: Point) extends Serializable {
 
   fe foreach { f => figures += f}

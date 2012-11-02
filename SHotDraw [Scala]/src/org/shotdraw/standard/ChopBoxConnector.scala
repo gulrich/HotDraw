@@ -23,10 +23,6 @@ import org.shotdraw.util.Geom
  *
  * @version <$CURRENT_VERSION$>
  */
-object ChopBoxConnector {
-  private final val serialVersionUID: Long = -1461450322712345462L
-}
-
 class ChopBoxConnector(owner: Figure) extends AbstractConnector(owner) {
 
   def this() {

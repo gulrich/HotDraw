@@ -23,11 +23,4 @@ import java.awt.Cursor
  *         Sangoi Padilha</a>
  * @see org.shotdraw.framework.Cursor
  */
-object AWTCursor {  
-  private final val serialVersionUID: Long = 1212601282967475415L
-}
-
 class AWTCursor(tpe: Int) extends Cursor(tpe) with org.shotdraw.framework.Cursor {}
-
-//class AWTCursor(newName: String) extends Cursor(newName) with org.shotdraw.framework.Cursor {}
-

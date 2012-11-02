@@ -24,10 +24,6 @@ import java.awt.Graphics
  *
  * @version <$CURRENT_VERSION$>
  */
-object EllipseFigure {
-  private final val serialVersionUID: Long = -6856203289355118951L
-}
-
 class EllipseFigure(origin: Point, corner: Point) extends AttributeFigure {
   private var fDisplayBox: Rectangle = null
   basicDisplayBox(origin, corner)

@@ -20,10 +20,6 @@ import scala.collection.mutable.ArrayBuffer
  * @author WMG (INIT Copyright (C) 2000 All rights reserved)
  * @version <$CURRENT_VERSION$>
  */
-object QuadTree {
-  private final val serialVersionUID: Long = -2989788971735637894L
-}
-
 class QuadTree(nMaxTreeDepth: Int, absoluteBoundingRectangle2D: Rectangle2D) extends Serializable {
   
   private var _absoluteBoundingRectangle2D: Rectangle2D = new Rectangle2D.Double

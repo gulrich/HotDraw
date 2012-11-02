@@ -21,10 +21,6 @@ import org.shotdraw.util._
  *
  * @version <$CURRENT_VERSION$>
  */
-object ArrowTip {
-  private final val serialVersionUID: Long = -3459171428373823638L
-}
-
 class ArrowTip(angle: Double, outerRadius: Double, innerRadius: Double) extends AbstractLineDecoration {
   private var fAngle: Double = .0
   private var fOuterRadius: Double = .0

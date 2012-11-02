@@ -22,10 +22,6 @@ import org.shotdraw.standard._
  *
  * @version <$CURRENT_VERSION$>
  */
-object PolyLineLocator {
-  private final val serialVersionUID: Long = -2695322556233654352L
-}
-
 class PolyLineLocator(private[figures] fIndex: Int) extends AbstractLocator {
 
   def locate(owner: Figure): Point = {

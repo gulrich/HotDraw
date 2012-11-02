@@ -21,10 +21,6 @@ import org.shotdraw.framework._
  *
  * @version <$CURRENT_VERSION$>
  */
-object SimpleUpdateStrategy {
-  private final val serialVersionUID: Long = -7539925820692134566L
-}
-
 class SimpleUpdateStrategy extends Painter {
   /**
    * Draws the view contents.

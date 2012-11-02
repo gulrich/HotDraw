@@ -24,10 +24,6 @@ import org.shotdraw.util._
  *
  * @version <$CURRENT_VERSION$>
  */
-object PolyLineConnector {
-  private final val serialVersionUID: Long = 6018435940519102865L
-}
-
 class PolyLineConnector(owner: PolyLineFigure) extends ChopBoxConnector(owner) {
 
   override protected def chop(target: Figure, from: Point): Point = {

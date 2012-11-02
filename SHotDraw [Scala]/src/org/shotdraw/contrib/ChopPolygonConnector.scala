@@ -21,10 +21,6 @@ import org.shotdraw.standard._
  * @author Erich Gamma
  * @version <$CURRENT_VERSION$>
  */
-object ChopPolygonConnector {
-  private final val serialVersionUID: Long = -156024908227796826L
-}
-
 class ChopPolygonConnector(owner: Figure) extends ChopBoxConnector(owner) {
   def this() {
     this(null)

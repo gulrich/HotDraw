@@ -66,7 +66,6 @@ object RelativeLocator {
    */
   def center: Locator = new RelativeLocator(0.5, 0.5)
 
-  private final val serialVersionUID: Long = 2619148876087898602L
 }
 
 class RelativeLocator(private[standard] var fRelativeX: Double, private[standard] var fRelativeY: Double) extends AbstractLocator {

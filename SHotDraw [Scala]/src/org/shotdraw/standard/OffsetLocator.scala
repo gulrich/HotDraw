@@ -21,10 +21,6 @@ import org.shotdraw.util._
  *
  * @version <$CURRENT_VERSION$>
  */
-object OffsetLocator {
-  private final val serialVersionUID: Long = 2679950024611847621L
-}
-
 class OffsetLocator(var fBase: Locator, var fOffsetX: Int, var fOffsetY: Int) extends AbstractLocator {
   def this() {
     this(null, 0, 0)

@@ -28,10 +28,6 @@ import scala.collection.mutable.ArrayBuffer
  *
  * @version <$CURRENT_VERSION$>
  */
-object ElbowConnection {
-  private final val serialVersionUID: Long = 2193968743082078559L
-}
-
 class ElbowConnection extends LineConnection {
 
   override def updateConnection {
@@ -77,10 +73,6 @@ class ElbowConnection extends LineConnection {
     }
     changed
   }
-}
-
-object ElbowTextLocator {
-  private final val serialVersionUID: Long = -5220096092980161909L
 }
 
 class ElbowTextLocator extends AbstractLocator {

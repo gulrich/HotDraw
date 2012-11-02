@@ -76,8 +76,6 @@ object StandardDrawingView {
     count = count+1
     count
   }
-  
-  private final val serialVersionUID: Long = -3878153366174603336L
 }
 
 class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int) extends JPanel with DrawingView with DNDInterface with java.awt.dnd.Autoscroll {

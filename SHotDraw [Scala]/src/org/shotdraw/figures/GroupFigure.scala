@@ -23,10 +23,6 @@ import org.shotdraw.framework.Figure
  *
  * @version <$CURRENT_VERSION$>
  */
-object GroupFigure {
-  private final val serialVersionUID: Long = 8311226373023297933L
-}
-
 class GroupFigure extends CompositeFigure {
   /**
    * GroupFigures cannot be connected

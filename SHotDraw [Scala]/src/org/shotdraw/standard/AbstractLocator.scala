@@ -24,10 +24,6 @@ import java.lang.Object
  *
  * @version <$CURRENT_VERSION$>
  */
-object AbstractLocator {
-  private final val serialVersionUID: Long = -7742023180844048409L
-}
-
 abstract class AbstractLocator extends Locator with Storable with Cloneable {
 
   override def clone: java.lang.Object = {

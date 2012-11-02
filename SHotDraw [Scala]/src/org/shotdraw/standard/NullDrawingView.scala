@@ -35,7 +35,6 @@ object NullDrawingView {
     }
   }
 
-  private final val serialVersionUID: Long = 2998621686568305779L
   private var drawingViewManager: Map[DrawingEditor, DrawingView] = Map[DrawingEditor, DrawingView]()
 }
 

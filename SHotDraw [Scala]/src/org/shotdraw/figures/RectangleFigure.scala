@@ -26,10 +26,6 @@ import org.shotdraw.util.StorableOutput
  *
  * @version <$CURRENT_VERSION$>
  */
-object RectangleFigure {
-  private final val serialVersionUID: Long = 184722075881789163L
-}
-
 class RectangleFigure(origin: Point, corner: Point) extends AttributeFigure {
   private var fDisplayBox: Rectangle = null
   basicDisplayBox(origin, corner)
