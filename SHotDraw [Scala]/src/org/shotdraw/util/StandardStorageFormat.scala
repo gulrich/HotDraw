@@ -27,7 +27,25 @@ import org.shotdraw.framework.Drawing
  * @version <$CURRENT_VERSION$>
  */
 class StandardStorageFormat extends StorageFormat {
-
+  /**
+   * Test whether the file name has the correct file extension
+   *
+   * @return true, if the file has the correct extension, false otherwise
+   */
+  protected def hasCorrectFileExtension(testFileName: String): Boolean = testFileName.endsWith("." + getFileExtension)
+  /**
+   * File extension
+   */
+  private var myFileExtension: String = createFileExtension
+  /**
+   * Description of the file type when displaying the FileFilter
+   */
+  private var myFileDescription: String = createFileDescription
+  /**
+   * FileFilter for a javax.swing.JFileChooser which recognizes files with the
+   * extension "draw"
+   */
+  private var myFileFilter: FileFilter = createFileFilter
   /**
    * Factory method to create the file extension recognized by the FileFilter for this
    * StandardStorageFormat. The StandardStorageFormat has the file extension "draw"
@@ -175,25 +193,4 @@ class StandardStorageFormat extends StorageFormat {
     if (!hasCorrectFileExtension(testFileName)) testFileName + "." + getFileExtension
     else testFileName
   }
-
-  /**
-   * Test whether the file name has the correct file extension
-   *
-   * @return true, if the file has the correct extension, false otherwise
-   */
-  protected def hasCorrectFileExtension(testFileName: String): Boolean = testFileName.endsWith("." + getFileExtension)
-
-  /**
-   * Description of the file type when displaying the FileFilter
-   */
-  private var myFileDescription: String = createFileDescription
-  /**
-   * FileFilter for a javax.swing.JFileChooser which recognizes files with the
-   * extension "draw"
-   */
-  private var myFileFilter: FileFilter = createFileFilter
-  /**
-   * File extension
-   */
-  private var myFileExtension: String = createFileExtension
 }

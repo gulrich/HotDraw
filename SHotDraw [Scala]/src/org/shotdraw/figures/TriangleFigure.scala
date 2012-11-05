@@ -16,11 +16,12 @@ import java.awt.Rectangle
 import java.awt.Graphics
 import java.awt.Graphics2D
 import java.awt.Point
-
 import org.shotdraw.framework.Handle
 import org.shotdraw.standard.BoxHandleKit
 import org.shotdraw.util.StorableInput
 import org.shotdraw.util.StorableOutput
+import org.shotdraw.framework.Connector
+import org.shotdraw.standard.AbstractConnector
 
 /**
  * An triangle figure.
@@ -35,8 +36,6 @@ class TriangleFigure(origin: Point, corner: Point) extends AttributeFigure {
   def this() {
     this(new Point(0, 0), new Point(0, 0))
   }
-
-
 
   def handles: Seq[Handle] = BoxHandleKit.addHandles(this, List())
 
@@ -80,6 +79,8 @@ class TriangleFigure(origin: Point, corner: Point) extends AttributeFigure {
     new Insets(cy, cx, cy, cx)
   }
 
+  override def connectorAt(x: Int, y: Int): Connector =  new ShortestDistanceConnector(this)
+  
   override def write(dw: StorableOutput) {
     super.write(dw)
     dw.writeInt(fDisplayBox.x)

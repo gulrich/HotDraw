@@ -183,14 +183,14 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
         setStartDecoration(null)
         setEndDecoration(null)
       case ArrowTipStart =>
-        setStartDecoration(ArrowTip.instance)
+        setStartDecoration(new ArrowTip)
         setEndDecoration(null)
       case ArrowTipEnd =>
         setStartDecoration(null)
-        setEndDecoration(ArrowTip.instance)
+        setEndDecoration(new ArrowTip)
       case ArrowTipBoth =>
-        setStartDecoration(ArrowTip.instance)
-        setEndDecoration(ArrowTip.instance)
+        setStartDecoration(new ArrowTip)
+        setEndDecoration(new ArrowTip)
     }
     changed
   }
@@ -274,7 +274,6 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
     }
     dw.writeStorable(fStartDecoration)
     dw.writeStorable(fEndDecoration)
-    dw.writeColor(getFrameColor)
   }
 
   override def read(dr: StorableInput) {

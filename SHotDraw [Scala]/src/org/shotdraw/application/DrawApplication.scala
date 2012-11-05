@@ -138,6 +138,27 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   protected var winCount: Int = 0
   protected var fgUntitled: String = "untitled"
   
+  private var fTool: Tool = null
+  private var fIconkit: Iconkit = null
+  private var fStatusLine: JTextField = null
+  private var fView: DrawingView = null
+  private var fDefaultToolButton: ToolButton = null
+  private var fSelectedToolButton: ToolButton = null
+  private var fApplicationName: String = DrawApplication.TITLE
+  private var fStorageFormatManager: StorageFormatManager = null
+  private var myUndoManager: UndoManager = null
+  /**
+   * List is not thread safe, but should not need to be.  If it does we can
+   * safely synchronize the few methods that use this by synchronizing on
+   * the List object itself.
+   */
+  private var listeners: ArrayBuffer[ViewChangeListener] = ArrayBuffer()
+  private var fDesktopListener: DesktopListener = null
+  /**
+   * This component acts as a desktop for the content.
+   */
+  private var fDesktop: Desktop = null
+    
   /**
    * Open a new window for this application containing the passed in drawing,
    * or a new drawing if the passed in drawing is null.
@@ -862,7 +883,8 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     }
     catch {
       case e: IOException => {
-        showStatus("Error: " + e)
+//        showStatus("Error: " + e)
+        e.printStackTrace
       }
     }
   }
@@ -888,8 +910,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   protected def setDrawingTitle(drawingTitle: String) {
     if (getDefaultDrawingTitle == drawingTitle) {
       setTitle(getApplicationName)
-    }
-    else {
+    } else {
       setTitle(getApplicationName + " - " + drawingTitle)
     }
   }
@@ -985,26 +1006,5 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   protected def getIconkit: Iconkit = {
     fIconkit
   }
-
-  private var fTool: Tool = null
-  private var fIconkit: Iconkit = null
-  private var fStatusLine: JTextField = null
-  private var fView: DrawingView = null
-  private var fDefaultToolButton: ToolButton = null
-  private var fSelectedToolButton: ToolButton = null
-  private var fApplicationName: String = null
-  private var fStorageFormatManager: StorageFormatManager = null
-  private var myUndoManager: UndoManager = null
-  /**
-   * List is not thread safe, but should not need to be.  If it does we can
-   * safely synchronize the few methods that use this by synchronizing on
-   * the List object itself.
-   */
-  private var listeners: ArrayBuffer[ViewChangeListener] = ArrayBuffer()
-  private var fDesktopListener: DesktopListener = null
-  /**
-   * This component acts as a desktop for the content.
-   */
-  private var fDesktop: Desktop = null
 }
 

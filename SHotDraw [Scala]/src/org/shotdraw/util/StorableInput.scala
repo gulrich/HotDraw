@@ -31,7 +31,7 @@ import scala.collection.mutable.ArrayBuffer
  */
 class StorableInput(stream: InputStream) {
   
-  private var fTokenizer: StreamTokenizer = new StreamTokenizer(new BufferedReader(new InputStreamReader(stream)))
+  var fTokenizer: StreamTokenizer = new StreamTokenizer(new BufferedReader(new InputStreamReader(stream)))
   private var fMap: ArrayBuffer[Storable] = ArrayBuffer()
   
   fTokenizer.wordChars('$', '$')
@@ -61,10 +61,11 @@ class StorableInput(stream: InputStream) {
   def readString: String = {
     val token: Int = fTokenizer.nextToken
     if (token == StreamTokenizer.TT_WORD || token == '"') {
-      return fTokenizer.sval
+      fTokenizer.sval
+    } else {
+      val msg: String = "String expected in line: " + fTokenizer.lineno
+      throw new IOException(msg)
     }
-    val msg: String = "String expected in line: " + fTokenizer.lineno
-    throw new IOException(msg)
   }
 
   /**

@@ -113,9 +113,9 @@ trait FigureAttributes extends Serializable {
     dw.writeColor(textColor)
     dw.writeInt(arrowMode match {
       case ArrowTipNone => 0  
-      case ArrowTipBoth => 1
+      case ArrowTipStart => 1
       case ArrowTipEnd => 2
-      case ArrowTipStart => 3
+      case ArrowTipBoth => 3
     })
     dw.writeString(fontName)
     dw.writeInt(fontSize)

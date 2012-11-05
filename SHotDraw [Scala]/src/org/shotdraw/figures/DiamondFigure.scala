@@ -81,7 +81,7 @@ class DiamondFigure(origin: Point, corner: Point) extends AttributeFigure {
     new Insets(cy, cx, cy, cx)
   }
 
-  override def connectorAt(x: Int, y: Int): Connector =  new AbstractConnector(this) {}
+  override def connectorAt(x: Int, y: Int): Connector =  new ShortestDistanceConnector(this)
 
   override def write(dw: StorableOutput) {
     super.write(dw)

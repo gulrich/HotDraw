@@ -33,7 +33,6 @@ import org.shotdraw.framework.FigureChangeListener
 import org.shotdraw.framework.FigureVisitor
 import org.shotdraw.framework.Handle
 import org.shotdraw.framework.Locator
-import org.shotdraw.standard.TextHolder
 import org.shotdraw.util.Geom
 
 /**
@@ -285,7 +284,7 @@ abstract class AbstractFigure extends Figure {
    * By default a ChopBoxConnector is returned.
    * @see ChopBoxConnector
    */
-  def connectorAt(x: Int, y: Int): Connector = new ChopBoxConnector(this) {}
+  def connectorAt(x: Int, y: Int): Connector = new ChopBoxConnector(this)
 
   /**
    * Sets whether the connectors should be visible.

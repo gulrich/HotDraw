@@ -29,7 +29,10 @@ import java.awt.Point
  * @version <$CURRENT_VERSION$>
  */
 class ShortestDistanceConnector(owner: Figure) extends AbstractConnector(owner) {
-
+  def this() {
+    this(null)
+  }
+  
   override def findStart(connection: ConnectionFigure): Point = findPoint(connection, true)
 
   override def findEnd(connection: ConnectionFigure): Point = findPoint(connection, false)
