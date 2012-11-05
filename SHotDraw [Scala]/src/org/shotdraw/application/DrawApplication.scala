@@ -226,8 +226,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     val d: Dimension = defaultSize
     if (d.width > mb.getPreferredSize.width) {
       setSize(d.width, d.height)
-    }
-    else {
+    } else {
       setSize(mb.getPreferredSize.width, d.height)
     }
     addListeners

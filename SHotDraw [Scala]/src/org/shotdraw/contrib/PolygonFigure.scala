@@ -115,6 +115,7 @@ object PolygonFigure {
 
 class PolygonFigure extends AttributeFigure {
   import PolygonFigure._
+  private var fPoly: Polygon = new Polygon
   
   def this(x: Int, y: Int) {
     this()
@@ -362,8 +363,8 @@ class PolygonFigure extends AttributeFigure {
   override def write(dw: StorableOutput) {
     super.write(dw)
     dw.writeInt(pointCount)
-    for(x <- getInternalPolygon.xpoints; y <- getInternalPolygon.ypoints) {
-      dw.writeInt(x)
+    (getInternalPolygon.xpoints zip getInternalPolygon.ypoints) foreach { case (x, y) =>      
+      dw.writeInt(x)      
       dw.writeInt(y)
     }
   }
@@ -379,7 +380,5 @@ class PolygonFigure extends AttributeFigure {
     }
     setInternalPolygon(new Polygon(xs, ys, size))
   }
-
-  private var fPoly: Polygon = new Polygon
 }
 
