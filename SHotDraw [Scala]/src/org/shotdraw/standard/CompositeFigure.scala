@@ -177,8 +177,8 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    */
   def sendToBack(figure: Figure) {
     if (containsFigure(figure)) {
-      fFigures = fFigures diff List(figure)
-      fFigures += figure
+      fFigures -= figure
+      fFigures = ArrayBuffer(figure) ++ fFigures
       _nLowestZ -= 1
       figure.setZValue(_nLowestZ)
       figure.changed
@@ -229,12 +229,11 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
       val figureLayer: Int = getLayer(figure)
       if (figureLayer < nr) {
         assignFiguresToPredecessorZValue(figureLayer + 1, nr)
-      }
-      else if (figureLayer > nr) {
+      } else if (figureLayer > nr) {
         assignFiguresToSuccessorZValue(nr, figureLayer - 1)
       }
-      fFigures = fFigures diff List(figure)
-      fFigures.insert(nr-1, figure) 
+      fFigures -= figure
+      fFigures.insert(nr, figure) 
       figure.setZValue(layerFigureZValue)
       figure.changed
     }

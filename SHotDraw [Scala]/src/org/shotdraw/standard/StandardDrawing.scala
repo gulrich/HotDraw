@@ -31,6 +31,21 @@ import scala.collection.mutable.ArrayBuffer
  * @version <$CURRENT_VERSION$>
  */
 class StandardDrawing extends CompositeFigure with Drawing {
+  
+  /**
+   * the registered listeners
+   */
+  @transient
+  private var fListeners: ArrayBuffer[DrawingChangeListener] = ArrayBuffer()
+  /**
+   * boolean that serves as a condition variable
+   * to lock the access to the drawing.
+   * The lock is recursive and we keep track of the current
+   * lock holder.
+   */
+  @transient
+  private var fDrawingLockHolder: Thread = null
+  private var myTitle: String = null
   init(new Rectangle(-500, -500, 2000, 2000))
 
   /**
@@ -172,20 +187,5 @@ class StandardDrawing extends CompositeFigure with Drawing {
   def setTitle(newTitle: String) {
     myTitle = newTitle
   }
-
-  /**
-   * the registered listeners
-   */
-  @transient
-  private var fListeners: ArrayBuffer[DrawingChangeListener] = ArrayBuffer()
-  /**
-   * boolean that serves as a condition variable
-   * to lock the access to the drawing.
-   * The lock is recursive and we keep track of the current
-   * lock holder.
-   */
-  @transient
-  private var fDrawingLockHolder: Thread = null
-  private var myTitle: String = null
 }
 
