@@ -23,7 +23,16 @@ import java.awt.Point
  * @version <$CURRENT_VERSION$>
  */
 class PolygonTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDrawingEditor) {
-
+  private var fPolygon: PolygonFigure = null
+  private var fLastX = 0
+  private var fLastY = 0
+  private var done = false
+  /**
+   * the figure that was actually added
+   * Note, this can be a different figure from the one which has been created.
+   */
+  private var myAddedFigure: Figure = null
+  
   override def activate {
     super.activate
     fPolygon = null
@@ -55,7 +64,7 @@ class PolygonTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDrawi
 
   override def mouseDown(e: MouseEvent, x: Int, y: Int) {
     super.mouseDown(e, x, y)
-
+    done = false
     if (e.getClickCount >= 2) {
       if (fPolygon != null) {
         fPolygon.smoothPoints
@@ -70,7 +79,7 @@ class PolygonTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDrawi
   }
 
   override def mouseMove(e: MouseEvent, x: Int, y: Int) {
-    if (e.getSource eq getActiveView) {
+    if (e.getSource == getActiveView && !done) {
       if (fPolygon != null) {
         if (fPolygon.pointCount > 1) {
           fPolygon.setPointAt(new Point(x, y), fPolygon.pointCount - 1)
@@ -84,7 +93,10 @@ class PolygonTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDrawi
     addPoint(e.getX, e.getY)
   }
 
-  override def mouseUp(e: MouseEvent, x: Int, y: Int) {}
+  override def mouseUp(e: MouseEvent, x: Int, y: Int) {
+    done = true
+    editor.toolDone
+  }
 
   /**
    * Gets the figure that was actually added
@@ -100,14 +112,5 @@ class PolygonTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDrawi
    * Factory method for undo activity
    */
   protected def createUndoActivity: Undoable = new PasteCommand.UndoActivity(view)
-
-  private var fPolygon: PolygonFigure = null
-  private var fLastX: Int = 0
-  private var fLastY: Int = 0
-  /**
-   * the figure that was actually added
-   * Note, this can be a different figure from the one which has been created.
-   */
-  private var myAddedFigure: Figure = null
 }
 
