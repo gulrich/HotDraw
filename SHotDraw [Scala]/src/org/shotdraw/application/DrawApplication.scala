@@ -94,6 +94,19 @@ import org.shotdraw.framework.FontName
 import org.shotdraw.framework.FontSize
 import org.shotdraw.framework.FontStyle
 import org.shotdraw.framework.FigureAttributeConstant
+import org.shotdraw.figures.TextTool
+import org.shotdraw.contrib.PolygonTool
+import org.shotdraw.standard.ConnectionTool
+import org.shotdraw.standard.CreationTool
+import org.shotdraw.figures.TextFigure
+import org.shotdraw.figures.EllipseFigure
+import org.shotdraw.figures.ElbowConnection
+import org.shotdraw.figures.DiamondFigure
+import org.shotdraw.figures.LineFigure
+import org.shotdraw.figures.RectangleFigure
+import org.shotdraw.figures.LineConnection
+import org.shotdraw.figures.TriangleFigure
+import org.shotdraw.figures.RoundRectangleFigure
 
 
 /**
@@ -445,6 +458,26 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   protected def createTools(palette: JToolBar) {
     setDefaultTool(createDefaultTool)
     palette.add(fDefaultToolButton)
+    var tool: Tool = new TextTool(this, new TextFigure)
+    palette.add(createToolButton(DrawApplication.IMAGES + "TEXT", "Text Tool", tool))
+    tool = new CreationTool(this, new RectangleFigure)
+    palette.add(createToolButton(DrawApplication.IMAGES + "RECT", "Rectangle Tool", tool))
+    tool = new CreationTool(this, new RoundRectangleFigure)
+    palette.add(createToolButton(DrawApplication.IMAGES + "RRECT", "Round Rectangle Tool", tool))
+    tool = new CreationTool(this, new EllipseFigure)
+    palette.add(createToolButton(DrawApplication.IMAGES + "ELLIPSE", "Ellipse Tool", tool))
+    tool = new CreationTool(this, new TriangleFigure)
+    palette.add(createToolButton(DrawApplication.IMAGES + "TRIANGLE", "Triangle Tool", tool))
+    tool = new CreationTool(this, new DiamondFigure)
+    palette.add(createToolButton(DrawApplication.IMAGES + "DIAMOND", "Diamond Tool", tool))
+    tool = new CreationTool(this, new LineFigure)
+    palette.add(createToolButton(DrawApplication.IMAGES + "LINE", "Line Tool", tool))
+    tool = new PolygonTool(this)
+    palette.add(createToolButton(DrawApplication.IMAGES + "POLYGON", "Polygon Tool", tool))
+    tool = new ConnectionTool(this, new LineConnection)
+    palette.add(createToolButton(DrawApplication.IMAGES + "CONN", "Connection Tool", tool))
+    tool = new ConnectionTool(this, new ElbowConnection)
+    palette.add(createToolButton(DrawApplication.IMAGES + "OCONN", "Elbow Connection Tool", tool))
   }
 
   /**
