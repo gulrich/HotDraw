@@ -86,6 +86,30 @@ object ConnectionTool {
 class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigure) extends AbstractTool(newDrawingEditor) {
 
   /**
+   * the anchor point of the interaction
+   */
+  private var myStartConnector: Connector = null
+  private var myEndConnector: Connector = null
+  private var myTargetConnector: Connector = null
+  private var myTarget: Figure = null
+  /**
+   * the currently created figure
+   */
+  private var myConnection: ConnectionFigure = null
+  /**
+   * the currently manipulated connection point
+   */
+  private var fSplitPoint: Int = 0
+  /**
+   * the currently edited connection
+   */
+  private var fEditedConnection: ConnectionFigure = null
+  /**
+   * the figure that was actually added
+   * Note, this can be a different figure from the one which has been created.
+   */
+  private var myAddedFigure: Figure = null
+  /**
    * Handles mouse move events in the drawing view.
    */
   override def mouseMove(e: MouseEvent, x: Int, y: Int) {
@@ -101,19 +125,26 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
     super.mouseDown(e, x, y)
     val ex: Int = e.getX
     val ey: Int = e.getY
+    println("############################("+ex+","+ey+")")
     val connection: ConnectionFigure = findConnection(ex, ey, drawing)
     if (connection != null) {
+      println("Connection not null")
       if (!connection.joinSegments(ex, ey)) {
+        println("!connection.joinSegments(ex, ey)")
         fSplitPoint = connection.splitSegment(ex, ey)
         fEditedConnection = connection
       } else {
+        println(">>>connection.joinSegments(ex, ey)")
         fEditedConnection = null
       }
     } else {
+      println("Connection null")
       setTargetFigure(findConnectionStart(ex, ey, drawing))
       if (getTargetFigure != null) {
+        println("getTargetFigure != null")
         setStartConnector(findConnector(ex, ey, getTargetFigure))
         if (getStartConnector != null) {
+          println("getStartConnector != null")
           setConnection(createConnection)
           getConnection.startPoint(ex, ey)
           getConnection.endPoint(ex, ey)
@@ -312,30 +343,5 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
    * Factory method for undo activity
    */
   protected def createUndoActivity: Undoable = new ConnectionTool.UndoActivity(view, getConnection)
-
-  /**
-   * the anchor point of the interaction
-   */
-  private var myStartConnector: Connector = null
-  private var myEndConnector: Connector = null
-  private var myTargetConnector: Connector = null
-  private var myTarget: Figure = null
-  /**
-   * the currently created figure
-   */
-  private var myConnection: ConnectionFigure = null
-  /**
-   * the currently manipulated connection point
-   */
-  private var fSplitPoint: Int = 0
-  /**
-   * the currently edited connection
-   */
-  private var fEditedConnection: ConnectionFigure = null
-  /**
-   * the figure that was actually added
-   * Note, this can be a different figure from the one which has been created.
-   */
-  private var myAddedFigure: Figure = null
 }
 
