@@ -22,21 +22,19 @@ import java.io.ObjectInput
 import java.io.ObjectInputStream
 import java.io.ObjectOutput
 import java.io.ObjectOutputStream
-import java.lang.Object
+
+import scala.collection.mutable.ArrayBuffer
+
 import org.shotdraw.framework.ConnectionFigure
 import org.shotdraw.framework.Connector
 import org.shotdraw.framework.Figure
-import org.shotdraw.framework.FigureAttributeConstant
 import org.shotdraw.framework.FigureChangeEvent
 import org.shotdraw.framework.FigureChangeListener
 import org.shotdraw.framework.FigureVisitor
 import org.shotdraw.framework.Handle
 import org.shotdraw.framework.Locator
+import org.shotdraw.standard.TextHolder
 import org.shotdraw.util.Geom
-import org.shotdraw.util.StorableInput
-import org.shotdraw.util.StorableOutput
-import scala.collection.mutable.ArrayBuffer
-import org.shotdraw.figures.FigureAttributes
 
 /**
  * AbstractFigure provides default implementations for
@@ -287,7 +285,7 @@ abstract class AbstractFigure extends Figure {
    * By default a ChopBoxConnector is returned.
    * @see ChopBoxConnector
    */
-  def connectorAt(x: Int, y: Int): Connector = new ChopBoxConnector(this)
+  def connectorAt(x: Int, y: Int): Connector = new ChopBoxConnector(this) {}
 
   /**
    * Sets whether the connectors should be visible.

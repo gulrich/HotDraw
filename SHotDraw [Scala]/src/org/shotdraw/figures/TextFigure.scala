@@ -25,8 +25,6 @@ import org.shotdraw.framework.FigureAttributeConstant
 import org.shotdraw.framework.FigureChangeEvent
 import org.shotdraw.framework.FigureChangeListener
 import org.shotdraw.framework.Handle
-
-
 import org.shotdraw.standard.NullHandle
 import org.shotdraw.standard.OffsetLocator
 import org.shotdraw.standard.RelativeLocator
@@ -35,6 +33,8 @@ import org.shotdraw.util.ColorMap
 import org.shotdraw.util.StorableInput
 import org.shotdraw.util.StorableOutput
 import java.lang.Object
+import org.shotdraw.framework.Connector
+import org.shotdraw.standard.ChopBoxConnector
 
 /**
  * A text figure.
@@ -347,7 +347,7 @@ class TextFigure extends AttributeFigure with FigureChangeListener with TextHold
       }
     }
   }
-
+  
   /**
    * @see org.shotdraw.framework.Figure#release()
    */

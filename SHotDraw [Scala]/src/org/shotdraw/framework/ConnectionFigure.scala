@@ -36,7 +36,7 @@ import java.awt.Point
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait ConnectionFigure extends Figure with FigureChangeListener {
+trait ConnectionFigure extends Figure with FigureChangeListener {
   /**
    * Sets the start Connector of the connection.
    * @param start the start connector of the connection

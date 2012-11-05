@@ -97,33 +97,35 @@ class ShortestDistanceConnector(owner: Figure) extends AbstractConnector(owner) 
       y1 = (ymax + ymin) / 2
       y2 = y1
     }
-    for(i <- 0 to 3) i match {
-      case 0 =>
-        p1 = Geom.east(r1)
-        p2 = Geom.west(r2)
-        s = new Point(p1.x, y1)
-        e = new Point(p2.x, y2)
-      case 1 =>
-        p1 = Geom.west(r1)
-        p2 = Geom.east(r2)
-        s = new Point(p1.x, y1)
-        e = new Point(p2.x, y2)
-      case 2 =>
-        p1 = Geom.north(r1)
-        p2 = Geom.south(r2)
-        s = new Point(x1, p1.y)
-        e = new Point(x2, p2.y)
-      case 3 =>
-        p1 = Geom.south(r1)
-        p2 = Geom.north(r2)
-        s = new Point(x1, p1.y)
-        e = new Point(x2, p2.y)
-    }
-    l2 = Geom.length2(s.x, s.y, e.x, e.y)
-    if (l2 < len2) {
-      start = s
-      end = e
-      len2 = l2
+    for(i <- 0 to 3) {
+      i match {    
+        case 0 =>
+          p1 = Geom.east(r1)
+          p2 = Geom.west(r2)
+          s = new Point(p1.x, y1)
+          e = new Point(p2.x, y2)
+        case 1 =>
+          p1 = Geom.west(r1)
+          p2 = Geom.east(r2)
+          s = new Point(p1.x, y1)
+          e = new Point(p2.x, y2)
+        case 2 =>
+          p1 = Geom.north(r1)
+          p2 = Geom.south(r2)
+          s = new Point(x1, p1.y)
+          e = new Point(x2, p2.y)
+        case 3 =>
+          p1 = Geom.south(r1)
+          p2 = Geom.north(r2)
+          s = new Point(x1, p1.y)
+         e = new Point(x2, p2.y)
+      }
+      l2 = Geom.length2(s.x, s.y, e.x, e.y)
+      if (l2 < len2) {
+        start = s
+        end = e
+        len2 = l2
+      }
     }
     if (getStart) start
     else end

@@ -15,11 +15,11 @@ import java.awt.Point
 import java.awt.Rectangle
 import java.io.IOException
 import org.shotdraw.framework.Handle
-
 import org.shotdraw.standard.BoxHandleKit
-
 import org.shotdraw.util.StorableInput
 import org.shotdraw.util.StorableOutput
+import org.shotdraw.framework.Connector
+import org.shotdraw.standard.ChopBoxConnector
 
 /**
  * A rectangle figure.
@@ -55,7 +55,7 @@ class RectangleFigure(origin: Point, corner: Point) extends AttributeFigure {
     val r: Rectangle = displayBox
     g.drawRect(r.x, r.y, r.width - 1, r.height - 1)
   }
-
+  
   override def write(dw: StorableOutput) {
     super.write(dw)
     dw.writeInt(fDisplayBox.x)
