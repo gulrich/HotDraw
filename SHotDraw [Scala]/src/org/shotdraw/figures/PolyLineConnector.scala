@@ -24,10 +24,17 @@ import org.shotdraw.util._
  *
  * @version <$CURRENT_VERSION$>
  */
-class PolyLineConnector(owner: PolyLineFigure) extends ChopBoxConnector(owner) {
-
+class PolyLineConnector(fOwner: PolyLineFigure) extends ChopBoxConnector(fOwner) {
+  def this() {
+    this(null)
+  }
+  
+  
   override protected def chop(target: Figure, from: Point): Point = {
-    val p: PolyLineFigure = owner
+    val p: PolyLineFigure = owner match {
+      case plf: PolyLineFigure => plf
+      case x => sys.error(x.getClass + " found, PolyLineFigure expected")
+    }
     val ctr: Point = p.center
     var cx: Int = -1
     var cy: Int = -1
