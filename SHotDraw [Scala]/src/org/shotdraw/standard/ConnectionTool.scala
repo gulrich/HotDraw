@@ -10,12 +10,13 @@
  */
 package org.shotdraw.standard
 
+import java.awt.event.MouseEvent
+import java.awt._
+
 import org.shotdraw.framework._
 import org.shotdraw.util.Geom
-import org.shotdraw.util.UndoableAdapter
 import org.shotdraw.util.Undoable
-import java.awt._
-import java.awt.event.MouseEvent
+import org.shotdraw.util.UndoableAdapter
 
 /**
  * A tool that can be used to connect figures, to split
@@ -204,7 +205,7 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
    * Creates the ConnectionFigure. By default the figure prototype is
    * cloned.
    */
-  protected def createConnection: ConnectionFigure = fPrototype
+  protected def createConnection: ConnectionFigure = fPrototype.clone.asInstanceOf[ConnectionFigure]
 
   /**
    * Finds a connectable figure target.
