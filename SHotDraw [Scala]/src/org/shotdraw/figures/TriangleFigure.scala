@@ -22,13 +22,14 @@ import org.shotdraw.util.StorableInput
 import org.shotdraw.util.StorableOutput
 import org.shotdraw.framework.Connector
 import org.shotdraw.standard.AbstractConnector
+import org.shotdraw.standard.AbstractFigure
 
 /**
  * An triangle figure.
  *
  * @version <$CURRENT_VERSION$>
  */
-class TriangleFigure(origin: Point, corner: Point) extends AttributeFigure {
+class TriangleFigure(origin: Point, corner: Point) extends AbstractFigure {
   private var fDisplayBox: Rectangle = null
   basicDisplayBox(origin, corner)
 

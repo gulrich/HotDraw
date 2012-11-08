@@ -17,7 +17,7 @@ import java.util.EventListener
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait FigureChangeListener extends EventListener {
+trait FigureChangeListener extends EventListener {
   /**
    * Sent when an area is invalid
    */

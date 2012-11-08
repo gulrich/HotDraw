@@ -14,7 +14,7 @@ package org.shotdraw.util
  * @author  Wolfram Kaiser <mrfloppy@sourceforge.net>
  * @version <$CURRENT_VERSION$>
  */
-abstract trait VersionControlStrategy {
+trait VersionControlStrategy {
   /**
    * Define a strategy how to select those versions of JHotDraw
    * with which they are compatible.

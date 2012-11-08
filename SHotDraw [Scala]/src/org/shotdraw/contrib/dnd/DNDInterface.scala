@@ -25,7 +25,7 @@ import java.awt.dnd.DragSourceListener
  * @author  CL.Gilbert <dnoyeb@users.sourceforge.net>
  * @version <$CURRENT_VERSION$>
  */
-abstract trait DNDInterface {
+trait DNDInterface {
   def DNDInitialize(dgl: DragGestureListener)
 
   def DNDDeinitialize

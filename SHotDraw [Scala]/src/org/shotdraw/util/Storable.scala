@@ -23,7 +23,7 @@ import java.io._
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait Storable {
+trait Storable {
   /**
    * Writes the object to the StorableOutput.
    */

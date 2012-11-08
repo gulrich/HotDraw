@@ -33,7 +33,7 @@ object Handle {
   val HANDLESIZE: Int = 8
 }
 
-abstract trait Handle {
+trait Handle {
   /**
    * Locates the handle on the figure. The handle is drawn
    * centered around the returned point.

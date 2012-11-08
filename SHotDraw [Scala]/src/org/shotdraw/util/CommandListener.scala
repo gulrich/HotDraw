@@ -16,7 +16,7 @@ import java.util.EventObject
  * @author Wolfram Kaiser
  * @version <$CURRENT_VERSION$>
  */
-abstract trait CommandListener {
+trait CommandListener {
   def commandExecuted(commandEvent: EventObject)
 
   def commandExecutable(commandEvent: EventObject)

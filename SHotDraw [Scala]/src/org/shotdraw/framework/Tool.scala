@@ -41,7 +41,7 @@ import java.awt.event.KeyEvent
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait Tool {
+trait Tool {
   /**
    * An active tool is the currently selected tool in the
    * DrawingView. A tool can be activated/deactivated

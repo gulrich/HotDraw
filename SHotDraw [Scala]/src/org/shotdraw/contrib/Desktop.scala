@@ -22,7 +22,7 @@ object Desktop {
   final val TERTIARY: Int = 2
 }
 
-abstract trait Desktop {
+trait Desktop {
   /**
    * For those absent minded components that were not paying attention to the
    * listener events.

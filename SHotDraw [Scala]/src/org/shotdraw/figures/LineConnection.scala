@@ -30,7 +30,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
   protected var myStartConnector: Connector = null
   protected var myEndConnector: Connector = null
   
-  setArrowMode(getArrowMode)
+  arrowMode = arrowMode
 
   /**
    * Tests whether a figure can be a connection target.

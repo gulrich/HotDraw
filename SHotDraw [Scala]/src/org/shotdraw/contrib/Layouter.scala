@@ -29,7 +29,7 @@ import java.awt._
  * @author	Wolfram Kaiser
  * @version <$CURRENT_VERSION$>
  */
-abstract trait Layouter extends Serializable with Storable {
+trait Layouter extends Serializable with Storable {
   /**
    * Calculate the layout for the figure and all its
    * subelements. The layout is not actually performed but just

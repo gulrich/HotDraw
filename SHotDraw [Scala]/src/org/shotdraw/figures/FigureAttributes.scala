@@ -29,43 +29,43 @@ import org.shotdraw.util.StorableOutput
 trait FigureAttributes extends Serializable {  
   import PolyLineFigure._
   
-  private var frameColor: Color = Color.BLACK
-  private var fillColor: Color = Color.BLUE
-  private var textColor: Color = Color.BLACK
-  private var arrowMode: ArrowType = ArrowTipBoth
-  private var fontName: String = "Helvetica"
-  private var fontSize: Int = 12
-  private var fontStyle: Int = Font.PLAIN
+  private var _frameColor: Color = Color.BLACK
+  private var _fillColor: Color = Color.BLUE
+  private var _textColor: Color = Color.BLACK
+  private var _arrowMode: ArrowType = ArrowTipBoth
+  private var _fontName: String = "Helvetica"
+  private var _fontSize: Int = 12
+  private var _fontStyle: Int = Font.PLAIN
   
   
-  def getFrameColor: Color = frameColor
-  def getFillColor: Color = fillColor
-  def getTextColor: Color = textColor
-  def getArrowMode: PolyLineFigure.ArrowType = arrowMode
-  def getFontName: String = fontName
-  def getFontSize: Int = fontSize
-  def getFontStyle: Int = fontStyle
+  def frameColor: Color = _frameColor
+  def fillColor: Color = _fillColor
+  def textColor: Color = _textColor
+  def arrowMode: PolyLineFigure.ArrowType = _arrowMode
+  def fontName: String = _fontName
+  def fontSize: Int = _fontSize
+  def fontStyle: Int = _fontStyle
   
-  def setFrameColor(value: Color) {
-    frameColor = value
+  def frameColor_=(value: Color) {
+    _frameColor = value
   }
-  def setFillColor(value: Color) {
-    fillColor = value
+  def fillColor_=(value: Color) {
+    _fillColor = value
   }
-  def setTextColor(value: Color) {
-    textColor = value
+  def textColor_=(value: Color) {
+    _textColor = value
   }
-  def setArrowMode(value: PolyLineFigure.ArrowType) {
-    arrowMode = value
+  def arrowMode_=(value: PolyLineFigure.ArrowType) {
+    _arrowMode = value
   }
-  def setFontName(value: String) {
-    fontName = value
+  def fontName_=(value: String) {
+    _fontName = value
   }
-  def setFontSize(value: Int) {
-    fontSize = value
+  def fontSize_=(value: Int) {
+    _fontSize = value
   }
-  def setFontStyle(value: Int) {
-    fontStyle = value
+  def fontStyle_=(value: Int) {
+    _fontStyle = value
   }
 
   /**

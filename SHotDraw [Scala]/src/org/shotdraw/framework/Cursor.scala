@@ -23,5 +23,5 @@ package org.shotdraw.framework
  *         Sangoi Padilha</a>
  * @see org.shotdraw.standard.AWTCursor
  */
-abstract trait Cursor
+trait Cursor
 

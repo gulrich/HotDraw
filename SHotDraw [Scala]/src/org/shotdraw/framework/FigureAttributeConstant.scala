@@ -10,49 +10,49 @@ trait FigureAttributeConstant[T] {
 
 case object FrameColor extends FigureAttributeConstant[Color] {
   def setAttribute(figAttr: FigureAttributes, value: Color) {
-    figAttr.setFrameColor(value)
+    figAttr.frameColor = value
   }
-  def getAttribute(figAttr: FigureAttributes): Color = figAttr.getFrameColor
+  def getAttribute(figAttr: FigureAttributes): Color = figAttr.frameColor
 }
 
 case object FillColor extends FigureAttributeConstant[Color] {
   def setAttribute(figAttr: FigureAttributes, value: Color) {
-    figAttr.setFillColor(value)
+    figAttr.fillColor = value
   }
-  def getAttribute(figAttr: FigureAttributes): Color = figAttr.getFillColor
+  def getAttribute(figAttr: FigureAttributes): Color = figAttr.fillColor
 }
 
 case object TextColor extends FigureAttributeConstant[Color] {
   def setAttribute(figAttr: FigureAttributes, value: Color) {
-    figAttr.setTextColor(value)
+    figAttr.textColor = value
   }
-  def getAttribute(figAttr: FigureAttributes): Color = figAttr.getTextColor
+  def getAttribute(figAttr: FigureAttributes): Color = figAttr.textColor
 }
 
 case object ArrowMode extends FigureAttributeConstant[ArrowType] {
   def setAttribute(figAttr: FigureAttributes, value: ArrowType) {
-    figAttr.setArrowMode(value)
+    figAttr.arrowMode = value
   }
-  def getAttribute(figAttr: FigureAttributes): ArrowType = figAttr.getArrowMode
+  def getAttribute(figAttr: FigureAttributes): ArrowType = figAttr.arrowMode
 }
 
 case object FontName extends FigureAttributeConstant[String] {
   def setAttribute(figAttr: FigureAttributes, value: String) {
-    figAttr.setFontName(value)
+    figAttr.fontName = value
   }
-  def getAttribute(figAttr: FigureAttributes): String = figAttr.getFontName
+  def getAttribute(figAttr: FigureAttributes): String = figAttr.fontName
 }
 
 case object FontSize extends FigureAttributeConstant[Int] {
   def setAttribute(figAttr: FigureAttributes, value: Int) {
-    figAttr.setFontSize(value)
+    figAttr.fontSize = value
   }
-  def getAttribute(figAttr: FigureAttributes): Int = figAttr.getFontSize
+  def getAttribute(figAttr: FigureAttributes): Int = figAttr.fontSize
 }
 
 case object FontStyle extends FigureAttributeConstant[Int] {
   def setAttribute(figAttr: FigureAttributes, value: Int) {
-    figAttr.setFontStyle(value)
+    figAttr.fontStyle = value
   }
-  def getAttribute(figAttr: FigureAttributes): Int = figAttr.getFontStyle
+  def getAttribute(figAttr: FigureAttributes): Int = figAttr.fontStyle
 }

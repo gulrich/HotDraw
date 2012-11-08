@@ -29,7 +29,7 @@ import java.io.Serializable
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait Painter extends Serializable {
+trait Painter extends Serializable {
   /**
    * Draws into the given DrawingView.
    */

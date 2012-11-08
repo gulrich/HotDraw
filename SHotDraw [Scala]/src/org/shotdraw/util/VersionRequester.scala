@@ -14,7 +14,7 @@ package org.shotdraw.util
  * @author  Wolfram Kaiser <mrfloppy@sourceforge.net>
  * @version <$CURRENT_VERSION$>
  */
-abstract trait VersionRequester {
+trait VersionRequester {
   /**
    * Subclasses should override this method to specify to which versions of
    * JHotDraw they are compatible. A string array is returned so it is possible

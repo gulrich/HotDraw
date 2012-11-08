@@ -19,7 +19,7 @@ import org.shotdraw.framework.Figure
  * @author Wolfram Kaiser
  * @version <$CURRENT_VERSION$>
  */
-abstract trait Layoutable extends Figure {
+trait Layoutable extends Figure {
   /**
    * Layout the figure
    */

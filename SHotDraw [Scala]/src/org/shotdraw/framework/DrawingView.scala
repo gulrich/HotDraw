@@ -41,7 +41,7 @@ import java.awt.Point
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait DrawingView extends ImageObserver with DrawingChangeListener {
+trait DrawingView extends ImageObserver with DrawingChangeListener {
   /**
    * Sets the view's editor.
    */

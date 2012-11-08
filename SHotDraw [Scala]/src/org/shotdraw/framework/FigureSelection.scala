@@ -21,7 +21,7 @@ import java.lang.Object
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait FigureSelection {
+trait FigureSelection {
   /**
    * Gets the type of the selection.
    */

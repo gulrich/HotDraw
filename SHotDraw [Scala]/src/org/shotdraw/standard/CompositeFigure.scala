@@ -294,7 +294,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    * Draws all the contained figures
    * @see Figure#draw
    */
-  def draw(g: Graphics) {
+  override def draw(g: Graphics) {
     draw(g, figures)
   }
 
@@ -580,39 +580,39 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
     }
   }
   
-  override def setFillColor(value: Color) {
-    super.setFillColor(value)
-    fFigures foreach { _.setFillColor(value) }
+  override def fillColor_=(value: Color) {
+    super.fillColor = value
+    fFigures foreach { _.fillColor=value }
   }
   
-  override def setFrameColor(value: Color) {
-    super.setFrameColor(value)
-    fFigures foreach { _.setFrameColor(value) }
+  override def frameColor_=(value: Color) {
+    super.frameColor = value
+    fFigures foreach { _.frameColor = value }
   }
   
-  override def setTextColor(value: Color) {
-    super.setTextColor(value)
-    fFigures foreach { _.setTextColor(value) }
+  override def textColor_=(value: Color) {
+    super.textColor = value
+    fFigures foreach { _.textColor = value }
   }
   
-  override def setFontSize(value: Int) {
-    super.setFontSize(value)
-    fFigures foreach { _.setFontSize(value) }
+  override def fontSize_=(value: Int) {
+    super.fontSize = value
+    fFigures foreach { _.fontSize = value }
   }
   
-  override def setFontName(value: String) {
-    super.setFontName(value)
-    fFigures foreach { _.setFontName(value) }
+  override def fontName_=(value: String) {
+    super.fontName = value
+    fFigures foreach { _.fontName = value }
   }
   
-  override def setFontStyle(value: Int) {
-    super.setFontStyle(value)
-    fFigures foreach { _.setFontStyle(value) }
+  override def fontStyle_=(value: Int) {
+    super.fontStyle = value
+    fFigures foreach { _.fontStyle = value }
   }
   
-  override def setArrowMode(value: ArrowType) {
-    super.setArrowMode(value)
-    fFigures foreach { _.setArrowMode(value) }
+  override def arrowMode_=(value: ArrowType) {
+    super.arrowMode = value
+    fFigures foreach { _.arrowMode = value }
   }
 
   /**

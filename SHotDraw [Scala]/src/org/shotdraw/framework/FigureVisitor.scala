@@ -14,7 +14,7 @@ package org.shotdraw.framework
  * @author  Wolfram Kaiser <mrfloppy@sourceforge.net>
  * @version <$CURRENT_VERSION$>
  */
-abstract trait FigureVisitor {
+trait FigureVisitor {
   def visitFigure(hostFigure: Figure)
 
   def visitHandle(hostHandle: Handle)

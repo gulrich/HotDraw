@@ -22,9 +22,7 @@ import java.io.ObjectInput
 import java.io.ObjectInputStream
 import java.io.ObjectOutput
 import java.io.ObjectOutputStream
-
 import scala.collection.mutable.ArrayBuffer
-
 import org.shotdraw.framework.ConnectionFigure
 import org.shotdraw.framework.Connector
 import org.shotdraw.framework.Figure
@@ -34,6 +32,9 @@ import org.shotdraw.framework.FigureVisitor
 import org.shotdraw.framework.Handle
 import org.shotdraw.framework.Locator
 import org.shotdraw.util.Geom
+import org.shotdraw.util.ColorMap
+import java.awt.Color
+import java.awt.Graphics
 
 /**
  * AbstractFigure provides default implementations for
@@ -368,6 +369,35 @@ abstract class AbstractFigure extends Figure {
   def getTextHolder: TextHolder = null
 
   def getDecoratedFigure: Figure = this
+  
+    /**
+   * Draws the figure in the given graphics. Draw is a template
+   * method calling drawBackground followed by drawFrame.
+   */
+  def draw(g: Graphics) {
+    val fill: Color = fillColor
+    if (!ColorMap.isTransparent(fill)) {
+      g.setColor(fill)
+      drawBackground(g)
+    }
+    val frame: Color = frameColor
+    if (!ColorMap.isTransparent(frame)) {
+      g.setColor(frame)
+      drawFrame(g)
+    }
+  }
+
+  /**
+   * Draws the background of the figure.
+   * @see #draw
+   */
+  protected def drawBackground(g: Graphics) {}
+
+  /**
+   * Draws the frame of the figure.
+   * @see #draw
+   */
+  protected def drawFrame(g: Graphics) {}
 
   /**
    * The listeners for a figure's changes.

@@ -20,7 +20,7 @@ import org.shotdraw.framework._
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait TextHolder {
+trait TextHolder {
   def textDisplayBox: Rectangle
 
   /**

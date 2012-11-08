@@ -176,7 +176,8 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
     fEndDecoration = l
   }
   
-  override def setArrowMode(value: ArrowType): Unit = {
+  override def arrowMode_=(value: ArrowType): Unit = {
+    super.arrowMode = value
     willChange
     value match {
       case ArrowTipNone =>
@@ -200,8 +201,8 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
    */
   def getEndDecoration: LineDecoration = fEndDecoration
 
-  def draw(g: Graphics) {
-    g.setColor(getFrameColor)
+  override def draw(g: Graphics) {
+    g.setColor(frameColor)
     var p1: Point = null
     var p2: Point = null
     for(i <- 0 to fPoints.size - 2) {

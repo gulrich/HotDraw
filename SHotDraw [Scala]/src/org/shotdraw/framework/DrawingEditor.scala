@@ -29,7 +29,7 @@ import org.shotdraw.util.UndoManager
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait DrawingEditor extends FigureSelectionListener {
+trait DrawingEditor extends FigureSelectionListener {
   /**
    * Gets the editor's drawing view.
    */

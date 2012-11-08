@@ -15,7 +15,7 @@ package org.shotdraw.framework
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait FigureSelectionListener {
+trait FigureSelectionListener {
   /**
    * Sent when the figure selection has changed.
    * @param view DrawingView

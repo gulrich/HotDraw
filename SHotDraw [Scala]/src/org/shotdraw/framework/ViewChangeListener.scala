@@ -11,7 +11,7 @@ import java.util.EventListener
  * @version     1.0
  * @since       10/14/01
  */
-abstract trait ViewChangeListener extends EventListener {
+trait ViewChangeListener extends EventListener {
   /**
    * Sent when the active view has changed.
    * @param newView view

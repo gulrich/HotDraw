@@ -25,7 +25,7 @@ import java.awt._
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait PointConstrainer {
+trait PointConstrainer {
   /**
    * Constrains the given point.
    * @return constrained point.

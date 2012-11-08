@@ -30,7 +30,7 @@ object RoundRectangleFigure {
   private final val DEFAULT_ARC: Int = 8
 }
 
-class RoundRectangleFigure(origin: Point, corner: Point) extends AttributeFigure {
+class RoundRectangleFigure(origin: Point, corner: Point) extends AbstractFigure {
   import RoundRectangleFigure._
   
   private var fDisplayBox: Rectangle = null

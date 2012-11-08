@@ -17,7 +17,7 @@ package org.shotdraw.util
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait PaletteListener {
+trait PaletteListener {
   /**
    * The user selected a palette entry. The selected button is
    * passed as an argument.

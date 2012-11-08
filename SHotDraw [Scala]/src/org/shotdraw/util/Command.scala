@@ -30,7 +30,7 @@ import org.shotdraw.framework.DrawingEditor
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait Command {
+trait Command {
   /**
    * Executes the command.
    */

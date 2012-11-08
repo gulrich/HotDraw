@@ -26,7 +26,7 @@ import org.shotdraw.framework.Drawing
  * @author  Wolfram Kaiser <mrfloppy@sourceforge.net>
  * @version <$CURRENT_VERSION$>
  */
-abstract trait StorageFormat {
+trait StorageFormat {
   /**
    * Return a FileFilter that can be used to identify files which can be stored and restored
    * with this Storage Format. Typically, each storage format has its own recognizable file

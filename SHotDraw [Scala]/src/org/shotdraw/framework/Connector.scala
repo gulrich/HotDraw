@@ -36,7 +36,7 @@ import org.shotdraw.util._
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait Connector extends Serializable with Storable {
+trait Connector extends Serializable with Storable {
   /**
    * Finds the start point for the connection.
    */

@@ -13,20 +13,19 @@ package org.shotdraw.figures
 import java.awt.Graphics
 import java.awt.Point
 import java.awt.Rectangle
-import java.io.IOException
+
 import org.shotdraw.framework.Handle
+import org.shotdraw.standard.AbstractFigure
 import org.shotdraw.standard.BoxHandleKit
 import org.shotdraw.util.StorableInput
 import org.shotdraw.util.StorableOutput
-import org.shotdraw.framework.Connector
-import org.shotdraw.standard.ChopBoxConnector
 
 /**
  * A rectangle figure.
  *
  * @version <$CURRENT_VERSION$>
  */
-class RectangleFigure(origin: Point, corner: Point) extends AttributeFigure {
+class RectangleFigure(origin: Point, corner: Point) extends AbstractFigure {
   private var fDisplayBox: Rectangle = null
   basicDisplayBox(origin, corner)
   def this() {

@@ -15,7 +15,6 @@ import java.awt.Point
 import java.awt.Polygon
 import java.awt.Rectangle
 import java.io.IOException
-import org.shotdraw.figures.AttributeFigure
 import org.shotdraw.framework.Connector
 import org.shotdraw.framework.Figure
 import org.shotdraw.framework.Handle
@@ -25,6 +24,7 @@ import org.shotdraw.util.Geom
 import org.shotdraw.util.StorableInput
 import org.shotdraw.util.StorableOutput
 import scala.collection.mutable.ArrayBuffer
+import org.shotdraw.standard.AbstractFigure
 
 /**
  * A scalable, rotatable polygon with an arbitrary number of points
@@ -113,7 +113,7 @@ object PolygonFigure {
   private[contrib] final val TOO_CLOSE: Int = 2
 }
 
-class PolygonFigure extends AttributeFigure {
+class PolygonFigure extends AbstractFigure {
   import PolygonFigure._
   private var fPoly: Polygon = new Polygon
   

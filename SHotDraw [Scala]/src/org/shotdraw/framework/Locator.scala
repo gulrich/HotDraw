@@ -25,7 +25,7 @@ import java.io.Serializable
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait Locator extends Storable with Serializable with Cloneable {
+trait Locator extends Storable with Serializable with Cloneable {
   /**
    * Locates a position on the passed figure.
    * @return a point on the figure.

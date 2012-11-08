@@ -47,7 +47,7 @@ import org.shotdraw.figures.FigureAttributes
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait Figure extends FigureAttributes with Storable with Cloneable {
+trait Figure extends FigureAttributes with Storable with Cloneable {
   /**
    * Moves the Figure to a new location.
    * @param dx the x delta

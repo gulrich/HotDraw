@@ -34,7 +34,7 @@ import java.awt.Graphics
  * @author Wolfram Kaiser
  * @version <$CURRENT_VERSION$>
  */
-abstract trait Drawing extends Storable with FigureChangeListener with Serializable {
+trait Drawing extends Storable with FigureChangeListener with Serializable {
   /**
    * Releases the drawing and its contained figures.
    */

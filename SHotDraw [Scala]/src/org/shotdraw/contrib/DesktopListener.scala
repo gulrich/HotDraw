@@ -14,7 +14,7 @@ package org.shotdraw.contrib
  * @author  C.L.Gilbert <dnoyeb@sourceforge.net>
  * @version <$CURRENT_VERSION$>
  */
-abstract trait DesktopListener {
+trait DesktopListener {
   def drawingViewAdded(dpe: DesktopEvent)
 
   def drawingViewRemoved(dpe: DesktopEvent)

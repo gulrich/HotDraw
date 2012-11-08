@@ -22,7 +22,7 @@ import java.io.Serializable
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait LineDecoration extends Storable with Cloneable with Serializable {
+trait LineDecoration extends Storable with Cloneable with Serializable {
   /**
    * Draws the decoration in the direction specified by the two points.
    */

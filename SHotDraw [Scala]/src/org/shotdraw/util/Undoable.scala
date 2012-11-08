@@ -16,7 +16,7 @@ import org.shotdraw.framework.Figure
  * @author  Wolfram Kaiser <mrfloppy@sourceforge.net>
  * @version <$CURRENT_VERSION$>
  */
-abstract trait Undoable {
+trait Undoable {
   /**
    * Undo the activity
    * @return true if the activity could be undone, false otherwise

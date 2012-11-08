@@ -16,7 +16,7 @@ import java.util.EventObject
  * @author Wolfram Kaiser
  * @version <$CURRENT_VERSION$>
  */
-abstract trait ToolListener {
+trait ToolListener {
   def toolEnabled(toolEvent: EventObject)
 
   def toolDisabled(toolEvent: EventObject)

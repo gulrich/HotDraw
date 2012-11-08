@@ -24,7 +24,7 @@ import java.awt.Graphics
  *
  * @version <$CURRENT_VERSION$>
  */
-class EllipseFigure(origin: Point, corner: Point) extends AttributeFigure {
+class EllipseFigure(origin: Point, corner: Point) extends AbstractFigure {
   private var fDisplayBox: Rectangle = null
   basicDisplayBox(origin, corner)
   

@@ -15,7 +15,7 @@ package org.shotdraw.framework
  *
  * @version <$CURRENT_VERSION$>
  */
-abstract trait DrawingChangeListener {
+trait DrawingChangeListener {
   /**
    * Sent when an area is invalid
    */

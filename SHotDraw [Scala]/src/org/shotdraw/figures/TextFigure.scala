@@ -35,6 +35,7 @@ import org.shotdraw.util.StorableOutput
 import java.lang.Object
 import org.shotdraw.framework.Connector
 import org.shotdraw.standard.ChopBoxConnector
+import org.shotdraw.standard.AbstractFigure
 
 /**
  * A text figure.
@@ -43,8 +44,8 @@ import org.shotdraw.standard.ChopBoxConnector
  *
  * @version <$CURRENT_VERSION$>
  */
-class TextFigure extends AttributeFigure with FigureChangeListener with TextHolder {
-  setFillColor(ColorMap.color("None"));
+class TextFigure extends AbstractFigure with FigureChangeListener with TextHolder {
+  fillColor = ColorMap.color("None")
   private var fOriginX: Int = 0
   private var fOriginY: Int = 0
   @transient
@@ -54,7 +55,7 @@ class TextFigure extends AttributeFigure with FigureChangeListener with TextHold
   @transient
   private var fHeight: Int = 0
   private var fText: String = ""
-  private var fFont: Font = new Font(getFontName, getFontStyle, getFontSize)
+  private var fFont: Font = new Font(fontName, fontStyle, fontSize)
   private var fIsReadOnly: Boolean = false
   private var fObservedFigure: Figure = null
   private var fLocator: OffsetLocator = null
@@ -136,18 +137,18 @@ class TextFigure extends AttributeFigure with FigureChangeListener with TextHold
     changed
   }
   
-  override def setFontStyle(value: Int) {
-    super.setFontStyle(value)
+  override def fontStyle_=(value: Int) {
+    super.fontStyle = value
     setFont(new Font(getFont.getName, value, getFont.getSize))
   }
   
-  override def setFontName(value: String) {
-    super.setFontName(value)
+  override def fontName_=(value: String) {
+    super.fontName = value
     setFont(new Font(value, getFont.getStyle, getFont.getSize))
   }
   
-  override def setFontSize(value: Int) {
-    super.setFontSize(value)
+  override def fontSize_=(value: Int) {
+    super.fontSize = value
     setFont(new Font(getFont.getName, getFont.getStyle, value))
   }
 
@@ -186,7 +187,7 @@ class TextFigure extends AttributeFigure with FigureChangeListener with TextHold
   def acceptsTyping: Boolean = !fIsReadOnly
 
   /**
-   * @see org.shotdraw.figures.AttributeFigure#drawBackground(java.awt.Graphics)
+   * @see org.shotdraw.figures.AbstractFigure#drawBackground(java.awt.Graphics)
    */
   override def drawBackground(g: Graphics) {
     val r: Rectangle = displayBox
@@ -194,11 +195,11 @@ class TextFigure extends AttributeFigure with FigureChangeListener with TextHold
   }
 
   /**
-   * @see org.shotdraw.figures.AttributeFigure#drawFrame(java.awt.Graphics)
+   * @see org.shotdraw.figures.AbstractFigure#drawFrame(java.awt.Graphics)
    */
   override def drawFrame(g: Graphics) {
     g.setFont(fFont)
-    g.setColor(getTextColor)
+    g.setColor(textColor)
     val metrics: FontMetrics = g.getFontMetrics(fFont)
     val r: Rectangle = displayBox
     g.drawString(getText, r.x, r.y + metrics.getAscent)
