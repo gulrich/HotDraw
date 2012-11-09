@@ -60,21 +60,15 @@ class UndoManager(maxStackCapacity: Int) {
     l
   }
 
-  private def getLastElement(l: ArrayBuffer[Undoable]): Option[Undoable] = l.lastOption
+  private def getLastElement(l: ArrayBuffer[Undoable]): Undoable = l.last
 
-  def isUndoable: Boolean = getLastElement(undoStack).isDefined && getLastElement(undoStack).get.isUndoable
+  def isUndoable: Boolean = getLastElement(undoStack).isUndoable
 
-  def isRedoable: Boolean = getLastElement(redoStack).isDefined && getLastElement(redoStack).get.isRedoable 
+  def isRedoable: Boolean = getLastElement(redoStack).isRedoable 
 
-  protected def peekUndo: Undoable = getLastElement(undoStack) match {
-    case Some(undoable) => undoable
-    case None => null
-  }
+  protected def peekUndo: Undoable = getLastElement(undoStack)
 
-  protected def peekRedo: Undoable = getLastElement(redoStack) match {
-    case Some(redoable) => redoable
-    case None => null
-  }
+  protected def peekRedo: Undoable = getLastElement(redoStack)
   /**
    * Returns the current size of undo buffer.
    */
@@ -128,4 +122,3 @@ class UndoManager(maxStackCapacity: Int) {
    */
   private var undoStack: ArrayBuffer[Undoable] = ArrayBuffer[Undoable]()
 }
-

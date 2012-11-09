@@ -34,13 +34,13 @@ class ToolButton(listener: PaletteListener, iconName: String, myName: String, va
   if (kit == null) {
     throw new JHotDrawRuntimeException("Iconkit instance isn't set")
   }
-  val im = new Array[Option[Image]](3)
+  val im = new Array[Image](3)
   im(0) = kit.loadImageResource(iconName + "1.gif")
   im(1) = kit.loadImageResource(iconName + "2.gif")
   im(2) = kit.loadImageResource(iconName + "3.gif")
   val tracker: MediaTracker = new MediaTracker(this)
   for(i <- 0 to 2) {
-    tracker.addImage(im(i).getOrElse(null),i)
+    tracker.addImage(im(i),i)
   }
   try {
     tracker.waitForAll
@@ -48,11 +48,11 @@ class ToolButton(listener: PaletteListener, iconName: String, myName: String, va
     case e: Exception => {
     }
   }
-  setPaletteIcon(new PaletteIcon(new Dimension(24, 24), im(0).getOrElse(null), im(1).getOrElse(null), im(2).getOrElse(null)))
+  setPaletteIcon(new PaletteIcon(new Dimension(24, 24), im(0), im(1), im(2)))
 
-  if (im(0).isDefined) setIcon(new ImageIcon(im(0).get))
-  if (im(1).isDefined) setIcon(new ImageIcon(im(1).get))
-  if (im(2).isDefined) setIcon(new ImageIcon(im(2).get))
+  if (im(0)!= NoImage) setIcon(new ImageIcon(im(0)))
+  if (im(1)!= NoImage) setIcon(new ImageIcon(im(1)))
+  if (im(2)!= NoImage) setIcon(new ImageIcon(im(2)))
   setToolTipText(name)
 
   def tool: Tool = myTool

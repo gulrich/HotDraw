@@ -18,6 +18,8 @@ import java.awt.image.ImageProducer
 import java.net.URL
 import javax.swing.ImageIcon
 import scala.collection.mutable.ArrayBuffer
+import java.awt.Graphics
+import java.awt.image.ImageObserver
 
 /**
  * The Iconkit class supports the sharing of images. It maintains
@@ -36,33 +38,29 @@ import scala.collection.mutable.ArrayBuffer
  * @version <$CURRENT_VERSION$>
  */
 object Iconkit {
-  /**
-   * Gets the single instance
-   */
-  def instance: Iconkit = new Iconkit
+  private var fgDebug: Boolean = false
+  private var fgIconkit: Iconkit = null
+  
+  def instance: Iconkit = fgIconkit
 
   private final val ID: Int = 123
 }
 
-class Iconkit {
-  /**
-   * Constructs an Iconkit that uses the given editor to
-   * resolve image path names.
-   */
-  def this(component: Component) {
-    this()
-    fComponent = component
-    fgIconkit = this
-  }
+class Iconkit(fComponent: Component) {
+  import Iconkit._
+  private var fMap: Map[String, Image] = Map()
+  private var fRegisteredImages: ArrayBuffer[String] = ArrayBuffer()
 
+  fgIconkit = this
+  
   /**
    * Loads all registered images.
    * @see #registerImage
    */
   def loadRegisteredImages(component: Component) {
     val tracker: MediaTracker = new MediaTracker(component)
-    for (s <- fRegisteredImages if basicGetImage(s).isDefined)
-      tracker.addImage(loadImage(s).get, Iconkit.ID)
+    for (s <- fRegisteredImages if basicGetImage(s) != NoImage)
+      tracker.addImage(loadImage(s), Iconkit.ID)
 //    fRegisteredImages.clear
     try {
       tracker.waitForAll
@@ -86,7 +84,7 @@ class Iconkit {
   /**
    * Registers and loads an image.
    */
-  def registerAndLoadImage(component: Component, fileName: String): Option[Image] = {
+  def registerAndLoadImage(component: Component, fileName: String): Image = {
     registerImage(fileName)
     loadRegisteredImages(component)
     getImage(fileName)
@@ -95,27 +93,27 @@ class Iconkit {
   /**
    * Loads an image with the given name.
    */
-  def loadImage(filename: String): Option[Image] = fMap.get(filename) match {
-    case Some(image) => Some(image)
+  def loadImage(filename: String): Image = fMap.get(filename) match {
+    case Some(image) => image
     case None =>
-      val image: Option[Image] = loadImageResource(filename)
-      if(image.isDefined) fMap += ((filename, image.get))
+      val image: Image = loadImageResource(filename)
+      if(image != NoImage) fMap += ((filename, image))
       image
   }
 
-  def loadImage(filename: String, waitForLoad: Boolean): Option[Image] = loadImage(filename) match {
-    case Some(image) if waitForLoad => Some(new ImageIcon(image).getImage)
+  def loadImage(filename: String, waitForLoad: Boolean): Image = loadImage(filename) match {
+    case image if waitForLoad => new ImageIcon(image).getImage
     case e => e
   }
 
-  def loadImageResource(resourcename: String): Option[Image] = {
+  def loadImageResource(resourcename: String): Image = {
     if (fgDebug) System.out.println(resourcename)
     try {
       getClass.getResource(resourcename).getContent match {
-        case ip: ImageProducer => Some(Toolkit.getDefaultToolkit.createImage(ip))
-        case _ => None
+        case ip: ImageProducer => Toolkit.getDefaultToolkit.createImage(ip)
+        case _ => NoImage
       }
-    } catch { case ex: Exception => None }
+    } catch { case ex: Exception => NoImage }
   }
 
   /**
@@ -123,19 +121,26 @@ class Iconkit {
    * can't be found it tries it again after loading
    * all the registered images.
    */
-  def getImage(filename: String): Option[Image] = basicGetImage(filename) match {
-    case Some(image) => Some(image)
-    case None =>
+  def getImage(filename: String): Image = basicGetImage(filename) match {
+    case NoImage =>
       loadRegisteredImages(fComponent)
       basicGetImage(filename)
+    case image => image
   }
 
-  private def basicGetImage(filename: String): Option[Image] = fMap.get(filename)
+  private def basicGetImage(filename: String): Image = fMap.get(filename) match {
+    case Some(image) => image
+    case _ => NoImage
+  }
+}
 
-  private var fMap: Map[String, Image] = Map()
-  private var fRegisteredImages: ArrayBuffer[String] = ArrayBuffer()
-  private var fgIconkit: Iconkit = null
-  private var fComponent: Component = null
-  private var fgDebug: Boolean = false
+object NoImage extends Image {
+  
+  override def flush() {} 
+  override def getGraphics: Graphics = null
+  override def getHeight(observer: ImageObserver): Int = 0 
+  override def getProperty(name: String, observer: ImageObserver): Object = null  
+  override def getSource: ImageProducer = null
+  override def getWidth(observer: ImageObserver): Int = 0 
 }
 
