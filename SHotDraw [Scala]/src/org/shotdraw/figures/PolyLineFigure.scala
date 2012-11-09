@@ -23,7 +23,7 @@ import org.shotdraw.standard.AbstractFigure
 import org.shotdraw.util.Geom
 import org.shotdraw.util.StorableInput
 import org.shotdraw.util.StorableOutput
-import java.lang.Object
+
 import scala.collection.mutable.ArrayBuffer
 
 /**

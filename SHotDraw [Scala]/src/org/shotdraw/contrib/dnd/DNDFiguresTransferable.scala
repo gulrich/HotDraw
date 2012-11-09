@@ -12,7 +12,7 @@ package org.shotdraw.contrib.dnd
 
 import java.awt.datatransfer._
 import java.io._
-import java.lang.Object
+
 
 /**
  * @author  C.L.Gilbert <dnoyeb@sourceforge.net>

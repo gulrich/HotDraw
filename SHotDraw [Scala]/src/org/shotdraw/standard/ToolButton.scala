@@ -15,7 +15,7 @@ import org.shotdraw.framework._
 import javax.swing._
 import java.awt._
 import java.util.EventObject
-import java.lang.Object
+
 
 /**
  * A PaletteButton that is associated with a tool.

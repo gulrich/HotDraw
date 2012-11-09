@@ -12,7 +12,7 @@ package org.shotdraw.util
 
 import javax.swing._
 import java.awt.event._
-import java.lang.Object
+
 
 /**
  * A palette button is a three state button. The states are normal

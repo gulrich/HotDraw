@@ -10,7 +10,7 @@
  */
 package org.shotdraw.framework
 
-import java.lang.Object
+
 
 /**
  * FigureSelection enables to transfer the selected figures

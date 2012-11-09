@@ -12,7 +12,7 @@ import org.shotdraw.util.Undoable
 import java.awt.Point
 import java.awt.datatransfer.DataFlavor
 import java.awt.dnd._
-import java.lang.Object
+
 import org.shotdraw.util.UndoableAdapter
 
 /**

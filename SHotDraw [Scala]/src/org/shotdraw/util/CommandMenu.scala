@@ -16,7 +16,7 @@ import java.awt._
 import java.awt.event.ActionListener
 import java.awt.event.ActionEvent
 import java.util._
-import java.lang.Object
+
 import scala.collection.mutable.{Map => MutableMap}
 
 /**

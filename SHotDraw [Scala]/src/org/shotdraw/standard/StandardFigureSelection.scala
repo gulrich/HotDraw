@@ -13,7 +13,7 @@ package org.shotdraw.standard
 import org.shotdraw.framework._
 import org.shotdraw.util._
 import java.io._
-import java.lang.Object
+
 import scala.collection.mutable.ArrayBuffer
 
 /**

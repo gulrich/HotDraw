@@ -32,7 +32,7 @@ import org.shotdraw.standard.TextHolder
 import org.shotdraw.util.ColorMap
 import org.shotdraw.util.StorableInput
 import org.shotdraw.util.StorableOutput
-import java.lang.Object
+
 import org.shotdraw.framework.Connector
 import org.shotdraw.standard.ChopBoxConnector
 import org.shotdraw.standard.AbstractFigure

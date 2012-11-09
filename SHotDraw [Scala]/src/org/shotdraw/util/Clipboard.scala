@@ -10,7 +10,7 @@
  */
 package org.shotdraw.util
 
-import java.lang.Object
+
 
 /**
  * A temporary replacement for a global clipboard.

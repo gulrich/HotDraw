@@ -50,7 +50,7 @@ import org.shotdraw.framework.Tool
 import org.shotdraw.util.Command
 import org.shotdraw.util.Geom
 import org.shotdraw.util.UndoableCommand
-import java.lang.Object
+
 import scala.collection.mutable.ArrayBuffer
 import java.awt.Graphics2D
 import java.awt.RenderingHints

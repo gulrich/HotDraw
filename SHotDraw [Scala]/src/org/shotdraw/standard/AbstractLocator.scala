@@ -13,7 +13,7 @@ package org.shotdraw.standard
 import org.shotdraw.util._
 import org.shotdraw.framework._
 import java.io.IOException
-import java.lang.Object
+
 
 /**
  * AbstractLocator provides default implementations for

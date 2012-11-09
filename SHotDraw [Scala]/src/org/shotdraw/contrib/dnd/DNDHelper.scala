@@ -18,7 +18,7 @@ import java.awt.datatransfer.Transferable
 import java.awt.dnd._
 import java.io._
 import java.util.List
-import java.lang.Object
+
 
 /**
  * Changes made in hopes of eventually cleaning up the functionality and 

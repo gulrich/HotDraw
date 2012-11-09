@@ -19,7 +19,7 @@ import java.awt._
  *
  * @version <$CURRENT_VERSION$>
  */
-class PaletteIcon extends Object {
+class PaletteIcon {
   def this(size: Dimension, normal: Image, pressed: Image, selected: Image) {
     this()
     fSize = size

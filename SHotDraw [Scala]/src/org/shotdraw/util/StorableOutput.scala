@@ -25,7 +25,7 @@ import scala.collection.mutable.ArrayBuffer
  *
  * @version <$CURRENT_VERSION$>
  */
-class StorableOutput(stream: OutputStream) extends Object {
+class StorableOutput(stream: OutputStream) {
 
   /**
    * Writes a storable object to the output stream.

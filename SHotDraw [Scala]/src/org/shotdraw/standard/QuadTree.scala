@@ -13,7 +13,7 @@ package org.shotdraw.standard
 import java.awt.geom.Rectangle2D
 import java.io.Serializable
 import org.shotdraw.framework.Figure
-import java.lang.Object
+
 import scala.collection.mutable.ArrayBuffer
 
 /**

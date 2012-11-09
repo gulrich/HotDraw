@@ -13,7 +13,7 @@ package org.shotdraw.standard
 import org.shotdraw.framework._
 import org.shotdraw.util.UndoableAdapter
 import org.shotdraw.util.Undoable
-import java.lang.Object
+
 
 /**
  * Command to change a named figure attribute.
