@@ -18,8 +18,12 @@
   * Keyboard (arrow keys or similar)
   * Undo/Redo command
   * External device (e.g. Kinect, Touch Screen)
-
-
+* Arrow move
+  * Mouse
+  * Keyboard (arrow keys or similar)
+  * Undo/Redo command
+  * External device (e.g. Kinect, Touch Screen)
+  * Another figure move
 
 
 

@@ -230,5 +230,3 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
    */
   private var mySelectedFigure: Figure = null
 }
-
-

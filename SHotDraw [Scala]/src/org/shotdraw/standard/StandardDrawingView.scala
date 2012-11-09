@@ -52,6 +52,8 @@ import org.shotdraw.util.Geom
 import org.shotdraw.util.UndoableCommand
 import java.lang.Object
 import scala.collection.mutable.ArrayBuffer
+import java.awt.Graphics2D
+import java.awt.RenderingHints
 
 /**
  * The standard implementation of DrawingView.
@@ -599,8 +601,11 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * The layers are drawn in back to front order.
    * No background is drawn.
    */
-  def draw(g: Graphics, fe: Seq[Figure]) {
-    val isPrinting: Boolean = g.isInstanceOf[PrintGraphics]
+  def draw(g: Graphics, fe: Seq[Figure]): Unit = {
+    val isPrinting = g match {
+      case pg: PrintGraphics => true
+      case _ => false
+    }
     if ((fBackgrounds != null) && !isPrinting) {
       drawPainters(g, fBackgrounds)
     }
