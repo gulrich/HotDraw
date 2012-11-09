@@ -95,7 +95,7 @@ abstract class DNDHelper(isDragSource: Boolean, isDropTarget: Boolean) {
       setDragSourceListener(null)
     }
     if (getDropTargetListener != null) {
-      val dt: DropTarget = null
+      val dt: DropTarget = NoDropTarget
       setDropTarget(dt)
       setDropTargetListener(null)
     }
@@ -124,49 +124,29 @@ abstract class DNDHelper(isDragSource: Boolean, isDropTarget: Boolean) {
 
   protected def getDragGestureListener: DragGestureListener = dragGestureListener
 
-  protected def setDragGestureRecognizer(dragGestureRecognizer: Option[DragGestureRecognizer]) {dragGestureRecognizer match  {
-    case Some(dg) => dgr = dg
-	case _ => 
-  }
-  }
+  protected def setDragGestureRecognizer(dragGestureRecognizer: DragGestureRecognizer) {dgr = dragGestureRecognizer}
 
   protected def getDragGestureRecognizer: DragGestureRecognizer = dgr
 
   protected def setDropTarget(newDropTarget: DropTarget) {
-    if ((newDropTarget == null) && (dropTarget != null)) {
+    if ((newDropTarget == NoDropTarget) && (dropTarget != null)) {
       dropTarget.setComponent(null)
       dropTarget.removeDropTargetListener(getDropTargetListener)
     }
     dropTarget = newDropTarget
   }
-
-  protected def setDropTarget(newDropTarget: Option[DropTarget]): Unit = newDropTarget match {
-    case Some(dt) => dropTarget = dt
-    case None if dropTarget != null =>
-      dropTarget.setComponent(null)
-      dropTarget.removeDropTargetListener(getDropTargetListener)
-    case _ => dropTarget = null
-  }
   
-  protected def createDropTarget: Option[DropTarget] = view match {
-    case c: Component => Some(new DropTarget(c, getDropTargetActions, getDropTargetListener)) 
-    case _ => None
-    /*catch {
-        case npe: NullPointerException => {
-          System.err.println("View Failed to initialize to DND.")
-          System.err.println("Container likely did not have peer before the DropTarget was added")
-          System.err.println(npe)
-          npe.printStackTrace
-        }
-      }*/
+  protected def createDropTarget: DropTarget = view match {
+    case c: Component => new DropTarget(c, getDropTargetActions, getDropTargetListener) 
+    case _ => NoDropTarget
   }
 
   /**
    * Used to create the gesture recognizer which in effect turns on draggability.
    */
-  protected def createDragGestureRecognizer(dgl: DragGestureListener): Option[DragGestureRecognizer] = view match {
-    case c: Component => Some(DragSource.getDefaultDragSource.createDefaultDragGestureRecognizer(c, getDragSourceActions, dgl))
-    case _ => None
+  protected def createDragGestureRecognizer(dgl: DragGestureListener): DragGestureRecognizer = view match {
+    case c: Component => DragSource.getDefaultDragSource.createDefaultDragGestureRecognizer(c, getDragSourceActions, dgl)
+    case _ => NoDragGestureRecognizer
   }
 
   /**
@@ -201,4 +181,11 @@ abstract class DNDHelper(isDragSource: Boolean, isDropTarget: Boolean) {
   private var dropTarget: DropTarget = null
   private var dragSourceListener: DragSourceListener = null
   private var dropTargetListener: DropTargetListener = null
+}
+
+object NoDropTarget extends DropTarget
+object NoDragSource extends DragSource
+object NoDragGestureRecognizer extends DragGestureRecognizer(NoDragSource) {
+  override def unregisterListeners() {}
+  override def registerListeners() {}
 }
