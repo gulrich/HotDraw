@@ -37,16 +37,16 @@ object DNDHelper {
         receivedData = transferable.getTransferData(DataFlavor.stringFlavor)
       }
       else if (flavor == DataFlavor.javaFileListFlavor) {
-        val aList: List[Figure] = transferable.getTransferData(DataFlavor.javaFileListFlavor).asInstanceOf[List[Figure]]
-        val fList: Array[File] = new Array[File](aList.size)
+        val aList = transferable.getTransferData(DataFlavor.javaFileListFlavor).asInstanceOf[List[Figure]]
+        val fList = new Array[File](aList.size)
         aList.toArray(fList)
         receivedData = fList
       }
       else if (flavor == ASCIIFlavor) {
-        val is: InputStream = transferable.getTransferData(ASCIIFlavor).asInstanceOf[InputStream]
-        val length: Int = is.available
-        val bytes: Array[Byte] = new Array[Byte](length)
-        val n: Int = is.read(bytes)
+        val is = transferable.getTransferData(ASCIIFlavor).asInstanceOf[InputStream]
+        val length = is.available
+        val bytes = new Array[Byte](length)
+        val n = is.read(bytes)
         if (n > 0) {
           receivedData = new String(bytes, 0, n)
         }
@@ -95,7 +95,7 @@ abstract class DNDHelper(isDragSource: Boolean, isDropTarget: Boolean) {
       setDragSourceListener(null)
     }
     if (getDropTargetListener != null) {
-      val dt: DropTarget = NoDropTarget
+      val dt = NoDropTarget
       setDropTarget(dt)
       setDropTargetListener(null)
     }

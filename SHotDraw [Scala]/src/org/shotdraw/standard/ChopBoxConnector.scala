@@ -30,8 +30,8 @@ class ChopBoxConnector(owner: Figure) extends AbstractConnector(owner) {
   }
   
   override def findStart(connection: ConnectionFigure): Point = {
-    val startFigure: Figure = connection.getStartConnector.owner
-    val r2: Rectangle = connection.getEndConnector.displayBox
+    val startFigure = connection.getStartConnector.owner
+    val r2 = connection.getEndConnector.displayBox
     var r2c: Point = null
     if (connection.pointCount == 2) {
       r2c = new Point(r2.x + r2.width / 2, r2.y + r2.height / 2)
@@ -42,8 +42,8 @@ class ChopBoxConnector(owner: Figure) extends AbstractConnector(owner) {
   }
 
   override def findEnd(connection: ConnectionFigure): Point = {
-    val endFigure: Figure = connection.getEndConnector.owner
-    val r1: Rectangle = connection.getStartConnector.displayBox
+    val endFigure = connection.getEndConnector.owner
+    val r1 = connection.getStartConnector.displayBox
     var r1c: Point = null
     if (connection.pointCount == 2) {
       r1c = new Point(r1.x + r1.width / 2, r1.y + r1.height / 2)
@@ -54,7 +54,7 @@ class ChopBoxConnector(owner: Figure) extends AbstractConnector(owner) {
   }
 
   protected def chop(target: Figure, from: Point): Point = {
-    val r: Rectangle = target.displayBox
+    val r = target.displayBox
     Geom.angleToPoint(r, (Geom.pointToAngle(r, from)))
   }
 }

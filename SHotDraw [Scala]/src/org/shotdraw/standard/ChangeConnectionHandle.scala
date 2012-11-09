@@ -120,7 +120,7 @@ abstract class ChangeConnectionHandle(owner: ConnectionFigure) extends AbstractH
    */
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
     var p: Point = new Point(x, y)
-    val f: Figure = findConnectableFigure(x, y, view.drawing)
+    val f = findConnectableFigure(x, y, view.drawing)
     if (f ne getTargetFigure) {
       if (getTargetFigure != null) {
         getTargetFigure.connectorVisibility(false, null)
@@ -130,7 +130,7 @@ abstract class ChangeConnectionHandle(owner: ConnectionFigure) extends AbstractH
         getTargetFigure.connectorVisibility(true, getConnection)
       }
     }
-    val target: Connector = findConnectionTarget(p.x, p.y, view.drawing)
+    val target = findConnectionTarget(p.x, p.y, view.drawing)
     if (target != null) {
       p = Geom.center(target.displayBox)
     }
@@ -149,7 +149,7 @@ abstract class ChangeConnectionHandle(owner: ConnectionFigure) extends AbstractH
     setPoint(x, y)
     connect(target)
     getConnection.updateConnection
-    val oldConnector: Connector = (getUndoActivity.asInstanceOf[ChangeConnectionHandle.UndoActivity]).getOldConnector
+    val oldConnector = (getUndoActivity.asInstanceOf[ChangeConnectionHandle.UndoActivity]).getOldConnector
     if ((oldConnector == null) || (target == null) || (oldConnector.owner eq target.owner)) {
       setUndoActivity(null)
     } else {
@@ -162,7 +162,7 @@ abstract class ChangeConnectionHandle(owner: ConnectionFigure) extends AbstractH
   }
 
   private def findConnectionTarget(x: Int, y: Int, drawing: Drawing): Connector = {
-    val target: Figure = findConnectableFigure(x, y, drawing)
+    val target = findConnectableFigure(x, y, drawing)
     if ((target != null) && target.canConnect && target != fOriginalTarget && !target.includes(owner) && canConnectTo(target)) findConnector(x, y, target)
     else null
   }
@@ -181,7 +181,7 @@ abstract class ChangeConnectionHandle(owner: ConnectionFigure) extends AbstractH
    * Draws this handle.
    */
   override def draw(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.setColor(Color.green)
     g.fillRect(r.x, r.y, r.width, r.height)
     g.setColor(Color.black)

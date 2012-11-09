@@ -17,9 +17,9 @@ import org.shotdraw.framework.DrawingView
  * @version <$CURRENT_VERSION$>
  */
 object Desktop {
-  final val PRIMARY: Int = 0
-  final val SECONDARY: Int = 1
-  final val TERTIARY: Int = 2
+  final val PRIMARY = 0
+  final val SECONDARY = 1
+  final val TERTIARY = 2
 }
 
 trait Desktop {

@@ -39,12 +39,12 @@ object PolygonScaleHandle {
     override def redo: Boolean = isRedoable && resetPolygon
 
     protected def resetPolygon: Boolean = {
-      val fe: Iterator[Figure] = getAffectedFigures.iterator
+      val fe = getAffectedFigures.iterator
       if (!fe.hasNext) {
         return false
       }
-      val figure: PolygonFigure = fe.next.asInstanceOf[PolygonFigure]
-      val backupPolygon: Polygon = figure.getPolygon
+      val figure = fe.next.asInstanceOf[PolygonFigure]
+      val backupPolygon = figure.getPolygon
       figure.willChange
       figure.setInternalPolygon(getPolygon)
       figure.changed
@@ -72,7 +72,7 @@ class PolygonScaleHandle(owner: PolygonFigure) extends AbstractHandle(owner) {
    */
   override def invokeStart(x: Int, y: Int, view: DrawingView) {
     fCurrent = new Point(x, y)
-    val activity: PolygonScaleHandle.UndoActivity = createUndoActivity(view).asInstanceOf[PolygonScaleHandle.UndoActivity]
+    val activity = createUndoActivity(view).asInstanceOf[PolygonScaleHandle.UndoActivity]
     setUndoActivity(activity)
     activity.setAffectedFigures(List(owner))
     activity.setPolygon(owner.getPolygon)
@@ -87,7 +87,7 @@ class PolygonScaleHandle(owner: PolygonFigure) extends AbstractHandle(owner) {
    */
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
     fCurrent = new Point(x, y)
-    val polygon: Polygon = (getUndoActivity.asInstanceOf[PolygonScaleHandle.UndoActivity]).getPolygon
+    val polygon = (getUndoActivity.asInstanceOf[PolygonScaleHandle.UndoActivity]).getPolygon
     owner.scaleRotate(new Point(anchorX, anchorY), polygon, fCurrent)
   }
 
@@ -112,19 +112,19 @@ class PolygonScaleHandle(owner: PolygonFigure) extends AbstractHandle(owner) {
   }
 
   private[contrib] def getOrigin: Point = {
-    val outer: Point = ((owner).asInstanceOf[PolygonFigure]).outermostPoint
-    val ctr: Point = ((owner).asInstanceOf[PolygonFigure]).center
-    val len: Double = Geom.length(outer.x, outer.y, ctr.x, ctr.y)
+    val outer = ((owner).asInstanceOf[PolygonFigure]).outermostPoint
+    val ctr = ((owner).asInstanceOf[PolygonFigure]).center
+    val len = Geom.length(outer.x, outer.y, ctr.x, ctr.y)
     if (len == 0) {
       return new Point(outer.x - HANDLESIZE / 2, outer.y + HANDLESIZE / 2)
     }
-    val u: Double = HANDLESIZE / len
+    val u = HANDLESIZE / len
     if (u > 1.0) new Point((outer.x * 3 + ctr.x) / 4, (outer.y * 3 + ctr.y) / 4)
     else new Point((outer.x * (1.0 - u) + ctr.x * u).asInstanceOf[Int], (outer.y * (1.0 - u) + ctr.y * u).asInstanceOf[Int])
   }
 
   override def draw(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.setColor(Color.yellow)
     g.fillOval(r.x, r.y, r.width, r.height)
     g.setColor(Color.black)

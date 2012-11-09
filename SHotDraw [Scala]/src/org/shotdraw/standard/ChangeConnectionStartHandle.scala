@@ -25,7 +25,7 @@ object ChangeConnectionStartHandle {
   class UndoActivity(newView: DrawingView) extends ChangeConnectionHandle.UndoActivity(newView) {
 
     protected def replaceConnector(connection: ConnectionFigure): Connector = {
-      val tempStartConnector: Connector = connection.getStartConnector
+      val tempStartConnector = connection.getStartConnector
       connection.connectStart(getOldConnector)
       tempStartConnector
     }

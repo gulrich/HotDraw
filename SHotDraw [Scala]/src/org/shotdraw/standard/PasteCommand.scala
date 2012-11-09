@@ -36,7 +36,7 @@ object PasteCommand {
       if (!super.undo) {
         return false
       }
-      val deleteVisitor: DeleteFromDrawingVisitor = new DeleteFromDrawingVisitor(getDrawingView.drawing)
+      val deleteVisitor = new DeleteFromDrawingVisitor(getDrawingView.drawing)
       getAffectedFigures foreach {
         _.visit(deleteVisitor)
       }
@@ -60,7 +60,7 @@ class PasteCommand(name: String, newDrawingEditor: DrawingEditor) extends Figure
 
   override def execute {
     super.execute
-    val selection: FigureSelection = Clipboard.getClipboard.getContents.asInstanceOf[FigureSelection]
+    val selection = Clipboard.getClipboard.getContents.asInstanceOf[FigureSelection]
     if (selection != null) {
       setUndoActivity(createUndoActivity)
       getUndoActivity.setAffectedFigures(selection.getData(StandardFigureSelection.TYPE))
@@ -68,9 +68,9 @@ class PasteCommand(name: String, newDrawingEditor: DrawingEditor) extends Figure
         setUndoActivity(null)
         return
       }
-      val r: Rectangle = getBounds(getUndoActivity.getAffectedFigures)
+      val r = getBounds(getUndoActivity.getAffectedFigures)
       view.clearSelection
-      val fe: Seq[Figure] = insertFigures(getUndoActivity.getAffectedFigures, r.x + 20, r.y + 20)
+      val fe = insertFigures(getUndoActivity.getAffectedFigures, r.x + 20, r.y + 20)
       getUndoActivity.setAffectedFigures(fe)
       view.checkDamage
     }
@@ -79,7 +79,7 @@ class PasteCommand(name: String, newDrawingEditor: DrawingEditor) extends Figure
   override def isExecutableWithView: Boolean = Clipboard.getClipboard.getContents != null
 
   private def getBounds(fe: Seq[Figure]): Rectangle = {
-    val r: Rectangle = new Rectangle
+    val r = new Rectangle
     fe foreach { f =>
       r.add(f.displayBox)
     }

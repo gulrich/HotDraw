@@ -29,7 +29,7 @@ object ChangeConnectionEndHandle {
   class UndoActivity(newView: DrawingView) extends ChangeConnectionHandle.UndoActivity(newView) {
 
     protected def replaceConnector(connection: ConnectionFigure): Connector = {
-      val tempEndConnector: Connector = connection.getEndConnector
+      val tempEndConnector = connection.getEndConnector
       connection.connectEnd(getOldConnector)
       tempEndConnector
     }

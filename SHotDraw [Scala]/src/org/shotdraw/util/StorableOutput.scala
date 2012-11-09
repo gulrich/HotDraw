@@ -100,7 +100,7 @@ class StorableOutput(stream: OutputStream) {
   def writeString(s: String) {
     fStream.print('"')
     for(i <- 0 to s.length-1) {
-      val c: Char = s.charAt(i)
+      val c = s.charAt(i)
       c match {
         case '\n' =>
           fStream.print('\\')
@@ -140,7 +140,7 @@ class StorableOutput(stream: OutputStream) {
   }
 
   private def writeRef(storable: Storable) {
-    val ref: Int = fMap.indexOf(storable)
+    val ref = fMap.indexOf(storable)
     fStream.print("REF")
     space
     fStream.print(ref)

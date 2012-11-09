@@ -50,7 +50,7 @@ class CommandMenu(name: String) extends JMenu(name) with ActionListener with Com
    * the command's name.
    */
   def add(command: Command, ks: KeyStroke) {
-    val item: JMenuItem = new JMenuItem(command.name)
+    val item = new JMenuItem(command.name)
     item.setAccelerator(ks)
     addMenuItem(command, item)
   }
@@ -90,7 +90,7 @@ class CommandMenu(name: String) extends JMenu(name) with ActionListener with Com
 
   def checkEnabled {
     for(i <- 0 to getMenuComponentCount-1) {
-      val c: Component = getMenuComponent(i)
+      val c = getMenuComponent(i)
       c match {
         case menuItem: JMenuItem =>
           hm get(menuItem) match {
@@ -123,7 +123,7 @@ class CommandMenu(name: String) extends JMenu(name) with ActionListener with Com
   def commandNotExecutable(commandEvent: EventObject) {
   }
 
-  private val hm: MutableMap[JMenuItem, Command] = MutableMap[JMenuItem, Command]()
+  private val hm = MutableMap[JMenuItem, Command]()
 }
 
 

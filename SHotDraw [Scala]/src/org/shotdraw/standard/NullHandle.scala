@@ -32,7 +32,7 @@ class NullHandle(owner: Figure, locator: Locator) extends LocatorHandle(owner, l
    * red framed rectangle.
    */
   override def draw(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.setColor(Color.black)
     g.drawRect(r.x, r.y, r.width, r.height)
   }

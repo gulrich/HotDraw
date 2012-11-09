@@ -22,12 +22,12 @@ class RedoCommand(name: String, newDrawingEditor: DrawingEditor) extends Abstrac
 
   override def execute {
     super.execute
-    val um: UndoManager = getDrawingEditor.getUndoManager
+    val um = getDrawingEditor.getUndoManager
     if ((um == null) || !um.isRedoable) {
       return
     }
-    val lastRedoable: Undoable = um.popRedo
-    val hasBeenUndone: Boolean = lastRedoable.redo
+    val lastRedoable = um.popRedo
+    val hasBeenUndone = lastRedoable.redo
     if (hasBeenUndone && lastRedoable.isUndoable) {
       um.pushUndo(lastRedoable)
     }
@@ -41,7 +41,7 @@ class RedoCommand(name: String, newDrawingEditor: DrawingEditor) extends Abstrac
    * activity in the UndoManager.
    */
   override def isExecutableWithView: Boolean = {
-    val um: UndoManager = getDrawingEditor.getUndoManager
+    val um = getDrawingEditor.getUndoManager
     ((um != null) && (um.getRedoSize > 0))
   }
 }

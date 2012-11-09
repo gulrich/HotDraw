@@ -147,8 +147,8 @@ class StandardStorageFormat extends StorageFormat {
    * @return file name with correct file extension
    */
   def store(fileName: String, saveDrawing: Drawing): String = {
-    val stream: FileOutputStream = new FileOutputStream(adjustFileName(fileName))
-    val output: StorableOutput = new StorableOutput(stream)
+    val stream = new FileOutputStream(adjustFileName(fileName))
+    val output = new StorableOutput(stream)
     output.writeStorable(saveDrawing)
     output.close
     adjustFileName(fileName)
@@ -163,8 +163,8 @@ class StandardStorageFormat extends StorageFormat {
   def restore(fileName: String): Drawing = {
     if (!hasCorrectFileExtension(fileName)) null
     else {
-      val stream: FileInputStream = new FileInputStream(fileName)
-      val input: StorableInput = new StorableInput(stream)
+      val stream = new FileInputStream(fileName)
+      val input = new StorableInput(stream)
       input.readStorable match {
         case d: Drawing => d
         case _ => sys.error(fileName + " is not a Drawing")

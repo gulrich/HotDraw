@@ -60,10 +60,10 @@ abstract class AutoscrollHelper {
     var left: Int = 0
     var bottom: Int = 0
     var right: Int = 0
-    val size: Dimension = getSize
-    val rect: Rectangle = getVisibleRect
-    val bottomEdge: Int = rect.y + rect.height
-    val rightEdge: Int = rect.x + rect.width
+    val size = getSize
+    val rect = getVisibleRect
+    val bottomEdge = rect.y + rect.height
+    val rightEdge = rect.x + rect.width
     if (location.y - rect.y <= autoscrollMargin && rect.y > 0) top = autoscrollMargin
     if (location.x - rect.x <= autoscrollMargin && rect.x > 0) left = autoscrollMargin
     if (bottomEdge - location.y <= autoscrollMargin && bottomEdge < size.height) bottom = autoscrollMargin
@@ -74,8 +74,8 @@ abstract class AutoscrollHelper {
   }
 
   def getAutoscrollInsets: Insets = {
-    val size: Dimension = getSize
-    val rect: Rectangle = getVisibleRect
+    val size = getSize
+    val rect = getVisibleRect
     autoscrollInsets.top = rect.y + autoscrollMargin
     autoscrollInsets.left = rect.x + autoscrollMargin
     autoscrollInsets.bottom = size.height - (rect.y + rect.height) + autoscrollMargin

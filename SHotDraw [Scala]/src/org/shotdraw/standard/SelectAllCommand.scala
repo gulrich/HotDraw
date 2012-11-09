@@ -61,7 +61,7 @@ class SelectAllCommand(name: String, newDrawingEditor: DrawingEditor) extends Ab
    * in the selected drawing view.
    */
   override def isExecutableWithView: Boolean = {
-    val fe: Iterator[Figure] = view.drawing.figures.iterator
+    val fe = view.drawing.figures.iterator
     fe.hasNext && (fe.next != null)
   }
 

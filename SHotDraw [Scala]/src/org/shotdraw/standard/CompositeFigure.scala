@@ -83,7 +83,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    * @see #removeAll
    */
   def remove(figure: Figure): Figure = {
-    val orphanedFigure: Figure = orphan(figure)
+    val orphanedFigure = orphan(figure)
     if (orphanedFigure != null) {
       orphanedFigure.release
     }
@@ -158,7 +158,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    * @return the figure that has been inserted (might be different from the figure specified)
    */
   def replace(figure: Figure, replacement: Figure): Figure = {
-    val index: Int = fFigures.indexOf(figure)
+    val index = fFigures.indexOf(figure)
     if (index != -1) {
       replacement.setZValue(figure.getZValue)
       replacement.addToContainer(this)
@@ -224,9 +224,9 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
       if (nr >= fFigures.size) {
         nr = fFigures.size - 1
       }
-      val layerFigure: Figure = getFigureFromLayer(nr)
-      val layerFigureZValue: Int = layerFigure.getZValue
-      val figureLayer: Int = getLayer(figure)
+      val layerFigure = getFigureFromLayer(nr)
+      val layerFigureZValue = layerFigure.getZValue
+      val figureLayer = getLayer(figure)
       if (figureLayer < nr) {
         assignFiguresToPredecessorZValue(figureLayer + 1, nr)
       } else if (figureLayer > nr) {
@@ -245,8 +245,8 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
       up = fFigures.size - 1
     }
     for(i <- up to lowerBound) {
-      val currentFigure: Figure = fFigures(i)
-      val predecessorFigure: Figure = fFigures(i - 1)
+      val currentFigure = fFigures(i)
+      val predecessorFigure = fFigures(i - 1)
       currentFigure.setZValue(predecessorFigure.getZValue)
     }
   }
@@ -257,8 +257,8 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
       up = fFigures.size - 1
     }
     for(i <- up to lowerBound) {
-      val currentFigure: Figure = fFigures(i)
-      val successorFigure: Figure = fFigures(i + 1)
+      val currentFigure = fFigures(i)
+      val successorFigure = fFigures(i + 1)
       currentFigure.setZValue(successorFigure.getZValue)
     }
   }
@@ -327,11 +327,11 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    */
   def figures(viewRectangle: Rectangle): Seq[Figure] = {
     if (_theQuadTree != null) {
-      val fe: Seq[Figure] = _theQuadTree.getAllWithin(new Bounds(viewRectangle).asRectangle2D)
+      val fe = _theQuadTree.getAllWithin(new Bounds(viewRectangle).asRectangle2D)
       var l2: List[OrderedFigureElement] = List()
       fe foreach(f => l2 ::= new OrderedFigureElement(f, f.getZValue))
       l2 = l2.sortWith((e1, e2) => e1.compareTo(e2) < 0)
-      val l3: ArrayBuffer[Figure] = l2.foldLeft(ArrayBuffer[Figure]())((x,y) => x+=y.getFigure)
+      val l3 = l2.foldLeft(ArrayBuffer[Figure]())((x,y) => x+=y.getFigure)
       l3
     } else figures
   }
@@ -526,7 +526,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    */
   override def read(dr: StorableInput) {
     super.read(dr)
-    val size: Int = dr.readInt
+    val size = dr.readInt
     fFigures = ArrayBuffer()
     for(i <- 0 to size-1) {add(dr.readStorable.asInstanceOf[Figure])}
     init(displayBox)
@@ -535,7 +535,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
   private def readObject(s: ObjectInputStream) {
     s.defaultReadObject
     figures foreach(_.addToContainer(this))
-    val fe: Seq[Figure] = figures
+    val fe = figures
     init(new Rectangle(0, 0))
   }
 
@@ -557,7 +557,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
 
   private def _addToQuadTree(f: Figure) {
     if (_theQuadTree != null) {
-      val r: Rectangle = f.displayBox
+      val r = f.displayBox
       if (r.height == 0) {
         r.grow(0, 1)
       } 

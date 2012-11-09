@@ -23,8 +23,8 @@ import org.shotdraw.util._
  * @version <$CURRENT_VERSION$>
  */
 object AbstractLineDecoration {
-  private val FILL_COLOR: String = "fill_color"
-  private val FRAME_COLOR: String = "frame_color"
+  private val FILL_COLOR = "fill_color"
+  private val FRAME_COLOR = "frame_color"
 }
 
 abstract class AbstractLineDecoration extends LineDecoration {
@@ -39,19 +39,19 @@ abstract class AbstractLineDecoration extends LineDecoration {
    * points.. (template method)
    */
   def draw(g: Graphics, x1: Int, y1: Int, x2: Int, y2: Int) {
-    val p: Polygon = outline(x1, y1, x2, y2)
+    val p = outline(x1, y1, x2, y2)
     myBounds = p.getBounds
     if (getFillColor == null) {
       g.fillPolygon(p.xpoints, p.ypoints, p.npoints)
     }
     else {
-      val drawColor: Color = g.getColor
+      val drawColor = g.getColor
       g.setColor(getFillColor)
       g.fillPolygon(p.xpoints, p.ypoints, p.npoints)
       g.setColor(drawColor)
     }
     if (getBorderColor ne getFillColor) {
-      val drawColor: Color = g.getColor
+      val drawColor = g.getColor
       g.setColor(getBorderColor)
       g.drawPolygon(p.xpoints, p.ypoints, p.npoints)
       g.setColor(drawColor)
@@ -97,11 +97,11 @@ abstract class AbstractLineDecoration extends LineDecoration {
    * Reads the arrow tip from a StorableInput.
    */
   def read(dr: StorableInput) {
-    val fillColorId: String = dr.readString
+    val fillColorId = dr.readString
     if (fillColorId == FRAME_COLOR) {
       setFillColor(dr.readColor)
     }
-    val borderColorId: String = dr.readString
+    val borderColorId = dr.readString
     if ((borderColorId == "BorderColor") || (borderColorId == FRAME_COLOR)) {
       setBorderColor(dr.readColor)
     }

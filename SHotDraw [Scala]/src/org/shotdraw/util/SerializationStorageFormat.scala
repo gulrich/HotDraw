@@ -49,8 +49,8 @@ class SerializationStorageFormat extends StandardStorageFormat {
    * @param saveDrawing drawing to be saved
    */
   override def store(fileName: String, saveDrawing: Drawing): String = {
-    val stream: FileOutputStream = new FileOutputStream(adjustFileName(fileName))
-    val output: ObjectOutput = new ObjectOutputStream(stream)
+    val stream = new FileOutputStream(adjustFileName(fileName))
+    val output = new ObjectOutputStream(stream)
     output.writeObject(saveDrawing)
     output.close
     adjustFileName(fileName)
@@ -65,8 +65,8 @@ class SerializationStorageFormat extends StandardStorageFormat {
    */
   override def restore(fileName: String): Drawing = {
     try {
-      val stream: FileInputStream = new FileInputStream(fileName)
-      val input: ObjectInput = new ObjectInputStream(stream)
+      val stream = new FileInputStream(fileName)
+      val input = new ObjectInputStream(stream)
       input.readObject match {
         case d: Drawing => d
         case None => sys.error(fileName + " is not a Drawing")

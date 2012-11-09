@@ -55,12 +55,12 @@ class SelectAreaTracker(newDrawingEditor: DrawingEditor, fRubberBandColor: Color
   }
 
   private def drawXORRect(r: Rectangle) {
-    val g: Graphics = view.getGraphics
+    val g = view.getGraphics
     if (g != null) {
       try {
         g match {
           case g2d: Graphics2D =>
-            val dashedStroke: Stroke = new BasicStroke(1.0f, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10.0f, Array[Float](5f, 5f, 5f, 5f), 5.0f)
+            val dashedStroke = new BasicStroke(1.0f, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10.0f, Array[Float](5f, 5f, 5f, 5f), 5.0f)
             g2d.setStroke(dashedStroke)
           case _ =>
         }
@@ -75,7 +75,7 @@ class SelectAreaTracker(newDrawingEditor: DrawingEditor, fRubberBandColor: Color
 
   private def selectGroup(toggle: Boolean) {
     drawing.figuresReverse foreach { f =>
-      val r2: Rectangle = f.displayBox
+      val r2 = f.displayBox
       if (fSelectGroup.contains(r2.x, r2.y) && fSelectGroup.contains(r2.x + r2.width, r2.y + r2.height)) {
         if (toggle) {
           view.toggleSelection(f)

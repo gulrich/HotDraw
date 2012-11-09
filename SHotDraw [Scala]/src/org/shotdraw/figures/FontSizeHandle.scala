@@ -57,7 +57,7 @@ object FontSizeHandle {
     }
 
     private def replaceFontSize: Int = {
-      val tempFontSize: Int = getFont.getSize
+      val tempFontSize = getFont.getSize
       setFont(new Font(getFont.getName, getFont.getStyle, getOldFontSize))
       tempFontSize
     }
@@ -85,15 +85,15 @@ class FontSizeHandle(owner: TextFigure, l: Locator) extends LocatorHandle(owner,
   }
 
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    val textOwner: TextFigure = owner.asInstanceOf[TextFigure]
-    val activity: FontSizeHandle.UndoActivity = getUndoActivity.asInstanceOf[FontSizeHandle.UndoActivity]
-    val newSize: Int = activity.getFont.getSize + y - anchorY
+    val textOwner = owner.asInstanceOf[TextFigure]
+    val activity = getUndoActivity.asInstanceOf[FontSizeHandle.UndoActivity]
+    val newSize = activity.getFont.getSize + y - anchorY
     textOwner.setFont(new Font(activity.getFont.getName, activity.getFont.getStyle, newSize))
   }
 
   override def invokeEnd(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    val textOwner: TextFigure = owner.asInstanceOf[TextFigure]
-    val activity: FontSizeHandle.UndoActivity = getUndoActivity.asInstanceOf[FontSizeHandle.UndoActivity]
+    val textOwner = owner.asInstanceOf[TextFigure]
+    val activity = getUndoActivity.asInstanceOf[FontSizeHandle.UndoActivity]
     if (textOwner.getFont.getSize == activity.getOldFontSize) {
       setUndoActivity(null)
     } else {
@@ -102,7 +102,7 @@ class FontSizeHandle(owner: TextFigure, l: Locator) extends LocatorHandle(owner,
   }
 
   override def draw(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.setColor(Color.yellow)
     g.fillOval(r.x, r.y, r.width, r.height)
     g.setColor(Color.black)

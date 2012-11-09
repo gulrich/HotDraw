@@ -32,7 +32,7 @@ class DeleteFromDrawingVisitor(newDrawing: Drawing) extends FigureVisitor {
 
   def visitFigure(hostFigure: Figure) {
     if (!myDeletedFigures.contains(hostFigure) && getDrawing.containsFigure(hostFigure)) {
-      val orphanedFigure: Figure = getDrawing.orphan(hostFigure)
+      val orphanedFigure = getDrawing.orphan(hostFigure)
       myDeletedFigures += orphanedFigure
     }
   }

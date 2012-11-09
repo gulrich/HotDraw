@@ -28,7 +28,7 @@ class ChopEllipseConnector(owner: Figure) extends ChopBoxConnector(owner) {
   }
 
   override protected def chop(target: Figure, from: Point): Point = {
-    val r: Rectangle = target.displayBox
+    val r = target.displayBox
     Geom.ovalAngleToPoint(r, Geom.pointToAngle(r, from))
   }
 }

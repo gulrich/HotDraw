@@ -90,8 +90,8 @@ class AbstractCommand(var myName: String, var myDrawingEditor: DrawingEditor, va
       newView.addFigureSelectionListener(this)
     }
     if (isViewRequired) {
-      val isOldViewInteractive: Boolean = (oldView != null) && oldView.isInteractive
-      val isNewViewInteractive: Boolean = (newView != null) && newView.isInteractive
+      val isOldViewInteractive = (oldView != null) && oldView.isInteractive
+      val isNewViewInteractive = (newView != null) && newView.isInteractive
       if (!isOldViewInteractive && isNewViewInteractive) {
         getEventDispatcher.fireCommandExecutableEvent
       } else if (isOldViewInteractive && !isNewViewInteractive) {

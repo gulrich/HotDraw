@@ -42,7 +42,7 @@ object JHDDragSourceListener {
     override def redo: Boolean = {
       if (isRedoable) {
         log("RemoveUndoActivity redo")
-        val deleteVisitor: DeleteFromDrawingVisitor = new DeleteFromDrawingVisitor(getDrawingView.drawing)
+        val deleteVisitor = new DeleteFromDrawingVisitor(getDrawingView.drawing)
         getAffectedFigures foreach { f =>
           f.visit(deleteVisitor)
         }
@@ -82,15 +82,15 @@ class JHDDragSourceListener(myEditor: DrawingEditor, newView: DrawingView) exten
    * This is the last method called in the process.
    */
   def dragDropEnd(dsde: DragSourceDropEvent) {
-    val view: DrawingView = dsde.getDragSourceContext.getComponent.asInstanceOf[DrawingView]
+    val view = dsde.getDragSourceContext.getComponent.asInstanceOf[DrawingView]
     log("DragSourceDropEvent-dragDropEnd")
     if (dsde.getDropSuccess) {
       if (dsde.getDropAction == DnDConstants.ACTION_MOVE) {
         log("DragSourceDropEvent-ACTION_MOVE")
         setSourceUndoActivity(createSourceUndoActivity(view))
-        val df: DNDFigures = DNDHelper.processReceivedData(DNDFiguresTransferable.DNDFiguresFlavor, dsde.getDragSourceContext.getTransferable).asInstanceOf[DNDFigures]
+        val df = DNDHelper.processReceivedData(DNDFiguresTransferable.DNDFiguresFlavor, dsde.getDragSourceContext.getTransferable).asInstanceOf[DNDFigures]
         getSourceUndoActivity.setAffectedFigures(df.getFigures)
-        val deleteVisitor: DeleteFromDrawingVisitor = new DeleteFromDrawingVisitor(view.drawing)
+        val deleteVisitor = new DeleteFromDrawingVisitor(view.drawing)
         getSourceUndoActivity.getAffectedFigures foreach { f => f.visit(deleteVisitor)}
         view.clearSelection
         view.checkDamage
@@ -117,9 +117,9 @@ class JHDDragSourceListener(myEditor: DrawingEditor, newView: DrawingView) exten
   def dragEnter(dsde: DragSourceDragEvent) {
     log("DragSourceDragEvent-dragEnter")
     if (!autoscrollState) {
-      val c: Component = dsde.getDragSourceContext.getComponent
+      val c = dsde.getDragSourceContext.getComponent
       if (classOf[JComponent].isInstance(c)) {
-        val jc: JComponent = c.asInstanceOf[JComponent]
+        val jc = c.asInstanceOf[JComponent]
         autoscrollState = jc.getAutoscrolls
         jc.setAutoscrolls(false)
       }

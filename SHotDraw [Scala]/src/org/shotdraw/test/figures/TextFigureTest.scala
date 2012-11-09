@@ -115,7 +115,7 @@ class TextFigureTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.figures.TextFigure#getFont()
    */
   def testSetGetFont {         
-    val tests: List[Font] = List(new Font("Helvetica", Font.PLAIN, 12), null)
+    val tests = List(new Font("Helvetica", Font.PLAIN, 12), null)
     tests foreach { e => 
       textfigure.setFont(e)
       assert(e == textfigure.getFont)  
@@ -151,7 +151,7 @@ class TextFigureTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.figures.TextFigure#getText()
    */
   def testSetGetText {
-    val tests: List[String] = List("", " ", "a", "A", "�", "�", "0123456789", "012345678901234567890", "\n", null)
+    val tests = List("", " ", "a", "A", "�", "�", "0123456789", "012345678901234567890", "\n", null)
     tests foreach { e => 
       textfigure.setText(e)
       assert(e == textfigure.getText)  

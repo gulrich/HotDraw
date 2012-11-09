@@ -42,11 +42,11 @@ class SelectionTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDra
       return
     }
     view.freezeView
-    val handle: Handle = view.findHandle(e.getX, e.getY)
+    val handle = view.findHandle(e.getX, e.getY)
     if (handle != null) {
       setDelegateTool(createHandleTracker(view, handle))
     } else {
-      val figure: Figure = drawing.findFigure(e.getX, e.getY)
+      val figure = drawing.findFigure(e.getX, e.getY)
       if (figure != null) {
         setDelegateTool(createDragTracker(figure))
       } else {

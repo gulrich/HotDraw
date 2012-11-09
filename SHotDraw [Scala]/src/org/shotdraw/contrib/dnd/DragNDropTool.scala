@@ -61,8 +61,8 @@ object DragNDropTool {
     if (view == null) {
       return
     }
-    val handle: Handle = view.findHandle(x, y)
-    val figure: Figure = view.drawing.findFigure(x, y)
+    val handle = view.findHandle(x, y)
+    val figure = view.drawing.findFigure(x, y)
     if (handle != null) {
       view.setCursor(handle.getCursor)
     } else if (figure != null) {
@@ -83,7 +83,7 @@ class DragNDropTool(editor: DrawingEditor) extends AbstractTool(editor) {
   override protected def viewCreated(view: DrawingView) {
     super.viewCreated(view)
     if (classOf[DNDInterface].isInstance(view)) {
-      val dndi: DNDInterface = view.asInstanceOf[DNDInterface]
+      val dndi = view.asInstanceOf[DNDInterface]
       dndi.DNDInitialize(getDragGestureListener)
     }
   }
@@ -93,7 +93,7 @@ class DragNDropTool(editor: DrawingEditor) extends AbstractTool(editor) {
    */
   override protected def viewDestroying(view: DrawingView) {
     if (classOf[DNDInterface].isInstance(view)) {
-      val dndi: DNDInterface = view.asInstanceOf[DNDInterface]
+      val dndi = view.asInstanceOf[DNDInterface]
       dndi.DNDDeinitialize
     }
     super.viewDestroying(view)
@@ -149,13 +149,13 @@ class DragNDropTool(editor: DrawingEditor) extends AbstractTool(editor) {
       return
     }
     view.freezeView
-    val handle: Handle = view.findHandle(getAnchorX, getAnchorY)
+    val handle = view.findHandle(getAnchorX, getAnchorY)
     if (handle != null) {
       setDragOn(false)
       fChild = createHandleTracker(handle)
     }
     else {
-      val figure: Figure = drawing.findFigure(getAnchorX, getAnchorY)
+      val figure = drawing.findFigure(getAnchorX, getAnchorY)
       if (figure != null) {
         fChild = null
         if (e.isShiftDown) {
@@ -221,22 +221,22 @@ class DragNDropTool(editor: DrawingEditor) extends AbstractTool(editor) {
   private def createDragGestureListener: DragGestureListener = {
     new DragGestureListener {
       def dragGestureRecognized(dge: java.awt.dnd.DragGestureEvent) {
-        val c: Component = dge.getComponent
+        val c = dge.getComponent
         if (isDragOn == false) {
           return
         }
         if (c.isInstanceOf[DrawingView]) {
           var found: Boolean = false
-          val dv: DrawingView = c.asInstanceOf[DrawingView]
-          val selectedElements: Iterator[Figure] = dv.selection.iterator
+          val dv = c.asInstanceOf[DrawingView]
+          val selectedElements = dv.selection.iterator
           if (!selectedElements.hasNext) {
             return
           }
-          val p: Point = dge.getDragOrigin
+          val p = dge.getDragOrigin
           found = selectedElements.find(f => f.containsPoint(p.x, p.y)).isDefined
           if (found) {
-            val dndff: DNDFigures = new DNDFigures(dv.selection.toList, p)
-            val trans: DNDFiguresTransferable = new DNDFiguresTransferable(dndff)
+            val dndff = new DNDFigures(dv.selection.toList, p)
+            val trans = new DNDFiguresTransferable(dndff)
             if (c.isInstanceOf[JComponent]) {
               (c.asInstanceOf[JComponent]).setAutoscrolls(false)
             }

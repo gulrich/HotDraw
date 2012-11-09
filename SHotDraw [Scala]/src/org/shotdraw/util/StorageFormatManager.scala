@@ -91,7 +91,7 @@ class StorageFormatManager {
       for(e <- myStorageFormats if e.isRestoreFormat) {
         fileChooser.addChoosableFileFilter(e.getFileFilter)
       }
-      val sf: StorageFormat = getDefaultStorageFormat
+      val sf = getDefaultStorageFormat
       if (sf != null && sf.isRestoreFormat) {
         fileChooser.setFileFilter(sf.getFileFilter)
       }
@@ -99,7 +99,7 @@ class StorageFormatManager {
       for(e <- myStorageFormats if e.isStoreFormat) {
         fileChooser.addChoosableFileFilter(e.getFileFilter)
       }
-      val sf: StorageFormat = getDefaultStorageFormat
+      val sf = getDefaultStorageFormat
       if (sf != null && sf.isStoreFormat) {
         fileChooser.setFileFilter(sf.getFileFilter)
       }
@@ -107,7 +107,7 @@ class StorageFormatManager {
       for(e <- myStorageFormats) {
         fileChooser.addChoosableFileFilter(e.getFileFilter)
       }
-      val sf: StorageFormat = getDefaultStorageFormat
+      val sf = getDefaultStorageFormat
       if (sf != null) {
         fileChooser.setFileFilter(sf.getFileFilter)
       }

@@ -23,8 +23,8 @@ class DuplicateCommand(name: String, newDrawingEditor: DrawingEditor) extends Fi
   override def execute {
     super.execute
     setUndoActivity(createUndoActivity)
-    val selection: FigureSelection = view.getFigureSelection
-    val figures: Seq[Figure] = selection.getData(StandardFigureSelection.TYPE).asInstanceOf[Seq[Figure]]
+    val selection = view.getFigureSelection
+    val figures = selection.getData(StandardFigureSelection.TYPE).asInstanceOf[Seq[Figure]]
     getUndoActivity.setAffectedFigures(figures)
     view.clearSelection
     getUndoActivity.setAffectedFigures(insertFigures(getUndoActivity.getAffectedFigures, 10, 10))

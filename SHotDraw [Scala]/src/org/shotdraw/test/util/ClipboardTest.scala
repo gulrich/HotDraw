@@ -72,7 +72,7 @@ class ClipboardTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.util.Clipboard#getContents()
    */
   def testSetGetContents {
-    val tests: List[AnyRef] = List(new AnyRef, null)
+    val tests = List(new AnyRef, null)
     tests foreach {e =>
       clipboard.setContents(e)
       assert(e == clipboard.getContents)

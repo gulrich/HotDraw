@@ -27,7 +27,7 @@ import java.awt.Graphics
  * @version <$CURRENT_VERSION$>
  */
 object RoundRectangleFigure {
-  private final val DEFAULT_ARC: Int = 8
+  private final val DEFAULT_ARC = 8
 }
 
 class RoundRectangleFigure(origin: Point, corner: Point) extends AbstractFigure {
@@ -71,12 +71,12 @@ class RoundRectangleFigure(origin: Point, corner: Point) extends AbstractFigure 
   }
 
   override def drawBackground(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.fillRoundRect(r.x, r.y, r.width, r.height, fArcWidth, fArcHeight)
   }
 
   override def drawFrame(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.drawRoundRect(r.x, r.y, r.width - 1, r.height - 1, fArcWidth, fArcHeight)
   }
 

@@ -30,7 +30,7 @@ class InsertIntoDrawingVisitor(var myDrawing: Drawing) extends FigureVisitor {
 
   def visitFigure(hostFigure: Figure) {
     if (!myInsertedFigures.contains(hostFigure) && !getDrawing.includes(hostFigure)) {
-      val addedFigure: Figure = getDrawing.add(hostFigure)
+      val addedFigure = getDrawing.add(hostFigure)
       myInsertedFigures += addedFigure
     }
   }

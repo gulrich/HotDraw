@@ -23,7 +23,7 @@ object AllTests {
   }
 
   def suite: Test = {
-    val suite: TestSuite = new TestSuite("Test for org.shotdraw.test.standard")
+    val suite = new TestSuite("Test for org.shotdraw.test.standard")
     suite.addTest(new TestSuite(classOf[ChangeConnectionEndHandleTest]))
     suite.addTest(new TestSuite(classOf[ChangeConnectionStartHandleTest]))
     suite.addTest(new TestSuite(classOf[ChopBoxConnectorTest]))

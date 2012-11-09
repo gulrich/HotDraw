@@ -23,7 +23,7 @@ package org.shotdraw.application
 
 object JHotDraw extends DrawApplication {
   def main(args: Array[String]) {
-    val window: DrawApplication = JHotDraw
+    val window = JHotDraw
     window.open
   }
 }

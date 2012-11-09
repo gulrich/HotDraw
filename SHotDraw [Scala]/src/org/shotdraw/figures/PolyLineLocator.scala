@@ -25,7 +25,7 @@ import org.shotdraw.standard._
 class PolyLineLocator(private[figures] fIndex: Int) extends AbstractLocator {
 
   def locate(owner: Figure): Point = {
-    val plf: PolyLineFigure = owner.asInstanceOf[PolyLineFigure]
+    val plf = owner.asInstanceOf[PolyLineFigure]
     if (fIndex < plf.pointCount) (owner.asInstanceOf[PolyLineFigure]).pointAt(fIndex)
     else new Point(0, 0)
   }

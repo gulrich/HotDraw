@@ -33,7 +33,7 @@ object UngroupCommand {
       getDrawingView.clearSelection
       getAffectedFigures foreach { f =>
         getDrawingView.drawing.orphanAll(f.figures)
-        val figure: Figure = getDrawingView.drawing.add(f)
+        val figure = getDrawingView.drawing.add(f)
         getDrawingView.addToSelection(figure)
       }
       true
@@ -50,7 +50,7 @@ object UngroupCommand {
 
     private[figures] def ungroupFigures {
       getAffectedFigures foreach { f =>
-        val group: Figure = getDrawingView.drawing.orphan(f)
+        val group = getDrawingView.drawing.orphan(f)
         getDrawingView.drawing.addAll(group.figures)
         getDrawingView.addToSelectionAll(group.figures)
       }

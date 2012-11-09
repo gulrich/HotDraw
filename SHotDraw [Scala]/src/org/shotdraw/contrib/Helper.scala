@@ -20,7 +20,7 @@ import java.awt._
 object Helper {
   def getDrawingView(container: Container): DrawingView = {
     var oldDrawingView: DrawingView = null
-    val components: Array[Component] = container.getComponents
+    val components = container.getComponents
     for(comp <- components) { comp match {
       case dv: DrawingView => return dv
       case c: Container =>

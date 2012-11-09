@@ -28,7 +28,7 @@ object AbstractHandle {
   /**
    * The standard size of a handle.
    */
-  final val HANDLESIZE: Int = 8
+  final val HANDLESIZE = 8
 }
 
 abstract class AbstractHandle(fOwner: Figure) extends Handle {
@@ -110,7 +110,7 @@ abstract class AbstractHandle(fOwner: Figure) extends Handle {
    * @see org.shotdraw.framework.Handle#displayBox()
    */
   def displayBox: Rectangle = {
-    val p: Point = locate
+    val p = locate
     new Rectangle(p.x - HANDLESIZE / 2, p.y - HANDLESIZE / 2, HANDLESIZE, HANDLESIZE)
   }
 
@@ -125,7 +125,7 @@ abstract class AbstractHandle(fOwner: Figure) extends Handle {
    * @see org.shotdraw.framework.Handle#draw(java.awt.Graphics)
    */
   def draw(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.setColor(Color.white)
     g.fillRect(r.x, r.y, r.width, r.height)
     g.setColor(Color.black)

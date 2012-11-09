@@ -35,8 +35,8 @@ class StorableInputTest(name: String) extends TestCase(name) {
    * Factory method for instances of the class to be tested.
    */
   def createInstance: StorableInput = {
-    val tempFile: File = File.createTempFile("StorableInputTest", "dat")
-    val stream: FileInputStream = new FileInputStream(tempFile)
+    val tempFile = File.createTempFile("StorableInputTest", "dat")
+    val stream = new FileInputStream(tempFile)
     tempFile.deleteOnExit
     new StorableInput(stream)
   }

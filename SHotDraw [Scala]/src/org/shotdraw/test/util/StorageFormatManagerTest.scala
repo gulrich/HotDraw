@@ -87,7 +87,7 @@ class StorageFormatManagerTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.util.StorageFormatManager#getDefaultStorageFormat()
    */
   def testSetGetDefaultStorageFormat {
-    val tests: List[StorageFormat] = List(new StandardStorageFormat, null)
+    val tests = List(new StandardStorageFormat, null)
     
     tests foreach { e =>
       storageformatmanager.setDefaultStorageFormat(e)

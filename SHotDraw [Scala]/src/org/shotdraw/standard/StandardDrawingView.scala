@@ -68,10 +68,10 @@ object StandardDrawingView {
   /**
    * Scrolling increment
    */
-  final val MINIMUM_WIDTH: Int = 400
-  final val MINIMUM_HEIGHT: Int = 300
-  final val SCROLL_INCR: Int = 100
-  final val SCROLL_OFFSET: Int = 10
+  final val MINIMUM_WIDTH = 400
+  final val MINIMUM_HEIGHT = 300
+  final val SCROLL_INCR = 100
+  final val SCROLL_OFFSET = 10
   
   private var count: Int = 0
   def counter = {
@@ -278,7 +278,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
       return Seq[Figure]()
     }
     var vCF: ArrayBuffer[ConnectionFigure] = ArrayBuffer[ConnectionFigure]()
-    val visitor: InsertIntoDrawingVisitor = new InsertIntoDrawingVisitor(drawing)
+    val visitor = new InsertIntoDrawingVisitor(drawing)
     fe foreach (f => f match {
       case cf: ConnectionFigure => vCF += cf
       case _ if f != null => 
@@ -286,14 +286,14 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
         f.visit(visitor)
     })
     vCF foreach { cf =>
-      val sf: Figure = cf.startFigure
-      val ef: Figure = cf.endFigure
+      val sf = cf.startFigure
+      val ef = cf.endFigure
       if (figureExists(sf, drawing.figures) && figureExists(ef, drawing.figures) && (!bCheck || cf.canConnect(sf, ef))) {
         if (bCheck) {
-          val sp: Point = sf.center
-          val ep: Point = ef.center
-          val fStartConnector: Connector = cf.startFigure.connectorAt(ep.x, ep.y)
-          val fEndConnector: Connector = cf.endFigure.connectorAt(sp.x, sp.y)
+          val sp = sf.center
+          val ep = ef.center
+          val fStartConnector = cf.startFigure.connectorAt(ep.x, ep.y)
+          val fEndConnector = cf.endFigure.connectorAt(sp.x, sp.y)
           if (fEndConnector != null && fStartConnector != null) {
             cf.connectStart(fStartConnector)
             cf.connectEnd(fEndConnector)
@@ -533,7 +533,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * Refreshes the drawing if there is some accumulated damage
    */
   def checkDamage {
-    val each: Iterator[DrawingChangeListener] = drawing.drawingChangeListeners
+    val each = drawing.drawingChangeListeners
     each foreach (l => l match {
       case dv: DrawingView => dv.repairDamage
       case _ =>
@@ -548,11 +548,11 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   }
 
   def drawingInvalidated(e: DrawingChangeEvent) {
-    val r: Rectangle = e.getInvalidatedRectangle
+    val r = e.getInvalidatedRectangle
     if (getDamage == null) {
       setDamage(r)
     } else {
-      val damagedR: Rectangle = getDamage
+      val damagedR = getDamage
       damagedR.add(r)
       setDamage(damagedR)
     }
@@ -581,7 +581,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * The layers are drawn in back to front order.
    */
   def drawAll(g: Graphics) {
-    val isPrinting: Boolean = g.isInstanceOf[PrintGraphics]
+    val isPrinting = g.isInstanceOf[PrintGraphics]
     drawBackground(g)
     if ((fBackgrounds != null) && !isPrinting) {
       drawPainters(g, fBackgrounds)
@@ -718,8 +718,8 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   }
 
   protected def checkMinimumSize {
-    val d: Dimension = getDrawingSize
-    val v: Dimension = getPreferredSize
+    val d = getDrawingSize
+    val v = getPreferredSize
     if (v.height < d.height || v.width < d.width) {
       v.height = d.height + SCROLL_OFFSET
       v.width = d.width + SCROLL_OFFSET
@@ -732,10 +732,10 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * the drawing. This method is called by checkMinimumSize().
    */
   protected def getDrawingSize: Dimension = {
-    val d: Dimension = new Dimension(0, 0)
+    val d = new Dimension(0, 0)
     if (drawing != null) {
       drawing.figures foreach { f =>
-        val r: Rectangle = f.displayBox
+        val r = f.displayBox
         d.width = math.max(d.width, r.x + r.width)
         d.height = math.max(d.height, r.y + r.height)
       }
@@ -859,7 +859,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * @see java.awt.Component#getMinimumSize()
    */
   override def getMinimumSize: Dimension = {
-    val r: Rectangle = new Rectangle
+    val r = new Rectangle
     drawing.figures foreach { f =>
       r.add(f.displayBox)
     }
@@ -886,7 +886,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     override def mousePressed(e: MouseEvent) {
       try {
         requestFocus
-        val p: Point = constrainPoint(new Point(e.getX, e.getY))
+        val p = constrainPoint(new Point(e.getX, e.getY))
         setLastClick(new Point(e.getX, e.getY))
         tool.mouseDown(e, p.x, p.y)
         checkDamage
@@ -903,7 +903,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
      */
     override def mouseReleased(e: MouseEvent) {
       try {
-        val p: Point = constrainPoint(new Point(e.getX, e.getY))
+        val p = constrainPoint(new Point(e.getX, e.getY))
         tool.mouseUp(e, p.x, p.y)
         checkDamage
       } catch {
@@ -921,7 +921,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
      */
     def mouseDragged(e: MouseEvent) {
       try {
-        val p: Point = constrainPoint(new Point(e.getX, e.getY))
+        val p = constrainPoint(new Point(e.getX, e.getY))
         tool.mouseDrag(e, p.x, p.y)
         checkDamage
       } catch {
@@ -954,8 +954,8 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
      * currently active tool.
      */
     def keyPressed(e: KeyEvent) {
-      val code: Int = e.getKeyCode
-      val modifiers: Int = e.getModifiers
+      val code = e.getKeyCode
+      val modifiers = e.getModifiers
       if (modifiers == 0 && ((code == KeyEvent.VK_BACK_SPACE) || (code == KeyEvent.VK_DELETE))) {
         if (deleteCmd.isExecutable) {
           deleteCmd.execute

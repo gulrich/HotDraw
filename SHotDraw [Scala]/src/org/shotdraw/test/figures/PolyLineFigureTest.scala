@@ -164,7 +164,7 @@ class PolyLineFigureTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.figures.PolyLineFigure#getStartDecoration()
    */
   def testSetGetStartDecoration {
-    val tests: List[LineDecoration] = List(new ArrowTip, null)
+    val tests = List(new ArrowTip, null)
     tests foreach { e => 
       polylinefigure.setStartDecoration(e)
       assert(e == polylinefigure.getStartDecoration)  
@@ -179,7 +179,7 @@ class PolyLineFigureTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.figures.PolyLineFigure#getEndDecoration()
    */
   def testSetGetEndDecoration {
-    val tests: List[LineDecoration] = List(new ArrowTip, null)
+    val tests = List(new ArrowTip, null)
     tests foreach { e => 
       polylinefigure.setEndDecoration(e)
       assert(e == polylinefigure.getEndDecoration)  

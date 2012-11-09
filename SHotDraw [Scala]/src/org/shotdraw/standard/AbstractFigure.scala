@@ -223,7 +223,7 @@ abstract class AbstractFigure extends Figure {
    */
   def invalidate {
     if (listener != null) {
-      val r: Rectangle = invalidateRectangle(displayBox)
+      val r = invalidateRectangle(displayBox)
       listener.figureInvalidated(new FigureChangeEvent(this, r))
     }
   }
@@ -307,9 +307,9 @@ abstract class AbstractFigure extends Figure {
    */
   override def clone: java.lang.Object = {
     var clone: java.lang.Object = null
-    val output: ByteArrayOutputStream = new ByteArrayOutputStream(200)
+    val output = new ByteArrayOutputStream(200)
     try {
-      val writer: ObjectOutput = new ObjectOutputStream(output)
+      val writer = new ObjectOutputStream(output)
       writer.writeObject(this)
       writer.close
     } catch {
@@ -317,9 +317,9 @@ abstract class AbstractFigure extends Figure {
         System.err.println("Class not found: " + e)
       }
     }
-    val input: InputStream = new ByteArrayInputStream(output.toByteArray)
+    val input = new ByteArrayInputStream(output.toByteArray)
     try {
-      val reader: ObjectInput = new ObjectInputStream(input)
+      val reader = new ObjectInputStream(input)
       clone = reader.readObject
     } catch {
       case e: IOException => {
@@ -375,12 +375,12 @@ abstract class AbstractFigure extends Figure {
    * method calling drawBackground followed by drawFrame.
    */
   def draw(g: Graphics) {
-    val fill: Color = fillColor
+    val fill = fillColor
     if (!ColorMap.isTransparent(fill)) {
       g.setColor(fill)
       drawBackground(g)
     }
-    val frame: Color = frameColor
+    val frame = frameColor
     if (!ColorMap.isTransparent(frame)) {
       g.setColor(frame)
       drawFrame(g)

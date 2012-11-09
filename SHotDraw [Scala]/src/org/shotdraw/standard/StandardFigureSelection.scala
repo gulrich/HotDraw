@@ -27,14 +27,14 @@ import scala.collection.mutable.ArrayBuffer
  */
 object StandardFigureSelection {
   def duplicateFigures(toBeCloned: Seq[Figure], figureCount: Int): Seq[Figure] = {
-    val duplicater: StandardFigureSelection = new StandardFigureSelection(toBeCloned, figureCount)
+    val duplicater = new StandardFigureSelection(toBeCloned, figureCount)
     duplicater.getData(duplicater.getType).asInstanceOf[Seq[Figure]]
   }
 
   /**
    * The type identifier of the selection.
    */
-  final val TYPE: String = "org.shotdraw.Figures"
+  final val TYPE = "org.shotdraw.Figures"
 }
 
 class StandardFigureSelection extends FigureSelection with Serializable {
@@ -45,8 +45,8 @@ class StandardFigureSelection extends FigureSelection with Serializable {
    */
   def this(fe: Seq[Figure], figureCount: Int) {
     this()
-    val output: ByteArrayOutputStream = new ByteArrayOutputStream(200)
-    val writer: StorableOutput = new StorableOutput(output)
+    val output = new ByteArrayOutputStream(200)
+    val writer = new StorableOutput(output)
     writer.writeInt(figureCount)
     fe foreach {
       writer.writeStorable(_)
@@ -68,13 +68,13 @@ class StandardFigureSelection extends FigureSelection with Serializable {
    */
   def getData(tpe: String): Seq[Figure] = {
     if (tpe == TYPE) {
-      val input: InputStream = new ByteArrayInputStream(fData)
+      val input = new ByteArrayInputStream(fData)
       var result: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
-      val reader: StorableInput = new StorableInput(input)
-      val count: Int = reader.readInt
+      val reader = new StorableInput(input)
+      val count = reader.readInt
       for(numRead <- 0 to count-1) {
         try {
-          val newFigure: Figure = reader.readStorable.asInstanceOf[Figure]
+          val newFigure = reader.readStorable.asInstanceOf[Figure]
           result += newFigure
         } catch {
           case e: IOException => {

@@ -62,14 +62,14 @@ class DesktopEventService(var myDesktop: Desktop, var myContainer: Container) {
   }
 
   protected def fireDrawingViewAddedEvent(dv: DrawingView) {
-    val dpe: DesktopEvent = createDesktopEvent(getActiveDrawingView, dv)
+    val dpe = createDesktopEvent(getActiveDrawingView, dv)
     listeners.reverse.foreach {dpl =>
       dpl.drawingViewAdded(dpe)
     }
   }
 
   protected def fireDrawingViewRemovedEvent(dv: DrawingView) {
-    val dpe: DesktopEvent = createDesktopEvent(getActiveDrawingView, dv)
+    val dpe = createDesktopEvent(getActiveDrawingView, dv)
     listeners.reverse.foreach { dpl =>
       dpl.drawingViewRemoved(dpe)
     }
@@ -79,7 +79,7 @@ class DesktopEventService(var myDesktop: Desktop, var myContainer: Container) {
    * This method is only called if the selected drawingView has actually changed
    */
   protected def fireDrawingViewSelectedEvent(oldView: DrawingView, newView: DrawingView) {
-    val dpe: DesktopEvent = createDesktopEvent(oldView, newView)
+    val dpe = createDesktopEvent(oldView, newView)
     listeners.reverse.foreach{ dpl =>
       dpl.drawingViewSelected(dpe)
     }
@@ -93,7 +93,7 @@ class DesktopEventService(var myDesktop: Desktop, var myContainer: Container) {
   def getDrawingViews(comps: List[Component]): List[DrawingView] = {
     var al: List[DrawingView] = List[DrawingView]()
     comps foreach {c =>
-      val dv: DrawingView = Helper.getDrawingView(c)
+      val dv = Helper.getDrawingView(c)
       if(dv != null) al ::= dv
     }
     al
@@ -113,8 +113,8 @@ class DesktopEventService(var myDesktop: Desktop, var myContainer: Container) {
        *       If it is to work on multipleView desktops, the we need to think further.
        */
       override def componentAdded(e: ContainerEvent) {
-        val dv: DrawingView = Helper.getDrawingView(e.getChild.asInstanceOf[Container])
-        val oldView: DrawingView = getActiveDrawingView
+        val dv = Helper.getDrawingView(e.getChild.asInstanceOf[Container])
+        val oldView = getActiveDrawingView
         if (dv != null) {
           fireDrawingViewAddedEvent(dv)
           setActiveDrawingView(dv)
@@ -128,9 +128,9 @@ class DesktopEventService(var myDesktop: Desktop, var myContainer: Container) {
        * added to the desktop.  it would be simpler if we forbade that.
        */
       override def componentRemoved(e: ContainerEvent) {
-        val dv: DrawingView = Helper.getDrawingView(e.getChild.asInstanceOf[Container])
+        val dv = Helper.getDrawingView(e.getChild.asInstanceOf[Container])
         if (dv != null) {
-          val oldView: DrawingView = getActiveDrawingView
+          val oldView = getActiveDrawingView
           setActiveDrawingView(NullDrawingView.getManagedDrawingView(oldView.editor))
           fireDrawingViewSelectedEvent(oldView, getActiveDrawingView)
           fireDrawingViewRemovedEvent(dv)

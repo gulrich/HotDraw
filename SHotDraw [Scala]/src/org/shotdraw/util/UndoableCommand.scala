@@ -40,7 +40,7 @@ class UndoableCommand extends Command with FigureSelectionListener with CommandL
     hasSelectionChanged = false
     view.addFigureSelectionListener(this)
     getWrappedCommand.execute
-    val undoableCommand: Undoable = getWrappedCommand.getUndoActivity
+    val undoableCommand = getWrappedCommand.getUndoActivity
     if ((undoableCommand != null) && (undoableCommand.isUndoable)) {
       getDrawingEditor.getUndoManager.pushUndo(undoableCommand)
       getDrawingEditor.getUndoManager.clearRedos

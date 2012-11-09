@@ -43,13 +43,13 @@ object VersionManagement {
     if (lookupPackage == null) {
       return null
     }
-    val specVersion: String = lookupPackage.getSpecificationVersion
+    val specVersion = lookupPackage.getSpecificationVersion
     if (specVersion != null) {
       return specVersion
     }
     else {
-      val normalizedPackageName: String = normalizePackageName(lookupPackage.getName)
-      val nextPackageName: String = getNextPackage(normalizedPackageName)
+      val normalizedPackageName = normalizePackageName(lookupPackage.getName)
+      val nextPackageName = getNextPackage(normalizedPackageName)
       return getPackageVersion(Package.getPackage(nextPackageName))
     }
   }
@@ -61,7 +61,7 @@ object VersionManagement {
    * for the framework package.
    */
   def isCompatibleVersion(compareVersionString: String): Boolean = {
-    val pack: Package = packages(4)
+    val pack = packages(4)
     (compareVersionString == null && pack.getSpecificationVersion == null) || pack.isCompatibleWith(compareVersionString)  
   }
 
@@ -75,10 +75,10 @@ object VersionManagement {
    */
   def readVersionFromFile(applicationName: String, versionFileName: String): String = {
     try {
-      val fileInput: FileInputStream = new FileInputStream(versionFileName)
-      val manifest: Manifest = new Manifest
+      val fileInput = new FileInputStream(versionFileName)
+      val manifest = new Manifest
       manifest.read(fileInput)
-      val entries: java.util.Map[String, Attributes] = manifest.getEntries
+      val entries = manifest.getEntries
       
       entries foreach { case e@(s, a) =>
         normalizePackageName(s)
@@ -101,7 +101,7 @@ object VersionManagement {
     if (searchPackage == null) {
       return null
     }
-    val foundNextPackage: Int = searchPackage.lastIndexOf('.')
+    val foundNextPackage = searchPackage.lastIndexOf('.')
     if (foundNextPackage > 0) {
       return searchPackage.substring(0, foundNextPackage)
     }
@@ -122,7 +122,7 @@ object VersionManagement {
     var replaced: String = toBeNormalized.replace('/', '.')
     replaced = replaced.replace(File.pathSeparatorChar, '.')
     if (replaced.endsWith(".")) {
-      val lastSeparator: Int = replaced.lastIndexOf('.')
+      val lastSeparator = replaced.lastIndexOf('.')
       return replaced.substring(0, lastSeparator)
     }
     else {

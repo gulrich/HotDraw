@@ -23,7 +23,7 @@ class OrderedFigureElement(_theFigure: Figure, _nZ: Int) extends Comparable[Orde
   def getZValue: Int = _nZ
 
   def compareTo(o: OrderedFigureElement): Int = {
-    val ofe: OrderedFigureElement = o.asInstanceOf[OrderedFigureElement]
+    val ofe = o.asInstanceOf[OrderedFigureElement]
     if (_nZ == ofe.getZValue) {
       return 0
     }

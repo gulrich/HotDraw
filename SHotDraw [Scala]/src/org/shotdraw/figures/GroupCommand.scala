@@ -54,9 +54,9 @@ object GroupCommand {
     def groupFigures {
       getDrawingView.drawing.orphanAll(getAffectedFigures)
       getDrawingView.clearSelection
-      val group: GroupFigure = new GroupFigure
+      val group = new GroupFigure
       group.addAll(getAffectedFigures)
-      val figure: Figure = getDrawingView.drawing.add(group)
+      val figure = getDrawingView.drawing.add(group)
       getDrawingView.addToSelection(figure)
       setAffectedFigures(List(figure))
     }

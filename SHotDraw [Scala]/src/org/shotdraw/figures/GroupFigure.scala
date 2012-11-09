@@ -34,7 +34,7 @@ class GroupFigure extends CompositeFigure {
    * of the contained figures.
    */
   def displayBox: Rectangle = {
-    val r: Rectangle = new Rectangle
+    val r = new Rectangle
     figures foreach {f => r.add(f.displayBox)}
     r
   }

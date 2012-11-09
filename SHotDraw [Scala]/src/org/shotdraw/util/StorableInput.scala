@@ -41,12 +41,12 @@ class StorableInput(stream: InputStream) {
    */
   def readStorable: Storable = {
     var storable: Storable = null
-    val s: String = readString
+    val s = readString
     if (s == "NULL") {
       return null
     }
     if (s == "REF") {
-      val ref: Int = readInt
+      val ref = readInt
       return retrieve(ref)
     }
     storable = makeInstance(s).asInstanceOf[Storable]
@@ -59,11 +59,11 @@ class StorableInput(stream: InputStream) {
    * Reads a string from the input stream.
    */
   def readString: String = {
-    val token: Int = fTokenizer.nextToken
+    val token = fTokenizer.nextToken
     if (token == StreamTokenizer.TT_WORD || token == '"') {
       fTokenizer.sval
     } else {
-      val msg: String = "String expected in line: " + fTokenizer.lineno
+      val msg = "String expected in line: " + fTokenizer.lineno
       throw new IOException(msg)
     }
   }
@@ -72,11 +72,11 @@ class StorableInput(stream: InputStream) {
    * Reads an int from the input stream.
    */
   def readInt: Int = {
-    val token: Int = fTokenizer.nextToken
+    val token = fTokenizer.nextToken
     if (token == StreamTokenizer.TT_NUMBER) {
       return fTokenizer.nval.toInt
     }
-    val msg: String = "Integer expected in line: " + fTokenizer.lineno
+    val msg = "Integer expected in line: " + fTokenizer.lineno
     throw new IOException(msg)
   }
 
@@ -84,11 +84,11 @@ class StorableInput(stream: InputStream) {
    * Reads an int from the input stream.
    */
   def readLong: Long = {
-    val token: Long = fTokenizer.nextToken
+    val token = fTokenizer.nextToken
     if (token == StreamTokenizer.TT_NUMBER) {
       return fTokenizer.nval.toLong
     }
-    val msg: String = "Long expected in line: " + fTokenizer.lineno
+    val msg = "Long expected in line: " + fTokenizer.lineno
     throw new IOException(msg)
   }
 
@@ -101,11 +101,11 @@ class StorableInput(stream: InputStream) {
    * Reads a double from the input stream.
    */
   def readDouble: Double = {
-    val token: Int = fTokenizer.nextToken
+    val token = fTokenizer.nextToken
     if (token == StreamTokenizer.TT_NUMBER) {
       return fTokenizer.nval
     }
-    val msg: String = "Double expected in line: " + fTokenizer.lineno
+    val msg = "Double expected in line: " + fTokenizer.lineno
     throw new IOException(msg)
   }
 
@@ -116,7 +116,7 @@ class StorableInput(stream: InputStream) {
 
   private def makeInstance(className: String): Any = {
     try {
-      val cl: Class[_] = Class.forName(className)
+      val cl = Class.forName(className)
       cl.newInstance
     } catch {
       case e: NoSuchMethodError => {

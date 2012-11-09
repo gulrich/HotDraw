@@ -39,7 +39,7 @@ object PolygonFigure {
    */
   def locator(pointIndex: Int): Locator = new AbstractLocator {
     def locate(owner: Figure): Point = {
-      val plf: PolygonFigure = owner.asInstanceOf[PolygonFigure]
+      val plf = owner.asInstanceOf[PolygonFigure]
       if (pointIndex < plf.pointCount) {
         return (owner.asInstanceOf[PolygonFigure]).pointAt(pointIndex)
       }
@@ -75,20 +75,20 @@ object PolygonFigure {
   def center(p: Polygon): Point = {
     var sx: Long = p.xpoints.foldLeft(0)((x,y) => x+y)
     var sy: Long = p.ypoints.foldLeft(0)((x,y) => x+y)
-    val n: Int = p.npoints
+    val n = p.npoints
     new Point((sx / n).asInstanceOf[Int], (sy / n).asInstanceOf[Int])
   }
 
   def chop(poly: Polygon, p: Point): Point = {
-    val ctr: Point = center(poly)
+    val ctr = center(poly)
     var cx: Int = -1
     var cy: Int = -1
     var len: Long = Long.MaxValue
     for(i <- 0 to poly.npoints - 1) {
-      val nxt: Int = (i + 1) % poly.npoints
-      val chop: Point = Geom.intersect(poly.xpoints(i), poly.ypoints(i), poly.xpoints(nxt), poly.ypoints(nxt), p.x, p.y, ctr.x, ctr.y)
+      val nxt = (i + 1) % poly.npoints
+      val chop = Geom.intersect(poly.xpoints(i), poly.ypoints(i), poly.xpoints(nxt), poly.ypoints(nxt), p.x, p.y, ctr.x, ctr.y)
       if (chop != null) {
-        val cl: Long = Geom.length2(chop.x, chop.y, p.x, p.y)
+        val cl = Geom.length2(chop.x, chop.y, p.x, p.y)
         if (cl < len) {
           len = cl
           cx = chop.x
@@ -97,7 +97,7 @@ object PolygonFigure {
       }
     }
     for(i <- 0 to poly.npoints - 1) {
-      val l: Long = Geom.length2(poly.xpoints(i), poly.ypoints(i), p.x, p.y)
+      val l = Geom.length2(poly.xpoints(i), poly.ypoints(i), p.x, p.y)
       if (l < len) {
         len = l
         cx = poly.xpoints(i)
@@ -110,7 +110,7 @@ object PolygonFigure {
   /**
    * Distance threshold for smoothing away or locating points
    **/
-  private[contrib] final val TOO_CLOSE: Int = 2
+  private[contrib] final val TOO_CLOSE = 2
 }
 
 class PolygonFigure extends AbstractFigure {
@@ -142,11 +142,11 @@ class PolygonFigure extends AbstractFigure {
 
   def basicDisplayBox(origin: Point, corner: Point) {
     var r: Rectangle = displayBox
-    val dx: Int = origin.x - r.x
-    val dy: Int = origin.y - r.y
+    val dx = origin.x - r.x
+    val dy = origin.y - r.y
     getInternalPolygon.translate(dx, dy)
     r = displayBox
-    val oldCorner: Point = new Point(r.x + r.width, r.y + r.height)
+    val oldCorner = new Point(r.x + r.width, r.y + r.height)
     scaleRotate(oldCorner, getInternalPolygon, corner)
   }
 
@@ -212,9 +212,9 @@ class PolygonFigure extends AbstractFigure {
    */
   def insertPointAt(p: Point, i: Int) {
     willChange
-    val n: Int = pointCount + 1
-    val xs: Array[Int] = new Array[Int](n)
-    val ys: Array[Int] = new Array[Int](n)
+    val n = pointCount + 1
+    val xs = new Array[Int](n)
+    val ys = new Array[Int](n)
     
     for(j <- 0 to i - 1) {
       xs(j) = getInternalPolygon.xpoints(j)
@@ -232,9 +232,9 @@ class PolygonFigure extends AbstractFigure {
 
   def removePointAt(i: Int) {
     willChange
-    val n: Int = pointCount - 1
-    val xs: Array[Int] = new Array[Int](n)
-    val ys: Array[Int] = new Array[Int](n)
+    val n = pointCount - 1
+    val xs = new Array[Int](n)
+    val ys = new Array[Int](n)
     
     for(j <- 0 to i-1) {
       xs(j) = getInternalPolygon.xpoints(j)
@@ -253,23 +253,23 @@ class PolygonFigure extends AbstractFigure {
    **/
   def scaleRotate(anchor: Point, originalPolygon: Polygon, p: Point) {
     willChange
-    val ctr: Point = PolygonFigure.center(originalPolygon)
-    val anchorLen: Double = Geom.length(ctr.x, ctr.y, anchor.x, anchor.y)
+    val ctr = PolygonFigure.center(originalPolygon)
+    val anchorLen = Geom.length(ctr.x, ctr.y, anchor.x, anchor.y)
     if (anchorLen > 0.0) {
-      val newLen: Double = Geom.length(ctr.x, ctr.y, p.x, p.y)
-      val ratio: Double = newLen / anchorLen
-      val anchorAngle: Double = math.atan2(anchor.y - ctr.y, anchor.x - ctr.x)
-      val newAngle: Double = math.atan2(p.y - ctr.y, p.x - ctr.x)
-      val rotation: Double = newAngle - anchorAngle
-      val n: Int = originalPolygon.npoints
-      val xs: Array[Int] = new Array[Int](n)
-      val ys: Array[Int] = new Array[Int](n)
+      val newLen = Geom.length(ctr.x, ctr.y, p.x, p.y)
+      val ratio = newLen / anchorLen
+      val anchorAngle = math.atan2(anchor.y - ctr.y, anchor.x - ctr.x)
+      val newAngle = math.atan2(p.y - ctr.y, p.x - ctr.x)
+      val rotation = newAngle - anchorAngle
+      val n = originalPolygon.npoints
+      val xs = new Array[Int](n)
+      val ys = new Array[Int](n)
       
       for(i <- 0 to n-1) {
-        val x: Int = originalPolygon.xpoints(i)
-        val y: Int = originalPolygon.ypoints(i)
-        val l: Double = Geom.length(ctr.x, ctr.y, x, y) * ratio
-        val a: Double = math.atan2(y - ctr.y, x - ctr.x) + rotation
+        val x = originalPolygon.xpoints(i)
+        val y = originalPolygon.ypoints(i)
+        val l = Geom.length(ctr.x, ctr.y, x, y) * ratio
+        val a = math.atan2(y - ctr.y, x - ctr.x) + rotation
         xs(i) = (ctr.x + l * math.cos(a) + 0.5).toInt
         ys(i) = (ctr.y + l * math.sin(a) + 0.5).toInt
       }
@@ -289,8 +289,8 @@ class PolygonFigure extends AbstractFigure {
       removed = false
       var i: Int = 0
       while (i < n && n >= 3) {
-        val nxt: Int = (i + 1) % n
-        val prv: Int = (i - 1 + n) % n
+        val nxt = (i + 1) % n
+        val prv = (i - 1 + n) % n
         if ((Geom.distanceFromLine(getInternalPolygon.xpoints(prv), getInternalPolygon.ypoints(prv), getInternalPolygon.xpoints(nxt), getInternalPolygon.ypoints(nxt), getInternalPolygon.xpoints(i), getInternalPolygon.ypoints(i)) < TOO_CLOSE)) {
           removed = true
           n -= 1
@@ -314,7 +314,7 @@ class PolygonFigure extends AbstractFigure {
    * @return the index of the segment or -1 if no segment was hit.
    */
   def splitSegment(x: Int, y: Int): Int = {
-    val i: Int = findSegment(x, y)
+    val i = findSegment(x, y)
     if (i != -1) {
       insertPointAt(new Point(x, y), i + 1)
       i + 1
@@ -327,11 +327,11 @@ class PolygonFigure extends AbstractFigure {
    * Return the point on the polygon that is furthest from the center
    **/
   def outermostPoint: Point = {
-    val ctr: Point = center
+    val ctr = center
     var outer: Int = 0
     var dist: Long = 0
     for(i <- 0 to pointCount - 1) {
-      val d: Long = Geom.length2(ctr.x, ctr.y, getInternalPolygon.xpoints(i), getInternalPolygon.ypoints(i))
+      val d = Geom.length2(ctr.x, ctr.y, getInternalPolygon.xpoints(i), getInternalPolygon.ypoints(i))
       if (d > dist) {
         dist = d
         outer = i
@@ -348,8 +348,8 @@ class PolygonFigure extends AbstractFigure {
     var dist: Double = TOO_CLOSE
     var best: Int = -1
     for(i <- 0 to pointCount) {
-      val n: Int = (i + 1) % pointCount
-      val d: Double = Geom.distanceFromLine(getInternalPolygon.xpoints(i), getInternalPolygon.ypoints(i), getInternalPolygon.xpoints(n), getInternalPolygon.ypoints(n), x, y)
+      val n = (i + 1) % pointCount
+      val d = Geom.distanceFromLine(getInternalPolygon.xpoints(i), getInternalPolygon.ypoints(i), getInternalPolygon.xpoints(n), getInternalPolygon.ypoints(n), x, y)
       if (d < dist) {
         dist = d
         best = i
@@ -371,9 +371,9 @@ class PolygonFigure extends AbstractFigure {
 
   override def read(dr: StorableInput) {
     super.read(dr)
-    val size: Int = dr.readInt
-    val xs: Array[Int] = new Array[Int](size)
-    val ys: Array[Int] = new Array[Int](size)
+    val size = dr.readInt
+    val xs = new Array[Int](size)
+    val ys = new Array[Int](size)
     for(i <- 0 to size-1) {
       xs(i) = dr.readInt
       ys(i) = dr.readInt

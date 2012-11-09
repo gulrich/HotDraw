@@ -117,7 +117,7 @@ class CutCommand(name: String, newDrawingEditor: DrawingEditor) extends FigureTr
     }
     fe = affected
     getUndoActivity.setAffectedFigures(fe)
-    val ua: CutCommand.UndoActivity = getUndoActivity.asInstanceOf[CutCommand.UndoActivity]
+    val ua = getUndoActivity.asInstanceOf[CutCommand.UndoActivity]
     ua.setSelectedFigures(view.selection)
     copyFigures(ua.getSelectedFigures, ua.getSelectedFiguresCount)
     deleteFigures(getUndoActivity.getAffectedFigures)

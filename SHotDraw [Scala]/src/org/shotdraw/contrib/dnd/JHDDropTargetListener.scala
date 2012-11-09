@@ -33,7 +33,7 @@ object JHDDropTargetListener {
         return false
       }
       log("AddUndoActivity AddUndoActivity undo")
-      val deleteVisitor: DeleteFromDrawingVisitor = new DeleteFromDrawingVisitor(getDrawingView.drawing)
+      val deleteVisitor = new DeleteFromDrawingVisitor(getDrawingView.drawing)
       getAffectedFigures foreach { f => f.visit(deleteVisitor)}
       setAffectedFigures(deleteVisitor.getDeletedFigures)
       getDrawingView.clearSelection
@@ -104,8 +104,8 @@ class JHDDropTargetListener(drawingEditor: DrawingEditor, drawingView: DrawingVi
    */
   def dragOver(dtde: DropTargetDragEvent) {
     if (supportDropTargetDragEvent(dtde) == true) {
-      val x: Int = dtde.getLocation.x
-      val y: Int = dtde.getLocation.y
+      val x = dtde.getLocation.x
+      val y = dtde.getLocation.y
       if ((math.abs(x - fLastX) > 0) || (math.abs(y - fLastY) > 0)) {
         fLastX = x
         fLastY = y
@@ -131,15 +131,15 @@ class JHDDropTargetListener(drawingEditor: DrawingEditor, drawingView: DrawingVi
         dtde.acceptDrop(dtde.getDropAction)
         try {
           setTargetUndoActivity(createTargetUndoActivity(view))
-          val ff: DNDFigures = DNDHelper.processReceivedData(DNDFiguresTransferable.DNDFiguresFlavor, dtde.getTransferable).asInstanceOf[DNDFigures]
+          val ff = DNDHelper.processReceivedData(DNDFiguresTransferable.DNDFiguresFlavor, dtde.getTransferable).asInstanceOf[DNDFigures]
           getTargetUndoActivity.setAffectedFigures(ff.getFigures)
-          val theO: Point = ff.getOrigin
+          val theO = ff.getOrigin
           view.clearSelection
-          val newP: Point = dtde.getLocation
-          val dx: Int = newP.x - theO.x
-          val dy: Int = newP.y - theO.y
+          val newP = dtde.getLocation
+          val dx = newP.x - theO.x
+          val dy = newP.y - theO.y
           log("mouse at " + newP)
-          val fe: Seq[Figure] = view.insertFigures(getTargetUndoActivity.getAffectedFigures, dx, dy, false)
+          val fe = view.insertFigures(getTargetUndoActivity.getAffectedFigures, dx, dy, false)
           getTargetUndoActivity.setAffectedFigures(fe)
           if (dtde.getDropAction == DnDConstants.ACTION_MOVE) {
             view.addToSelectionAll(getTargetUndoActivity.getAffectedFigures)
@@ -161,7 +161,7 @@ class JHDDropTargetListener(drawingEditor: DrawingEditor, drawingView: DrawingVi
     } else if (dtde.isDataFlavorSupported(DataFlavor.stringFlavor)) {
       log("String flavor dropped.")
       dtde.acceptDrop(dtde.getDropAction)
-      val o: Any = DNDHelper.processReceivedData(DataFlavor.stringFlavor, dtde.getTransferable)
+      val o = DNDHelper.processReceivedData(DataFlavor.stringFlavor, dtde.getTransferable)
       if (o != null) {
         log("Received string flavored data.")
         dtde.getDropTargetContext.dropComplete(true)
@@ -173,7 +173,7 @@ class JHDDropTargetListener(drawingEditor: DrawingEditor, drawingView: DrawingVi
     else if (dtde.isDataFlavorSupported(DNDHelper.ASCIIFlavor) == true) {
       log("ASCII Flavor dropped.")
       dtde.acceptDrop(DnDConstants.ACTION_COPY)
-      val o: Any = DNDHelper.processReceivedData(DNDHelper.ASCIIFlavor, dtde.getTransferable)
+      val o = DNDHelper.processReceivedData(DNDHelper.ASCIIFlavor, dtde.getTransferable)
       if (o != null) {
         log("Received ASCII Flavored data.")
         dtde.getDropTargetContext.dropComplete(true)
@@ -185,7 +185,7 @@ class JHDDropTargetListener(drawingEditor: DrawingEditor, drawingView: DrawingVi
     else if (dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
       log("Java File List Flavor dropped.")
       dtde.acceptDrop(DnDConstants.ACTION_COPY)
-      val fList: List[File] = DNDHelper.processReceivedData(DataFlavor.javaFileListFlavor, dtde.getTransferable).asInstanceOf[Array[File]].toList
+      val fList = DNDHelper.processReceivedData(DataFlavor.javaFileListFlavor, dtde.getTransferable).asInstanceOf[Array[File]].toList
       if (fList != null) {
         log("Got list of files.")
         fList foreach { x => 

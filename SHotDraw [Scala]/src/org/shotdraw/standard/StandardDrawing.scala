@@ -78,18 +78,18 @@ class StandardDrawing extends CompositeFigure with Drawing {
    * @param figure that is part of the drawing and should be added
    */
   override def orphan(figure: Figure): Figure = {
-    val orphanedFigure: Figure = super.orphan(figure)
+    val orphanedFigure = super.orphan(figure)
     if (orphanedFigure.listener != null) {
-      val rect: Rectangle = invalidateRectangle(displayBox)
+      val rect = invalidateRectangle(displayBox)
       orphanedFigure.listener.figureRequestRemove(new FigureChangeEvent(orphanedFigure, rect))
     }
     orphanedFigure
   }
 
   override def add(figure: Figure): Figure = {
-    val addedFigure: Figure = super.add(figure)
+    val addedFigure = super.add(figure)
     if (addedFigure.listener != null) {
-      val rect: Rectangle = invalidateRectangle(displayBox)
+      val rect = invalidateRectangle(displayBox)
       addedFigure.listener.figureRequestUpdate(new FigureChangeEvent(figure, rect))
       addedFigure
     } else addedFigure
@@ -139,7 +139,7 @@ class StandardDrawing extends CompositeFigure with Drawing {
    * Gets the display box. This is the union of all figures.
    */
   def displayBox: Rectangle = {
-    val r: Rectangle = new Rectangle
+    val r = new Rectangle
     if (fFigures.size > 0) {
       figures foreach {f => r.add(f.displayBox)}
     }
@@ -152,7 +152,7 @@ class StandardDrawing extends CompositeFigure with Drawing {
    * Acquires the drawing lock.
    */
   def lock: Unit  = synchronized {
-    val current: Thread = Thread.currentThread
+    val current = Thread.currentThread
     if (fDrawingLockHolder == current) {
       return
     }

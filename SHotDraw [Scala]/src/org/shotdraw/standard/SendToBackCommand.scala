@@ -30,7 +30,7 @@ object SendToBackCommand {
         return false
       }
       getAffectedFigures foreach { f =>
-        val currentFigureLayer: Int = getOriginalLayer(f)
+        val currentFigureLayer = getOriginalLayer(f)
         getDrawingView.drawing.sendToLayer(f, currentFigureLayer)
       }
       true
@@ -60,7 +60,7 @@ object SendToBackCommand {
     override def setAffectedFigures(fe: Seq[Figure]) {
       super.setAffectedFigures(fe)
       getAffectedFigures foreach { f =>
-        val originalLayer: Int = getDrawingView.drawing.getLayer(f)
+        val originalLayer = getDrawingView.drawing.getLayer(f)
         addOriginalLayer(f, originalLayer) 
       }
     }

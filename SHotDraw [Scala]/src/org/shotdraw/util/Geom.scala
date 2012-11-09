@@ -24,7 +24,7 @@ object Geom {
    * Tests if a point is on a line.
    */
   def lineContainsPoint(x1: Int, y1: Int, x2: Int, y2: Int, px: Int, py: Int): Boolean = {
-    val r: Rectangle = new Rectangle(new Point(x1, y1))
+    val r = new Rectangle(new Point(x1, y1))
     r.add(x2, y2)
     r.grow(2, 2)
     if (!r.contains(px, py)) {
@@ -53,8 +53,8 @@ object Geom {
    */
   def direction(x1: Int, y1: Int, x2: Int, y2: Int): Int = {
     var direction: Int = 0
-    val vx: Int = x2 - x1
-    val vy: Int = y2 - y1
+    val vx = x2 - x1
+    val vy = y2 - y1
     if (vy < vx && vx > -vy) {
       direction = EAST
     }
@@ -150,8 +150,8 @@ object Geom {
    * Gets the angle of a point relative to a rectangle.
    */
   def pointToAngle(r: Rectangle, p: Point): Double = {
-    val px: Int = p.x - (r.x + r.width / 2)
-    val py: Int = p.y - (r.y + r.height / 2)
+    val px = p.x - (r.x + r.width / 2)
+    val py = p.y - (r.y + r.height / 2)
     math.atan2(py * r.width, px * r.height)
   }
 
@@ -159,9 +159,9 @@ object Geom {
    * Gets the point on a rectangle that corresponds to the given angle.
    */
   def angleToPoint(r: Rectangle, angle: Double): Point = {
-    val si: Double = math.sin(angle)
-    val co: Double = math.cos(angle)
-    val e: Double = 0.0001
+    val si = math.sin(angle)
+    val co = math.cos(angle)
+    val e = 0.0001
     var x: Int = 0
     var y: Int = 0
     if (math.abs(si) > e) {
@@ -185,8 +185,8 @@ object Geom {
    * Converts a polar to a point
    */
   def polarToPoint(angle: Double, fx: Double, fy: Double): Point = {
-    val si: Double = math.sin(angle)
-    val co: Double = math.cos(angle)
+    val si = math.sin(angle)
+    val co = math.cos(angle)
     new Point((fx * co + 0.5).asInstanceOf[Int], (fy * si + 0.5).asInstanceOf[Int])
   }
 
@@ -194,8 +194,8 @@ object Geom {
    * Gets the point on an oval that corresponds to the given angle.
    */
   def ovalAngleToPoint(r: Rectangle, angle: Double): Point = {
-    val center: Point = Geom.center(r)
-    val p: Point = Geom.polarToPoint(angle, r.width / 2, r.height / 2)
+    val center = Geom.center(r)
+    val p = Geom.polarToPoint(angle, r.width / 2, r.height / 2)
     new Point(center.x + p.x, center.y + p.y)
   }
 
@@ -204,8 +204,8 @@ object Geom {
    * Return the point of intersection if it exists, else null
    **/
   def intersect(xa: Int, ya: Int, xb: Int, yb: Int, xc: Int, yc: Int, xd: Int, yd: Int): Point = {
-    val denom: Double = ((xb - xa) * (yd - yc) - (yb - ya) * (xd - xc))
-    val rnum: Double = ((ya - yc) * (xd - xc) - (xa - xc) * (yd - yc))
+    val denom = ((xb - xa) * (yd - yc) - (yb - ya) * (xd - xc))
+    val rnum = ((ya - yc) * (xd - xc) - (xa - xc) * (yd - yc))
     if (denom == 0.0) {
       if (rnum == 0.0) {
         if ((xa < xb && (xb < xc || xb < xd)) || (xa > xb && (xb > xc || xb > xd))) {
@@ -219,12 +219,12 @@ object Geom {
         return null
       }
     }
-    val r: Double = rnum / denom
-    val snum: Double = ((ya - yc) * (xb - xa) - (xa - xc) * (yb - ya))
-    val s: Double = snum / denom
+    val r = rnum / denom
+    val snum = ((ya - yc) * (xb - xa) - (xa - xc) * (yb - ya))
+    val s = snum / denom
     if (0.0 <= r && r <= 1.0 && 0.0 <= s && s <= 1.0) {
-      val px: Int = (xa + (xb - xa) * r).asInstanceOf[Int]
-      val py: Int = (ya + (yb - ya) * r).asInstanceOf[Int]
+      val px = (xa + (xb - xa) * r).asInstanceOf[Int]
+      val py = (ya + (yb - ya) * r).asInstanceOf[Int]
       return new Point(px, py)
     }
     else {
@@ -238,21 +238,21 @@ object Geom {
    * If pts on line are same, return distance from point
    **/
   def distanceFromLine(xa: Int, ya: Int, xb: Int, yb: Int, xc: Int, yc: Int): Double = {
-    val xdiff: Int = xb - xa
-    val ydiff: Int = yb - ya
-    val l2: Long = xdiff * xdiff + ydiff * ydiff
+    val xdiff = xb - xa
+    val ydiff = yb - ya
+    val l2 = xdiff * xdiff + ydiff * ydiff
     if (l2 == 0) {
       return Geom.length(xa, ya, xc, yc)
     }
-    val rnum: Double = (ya - yc) * (ya - yb) - (xa - xc) * (xb - xa)
-    val r: Double = rnum / l2
+    val rnum = (ya - yc) * (ya - yb) - (xa - xc) * (xb - xa)
+    val r = rnum / l2
     if (r < 0.0 || r > 1.0) {
       return java.lang.Double.MAX_VALUE
     }
-    val xi: Double = xa + r * xdiff
-    val yi: Double = ya + r * ydiff
-    val xd: Double = xc - xi
-    val yd: Double = yc - yi
+    val xi = xa + r * xdiff
+    val yi = ya + r * ydiff
+    val xd = xc - xi
+    val yd = yc - yi
     math.sqrt(xd * xd + yd * yd)
   }
 
@@ -261,13 +261,13 @@ object Geom {
    * Uses AWT Line2D utility methods
    */
   def distanceFromLine2D(xa: Int, ya: Int, xb: Int, yb: Int, xc: Int, yc: Int): Double = {
-    val line: Line2D.Double = new Line2D.Double(xa, xb, ya, yb)
+    val line = new Line2D.Double(xa, xb, ya, yb)
     line.ptSegDist(xc, yc)
   }
 
-  val NORTH: Int = 1
-  val SOUTH: Int = 2
-  val WEST: Int = 3
-  val EAST: Int = 4
+  val NORTH = 1
+  val SOUTH = 2
+  val WEST = 3
+  val EAST = 4
 }
 

@@ -25,7 +25,7 @@ class FigureTransferCommand(name: String, newDrawingEditor: DrawingEditor) exten
    * Deletes the selection from the drawing.
    */
   private[standard] def deleteFigures(fe: Seq[Figure]) {
-    val deleteVisitor: DeleteFromDrawingVisitor = new DeleteFromDrawingVisitor(view.drawing)
+    val deleteVisitor = new DeleteFromDrawingVisitor(view.drawing)
     fe foreach {_.visit(deleteVisitor)}
     view.clearSelection
   }

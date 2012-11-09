@@ -89,7 +89,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    * @see org.shotdraw.framework.Figure#displayBox()
    */
   def displayBox: Rectangle = {
-    val extent: Dimension = textExtent
+    val extent = textExtent
     new Rectangle(fOriginX, fOriginY, extent.width, extent.height)
   }
 
@@ -190,7 +190,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    * @see org.shotdraw.figures.AbstractFigure#drawBackground(java.awt.Graphics)
    */
   override def drawBackground(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.fillRect(r.x, r.y, r.width, r.height)
   }
 
@@ -200,8 +200,8 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
   override def drawFrame(g: Graphics) {
     g.setFont(fFont)
     g.setColor(textColor)
-    val metrics: FontMetrics = g.getFontMetrics(fFont)
-    val r: Rectangle = displayBox
+    val metrics = g.getFontMetrics(fFont)
+    val r = displayBox
     g.drawString(getText, r.x, r.y + metrics.getAscent)
   }
 
@@ -209,7 +209,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
     if (!fSizeIsDirty) {
       return new Dimension(fWidth, fHeight)
     }
-    val metrics: FontMetrics = Toolkit.getDefaultToolkit.getFontMetrics(fFont)
+    val metrics = Toolkit.getDefaultToolkit.getFontMetrics(fFont)
     fWidth = metrics.stringWidth(getText)
     fHeight = metrics.getHeight
     fSizeIsDirty = false
@@ -225,7 +225,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    * @see org.shotdraw.standard.TextHolder#overlayColumns()
    */
   def overlayColumns: Int = {
-    val length: Int = getText.length
+    val length = getText.length
     var columns: Int = 20
     if (length != 0) {
       columns = getText.length + 3
@@ -248,7 +248,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    */
   override def write(dw: StorableOutput) {
     super.write(dw)
-    val r: Rectangle = displayBox
+    val r = displayBox
     dw.writeInt(r.x)
     dw.writeInt(r.y)
     dw.writeString(getText)
@@ -314,7 +314,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    */
   def figureRemoved(e: FigureChangeEvent) {
     if (listener != null) {
-      val rect: Rectangle = invalidateRectangle(displayBox)
+      val rect = invalidateRectangle(displayBox)
       listener.figureRemoved(new FigureChangeEvent(this, rect, e))
     }
   }
@@ -340,7 +340,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    */
   protected def updateLocation {
     if (getLocator != null) {
-      val p: Point = getLocator.locate(getObservedFigure)
+      val p = getLocator.locate(getObservedFigure)
       p.x -= size.width / 2 + fOriginX
       p.y -= size.height / 2 + fOriginY
       if (p.x != 0 || p.y != 0) {

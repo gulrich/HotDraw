@@ -146,7 +146,7 @@ class BoundsTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.util.Bounds#getCenter()
    */
   def testSetGetCenter {
-    val tests: List[Point2D] = List(new Point2D.Double(2.0, 3.0))
+    val tests = List(new Point2D.Double(2.0, 3.0))
     tests foreach {e =>
       bounds.setCenter(e)
 	  assert(e == bounds.getCenter)
@@ -160,7 +160,7 @@ class BoundsTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.util.Bounds#setCenter(java.awt.geom.Point2D)
    */
   def testSetNullCenter {
-    val original: Point2D = bounds.getCenter
+    val original = bounds.getCenter
     try {
       bounds.setCenter(null)
       sys.error("IllegalArgumentException expected")

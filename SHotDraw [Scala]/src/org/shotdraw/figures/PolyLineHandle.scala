@@ -43,12 +43,12 @@ object PolyLineHandle {
     }
 
     protected def movePointToOldLocation: Boolean = {
-      val fe: Iterator[Figure] = getAffectedFigures.iterator
+      val fe = getAffectedFigures.iterator
       if (!fe.hasNext) {
         return false
       }
-      val figure: PolyLineFigure = fe.next.asInstanceOf[PolyLineFigure]
-      val backupPoint: Point = figure.pointAt(getPointIndex)
+      val figure = fe.next.asInstanceOf[PolyLineFigure]
+      val backupPoint = figure.pointAt(getPointIndex)
       figure.setPointAt(getOldPoint, getPointIndex)
       setOldPoint(backupPoint)
       true
@@ -81,7 +81,7 @@ class PolyLineHandle(owner: PolyLineFigure, l: Locator, fIndex: Int) extends Loc
   }
 
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    val currentIndex: Int = (getUndoActivity.asInstanceOf[PolyLineHandle.UndoActivity]).getPointIndex
+    val currentIndex = (getUndoActivity.asInstanceOf[PolyLineHandle.UndoActivity]).getPointIndex
     myOwner.setPointAt(new Point(x, y), currentIndex)
   }
 

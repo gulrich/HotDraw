@@ -170,7 +170,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    * Gets the start point.
    */
   def startPoint: Point = {
-    val p: Point = pointAt(0)
+    val p = pointAt(0)
     new Point(p.x, p.y)
   }
 
@@ -179,7 +179,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    */
   def endPoint: Point = {
     if (fPoints.size > 0) {
-      val p: Point = pointAt(fPoints.size - 1)
+      val p = pointAt(fPoints.size - 1)
       new Point(p.x, p.y)
     } else null
   }
@@ -227,13 +227,13 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    */
   def updateConnection {
     if (getStartConnector != null) {
-      val start: Point = getStartConnector.findStart(this)
+      val start = getStartConnector.findStart(this)
       if (start != null) {
         startPoint(start.x, start.y)
       }
     }
     if (getEndConnector != null) {
-      val end: Point = getEndConnector.findEnd(this)
+      val end = getEndConnector.findEnd(this)
       if (end != null) {
         endPoint(end.x, end.y)
       }
@@ -285,11 +285,11 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
 
   override def read(dr: StorableInput) {
     super.read(dr)
-    val start: Connector = dr.readStorable.asInstanceOf[Connector]
+    val start = dr.readStorable.asInstanceOf[Connector]
     if (start != null) {
       connectStart(start)
     }
-    val end: Connector = dr.readStorable.asInstanceOf[Connector]
+    val end = dr.readStorable.asInstanceOf[Connector]
     if (end != null) {
       connectEnd(end)
     }

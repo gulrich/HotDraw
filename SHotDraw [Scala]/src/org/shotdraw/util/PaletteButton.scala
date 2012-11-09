@@ -25,9 +25,9 @@ import java.awt.event._
  * @version <$CURRENT_VERSION$>
  */
 object PaletteButton {
-  protected final val NORMAL: Int = 1
-  protected final val PRESSED: Int = 2
-  protected final val SELECTED: Int = 3
+  protected final val NORMAL = 1
+  protected final val PRESSED = 2
+  protected final val SELECTED = 3
 }
 
 abstract class PaletteButton extends JButton with MouseListener with MouseMotionListener {

@@ -32,7 +32,7 @@ class JPanelDesktop extends JPanel with Desktop {
   }
 
   protected def createContents(dv: DrawingView): Component = {
-    val sp: JScrollPane = new JScrollPane(dv.asInstanceOf[Component])
+    val sp = new JScrollPane(dv.asInstanceOf[Component])
     sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS)
     sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS)
     sp.setAlignmentX(LEFT_ALIGNMENT)

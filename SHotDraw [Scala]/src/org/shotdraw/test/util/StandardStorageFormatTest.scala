@@ -68,7 +68,7 @@ class StandardStorageFormatTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.util.StandardStorageFormat#getFileExtension()
    */
   def testSetGetFileExtension {
-    val tests: List[String] = List("", " ", "a", "A", "�", "�", "0123456789", "012345678901234567890", "\n", null)
+    val tests = List("", " ", "a", "A", "�", "�", "0123456789", "012345678901234567890", "\n", null)
     
     tests foreach { e =>
       standardstorageformat.setFileExtension(e)
@@ -91,7 +91,7 @@ class StandardStorageFormatTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.util.StandardStorageFormat#getFileDescription()
    */
   def testSetGetFileDescription {
-    val tests: List[String] = List("", " ", "a", "A", "�", "�", "0123456789", "012345678901234567890", "\n", null)
+    val tests = List("", " ", "a", "A", "�", "�", "0123456789", "012345678901234567890", "\n", null)
     
     tests foreach {e =>
           standardstorageformat.setFileDescription(e)
@@ -107,7 +107,7 @@ class StandardStorageFormatTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.util.StandardStorageFormat#getFileFilter()
    */
   def testSetGetFileFilter {
-    val tests: List[FileFilter] = List(null, null)
+    val tests = List(null, null)
     tests foreach { e =>
       standardstorageformat.setFileFilter(e)
       assert(e == standardstorageformat.getFileFilter)

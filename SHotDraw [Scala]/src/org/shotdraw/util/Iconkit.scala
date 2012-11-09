@@ -43,7 +43,7 @@ object Iconkit {
   
   def instance: Iconkit = fgIconkit
 
-  private final val ID: Int = 123
+  private final val ID = 123
 }
 
 class Iconkit(fComponent: Component) {
@@ -58,7 +58,7 @@ class Iconkit(fComponent: Component) {
    * @see #registerImage
    */
   def loadRegisteredImages(component: Component) {
-    val tracker: MediaTracker = new MediaTracker(component)
+    val tracker = new MediaTracker(component)
     for (s <- fRegisteredImages if basicGetImage(s) != NoImage)
       tracker.addImage(loadImage(s), Iconkit.ID)
 //    fRegisteredImages.clear
@@ -96,7 +96,7 @@ class Iconkit(fComponent: Component) {
   def loadImage(filename: String): Image = fMap.get(filename) match {
     case Some(image) => image
     case None =>
-      val image: Image = loadImageResource(filename)
+      val image = loadImageResource(filename)
       if(image != NoImage) fMap += ((filename, image))
       image
   }

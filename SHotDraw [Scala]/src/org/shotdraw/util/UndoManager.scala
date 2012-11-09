@@ -24,7 +24,7 @@ object UndoManager {
   /**
    * Maximum default buffer size for undo and redo stack
    */
-  final val DEFAULT_BUFFER_SIZE: Int = 20
+  final val DEFAULT_BUFFER_SIZE = 20
 }
 
 class UndoManager(maxStackCapacity: Int) {
@@ -83,7 +83,7 @@ class UndoManager(maxStackCapacity: Int) {
    * Throw NoSuchElementException if there is none
    */
   def popUndo: Undoable = {
-    val lastUndoable: Undoable = peekUndo
+    val lastUndoable = peekUndo
     undoStack = undoStack.init
     lastUndoable
   }
@@ -92,7 +92,7 @@ class UndoManager(maxStackCapacity: Int) {
    * Throw NoSuchElementException if there is none
    */
   def popRedo: Undoable = {
-    val lastUndoable: Undoable = peekRedo
+    val lastUndoable = peekRedo
     redoStack = redoStack.init
     lastUndoable
   }

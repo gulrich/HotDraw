@@ -38,12 +38,12 @@ class ShortestDistanceConnector(owner: Figure) extends AbstractConnector(owner) 
   override def findEnd(connection: ConnectionFigure): Point = findPoint(connection, false)
 
   protected def findPoint(connection: ConnectionFigure, getStart: Boolean): Point = {
-    val startFigure: Figure = connection.getStartConnector.owner
-    val endFigure: Figure = connection.getEndConnector.owner
-    val r1: Rectangle = startFigure.displayBox
-    val r2: Rectangle = endFigure.displayBox
-    val i1: Insets = startFigure.connectionInsets
-    val i2: Insets = endFigure.connectionInsets
+    val startFigure = connection.getStartConnector.owner
+    val endFigure = connection.getEndConnector.owner
+    val r1 = startFigure.displayBox
+    val r2 = endFigure.displayBox
+    val i1 = startFigure.connectionInsets
+    val i2 = endFigure.connectionInsets
     var p1: Point = null
     var p2: Point = null
     var start: Point = null

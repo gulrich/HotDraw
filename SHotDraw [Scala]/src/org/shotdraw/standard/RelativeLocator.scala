@@ -80,7 +80,7 @@ class RelativeLocator(private[standard] var fRelativeX: Double, private[standard
   }
 
   def locate(owner: Figure): Point = {
-    val r: Rectangle = owner.displayBox
+    val r = owner.displayBox
     new Point(r.x + (r.width * fRelativeX).asInstanceOf[Int], r.y + (r.height * fRelativeY).asInstanceOf[Int])
   }
 

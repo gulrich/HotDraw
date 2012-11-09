@@ -28,12 +28,12 @@ object PolygonHandle {
   class UndoActivity(newView: DrawingView, newPointIndex: Int) extends PolyLineHandle.UndoActivity(newView, newPointIndex) {
 
     protected override def movePointToOldLocation: Boolean = {
-      val fe: Iterator[Figure] = getAffectedFigures.iterator
+      val fe = getAffectedFigures.iterator
       if (!fe.hasNext) {
         return false
       }
-      val figure: PolygonFigure = fe.next.asInstanceOf[PolygonFigure]
-      val backupPoint: Point = figure.pointAt(getPointIndex)
+      val figure = fe.next.asInstanceOf[PolygonFigure]
+      val backupPoint = figure.pointAt(getPointIndex)
       figure.setPointAt(getOldPoint, getPointIndex)
       figure.smoothPoints
       setOldPoint(backupPoint)
@@ -52,7 +52,7 @@ class PolygonHandle(owner: PolygonFigure, fLocator: Locator, fIndex: Int) extend
   }
 
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    val index: Int = (getUndoActivity.asInstanceOf[PolyLineHandle.UndoActivity]).getPointIndex
+    val index = (getUndoActivity.asInstanceOf[PolyLineHandle.UndoActivity]).getPointIndex
     myOwner.setPointAt(new Point(x, y), index)
   }
 

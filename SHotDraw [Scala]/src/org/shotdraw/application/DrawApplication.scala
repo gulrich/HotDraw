@@ -124,26 +124,26 @@ import org.shotdraw.figures.RoundRectangleFigure
  * @version <$CURRENT_VERSION$>
  */
 object DrawApplication {
-  val TITLE: String = "SHotDraw"
-  private final val fgDrawPath: String = "/org/shotdraw/"
-  val IMAGES: String = fgDrawPath + "images/"
+  val TITLE = "SHotDraw"
+  private final val fgDrawPath = "/org/shotdraw/"
+  val IMAGES = fgDrawPath + "images/"
   
   /**
    * The index of the file menu in the menu bar.
    */
-  val FILE_MENU: Int = 0
+  val FILE_MENU = 0
   /**
    * The index of the edit menu in the menu bar.
    */
-  val EDIT_MENU: Int = 1
+  val EDIT_MENU = 1
   /**
    * The index of the alignment menu in the menu bar.
    */
-  val ALIGNMENT_MENU: Int = 2
+  val ALIGNMENT_MENU = 2
   /**
    * The index of the attributes menu in the menu bar.
    */
-  val ATTRIBUTES_MENU: Int = 3
+  val ATTRIBUTES_MENU = 3
 }
 
 class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor with PaletteListener with VersionRequester {
@@ -177,7 +177,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * or a new drawing if the passed in drawing is null.
    */
   def newWindow(initialDrawing: Drawing) {
-    val window: DrawApplication = new DrawApplication
+    val window = new DrawApplication
     if (initialDrawing == null) {
       window.open
     }
@@ -209,9 +209,9 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     getContentPane.add(getStatusLine, BorderLayout.SOUTH)
 //    setTool(new NullTool(this), "")
     setView(newDrawingView)
-    val tools: JToolBar = createToolPalette
+    val tools = createToolPalette
     createTools(tools)
-    val activePanel: JPanel = new JPanel
+    val activePanel = new JPanel
     activePanel.setAlignmentX(LEFT_ALIGNMENT)
     activePanel.setAlignmentY(TOP_ALIGNMENT)
     activePanel.setLayout(new BorderLayout)
@@ -220,10 +220,10 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     setDesktop(createDesktop)
     activePanel.add(getDesktop.asInstanceOf[Component], BorderLayout.CENTER)
     getContentPane.add(activePanel, BorderLayout.CENTER)
-    val mb: JMenuBar = new JMenuBar
+    val mb = new JMenuBar
     createMenus(mb)
     setJMenuBar(mb)
-    val d: Dimension = defaultSize
+    val d = defaultSize
     if (d.width > mb.getPreferredSize.width) {
       setSize(d.width, d.height)
     } else {
@@ -232,7 +232,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     addListeners
     setStorageFormatManager(createStorageFormatManager)
     setVisible(true)
-    val r: Runnable = new Runnable {
+    val r = new Runnable {
       def run {
         if (newDrawingView.isInteractive) {
           getDesktop.addToDesktop(newDrawingView, Desktop.PRIMARY)
@@ -300,7 +300,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * method to add additional menu items.
    */
   protected def createFileMenu: JMenu = {
-    val menu: CommandMenu = new CommandMenu("File")
+    val menu = new CommandMenu("File")
     var cmd: Command = new AbstractCommand("New", this, false) {
       override def execute {
         promptNew
@@ -341,7 +341,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * method to add additional menu items.
    */
   protected def createEditMenu: JMenu = {
-    val menu: CommandMenu = new CommandMenu("Edit")
+    val menu = new CommandMenu("Edit")
     menu.add(new UndoableCommand(new SelectAllCommand("Select All", this)), KeyStroke.getKeyStroke('A', InputEvent.CTRL_DOWN_MASK))
     menu.addSeparator
     menu.add(new UndoableCommand(new CutCommand("Cut", this)), KeyStroke.getKeyStroke('X', InputEvent.CTRL_DOWN_MASK))
@@ -367,7 +367,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * method to add additional menu items.
    */
   protected def createAttributesMenu: JMenu = {
-    val menu: JMenu = new JMenu("Attributes")
+    val menu = new JMenu("Attributes")
     menu.add(createColorMenu("Fill Color", FillColor))
     menu.add(createColorMenu("Pen Color", FrameColor))
     menu.add(createArrowMenu)
@@ -383,7 +383,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * Creates the color menu.
    */
   protected def createColorMenu(title: String, attribute: FigureAttributeConstant[Color]): JMenu = {
-    val menu: CommandMenu = new CommandMenu(title)
+    val menu = new CommandMenu(title)
     ColorMap.fMap foreach { case (name, color) =>
       menu.add(new UndoableCommand(new ChangeAttributeCommand(name, attribute, color, this)))
     }
@@ -394,7 +394,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * Creates the arrows menu.
    */
   protected def createArrowMenu: JMenu = {
-    val menu: CommandMenu = new CommandMenu("Arrow")
+    val menu = new CommandMenu("Arrow")
     menu.add(new UndoableCommand(new ChangeAttributeCommand("none", ArrowMode, PolyLineFigure.ArrowTipNone, this)))
     menu.add(new UndoableCommand(new ChangeAttributeCommand("at Start", ArrowMode, PolyLineFigure.ArrowTipStart, this)))
     menu.add(new UndoableCommand(new ChangeAttributeCommand("at End", ArrowMode, PolyLineFigure.ArrowTipEnd, this)))
@@ -407,8 +407,8 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * supported by the toolkit implementation.
    */
   protected def createFontMenu: JMenu = {
-    val menu: CommandMenu = new CommandMenu("Font")
-    val fonts: Array[String] = GraphicsEnvironment.getLocalGraphicsEnvironment.getAvailableFontFamilyNames
+    val menu = new CommandMenu("Font")
+    val fonts = GraphicsEnvironment.getLocalGraphicsEnvironment.getAvailableFontFamilyNames
     fonts foreach { f =>
       menu.add(new UndoableCommand(new ChangeAttributeCommand(f, FontName, f, this)))
     }
@@ -419,7 +419,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * Creates the font style menu with entries (Plain, Italic, Bold).
    */
   protected def createFontStyleMenu: JMenu = {
-    val menu: CommandMenu = new CommandMenu("Font Style")
+    val menu = new CommandMenu("Font Style")
     menu.add(new UndoableCommand(new ChangeAttributeCommand("Plain", FontStyle, Font.PLAIN, this)))
     menu.add(new UndoableCommand(new ChangeAttributeCommand("Italic", FontStyle, Font.ITALIC, this)))
     menu.add(new UndoableCommand(new ChangeAttributeCommand("Bold", FontStyle, Font.BOLD, this)))
@@ -430,8 +430,8 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * Creates the font size menu.
    */
   protected def createFontSizeMenu: JMenu = {
-    val menu: CommandMenu = new CommandMenu("Font Size")
-    val sizes: List[Int] = List(9, 10, 12, 14, 16, 18, 20, 24, 36, 48, 72)
+    val menu = new CommandMenu("Font Size")
+    val sizes = List(9, 10, 12, 14, 16, 18, 20, 24, 36, 48, 72)
     sizes foreach { e =>
       menu.add(new UndoableCommand(new ChangeAttributeCommand(e.toString, FontSize, e, this)))
     }
@@ -443,7 +443,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * Creates the tool palette.
    */
   protected def createToolPalette: JToolBar = {
-    val palette: JToolBar = new JToolBar
+    val palette = new JToolBar
     palette.setBackground(Color.lightGray)
     palette
   }
@@ -513,14 +513,14 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * DrawingView is returned.
    */
   protected def createDrawingView: DrawingView = {
-    val createdDrawingView: DrawingView = createDrawingView(createDrawing)
+    val createdDrawingView = createDrawingView(createDrawing)
     createdDrawingView.drawing.setTitle(getDefaultDrawingTitle)
     createdDrawingView
   }
 
   protected def createDrawingView(newDrawing: Drawing): DrawingView = {
-    val d: Dimension = getDrawingViewSize
-    val newDrawingView: DrawingView = new StandardDrawingView(this, d.width, d.height)
+    val d = getDrawingViewSize
+    val newDrawingView = new StandardDrawingView(this, d.width, d.height)
     newDrawingView.setDrawing(newDrawing)
     newDrawingView
   }
@@ -569,7 +569,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * their own format manager by overriding this method.
    */
   def createStorageFormatManager: StorageFormatManager = {
-    val storageFormatManager: StorageFormatManager = new StorageFormatManager
+    val storageFormatManager = new StorageFormatManager
     storageFormatManager.setDefaultStorageFormat(new StandardStorageFormat)
     storageFormatManager.addStorageFormat(storageFormatManager.getDefaultStorageFormat)
     storageFormatManager.addStorageFormat(new SerializationStorageFormat)
@@ -601,7 +601,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * Creates the status line.
    */
   protected def createStatusLine: JTextField = {
-    val field: JTextField = new JTextField("No Tool", 40)
+    val field = new JTextField("No Tool", 40)
     field.setBackground(Color.white)
     field.setEditable(false)
     field
@@ -618,7 +618,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * @see PaletteListener
    */
   def paletteUserSelected(paletteButton: PaletteButton) {
-    val toolButton: ToolButton = paletteButton.asInstanceOf[ToolButton]
+    val toolButton = paletteButton.asInstanceOf[ToolButton]
     setTool(toolButton.tool, toolButton.name)
     setSelected(toolButton)
   }
@@ -628,7 +628,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * @see PaletteListener
    */
   def paletteUserOver(paletteButton: PaletteButton, inside: Boolean) {
-    val toolButton: ToolButton = paletteButton.asInstanceOf[ToolButton]
+    val toolButton = paletteButton.asInstanceOf[ToolButton]
     if (inside) showStatus(toolButton.name)
     else if (fSelectedToolButton != null) showStatus(fSelectedToolButton.name)
   }
@@ -647,7 +647,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   def view: DrawingView = fView
 
   protected def setView(newView: DrawingView) {
-    val oldView: DrawingView = fView
+    val oldView = fView
     fView = newView
     fireViewSelectionChangedEvent(oldView, view)
   }
@@ -679,7 +679,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   }
 
   protected def checkCommandMenus {
-    val mb: JMenuBar = getJMenuBar
+    val mb = getJMenuBar
     
     for(i <- 0 to mb.getMenuCount-1) {
       mb.getMenu(i) match {
@@ -803,7 +803,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    */
   def promptOpen {
     toolDone
-    val openDialog: JFileChooser = createOpenFileChooser
+    val openDialog = createOpenFileChooser
     getStorageFormatManager.registerFileFilters(openDialog)
     if (openDialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
       var foundFormat: StorageFormat = getStorageFormatManager.findStorageFormat(openDialog.getFileFilter)
@@ -825,7 +825,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   def promptSaveAs {
     if (view != null) {
       toolDone
-      val saveDialog: JFileChooser = createSaveFileChooser
+      val saveDialog = createSaveFileChooser
       getStorageFormatManager.registerFileFilters(saveDialog)
       if (saveDialog.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
         var foundFormat: StorageFormat = getStorageFormatManager.findStorageFormat(saveDialog.getFileFilter)
@@ -847,7 +847,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * method in order to customize the open file dialog.
    */
   protected def createOpenFileChooser: JFileChooser = {
-    val openDialog: JFileChooser = new JFileChooser
+    val openDialog = new JFileChooser
     openDialog.setDialogType(JFileChooser.OPEN_DIALOG)
     openDialog.setDialogTitle("Open File...")
     openDialog
@@ -858,7 +858,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * method in order to customize the save file dialog.
    */
   protected def createSaveFileChooser: JFileChooser = {
-    val saveDialog: JFileChooser = new JFileChooser
+    val saveDialog = new JFileChooser
     saveDialog.setDialogType(JFileChooser.SAVE_DIALOG)
     saveDialog.setDialogTitle("Save File...")
     saveDialog
@@ -869,9 +869,9 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    */
   def print {
     tool.deactivate
-    val printJob: PrintJob = getToolkit.getPrintJob(this, "Print Drawing", null)
+    val printJob = getToolkit.getPrintJob(this, "Print Drawing", null)
     if (printJob != null) {
-      val pg: Graphics = printJob.getGraphics
+      val pg = printJob.getGraphics
       if (pg != null) {
         (view.asInstanceOf[StandardDrawingView]).printAll(pg)
         pg.dispose
@@ -887,7 +887,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   protected def saveDrawing(storeFormat: StorageFormat, file: String) {
     if (view != null) {
       try {
-        val name: String = storeFormat.store(file, view.drawing)
+        val name = storeFormat.store(file, view.drawing)
         view.drawing.setTitle(name)
         setDrawingTitle(name)
       }
@@ -904,7 +904,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    */
   protected def loadDrawing(restoreFormat: StorageFormat, file: String) {
     try {
-      val restoredDrawing: Drawing = restoreFormat.restore(file)
+      val restoredDrawing = restoreFormat.restore(file)
       if (restoredDrawing != null) {
         restoredDrawing.setTitle(file)
         newWindow(restoredDrawing)
@@ -1005,12 +1005,12 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   protected def createDesktopListener: DesktopListener = {
     new DesktopListener {
       def drawingViewAdded(dpe: DesktopEvent) {
-        val dv: DrawingView = dpe.getDrawingView
+        val dv = dpe.getDrawingView
         fireViewCreatedEvent(dv)
       }
 
       def drawingViewRemoved(dpe: DesktopEvent) {
-        val dv: DrawingView = dpe.getDrawingView
+        val dv = dpe.getDrawingView
         getUndoManager.clearUndos(dv)
         getUndoManager.clearRedos(dv)
         fireViewDestroyingEvent(dv)
@@ -1018,7 +1018,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
       }
 
       def drawingViewSelected(dpe: DesktopEvent) {
-        val dv: DrawingView = dpe.getDrawingView
+        val dv = dpe.getDrawingView
         if (dv != null) {
           if (dv.drawing != null) dv.unfreezeView
         }

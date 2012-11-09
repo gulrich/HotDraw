@@ -156,7 +156,7 @@ class StandardDrawingTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.standard.StandardDrawing#getTitle()
    */
   def testSetGetTitle {
-    val tests: Array[String] = Array("", " ", "a", "A", "�", "�", "0123456789", "012345678901234567890", "\n", null)
+    val tests = Array("", " ", "a", "A", "�", "�", "0123456789", "012345678901234567890", "\n", null)
     tests foreach { e =>
       standarddrawing.setTitle(e)
       assert(e == standarddrawing.getTitle)

@@ -46,19 +46,19 @@ class EllipseFigure(origin: Point, corner: Point) extends AbstractFigure {
   }
 
   override def drawBackground(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.fillOval(r.x, r.y, r.width, r.height)
   }
 
   override def drawFrame(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.drawOval(r.x, r.y, r.width - 1, r.height - 1)
   }
 
   override def connectionInsets: Insets = {
-    val r: Rectangle = fDisplayBox
-    val cx: Int = r.width / 2
-    val cy: Int = r.height / 2
+    val r = fDisplayBox
+    val cx = r.width / 2
+    val cy = r.height / 2
     new Insets(cy, cx, cy, cx)
   }
 

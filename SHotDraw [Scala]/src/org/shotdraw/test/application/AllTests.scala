@@ -23,7 +23,7 @@ object AllTests {
   }
 
   def suite: Test = {
-    val suite: TestSuite = new TestSuite("Test for org.shotdraw.test.samples.JHotDraw")
+    val suite = new TestSuite("Test for org.shotdraw.test.samples.JHotDraw")
     suite.addTest(new TestSuite(classOf[JHotDrawTest]))
     suite
   }

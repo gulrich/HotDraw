@@ -77,8 +77,8 @@ class FigureChangeEventMulticaster(newListenerA: FigureChangeListener, newListen
     if (oldl == b) {
       return a
     }
-    val a2: EventListener = removeInternal(a, oldl)
-    val b2: EventListener = removeInternal(b, oldl)
+    val a2 = removeInternal(a, oldl)
+    val b2 = removeInternal(b, oldl)
     if (a2 == a && b2 == b) {
       return this
     } else {

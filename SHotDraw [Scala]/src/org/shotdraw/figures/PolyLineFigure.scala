@@ -64,9 +64,9 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
   }
 
   def displayBox: Rectangle = {
-    val iter: Iterator[Point] = points
+    val iter = points
     if (iter.hasNext) {
-      val r: Rectangle = new Rectangle(iter.next)
+      val r = new Rectangle(iter.next)
       iter foreach {r.add(_)}
       r
     }
@@ -130,7 +130,7 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
    * @return the index of the segment or -1 if no segment was hit.
    */
   def splitSegment(x: Int, y: Int): Int = {
-    val i: Int = findSegment(x, y)
+    val i = findSegment(x, y)
     if (i != -1) {
       insertPointAt(new Point(x, y), i + 1)
     }
@@ -146,7 +146,7 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
    */
   def joinSegments(x: Int, y: Int): Boolean = {
     for(i <- 0 to fPoints.size - 2) {
-      val p: Point = pointAt(i)
+      val p = pointAt(i)
       if (Geom.length(x, y, p.x, p.y) < 3) {
         removePointAt(i)
         return true
@@ -222,14 +222,14 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
   }
 
   override def containsPoint(x: Int, y: Int): Boolean = {
-    val bounds: Rectangle = displayBox
+    val bounds = displayBox
     bounds.grow(4, 4)
     if (!bounds.contains(x, y)) {
       return false
     }
     for(i <- 0 to fPoints.size - 2) {
-      val p1: Point = pointAt(i)
-      val p2: Point = pointAt(i + 1)
+      val p1 = pointAt(i)
+      val p2 = pointAt(i + 1)
       if (Geom.lineContainsPoint(p1.x, p1.y, p2.x, p2.y, x, y)) {
         return true
       }
@@ -244,8 +244,8 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
    */
   def findSegment(x: Int, y: Int): Int = {
     for(i <- 0 to fPoints.size - 2) {
-      val p1: Point = pointAt(i)
-      val p2: Point = pointAt(i + 1)
+      val p1 = pointAt(i)
+      val p2 = pointAt(i + 1)
       if (Geom.lineContainsPoint(p1.x, p1.y, p2.x, p2.y, x, y)) {
         return i
       }
@@ -255,13 +255,13 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
 
   private def decorate(g: Graphics) {
     if (getStartDecoration != null) {
-      val p1: Point = pointAt(0)
-      val p2: Point = pointAt(1)
+      val p1 = pointAt(0)
+      val p2 = pointAt(1)
       getStartDecoration.draw(g, p1.x, p1.y, p2.x, p2.y)
     }
     if (getEndDecoration != null) {
-      val p3: Point = pointAt(fPoints.size - 2)
-      val p4: Point = pointAt(fPoints.size - 1)
+      val p3 = pointAt(fPoints.size - 2)
+      val p4 = pointAt(fPoints.size - 1)
       getEndDecoration.draw(g, p4.x, p4.y, p3.x, p3.y)
     }
   }
@@ -279,11 +279,11 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
 
   override def read(dr: StorableInput) {
     super.read(dr)
-    val size: Int = dr.readInt
+    val size = dr.readInt
     fPoints = ArrayBuffer[Point]()
     for(i <- 0 to size-1) {
-      val x: Int = dr.readInt
-      val y: Int = dr.readInt
+      val x = dr.readInt
+      val y = dr.readInt
       fPoints += new Point(x, y)
     }
     setStartDecoration(dr.readStorable.asInstanceOf[LineDecoration])
@@ -294,7 +294,7 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
    * Hook method to change the rectangle that will be invalidated
    */
   override protected def invalidateRectangle(r: Rectangle): Rectangle = {
-    val parentR: Rectangle = super.invalidateRectangle(r)
+    val parentR = super.invalidateRectangle(r)
     if (getStartDecoration != null) {
       parentR.add(getStartDecoration.displayBox)
     }

@@ -111,7 +111,7 @@ class UndoableHandle extends Handle {
    */
   def invokeEnd(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
     getWrappedHandle.invokeEnd(x, y, anchorX, anchorY, view)
-    val undoableActivity: Undoable = getWrappedHandle.getUndoActivity
+    val undoableActivity = getWrappedHandle.getUndoActivity
     if ((undoableActivity != null) && (undoableActivity.isUndoable)) {
       view.editor.getUndoManager.pushUndo(undoableActivity)
       view.editor.getUndoManager.clearRedos

@@ -45,7 +45,7 @@ class UndoableTool extends Tool with ToolListener {
    */
   def deactivate {
     getWrappedTool.deactivate
-    val undoActivity: Undoable = getWrappedTool.getUndoActivity
+    val undoActivity = getWrappedTool.getUndoActivity
     if ((undoActivity != null) && (undoActivity.isUndoable)) {
       editor.getUndoManager.pushUndo(undoActivity)
       editor.getUndoManager.clearRedos

@@ -23,7 +23,7 @@ object AllTests {
   }
 
   def suite: Test = {
-    val suite: TestSuite = new TestSuite("Test for org.shotdraw.test")
+    val suite = new TestSuite("Test for org.shotdraw.test")
     suite.addTest(org.shotdraw.test.contrib.AllTests.suite)
     suite.addTest(org.shotdraw.test.figures.AllTests.suite)
     suite.addTest(org.shotdraw.test.framework.AllTests.suite)

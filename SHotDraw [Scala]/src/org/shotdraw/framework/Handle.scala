@@ -30,7 +30,7 @@ import org.shotdraw.util.Undoable
  * @version <$CURRENT_VERSION$>
  */
 object Handle {
-  val HANDLESIZE: Int = 8
+  val HANDLESIZE = 8
 }
 
 trait Handle {

@@ -82,7 +82,7 @@ object ChangeAttributeCommand {
     override def setAffectedFigures(fe: Seq[Figure]) {
       super.setAffectedFigures(fe)
       getAffectedFigures foreach { f =>
-        val attributeValue: T = myUndoAttribute.getAttribute(f)
+        val attributeValue = myUndoAttribute.getAttribute(f)
         if (attributeValue != null) {
           addOriginalValue(f, attributeValue)
         }

@@ -31,7 +31,7 @@ class OffsetLocator(var fBase: Locator, var fOffsetX: Int, var fOffsetY: Int) ex
   }
 
   def locate(owner: Figure): Point = {
-    val p: Point = fBase.locate(owner)
+    val p = fBase.locate(owner)
     p.x += fOffsetX
     p.y += fOffsetY
     return p

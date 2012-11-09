@@ -82,20 +82,20 @@ class Bounds(var x1: Double, var y1: Double, var x2: Double, var y2: Double) ext
     if (centerPoint2D == null) {
       throw new IllegalArgumentException
     }
-    val currentCenterPoint2D: Point2D = getCenter
-    val dDeltaX: Double = centerPoint2D.getX - currentCenterPoint2D.getX
-    val dDeltaY: Double = centerPoint2D.getY - currentCenterPoint2D.getY
+    val currentCenterPoint2D = getCenter
+    val dDeltaX = centerPoint2D.getX - currentCenterPoint2D.getX
+    val dDeltaY = centerPoint2D.getY - currentCenterPoint2D.getY
     offset(dDeltaX, dDeltaY)
   }
 
   def getCenter: Point2D = new Point2D.Double((x1 + this.x2) / 2.0, (this.y1 + this.y2) / 2.0)
 
   def zoomBy(dRatio: Double) {
-    val dWidth: Double = this.x2 - this.x1
-    val dHeight: Double = this.y2 - this.y1
-    val dNewWidth: Double = (dWidth * dRatio)
-    val dNewHeight: Double = (dHeight * dRatio)
-    val centerPoint2D: Point2D = getCenter
+    val dWidth = this.x2 - this.x1
+    val dHeight = this.y2 - this.y1
+    val dNewWidth = (dWidth * dRatio)
+    val dNewHeight = (dHeight * dRatio)
+    val centerPoint2D = getCenter
     this.x1 = centerPoint2D.getX - (dNewWidth / 2.0)
     this.y1 = centerPoint2D.getY - (dNewHeight / 2.0)
     this.x2 = centerPoint2D.getX + (dNewWidth / 2.0)
@@ -103,10 +103,10 @@ class Bounds(var x1: Double, var y1: Double, var x2: Double, var y2: Double) ext
   }
 
   def shiftBy(nXPercentage: Int, nYPercentage: Int) {
-    val dWidth: Double = this.x2 - this.x1
-    val dHeight: Double = this.y2 - this.y1
-    val dDeltaX: Double = (dWidth * nXPercentage) / 100.0
-    val dDeltaY: Double = (dHeight * nYPercentage) / 100.0
+    val dWidth = this.x2 - this.x1
+    val dHeight = this.y2 - this.y1
+    val dDeltaX = (dWidth * nXPercentage) / 100.0
+    val dDeltaY = (dHeight * nYPercentage) / 100.0
     offset(dDeltaX, dDeltaY)
   }
 
@@ -123,18 +123,18 @@ class Bounds(var x1: Double, var y1: Double, var x2: Double, var y2: Double) ext
    * <code> getWidth() / getHeight() </code>
    **/
   def expandToRatio(dRatio: Double) {
-    val dCurrentRatio: Double = getWidth / getHeight
+    val dCurrentRatio = getWidth / getHeight
     if (dCurrentRatio < dRatio) {
-      val dNewWidth: Double = dRatio * getHeight
-      val dCenterX: Double = (this.x1 + this.x2) / 2.0
-      val dDelta: Double = dNewWidth / 2.0
+      val dNewWidth = dRatio * getHeight
+      val dCenterX = (this.x1 + this.x2) / 2.0
+      val dDelta = dNewWidth / 2.0
       this.x1 = dCenterX - dDelta
       this.x2 = dCenterX + dDelta
     }
     if (dCurrentRatio > dRatio) {
-      val dNewHeight: Double = getWidth / dRatio
-      val dCenterY: Double = (this.y1 + this.y2) / 2.0
-      val dDelta: Double = dNewHeight / 2.0
+      val dNewHeight = getWidth / dRatio
+      val dCenterY = (this.y1 + this.y2) / 2.0
+      val dDelta = dNewHeight / 2.0
       this.y1 = dCenterY - dDelta
       this.y2 = dCenterY + dDelta
     }
@@ -224,21 +224,21 @@ class Bounds(var x1: Double, var y1: Double, var x2: Double, var y2: Double) ext
     if (((this.y1 <= y1) && (y1 <= this.y2)) && ((this.y1 <= y2) && (y2 <= this.y2))) {
       return true
     }
-    val dSlope: Double = (y2 - y1) / (x2 - x1)
-    val _dYIntersectionAtX1: Double = dSlope * (this.x1 - x1) + y1
-    val _dYIntersectionAtX2: Double = dSlope * (this.x2 - x1) + y1
-    val _dXIntersectionAtY1: Double = (this.y1 - y1) / dSlope + x1
-    val _dXIntersectionAtY2: Double = (this.y2 - y1) / dSlope + x1
+    val dSlope = (y2 - y1) / (x2 - x1)
+    val _dYIntersectionAtX1 = dSlope * (this.x1 - x1) + y1
+    val _dYIntersectionAtX2 = dSlope * (this.x2 - x1) + y1
+    val _dXIntersectionAtY1 = (this.y1 - y1) / dSlope + x1
+    val _dXIntersectionAtY2 = (this.y2 - y1) / dSlope + x1
     (intersectsPoint(this.x1, _dYIntersectionAtX1)) || (intersectsPoint(this.x2, _dYIntersectionAtX2)) || (intersectsPoint(_dXIntersectionAtY1, this.y1)) || (intersectsPoint(_dXIntersectionAtY2, this.y2))
   }
 
   def intersectsLine(onePoint2D: Point2D, twoPoint2D: Point2D): Boolean = intersectsLine(onePoint2D.getX, onePoint2D.getY, twoPoint2D.getX, twoPoint2D.getY)
 
   def intersectsBounds(aBounds: Bounds): Boolean = {
-    val dLesserX: Double = aBounds.getLesserX
-    val dGreaterX: Double = aBounds.getGreaterX
-    val dLesserY: Double = aBounds.getLesserY
-    val dGreaterY: Double = aBounds.getGreaterY
+    val dLesserX = aBounds.getLesserX
+    val dGreaterX = aBounds.getGreaterX
+    val dLesserY = aBounds.getLesserY
+    val dGreaterY = aBounds.getGreaterY
     if (dLesserX < this.x1) {
       if (dLesserY < this.y1) {
         return ((dGreaterX >= this.x1) && (dGreaterY >= this.y1))
@@ -265,9 +265,9 @@ class Bounds(var x1: Double, var y1: Double, var x2: Double, var y2: Double) ext
     if (!intersectsLine(x1, y1, x2, y2)) {
       return Array()
     }
-    val resultLine: Array[Point2D] = new Array[Point2D](2)
-    val beginPoint2D: Point2D = new Point2D.Double(x1, y1)
-    val endPoint2D: Point2D = new Point2D.Double(x2, y2)
+    val resultLine = new Array[Point2D](2)
+    val beginPoint2D = new Point2D.Double(x1, y1)
+    val endPoint2D = new Point2D.Double(x2, y2)
     if (beginPoint2D.getX == endPoint2D.getX) {
       if (beginPoint2D.getY > y2) {
         beginPoint2D.setLocation(beginPoint2D.getX, this.y2)
@@ -297,31 +297,31 @@ class Bounds(var x1: Double, var y1: Double, var x2: Double, var y2: Double) ext
       }
     }
     else {
-      val dSlope: Double = (beginPoint2D.getY - endPoint2D.getY) / (beginPoint2D.getX - endPoint2D.getX)
+      val dSlope = (beginPoint2D.getY - endPoint2D.getY) / (beginPoint2D.getX - endPoint2D.getX)
       if (!intersectsPoint(beginPoint2D)) {
         if (beginPoint2D.getY > this.y2) {
-          val x: Double = ((this.y2 - beginPoint2D.getY) / dSlope) + beginPoint2D.getX
+          val x = ((this.y2 - beginPoint2D.getY) / dSlope) + beginPoint2D.getX
           if ((x >= this.x1) && (x <= this.x2)) {
             beginPoint2D.setLocation(x, beginPoint2D.getY)
             beginPoint2D.setLocation(beginPoint2D.getX, this.y2)
           }
         }
         if (beginPoint2D.getY < this.y1) {
-          val x: Double = ((this.y1 - beginPoint2D.getY) / dSlope) + beginPoint2D.getX
+          val x = ((this.y1 - beginPoint2D.getY) / dSlope) + beginPoint2D.getX
           if ((x >= this.x1) && (x <= this.x2)) {
             beginPoint2D.setLocation(x, beginPoint2D.getY)
             beginPoint2D.setLocation(beginPoint2D.getX, this.y1)
           }
         }
         if (beginPoint2D.getX > this.x2) {
-          val y: Double = dSlope * (this.x2 - beginPoint2D.getX) + beginPoint2D.getY
+          val y = dSlope * (this.x2 - beginPoint2D.getX) + beginPoint2D.getY
           if ((y >= this.y1) && (y <= this.y2)) {
             beginPoint2D.setLocation(this.x2, beginPoint2D.getY)
             beginPoint2D.setLocation(beginPoint2D.getX, y)
           }
         }
         if (beginPoint2D.getX < this.x1) {
-          val y: Double = dSlope * (this.x1 - beginPoint2D.getX) + beginPoint2D.getY
+          val y = dSlope * (this.x1 - beginPoint2D.getX) + beginPoint2D.getY
           if ((y >= this.y1) && (y <= this.y2)) {
             beginPoint2D.setLocation(this.x1, beginPoint2D.getY)
             beginPoint2D.setLocation(beginPoint2D.getX, y)
@@ -330,28 +330,28 @@ class Bounds(var x1: Double, var y1: Double, var x2: Double, var y2: Double) ext
       }
       if (!intersectsPoint(endPoint2D)) {
         if (endPoint2D.getY > this.y2) {
-          val x: Double = ((this.y2 - beginPoint2D.getY) / dSlope) + beginPoint2D.getX
+          val x = ((this.y2 - beginPoint2D.getY) / dSlope) + beginPoint2D.getX
           if ((x >= this.x1) && (x <= this.x2)) {
             endPoint2D.setLocation(x, endPoint2D.getY)
             endPoint2D.setLocation(endPoint2D.getX, this.y2)
           }
         }
         if (endPoint2D.getY < this.y1) {
-          val x: Double = ((this.y1 - beginPoint2D.getY) / dSlope) + beginPoint2D.getX
+          val x = ((this.y1 - beginPoint2D.getY) / dSlope) + beginPoint2D.getX
           if ((x >= this.x1) && (x <= this.x2)) {
             endPoint2D.setLocation(x, endPoint2D.getY)
             endPoint2D.setLocation(endPoint2D.getX, this.y1)
           }
         }
         if (endPoint2D.getX > this.x2) {
-          val y: Double = dSlope * (this.x2 - beginPoint2D.getX) + beginPoint2D.getY
+          val y = dSlope * (this.x2 - beginPoint2D.getX) + beginPoint2D.getY
           if ((y >= this.y1) && (y <= this.y2)) {
             endPoint2D.setLocation(this.x2, endPoint2D.getY)
             endPoint2D.setLocation(endPoint2D.getX, y)
           }
         }
         if (endPoint2D.getX < this.x1) {
-          val y: Double = dSlope * (this.x1 - beginPoint2D.getX) + beginPoint2D.getY
+          val y = dSlope * (this.x1 - beginPoint2D.getX) + beginPoint2D.getY
           if ((y >= this.y1) && (y <= this.y2)) {
             endPoint2D.setLocation(this.x1, endPoint2D.getY)
             endPoint2D.setLocation(endPoint2D.getX, y)

@@ -31,7 +31,7 @@ object ColorMap {
     map
   }
   
-  val fMap: Map[String, Color] = Map(("Black", Color.black), ("Blue", Color.blue), ("Green", Color.green), ("Red", Color.red), ("Pink", Color.pink), ("Magenta", Color.magenta), ("Orange", Color.orange), ("Yellow", Color.yellow), ("New Tan", new Color(0xEBC79E)), ("Aquamarine", new Color(0x70DB93)), ("Sea Green", new Color(0x238E68)), ("Dark Gray", Color.darkGray), ("Light Gray", Color.lightGray), ("White", Color.white), ("None", new Color(0xFFC79E)))
+  val fMap = Map(("Black", Color.black), ("Blue", Color.blue), ("Green", Color.green), ("Red", Color.red), ("Pink", Color.pink), ("Magenta", Color.magenta), ("Orange", Color.orange), ("Yellow", Color.yellow), ("New Tan", new Color(0xEBC79E)), ("Aquamarine", new Color(0x70DB93)), ("Sea Green", new Color(0x238E68)), ("Dark Gray", Color.darkGray), ("Light Gray", Color.lightGray), ("White", Color.white), ("None", new Color(0xFFC79E)))
 }
 
 

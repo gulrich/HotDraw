@@ -30,7 +30,7 @@ class ToolButton(listener: PaletteListener, iconName: String, myName: String, va
   myTool.addToolListener(this)
   setEnabled(tool.isUsable)
   setName(myName)
-  val kit: Iconkit = Iconkit.instance
+  val kit = Iconkit.instance
   if (kit == null) {
     throw new JHotDrawRuntimeException("Iconkit instance isn't set")
   }
@@ -38,7 +38,7 @@ class ToolButton(listener: PaletteListener, iconName: String, myName: String, va
   im(0) = kit.loadImageResource(iconName + "1.gif")
   im(1) = kit.loadImageResource(iconName + "2.gif")
   im(2) = kit.loadImageResource(iconName + "3.gif")
-  val tracker: MediaTracker = new MediaTracker(this)
+  val tracker = new MediaTracker(this)
   for(i <- 0 to 2) {
     tracker.addImage(im(i),i)
   }

@@ -26,7 +26,7 @@ import java.awt.Color
  * @version <$CURRENT_VERSION$>
  */
 object RadiusHandle {
-  private final val OFFSET: Int = 4
+  private final val OFFSET = 4
 
   class UndoActivity(newView: DrawingView) extends UndoableAdapter(newView) {
     setUndoable(true)
@@ -37,12 +37,12 @@ object RadiusHandle {
     override def redo: Boolean = isRedoable && resetRadius
 
     protected def resetRadius: Boolean = {
-      val fe: Iterator[Figure] = getAffectedFigures.iterator
+      val fe = getAffectedFigures.iterator
       if (!fe.hasNext) {
         return false
       }
-      val currentFigure: RoundRectangleFigure = fe.next.asInstanceOf[RoundRectangleFigure]
-      val figureRadius: Point = currentFigure.getArc
+      val currentFigure = fe.next.asInstanceOf[RoundRectangleFigure]
+      val figureRadius = currentFigure.getArc
       currentFigure.setArc(getOldRadius.x, getOldRadius.y)
       setOldRadius(figureRadius)
       true
@@ -68,33 +68,33 @@ class RadiusHandle(owner: RoundRectangleFigure) extends AbstractHandle(owner) {
   }
 
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    val dx: Int = x - anchorX
-    val dy: Int = y - anchorY
-    val _owner: RoundRectangleFigure = owner.asInstanceOf[RoundRectangleFigure]
-    val r: Rectangle = _owner.displayBox
-    val originalRadius: Point = (getUndoActivity.asInstanceOf[RadiusHandle.UndoActivity]).getOldRadius
-    val rx: Int = Geom.range(0, r.width, 2 * (originalRadius.x / 2 + dx))
-    val ry: Int = Geom.range(0, r.height, 2 * (originalRadius.y / 2 + dy))
+    val dx = x - anchorX
+    val dy = y - anchorY
+    val _owner = owner.asInstanceOf[RoundRectangleFigure]
+    val r = _owner.displayBox
+    val originalRadius = (getUndoActivity.asInstanceOf[RadiusHandle.UndoActivity]).getOldRadius
+    val rx = Geom.range(0, r.width, 2 * (originalRadius.x / 2 + dx))
+    val ry = Geom.range(0, r.height, 2 * (originalRadius.y / 2 + dy))
     _owner.setArc(rx, ry)
   }
 
   override def invokeEnd(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    val currentRadius: Point = (owner.asInstanceOf[RoundRectangleFigure]).getArc
-    val originalRadius: Point = (getUndoActivity.asInstanceOf[RadiusHandle.UndoActivity]).getOldRadius
+    val currentRadius = (owner.asInstanceOf[RoundRectangleFigure]).getArc
+    val originalRadius = (getUndoActivity.asInstanceOf[RadiusHandle.UndoActivity]).getOldRadius
     if ((currentRadius.x == originalRadius.x) && (currentRadius.y == originalRadius.y)) {
       setUndoActivity(null)
     }
   }
 
   def locate: Point = {
-    val _owner: RoundRectangleFigure = owner.asInstanceOf[RoundRectangleFigure]
-    val radius: Point = _owner.getArc
-    val r: Rectangle = _owner.displayBox
+    val _owner = owner.asInstanceOf[RoundRectangleFigure]
+    val radius = _owner.getArc
+    val r = _owner.displayBox
     new Point(r.x + radius.x / 2 + OFFSET, r.y + radius.y / 2 + OFFSET)
   }
 
   override def draw(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.setColor(Color.yellow)
     g.fillOval(r.x, r.y, r.width, r.height)
     g.setColor(Color.black)

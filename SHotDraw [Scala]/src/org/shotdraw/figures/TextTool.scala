@@ -95,7 +95,7 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
       return
     }
     var textHolder: TextHolder = null
-    val pressedFigure: Figure = drawing.findFigureInside(x, y)
+    val pressedFigure = drawing.findFigureInside(x, y)
     if (pressedFigure != null) {
       textHolder = pressedFigure.getTextHolder
       setSelectedFigure(pressedFigure)
@@ -183,9 +183,9 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
   protected def isDeleteTextFigure: Boolean = getFloatingTextField.getText.length == 0
 
   private def fieldBounds(figure: TextHolder): Rectangle = {
-    val box: Rectangle = figure.textDisplayBox
-    val nChars: Int = figure.overlayColumns
-    val d: Dimension = getFloatingTextField.getPreferredSize(nChars)
+    val box = figure.textDisplayBox
+    val nChars = figure.overlayColumns
+    val d = getFloatingTextField.getPreferredSize(nChars)
     new Rectangle(box.x, box.y, d.width, d.height)
   }
 
@@ -210,7 +210,7 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
   protected def getFloatingTextField: FloatingTextField = myTextField
 
   protected def createDeleteUndoActivity: Undoable = {
-    val cmd: FigureTransferCommand = new DeleteCommand("Delete", editor)
+    val cmd = new DeleteCommand("Delete", editor)
     new DeleteCommand.UndoActivity(cmd)
   }
 

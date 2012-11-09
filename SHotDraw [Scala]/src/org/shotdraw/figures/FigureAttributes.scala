@@ -78,7 +78,7 @@ trait FigureAttributes extends Serializable {
    * @see #write
    */
   def read(dr: StorableInput) {
-    val s: String = dr.readString
+    val s = dr.readString
     if (!(s.toLowerCase == "attributes")) {
       throw new IOException("Attributes expected")
     }

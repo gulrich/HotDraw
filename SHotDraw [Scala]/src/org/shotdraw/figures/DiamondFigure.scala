@@ -52,9 +52,9 @@ class DiamondFigure(origin: Point, corner: Point) extends AbstractFigure {
   }
 
   override def drawBackground(g: Graphics) {
-    val r: Rectangle = displayBox
-    val g2d: Graphics2D = g.asInstanceOf[Graphics2D]
-    val path: GeneralPath = new GeneralPath
+    val r = displayBox
+    val g2d = g.asInstanceOf[Graphics2D]
+    val path = new GeneralPath
     path.moveTo(r.x + r.width / 2.0, r.y)
     path.lineTo(r.x, r.y + r.height / 2.0)
     path.lineTo(r.x + r.width / 2.0, r.y + r.height)
@@ -64,9 +64,9 @@ class DiamondFigure(origin: Point, corner: Point) extends AbstractFigure {
   }
 
   override def drawFrame(g: Graphics) {
-    val r: Rectangle = displayBox
-    val g2d: Graphics2D = g.asInstanceOf[Graphics2D]
-    val path: GeneralPath = new GeneralPath
+    val r = displayBox
+    val g2d = g.asInstanceOf[Graphics2D]
+    val path = new GeneralPath
     path.moveTo(r.x + r.width / 2.0, r.y)
     path.lineTo(r.x, r.y + r.height / 2.0)
     path.lineTo(r.x + r.width / 2.0, r.y + r.height)
@@ -76,9 +76,9 @@ class DiamondFigure(origin: Point, corner: Point) extends AbstractFigure {
   }
 
   override def connectionInsets: Insets = {
-    val r: Rectangle = fDisplayBox
-    val cx: Int = r.width / 2
-    val cy: Int = r.height / 2
+    val r = fDisplayBox
+    val cx = r.width / 2
+    val cy = r.height / 2
     new Insets(cy, cx, cy, cx)
   }
 

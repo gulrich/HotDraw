@@ -24,7 +24,7 @@ final class GroupHandle(owner: Figure, locator: Locator) extends NullHandle(owne
    * Draws the Group handle.
    */
   override def draw(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.setColor(Color.black)
     g.drawRect(r.x, r.y, r.width, r.height)
     r.grow(-1, -1)

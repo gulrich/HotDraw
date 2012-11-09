@@ -46,12 +46,12 @@ class RectangleFigure(origin: Point, corner: Point) extends AbstractFigure {
   }
 
   override def drawBackground(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.fillRect(r.x, r.y, r.width, r.height)
   }
 
   override def drawFrame(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.drawRect(r.x, r.y, r.width - 1, r.height - 1)
   }
   

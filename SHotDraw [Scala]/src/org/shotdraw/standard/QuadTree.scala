@@ -48,10 +48,10 @@ class QuadTree(nMaxTreeDepth: Int, absoluteBoundingRectangle2D: Rectangle2D) ext
       }
       return
     }
-    val bNW: Boolean = absoluteBoundingRectangle2D.intersects(_nwQuadTree.getAbsoluteBoundingRectangle2D)
-    val bNE: Boolean = absoluteBoundingRectangle2D.intersects(_neQuadTree.getAbsoluteBoundingRectangle2D)
-    val bSW: Boolean = absoluteBoundingRectangle2D.intersects(_swQuadTree.getAbsoluteBoundingRectangle2D)
-    val bSE: Boolean = absoluteBoundingRectangle2D.intersects(_seQuadTree.getAbsoluteBoundingRectangle2D)
+    val bNW = absoluteBoundingRectangle2D.intersects(_nwQuadTree.getAbsoluteBoundingRectangle2D)
+    val bNE = absoluteBoundingRectangle2D.intersects(_neQuadTree.getAbsoluteBoundingRectangle2D)
+    val bSW = absoluteBoundingRectangle2D.intersects(_swQuadTree.getAbsoluteBoundingRectangle2D)
+    val bSE = absoluteBoundingRectangle2D.intersects(_seQuadTree.getAbsoluteBoundingRectangle2D)
     var nCount: Int = 0
     if (bNW) {
       nCount += 1

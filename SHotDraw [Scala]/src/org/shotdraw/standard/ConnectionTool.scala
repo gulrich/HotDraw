@@ -124,9 +124,9 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
    */
   override def mouseDown(e: MouseEvent, x: Int, y: Int) {
     super.mouseDown(e, x, y)
-    val ex: Int = e.getX
-    val ey: Int = e.getY
-    val connection: ConnectionFigure = findConnection(ex, ey, drawing)
+    val ex = e.getX
+    val ey = e.getY
+    val connection = findConnection(ex, ey, drawing)
     if (connection != null) {
       if (!connection.joinSegments(ex, ey)) {
         fSplitPoint = connection.splitSegment(ex, ey)
@@ -160,7 +160,7 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
       }
       getConnection.endPoint(p.x, p.y)
     } else if (fEditedConnection != null) {
-      val pp: Point = new Point(x, y)
+      val pp = new Point(x, y)
       fEditedConnection.setPointAt(pp, fSplitPoint)
     }
   }
@@ -220,8 +220,8 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
    * figure.
    */
   protected def findTarget(x: Int, y: Int, drawing: Drawing): Figure = {
-    val target: Figure = findConnectableFigure(x, y, drawing)
-    val start: Figure = getStartConnector.owner
+    val target = findConnectableFigure(x, y, drawing)
+    val start = getStartConnector.owner
     if (target != null && getConnection != null && target.canConnect && !target.includes(start) && getConnection.canConnect(start, target)) {
       target
     } else null
@@ -283,7 +283,7 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
    * Finds a connection start figure.
    */
   protected def findConnectionStart(x: Int, y: Int, drawing: Drawing): Figure = {
-    val target: Figure = findConnectableFigure(x, y, drawing)
+    val target = findConnectableFigure(x, y, drawing)
     if ((target != null) && target.canConnect) target
     else null
   }

@@ -29,7 +29,7 @@ object NullDrawingView {
     if (drawingViewManager.exists{case (de, dv) => de == editor}) {
       drawingViewManager.get(editor).asInstanceOf[DrawingView]
     } else {
-      val newDrawingView: DrawingView = new NullDrawingView(editor)
+      val newDrawingView = new NullDrawingView(editor)
       drawingViewManager += ((editor, newDrawingView))
       newDrawingView
     }

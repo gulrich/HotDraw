@@ -28,12 +28,12 @@ class UndoCommand(name: String, newDrawingEditor: DrawingEditor) extends Abstrac
 
   override def execute {
     super.execute
-    val um: UndoManager = getDrawingEditor.getUndoManager
+    val um = getDrawingEditor.getUndoManager
     if ((um == null) || !um.isUndoable) {
       return
     }
-    val lastUndoable: Undoable = um.popUndo
-    val hasBeenUndone: Boolean = lastUndoable.undo
+    val lastUndoable = um.popUndo
+    val hasBeenUndone = lastUndoable.undo
     if (hasBeenUndone && lastUndoable.isRedoable) {
       um.pushRedo(lastUndoable)
     }
@@ -47,7 +47,7 @@ class UndoCommand(name: String, newDrawingEditor: DrawingEditor) extends Abstrac
    * activity registered with UndoManager.
    */
   override def isExecutableWithView: Boolean = {
-    val um: UndoManager = getDrawingEditor.getUndoManager
+    val um = getDrawingEditor.getUndoManager
     (um != null) && (um.getUndoSize > 0)
   }
 }

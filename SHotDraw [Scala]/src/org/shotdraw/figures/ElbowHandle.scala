@@ -33,19 +33,19 @@ class ElbowHandle(owner: LineConnection, fSegment: Int) extends AbstractHandle(o
   }
 
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    val line: LineConnection = ownerConnection
-    val p1: Point = line.pointAt(fSegment)
-    val p2: Point = line.pointAt(fSegment + 1)
-    val ddx: Int = x - fLastX
-    val ddy: Int = y - fLastY
+    val line = ownerConnection
+    val p1 = line.pointAt(fSegment)
+    val p2 = line.pointAt(fSegment + 1)
+    val ddx = x - fLastX
+    val ddy = y - fLastY
     var np1: Point = null
     var np2: Point = null
     if (isVertical(p1, p2)) {
-      val cx: Int = constrainX(p1.x + ddx)
+      val cx = constrainX(p1.x + ddx)
       np1 = new Point(cx, p1.y)
       np2 = new Point(cx, p2.y)
     } else {
-      val cy: Int = constrainY(p1.y + ddy)
+      val cy = constrainY(p1.y + ddy)
       np1 = new Point(p1.x, cy)
       np2 = new Point(p2.x, cy)
     }
@@ -58,15 +58,15 @@ class ElbowHandle(owner: LineConnection, fSegment: Int) extends AbstractHandle(o
   private def isVertical(p1: Point, p2: Point): Boolean = p1.x == p2.x
 
   def locate: Point = {
-    val line: LineConnection = ownerConnection
-    val segment: Int = math.min(fSegment, line.pointCount - 2)
-    val p1: Point = line.pointAt(segment)
-    val p2: Point = line.pointAt(segment + 1)
+    val line = ownerConnection
+    val segment = math.min(fSegment, line.pointCount - 2)
+    val p1 = line.pointAt(segment)
+    val p2 = line.pointAt(segment + 1)
     new Point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2)
   }
 
   override def draw(g: Graphics) {
-    val r: Rectangle = displayBox
+    val r = displayBox
     g.setColor(Color.yellow)
     g.fillOval(r.x, r.y, r.width, r.height)
     g.setColor(Color.black)
@@ -75,13 +75,13 @@ class ElbowHandle(owner: LineConnection, fSegment: Int) extends AbstractHandle(o
 
   private def constrainX(x: Int): Int = {
     var _x = x
-    val line: LineConnection = ownerConnection
-    val startFigure: Figure = line.getStartConnector.owner
-    val endFigure: Figure = line.getEndConnector.owner
-    val start: Rectangle = startFigure.displayBox
-    val end: Rectangle = endFigure.displayBox
-    val i1: Insets = startFigure.connectionInsets
-    val i2: Insets = endFigure.connectionInsets
+    val line = ownerConnection
+    val startFigure = line.getStartConnector.owner
+    val endFigure = line.getEndConnector.owner
+    val start = startFigure.displayBox
+    val end = endFigure.displayBox
+    val i1 = startFigure.connectionInsets
+    val i2 = endFigure.connectionInsets
     var r1x: Int = 0
     var r1width: Int = 0
     var r2x: Int = 0
@@ -101,13 +101,13 @@ class ElbowHandle(owner: LineConnection, fSegment: Int) extends AbstractHandle(o
 
   private def constrainY(y: Int): Int = {
     var _y = y
-    val line: LineConnection = ownerConnection
-    val startFigure: Figure = line.getStartConnector.owner
-    val endFigure: Figure = line.getEndConnector.owner
-    val start: Rectangle = startFigure.displayBox
-    val end: Rectangle = endFigure.displayBox
-    val i1: Insets = startFigure.connectionInsets
-    val i2: Insets = endFigure.connectionInsets
+    val line = ownerConnection
+    val startFigure = line.getStartConnector.owner
+    val endFigure = line.getEndConnector.owner
+    val start = startFigure.displayBox
+    val end = endFigure.displayBox
+    val i1 = startFigure.connectionInsets
+    val i2 = endFigure.connectionInsets
     var r1y: Int = 0
     var r1height: Int = 0
     var r2y: Int = 0

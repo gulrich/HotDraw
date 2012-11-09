@@ -52,16 +52,16 @@ class ElbowConnection extends LineConnection {
 
   protected def updatePoints {
     willChange
-    val start: Point = startPoint
-    val end: Point = endPoint
+    val start = startPoint
+    val end = endPoint
     fPoints = ArrayBuffer()
     fPoints += start
     if (start.x == end.x || start.y == end.y) {
       fPoints += end
     } else {
-      val r1: Rectangle = getStartConnector.owner.displayBox
-      val r2: Rectangle = getEndConnector.owner.displayBox
-      val dir: Int = Geom.direction(r1.x + r1.width / 2, r1.y + r1.height / 2, r2.x + r2.width / 2, r2.y + r2.height / 2)
+      val r1 = getStartConnector.owner.displayBox
+      val r2 = getEndConnector.owner.displayBox
+      val dir = Geom.direction(r1.x + r1.width / 2, r1.y + r1.height / 2, r2.x + r2.width / 2, r2.y + r2.height / 2)
       if (dir == Geom.NORTH || dir == Geom.SOUTH) {
         fPoints += new Point(start.x, (start.y + end.y) / 2)
         fPoints += new Point(end.x, (start.y + end.y) / 2)
@@ -77,7 +77,7 @@ class ElbowConnection extends LineConnection {
 
 class ElbowTextLocator extends AbstractLocator {
   def locate(owner: Figure): Point = {
-    val p: Point = owner.center
+    val p = owner.center
     new Point(p.x, p.y - 10)
   }
 }
