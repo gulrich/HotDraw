@@ -17,6 +17,7 @@ import org.shotdraw.framework.Figure
 import org.shotdraw.framework.JHotDrawRuntimeException
 import org.shotdraw.util.Undoable
 import scala.collection.mutable.ArrayBuffer
+import org.shotdraw.util.UndoableCommand
 
 /**
  * A tool to create new figures. The figure to be
@@ -132,8 +133,7 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
     if (getAddedFigures.isEmpty) {
       setUndoActivity(null)
     } else {
-      setUndoActivity(createUndoActivity)
-      getUndoActivity.setAffectedFigures(getAddedFigures)
+      newDrawingEditor.getUndoManager.pushUndo(createUndoActivity)      
     }
     editor.toolDone
   }
@@ -196,6 +196,6 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
   /**
    * Factory method for undo activity
    */
-  protected def createUndoActivity: Undoable = new PasteCommand.UndoActivity(getActiveView)
+  protected def createUndoActivity: Undoable = new CreationCommand("Figure creation", getAddedFigure, newDrawingEditor).createUndoActivity
 
 }
