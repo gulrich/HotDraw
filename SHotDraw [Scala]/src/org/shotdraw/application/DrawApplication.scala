@@ -357,8 +357,8 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     menu.add(new UndoableCommand(new SendToBackCommand("Send to Back", this)), KeyStroke.getKeyStroke('B', InputEvent.CTRL_DOWN_MASK))
     menu.add(new UndoableCommand(new BringToFrontCommand("Bring to Front", this)), KeyStroke.getKeyStroke('F', InputEvent.CTRL_DOWN_MASK))
     menu.addSeparator
-    menu.add(new UndoCommand("Undo Command", this), KeyStroke.getKeyStroke('Z', InputEvent.CTRL_DOWN_MASK))
-    menu.add(new RedoCommand("Redo Command", this), KeyStroke.getKeyStroke('Y', InputEvent.CTRL_DOWN_MASK))
+    menu.add(new UndoCommand("Undo", this), KeyStroke.getKeyStroke('Z', InputEvent.CTRL_DOWN_MASK))
+    menu.add(new RedoCommand("Redo", this), KeyStroke.getKeyStroke('Y', InputEvent.CTRL_DOWN_MASK))
     menu
   }
 

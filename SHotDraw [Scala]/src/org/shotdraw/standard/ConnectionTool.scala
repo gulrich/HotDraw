@@ -182,6 +182,7 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
         getConnection.updateConnection
         setUndoActivity(createUndoActivity)
         getUndoActivity.setAffectedFigures(Seq[Figure](getAddedFigure))
+        newDrawingEditor.getUndoManager.pushUndo(createUndoActivity)      
       }
     }
     else if (getConnection != null) {
@@ -336,6 +337,6 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
   /**
    * Factory method for undo activity
    */
-  protected def createUndoActivity: Undoable = new ConnectionTool.UndoActivity(view, getConnection)
+  protected def createUndoActivity: Undoable = new CreationCommand("connection", getConnection, newDrawingEditor).createUndoActivity
 }
 

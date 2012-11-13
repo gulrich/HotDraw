@@ -196,6 +196,6 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
   /**
    * Factory method for undo activity
    */
-  protected def createUndoActivity: Undoable = new CreationCommand("Figure creation", getAddedFigure, newDrawingEditor).createUndoActivity
+  protected def createUndoActivity: Undoable = new CreationCommand("figure", getAddedFigure, newDrawingEditor).createUndoActivity
 
 }

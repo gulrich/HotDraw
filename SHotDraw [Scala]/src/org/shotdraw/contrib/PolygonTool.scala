@@ -95,6 +95,7 @@ class PolygonTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDrawi
 
   override def mouseUp(e: MouseEvent, x: Int, y: Int) {
     done = true
+    newDrawingEditor.getUndoManager.pushUndo(createUndoActivity)      
     editor.toolDone
   }
 
@@ -111,6 +112,6 @@ class PolygonTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDrawi
   /**
    * Factory method for undo activity
    */
-  protected def createUndoActivity: Undoable = new PasteCommand.UndoActivity(view)
+  protected def createUndoActivity: Undoable = new CreationCommand("polygon", getAddedFigure, newDrawingEditor).createUndoActivity
 }
 
