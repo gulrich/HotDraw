@@ -338,7 +338,9 @@ public abstract class CompositeFigure extends AbstractFigure implements FigureCh
 	 * @see Figure#draw
 	 */
 	public void draw(Graphics g) {
-		draw(g, figures());
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+		draw(g2d, figures());
 	}
 
 	/**
