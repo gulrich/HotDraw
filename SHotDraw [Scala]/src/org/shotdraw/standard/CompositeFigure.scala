@@ -19,6 +19,8 @@ import java.awt.Graphics
 import scala.collection.mutable.ArrayBuffer
 import java.awt.Color
 import org.shotdraw.figures.PolyLineFigure.ArrowType
+import java.awt.Graphics2D
+import java.awt.RenderingHints
 
 /**
  * A Figure that is composed of several figures. A CompositeFigure
@@ -294,8 +296,11 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    * Draws all the contained figures
    * @see Figure#draw
    */
-  override def draw(g: Graphics) {
-    draw(g, figures)
+  override def draw(g: Graphics): Unit = g match {
+    case g2d: Graphics2D => 
+      g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+      draw(g2d, figures)
+    case g => draw(g, figures)
   }
 
   /**
