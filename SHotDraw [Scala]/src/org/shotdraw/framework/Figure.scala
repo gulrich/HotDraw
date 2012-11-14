@@ -202,14 +202,14 @@ trait Figure extends FigureAttributes with Storable with Cloneable {
    * a figure is removed from a drawing. Informs the listeners that
    * the figure is removed by calling figureRemoved.
    */
-  def release
+  def release()
 
   /**
    * Invalidates the figure. This method informs its listeners
    * that its current display box is invalid and should be
    * refreshed.
    */
-  def invalidate
+  def invalidate()
 
   /**
    * Informes that a figure is about to change such that its
@@ -225,7 +225,7 @@ trait Figure extends FigureAttributes with Storable with Cloneable {
    * @see #invalidate
    * @see #changed
    */
-  def willChange
+  def willChange()
 
   /**
    * Informes that a figure has changed its display box.
@@ -235,7 +235,7 @@ trait Figure extends FigureAttributes with Storable with Cloneable {
    * @see #willChange
    *
    */
-  def changed
+  def changed()
 
   /**
    * Checks if this figure can be connected

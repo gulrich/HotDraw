@@ -185,14 +185,14 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     }
   }
 
-  final def newWindow {
+  final def newWindow() {
     newWindow(createDrawing)
   }
 
   /**
    * Opens a new window
    */
-  def open {
+  def open() {
     open(createInitialDrawingView)
   }
 
@@ -232,7 +232,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     setStorageFormatManager(createStorageFormatManager)
     setVisible(true)
     val r = new Runnable {
-      def run {
+      def run() {
         if (newDrawingView.isInteractive) {
           getDesktop.addToDesktop(newDrawingView, Desktop.PRIMARY)
         }
@@ -261,7 +261,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   /**
    * Registers the listeners for this window
    */
-  protected def addListeners {
+  protected def addListeners() {
     addWindowListener(new WindowAdapter {
       override def windowClosing(event: WindowEvent) {
         endApp
@@ -301,33 +301,33 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   protected def createFileMenu: JMenu = {
     val menu = new CommandMenu("File")
     var cmd = new AbstractCommand("New", this, false) {
-      override def execute {
+      override def execute() {
         promptNew
       }
     }
     menu.add(cmd, KeyStroke.getKeyStroke('N', InputEvent.CTRL_DOWN_MASK))
     cmd = new AbstractCommand("Open...", this, false) {
-      override def execute {
+      override def execute() {
         promptOpen
       }
     }
     menu.add(cmd, KeyStroke.getKeyStroke('O', InputEvent.CTRL_DOWN_MASK))
     cmd = new AbstractCommand("Save As...", this, true) {
-      override def execute {
+      override def execute() {
         promptSaveAs
       }
     }
     menu.add(cmd, KeyStroke.getKeyStroke('S', InputEvent.CTRL_DOWN_MASK))
     menu.addSeparator
     cmd = new AbstractCommand("Print...", this, true) {
-      override def execute {
+      override def execute() {
         print
       }
     }
     menu.add(cmd, KeyStroke.getKeyStroke('P', InputEvent.CTRL_DOWN_MASK))
     menu.addSeparator
     cmd = new AbstractCommand("Quit", this, true) {
-      override def execute {
+      override def execute() {
         endApp
       }
     }
@@ -657,7 +657,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * Sets the default tool of the editor.
    * @see DrawingEditor
    */
-  def toolDone {
+  def toolDone() {
     if (fDefaultToolButton != null) {
       setTool(fDefaultToolButton.tool, fDefaultToolButton.name)
       setSelected(fDefaultToolButton)
@@ -677,7 +677,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     checkCommandMenus
   }
 
-  protected def checkCommandMenus {
+  protected def checkCommandMenus() {
     val mb = getJMenuBar
     
     for(i <- 0 to mb.getMenuCount-1) {
@@ -771,14 +771,14 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   /**
    * Exits the application. You should never override this method
    */
-  def exit {
+  def exit() {
     destroy
     dispose
   }
 
   protected def closeQuery: Boolean = true
 
-  protected def endApp {
+  protected def endApp() {
     if (closeQuery == true) {
       exit
     }
@@ -788,19 +788,19 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * Handles additional clean up operations. Override to destroy
    * or release drawing editor resources.
    */
-  protected def destroy {}
+  protected def destroy() {}
 
   /**
    * Resets the drawing to a new empty drawing.
    */
-  def promptNew {
+  def promptNew() {
     newWindow(createDrawing)
   }
 
   /**
    * Shows a file dialog and opens a drawing.
    */
-  def promptOpen {
+  def promptOpen() {
     toolDone
     val openDialog = createOpenFileChooser
     getStorageFormatManager.registerFileFilters(openDialog)
@@ -821,7 +821,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   /**
    * Shows a file dialog and saves drawing.
    */
-  def promptSaveAs {
+  def promptSaveAs() {
     if (view != null) {
       toolDone
       val saveDialog = createSaveFileChooser
@@ -866,7 +866,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   /**
    * Prints the drawing.
    */
-  def print {
+  def print() {
     tool.deactivate
     val printJob = getToolkit.getPrintJob(this, "Print Drawing", null)
     if (printJob != null) {

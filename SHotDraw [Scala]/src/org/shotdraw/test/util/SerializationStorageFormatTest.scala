@@ -42,7 +42,7 @@ class SerializationStorageFormatTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     serializationstorageformat = createInstance
   }
@@ -52,7 +52,7 @@ class SerializationStorageFormatTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     serializationstorageformat = null
     super.tearDown
   }
@@ -61,21 +61,21 @@ class SerializationStorageFormatTest(name: String) extends TestCase(name) {
    * Method testCreateFileDescription is testing createFileDescription
    * @see org.shotdraw.util.SerializationStorageFormat#createFileDescription()
    */
-  def testCreateFileDescription {
+  def testCreateFileDescription() {
   }
 
   /**
    * Method testStore is testing store
    * @see org.shotdraw.util.SerializationStorageFormat#store(java.lang.String, org.shotdraw.framework.Drawing)
    */
-  def testStore {
+  def testStore() {
   }
 
   /**
    * Method testRestore is testing restore
    * @see org.shotdraw.util.SerializationStorageFormat#restore(java.lang.String)
    */
-  def testRestore {
+  def testRestore() {
   }
 
   /**
@@ -84,7 +84,7 @@ class SerializationStorageFormatTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var serializationstorageformat: SerializationStorageFormat = null

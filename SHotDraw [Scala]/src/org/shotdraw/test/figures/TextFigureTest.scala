@@ -43,7 +43,7 @@ class TextFigureTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     textfigure = createInstance
   }
@@ -53,7 +53,7 @@ class TextFigureTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     textfigure = null
     super.tearDown
   }
@@ -62,49 +62,49 @@ class TextFigureTest(name: String) extends TestCase(name) {
    * Method testMoveBy is testing moveBy
    * @see org.shotdraw.figures.TextFigure#moveBy(int, int)
    */
-  def testMoveBy {
+  def testMoveBy() {
   }
 
   /**
    * Method testBasicDisplayBox is testing basicDisplayBox
    * @see org.shotdraw.figures.TextFigure#basicDisplayBox(java.awt.Point, java.awt.Point)
    */
-  def testBasicDisplayBox {
+  def testBasicDisplayBox() {
   }
 
   /**
    * Method testDisplayBox is testing displayBox
    * @see org.shotdraw.figures.TextFigure#displayBox()
    */
-  def testDisplayBox {
+  def testDisplayBox() {
   }
 
   /**
    * Method testTextDisplayBox is testing textDisplayBox
    * @see org.shotdraw.figures.TextFigure#textDisplayBox()
    */
-  def testTextDisplayBox {
+  def testTextDisplayBox() {
   }
 
   /**
    * Method testReadOnly is testing readOnly
    * @see org.shotdraw.figures.TextFigure#readOnly()
    */
-  def testReadOnly {
+  def testReadOnly() {
   }
 
   /**
    * Method testSetReadOnly is testing setReadOnly
    * @see org.shotdraw.figures.TextFigure#setReadOnly(boolean)
    */
-  def testSetReadOnly {
+  def testSetReadOnly() {
   }
 
   /**
    * Method testGetRepresentingFigure is testing getRepresentingFigure
    * @see org.shotdraw.figures.TextFigure#getRepresentingFigure()
    */
-  def testGetRepresentingFigure {
+  def testGetRepresentingFigure() {
   }
 
   /**
@@ -114,7 +114,7 @@ class TextFigureTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.figures.TextFigure#setFont(java.awt.Font)
    * @see org.shotdraw.figures.TextFigure#getFont()
    */
-  def testSetGetFont {         
+  def testSetGetFont() {         
     val tests = List(new Font("Helvetica", Font.PLAIN, 12), null)
     tests foreach { e => 
       textfigure.setFont(e)
@@ -126,21 +126,21 @@ class TextFigureTest(name: String) extends TestCase(name) {
    * Method testChanged is testing changed
    * @see org.shotdraw.figures.TextFigure#changed()
    */
-  def testChanged {
+  def testChanged() {
   }
 
   /**
    * Method testGetAttribute is testing getAttribute
    * @see org.shotdraw.figures.TextFigure#getAttribute(java.lang.String)
    */
-  def testGetAttribute {
+  def testGetAttribute() {
   }
 
   /**
    * Method testSetAttribute is testing setAttribute
    * @see org.shotdraw.figures.TextFigure#setAttribute(java.lang.String, java.lang.Object)
    */
-  def testSetAttribute {
+  def testSetAttribute() {
   }
 
   /**
@@ -150,7 +150,7 @@ class TextFigureTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.figures.TextFigure#setText(java.lang.String)
    * @see org.shotdraw.figures.TextFigure#getText()
    */
-  def testSetGetText {
+  def testSetGetText() {
     val tests = List("", " ", "a", "A", "�", "�", "0123456789", "012345678901234567890", "\n", null)
     tests foreach { e => 
       textfigure.setText(e)
@@ -162,140 +162,140 @@ class TextFigureTest(name: String) extends TestCase(name) {
    * Method testAcceptsTyping is testing acceptsTyping
    * @see org.shotdraw.figures.TextFigure#acceptsTyping()
    */
-  def testAcceptsTyping {
+  def testAcceptsTyping() {
   }
 
   /**
    * Method testDrawBackground is testing drawBackground
    * @see org.shotdraw.figures.TextFigure#drawBackground(java.awt.Graphics)
    */
-  def testDrawBackground {
+  def testDrawBackground() {
   }
 
   /**
    * Method testDrawFrame is testing drawFrame
    * @see org.shotdraw.figures.TextFigure#drawFrame(java.awt.Graphics)
    */
-  def testDrawFrame {
+  def testDrawFrame() {
   }
 
   /**
    * Method testOverlayColumns is testing overlayColumns
    * @see org.shotdraw.figures.TextFigure#overlayColumns()
    */
-  def testOverlayColumns {
+  def testOverlayColumns() {
   }
 
   /**
    * Method testHandles is testing handles
    * @see org.shotdraw.figures.TextFigure#handles()
    */
-  def testHandles {
+  def testHandles() {
   }
 
   /**
    * Method testWrite is testing write
    * @see org.shotdraw.figures.TextFigure#write(org.shotdraw.util.StorableOutput)
    */
-  def testWrite {
+  def testWrite() {
   }
 
   /**
    * Method testRead is testing read
    * @see org.shotdraw.figures.TextFigure#read(org.shotdraw.util.StorableInput)
    */
-  def testRead {
+  def testRead() {
   }
 
   /**
    * Method testConnect is testing connect
    * @see org.shotdraw.figures.TextFigure#connect(org.shotdraw.framework.Figure)
    */
-  def testConnect {
+  def testConnect() {
   }
 
   /**
    * Method testFigureChanged is testing figureChanged
    * @see org.shotdraw.figures.TextFigure#figureChanged(org.shotdraw.framework.FigureChangeEvent)
    */
-  def testFigureChanged {
+  def testFigureChanged() {
   }
 
   /**
    * Method testFigureRemoved is testing figureRemoved
    * @see org.shotdraw.figures.TextFigure#figureRemoved(org.shotdraw.framework.FigureChangeEvent)
    */
-  def testFigureRemoved {
+  def testFigureRemoved() {
   }
 
   /**
    * Method testFigureRequestRemove is testing figureRequestRemove
    * @see org.shotdraw.figures.TextFigure#figureRequestRemove(org.shotdraw.framework.FigureChangeEvent)
    */
-  def testFigureRequestRemove {
+  def testFigureRequestRemove() {
   }
 
   /**
    * Method testFigureInvalidated is testing figureInvalidated
    * @see org.shotdraw.figures.TextFigure#figureInvalidated(org.shotdraw.framework.FigureChangeEvent)
    */
-  def testFigureInvalidated {
+  def testFigureInvalidated() {
   }
 
   /**
    * Method testFigureRequestUpdate is testing figureRequestUpdate
    * @see org.shotdraw.figures.TextFigure#figureRequestUpdate(org.shotdraw.framework.FigureChangeEvent)
    */
-  def testFigureRequestUpdate {
+  def testFigureRequestUpdate() {
   }
 
   /**
    * Method testRelease is testing release
    * @see org.shotdraw.figures.TextFigure#release()
    */
-  def testRelease {
+  def testRelease() {
   }
 
   /**
    * Method testDisconnect is testing disconnect
    * @see org.shotdraw.figures.TextFigure#disconnect(org.shotdraw.framework.Figure)
    */
-  def testDisconnect {
+  def testDisconnect() {
   }
 
   /**
    * Method testGetTextHolder is testing getTextHolder
    * @see org.shotdraw.figures.TextFigure#getTextHolder()
    */
-  def testGetTextHolder {
+  def testGetTextHolder() {
   }
 
   /**
    * Method testCreateCurrentFont is testing createCurrentFont
    * @see org.shotdraw.figures.TextFigure#createCurrentFont()
    */
-  def testCreateCurrentFont {
+  def testCreateCurrentFont() {
   }
 
   /**
    * Method testSetCurrentFontName is testing setCurrentFontName
    * @see org.shotdraw.figures.TextFigure#setCurrentFontName(java.lang.String)
    */
-  def testSetCurrentFontName {
+  def testSetCurrentFontName() {
   }
 
   /**
    * Method testSetCurrentFontSize is testing setCurrentFontSize
    * @see org.shotdraw.figures.TextFigure#setCurrentFontSize(int)
    */
-  def testSetCurrentFontSize {
+  def testSetCurrentFontSize() {
   }
 
   /**
    * Method testSetCurrentFontStyle is testing setCurrentFontStyle
    * @see org.shotdraw.figures.TextFigure#setCurrentFontStyle(int)
    */
-  def testSetCurrentFontStyle {
+  def testSetCurrentFontStyle() {
   }
 
   /**
@@ -304,7 +304,7 @@ class TextFigureTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var textfigure: TextFigure = null

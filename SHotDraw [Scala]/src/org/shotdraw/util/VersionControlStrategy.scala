@@ -19,5 +19,5 @@ trait VersionControlStrategy {
    * Define a strategy how to select those versions of JHotDraw
    * with which they are compatible.
    */
-  def assertCompatibleVersion
+  def assertCompatibleVersion()
 }

@@ -42,7 +42,7 @@ class StandardDrawingTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     standarddrawing = createInstance
   }
@@ -52,7 +52,7 @@ class StandardDrawingTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     standarddrawing = null
     super.tearDown
   }
@@ -61,91 +61,91 @@ class StandardDrawingTest(name: String) extends TestCase(name) {
    * Method testAddDrawingChangeListener is testing addDrawingChangeListener
    * @see org.shotdraw.standard.StandardDrawing#addDrawingChangeListener(org.shotdraw.framework.DrawingChangeListener)
    */
-  def testAddDrawingChangeListener {
+  def testAddDrawingChangeListener() {
   }
 
   /**
    * Method testRemoveDrawingChangeListener is testing removeDrawingChangeListener
    * @see org.shotdraw.standard.StandardDrawing#removeDrawingChangeListener(org.shotdraw.framework.DrawingChangeListener)
    */
-  def testRemoveDrawingChangeListener {
+  def testRemoveDrawingChangeListener() {
   }
 
   /**
    * Method testDrawingChangeListeners is testing drawingChangeListeners
    * @see org.shotdraw.standard.StandardDrawing#drawingChangeListeners()
    */
-  def testDrawingChangeListeners {
+  def testDrawingChangeListeners() {
   }
 
   /**
    * Method testOrphan is testing orphan
    * @see org.shotdraw.standard.StandardDrawing#orphan(org.shotdraw.framework.Figure)
    */
-  def testOrphan {
+  def testOrphan() {
   }
 
   /**
    * Method testAdd is testing add
    * @see org.shotdraw.standard.StandardDrawing#add(org.shotdraw.framework.Figure)
    */
-  def testAdd {
+  def testAdd() {
   }
 
   /**
    * Method testFigureInvalidated is testing figureInvalidated
    * @see org.shotdraw.standard.StandardDrawing#figureInvalidated(org.shotdraw.framework.FigureChangeEvent)
    */
-  def testFigureInvalidated {
+  def testFigureInvalidated() {
   }
 
   /**
    * Method testFireDrawingTitleChanged is testing fireDrawingTitleChanged
    * @see org.shotdraw.standard.StandardDrawing#fireDrawingTitleChanged()
    */
-  def testFireDrawingTitleChanged {
+  def testFireDrawingTitleChanged() {
   }
 
   /**
    * Method testFigureRequestUpdate is testing figureRequestUpdate
    * @see org.shotdraw.standard.StandardDrawing#figureRequestUpdate(org.shotdraw.framework.FigureChangeEvent)
    */
-  def testFigureRequestUpdate {
+  def testFigureRequestUpdate() {
   }
 
   /**
    * Method testHandles is testing handles
    * @see org.shotdraw.standard.StandardDrawing#handles()
    */
-  def testHandles {
+  def testHandles() {
   }
 
   /**
    * Method testDisplayBox is testing displayBox
    * @see org.shotdraw.standard.StandardDrawing#displayBox()
    */
-  def testDisplayBox {
+  def testDisplayBox() {
   }
 
   /**
    * Method testBasicDisplayBox is testing basicDisplayBox
    * @see org.shotdraw.standard.StandardDrawing#basicDisplayBox(java.awt.Point, java.awt.Point)
    */
-  def testBasicDisplayBox {
+  def testBasicDisplayBox() {
   }
 
   /**
    * Method testLock is testing lock
    * @see org.shotdraw.standard.StandardDrawing#lock()
    */
-  def testLock {
+  def testLock() {
   }
 
   /**
    * Method testUnlock is testing unlock
    * @see org.shotdraw.standard.StandardDrawing#unlock()
    */
-  def testUnlock {
+  def testUnlock() {
   }
 
   /**
@@ -155,7 +155,7 @@ class StandardDrawingTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.standard.StandardDrawing#setTitle(java.lang.String)
    * @see org.shotdraw.standard.StandardDrawing#getTitle()
    */
-  def testSetGetTitle {
+  def testSetGetTitle() {
     val tests = Array("", " ", "a", "A", "�", "�", "0123456789", "012345678901234567890", "\n", null)
     tests foreach { e =>
       standarddrawing.setTitle(e)
@@ -169,7 +169,7 @@ class StandardDrawingTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var standarddrawing: StandardDrawing = null

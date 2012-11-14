@@ -46,7 +46,7 @@ class StorableOutputTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     storableoutput = createInstance
   }
@@ -56,7 +56,7 @@ class StorableOutputTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     storableoutput = null
     super.tearDown
   }
@@ -65,56 +65,56 @@ class StorableOutputTest(name: String) extends TestCase(name) {
    * Method testWriteStorable is testing writeStorable
    * @see org.shotdraw.util.StorableOutput#writeStorable(org.shotdraw.util.Storable)
    */
-  def testWriteStorable {
+  def testWriteStorable() {
   }
 
   /**
    * Method testWriteInt is testing writeInt
    * @see org.shotdraw.util.StorableOutput#writeInt(int)
    */
-  def testWriteInt {
+  def testWriteInt() {
   }
 
   /**
    * Method testWriteLong is testing writeLong
    * @see org.shotdraw.util.StorableOutput#writeLong(long)
    */
-  def testWriteLong {
+  def testWriteLong() {
   }
 
   /**
    * Method testWriteColor is testing writeColor
    * @see org.shotdraw.util.StorableOutput#writeColor(java.awt.Color)
    */
-  def testWriteColor {
+  def testWriteColor() {
   }
 
   /**
    * Method testWriteDouble is testing writeDouble
    * @see org.shotdraw.util.StorableOutput#writeDouble(double)
    */
-  def testWriteDouble {
+  def testWriteDouble() {
   }
 
   /**
    * Method testWriteBoolean is testing writeBoolean
    * @see org.shotdraw.util.StorableOutput#writeBoolean(boolean)
    */
-  def testWriteBoolean {
+  def testWriteBoolean() {
   }
 
   /**
    * Method testWriteString is testing writeString
    * @see org.shotdraw.util.StorableOutput#writeString(java.lang.String)
    */
-  def testWriteString {
+  def testWriteString() {
   }
 
   /**
    * Method testClose is testing close
    * @see org.shotdraw.util.StorableOutput#close()
    */
-  def testClose {
+  def testClose() {
   }
 
   /**
@@ -123,7 +123,7 @@ class StorableOutputTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var storableoutput: StorableOutput = null

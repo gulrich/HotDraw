@@ -33,12 +33,12 @@ class PolygonTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDrawi
    */
   private var myAddedFigure: Figure = null
   
-  override def activate {
+  override def activate() {
     super.activate
     fPolygon = null
   }
 
-  override def deactivate {
+  override def deactivate() {
     if (fPolygon != null) {
       fPolygon.smoothPoints
       if (fPolygon.pointCount < 3 || fPolygon.size.width < 4 || fPolygon.size.height < 4) {

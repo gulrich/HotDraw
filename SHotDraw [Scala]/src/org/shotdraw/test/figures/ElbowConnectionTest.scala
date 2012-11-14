@@ -42,7 +42,7 @@ class ElbowConnectionTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     elbowconnection = createInstance
   }
@@ -52,7 +52,7 @@ class ElbowConnectionTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     elbowconnection = null
     super.tearDown
   }
@@ -61,28 +61,28 @@ class ElbowConnectionTest(name: String) extends TestCase(name) {
    * Method testUpdateConnection is testing updateConnection
    * @see org.shotdraw.figures.ElbowConnection#updateConnection()
    */
-  def testUpdateConnection {
+  def testUpdateConnection() {
   }
 
   /**
    * Method testLayoutConnection is testing layoutConnection
    * @see org.shotdraw.figures.ElbowConnection#layoutConnection()
    */
-  def testLayoutConnection {
+  def testLayoutConnection() {
   }
 
   /**
    * Method testHandles is testing handles
    * @see org.shotdraw.figures.ElbowConnection#handles()
    */
-  def testHandles {
+  def testHandles() {
   }
 
   /**
    * Method testConnectedTextLocator is testing connectedTextLocator
    * @see org.shotdraw.figures.ElbowConnection#connectedTextLocator(org.shotdraw.framework.Figure)
    */
-  def testConnectedTextLocator {
+  def testConnectedTextLocator() {
   }
 
   /**
@@ -91,7 +91,7 @@ class ElbowConnectionTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var elbowconnection: ElbowConnection = null

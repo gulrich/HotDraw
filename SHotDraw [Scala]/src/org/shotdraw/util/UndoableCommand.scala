@@ -36,7 +36,7 @@ class UndoableCommand extends Command with FigureSelectionListener with CommandL
   /**
    * Executes the command.
    */
-  def execute {
+  def execute() {
     hasSelectionChanged = false
     view.addFigureSelectionListener(this)
     getWrappedCommand.execute

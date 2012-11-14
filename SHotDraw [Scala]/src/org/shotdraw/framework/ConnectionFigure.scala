@@ -52,17 +52,17 @@ trait ConnectionFigure extends Figure with FigureChangeListener {
   /**
    * Updates the connection
    */
-  def updateConnection
+  def updateConnection()
 
   /**
    * Disconnects the start figure from the dependent figure
    */
-  def disconnectStart
+  def disconnectStart()
 
   /**
    * Disconnects the end figure from the dependent figure
    */
-  def disconnectEnd
+  def disconnectEnd()
 
   /**
    * Gets the start Connector

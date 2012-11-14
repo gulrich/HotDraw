@@ -30,19 +30,19 @@ object AbstractCommand {
 
   class EventDispatcher(myObservedCommand: Command) {
 
-    def fireCommandExecutedEvent {
+    def fireCommandExecutedEvent() {
       myRegisteredListeners foreach { l =>
         l.commandExecuted(new EventObject(myObservedCommand))
       }
     }
 
-    def fireCommandExecutableEvent {
+    def fireCommandExecutableEvent() {
       myRegisteredListeners foreach { l =>
         l.commandExecutable(new EventObject(myObservedCommand))
       }
     }
 
-    def fireCommandNotExecutableEvent {
+    def fireCommandNotExecutableEvent() {
             myRegisteredListeners foreach { l =>
         l.commandNotExecutable(new EventObject(myObservedCommand))
       }
@@ -143,7 +143,7 @@ class AbstractCommand(var myName: String, var myDrawingEditor: DrawingEditor, va
   /**
    * Releases resources associated with this command
    */
-  def dispose {
+  def dispose() {
     if (view != null) {
       view.removeFigureSelectionListener(this)
     }
@@ -152,7 +152,7 @@ class AbstractCommand(var myName: String, var myDrawingEditor: DrawingEditor, va
   /**
    * Executes the command.
    */
-  def execute {
+  def execute() {
     if (view == null) {
       throw new JHotDrawRuntimeException("execute should NOT be getting called when view() == null")
     }

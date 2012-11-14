@@ -43,7 +43,7 @@ class FloatingTextFieldTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     floatingtextfield = createInstance
   }
@@ -53,7 +53,7 @@ class FloatingTextFieldTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     floatingtextfield = null
     super.tearDown
   }
@@ -62,49 +62,49 @@ class FloatingTextFieldTest(name: String) extends TestCase(name) {
    * Method testCreateOverlay is testing createOverlay
    * @see org.shotdraw.util.FloatingTextField#createOverlay(java.awt.Container)
    */
-  def testCreateOverlay {
+  def testCreateOverlay() {
   }
 
   /**
    * Method testAddActionListener is testing addActionListener
    * @see org.shotdraw.util.FloatingTextField#addActionListener(java.awt.event.ActionListener)
    */
-  def testAddActionListener {
+  def testAddActionListener() {
   }
 
   /**
    * Method testRemoveActionListener is testing removeActionListener
    * @see org.shotdraw.util.FloatingTextField#removeActionListener(java.awt.event.ActionListener)
    */
-  def testRemoveActionListener {
+  def testRemoveActionListener() {
   }
 
   /**
    * Method testSetBounds is testing setBounds
    * @see org.shotdraw.util.FloatingTextField#setBounds(java.awt.Rectangle, java.lang.String)
    */
-  def testSetBounds {
+  def testSetBounds() {
   }
 
   /**
    * Method testGetText is testing getText
    * @see org.shotdraw.util.FloatingTextField#getText()
    */
-  def testGetText {
+  def testGetText() {
   }
 
   /**
    * Method testGetPreferredSize is testing getPreferredSize
    * @see org.shotdraw.util.FloatingTextField#getPreferredSize(int)
    */
-  def testGetPreferredSize {
+  def testGetPreferredSize() {
   }
 
   /**
    * Method testEndOverlay is testing endOverlay
    * @see org.shotdraw.util.FloatingTextField#endOverlay()
    */
-  def testEndOverlay {
+  def testEndOverlay() {
   }
 
   /**
@@ -113,7 +113,7 @@ class FloatingTextFieldTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var floatingtextfield: FloatingTextField = null

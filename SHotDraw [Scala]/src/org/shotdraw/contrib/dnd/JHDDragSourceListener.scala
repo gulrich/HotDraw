@@ -58,7 +58,7 @@ object JHDDragSourceListener {
      * Since this is a delete activity, figures can only be released if the
      * action has not been undone.
      */
-    override def release {
+    override def release() {
       if (undone == false) {
         getAffectedFigures foreach { f =>
           getDrawingView.drawing.remove(f)

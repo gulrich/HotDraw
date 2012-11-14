@@ -135,9 +135,9 @@ class DragTracker(newDrawingEditor: DrawingEditor, anchor: Figure) extends Abstr
     fMoved = newMoved
   }
 
-  override def activate {}
+  override def activate() {}
 
-  override def deactivate {
+  override def deactivate() {
     if (hasMoved) {
       (getUndoActivity.asInstanceOf[DragTracker.UndoActivity]).setBackupPoint(new Point(getLastMouseX, getLastMouseY))
     } else {

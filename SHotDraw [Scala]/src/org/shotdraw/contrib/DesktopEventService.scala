@@ -49,7 +49,7 @@ class DesktopEventService(var myDesktop: Desktop, var myContainer: Container) {
     }
   }
 
-  def removeAllComponents {
+  def removeAllComponents() {
     getContainer.removeAll
   }
 

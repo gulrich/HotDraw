@@ -48,7 +48,7 @@ object UngroupCommand {
       } else false
     }
 
-    private[figures] def ungroupFigures {
+    private[figures] def ungroupFigures() {
       getAffectedFigures foreach { f =>
         val group = getDrawingView.drawing.orphan(f)
         getDrawingView.drawing.addAll(group.figures)
@@ -61,7 +61,7 @@ object UngroupCommand {
 
 class UngroupCommand(name: String, newDrawingEditor: DrawingEditor) extends AbstractCommand(name, newDrawingEditor) {
 
-  override def execute {
+  override def execute() {
     super.execute
     setUndoActivity(createUndoActivity)
     getUndoActivity.setAffectedFigures(view.selection)

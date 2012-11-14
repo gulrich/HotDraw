@@ -74,7 +74,7 @@ object StandardDrawingView {
   final val SCROLL_OFFSET = 10
   
   private var count = 0
-  def counter = {
+  def counter() = {
     count = count+1
     count
   }
@@ -431,7 +431,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   /**
    * Clears the current selection.
    */
-  def clearSelection {
+  def clearSelection() {
     if (selectionCount == 0) {
       return
     }
@@ -478,7 +478,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * By default this event is forwarded to the
    * drawing editor.
    */
-  protected def fireSelectionChanged {
+  protected def fireSelectionChanged() {
     if (fSelectionListeners != null) {
       fSelectionListeners foreach {fsl =>
         fsl.figureSelectionChanged(this)
@@ -532,7 +532,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   /**
    * Refreshes the drawing if there is some accumulated damage
    */
-  def checkDamage {
+  def checkDamage() {
     val each = drawing.drawingChangeListeners
     each foreach (l => l match {
       case dv: DrawingView => dv.repairDamage
@@ -540,7 +540,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     })
   }
 
-  def repairDamage {
+  def repairDamage() {
     if (getDamage != null) {
       repaint(getDamage.x, getDamage.y, getDamage.width, getDamage.height)
       setDamage(null)
@@ -696,7 +696,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * Freezes the view by acquiring the drawing lock.
    * @see Drawing#lock
    */
-  def freezeView {
+  def freezeView() {
     drawing.lock
   }
 
@@ -704,7 +704,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * Unfreezes the view by releasing the drawing lock.
    * @see Drawing#unlock
    */
-  def unfreezeView {
+  def unfreezeView() {
     drawing.unlock
   }
 
@@ -717,7 +717,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     fSelectionListeners = ArrayBuffer[FigureSelectionListener]()
   }
 
-  protected def checkMinimumSize {
+  protected def checkMinimumSize() {
     val d = getDrawingSize
     val v = getPreferredSize
     if (v.height < d.height || v.width < d.width) {
@@ -812,7 +812,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     getDNDHelper.initialize(dgl)
   }
 
-  def DNDDeinitialize {
+  def DNDDeinitialize() {
     getDNDHelper.deinitialize
   }
 

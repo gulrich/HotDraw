@@ -125,7 +125,7 @@ class StorableOutput(stream: OutputStream) {
   /**
    * Closes a storable output stream.
    */
-  def close {
+  def close() {
     fStream.close
   }
 
@@ -147,21 +147,21 @@ class StorableOutput(stream: OutputStream) {
     space
   }
 
-  private def incrementIndent {
+  private def incrementIndent() {
     fIndent += 4
   }
 
-  private def decrementIndent {
+  private def decrementIndent() {
     fIndent -= 4
     if (fIndent < 0) fIndent = 0
   }
 
-  private def startNewLine {
+  private def startNewLine() {
     fStream.println
     for (i <- 0 to fIndent-1) space
   }
 
-  private def space {
+  private def space() {
     fStream.print(' ')
   }
 

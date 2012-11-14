@@ -210,7 +210,7 @@ abstract class AbstractFigure extends Figure {
    * method directly. Release notifies its listeners.
    * @see Figure#release
    */
-  def release {
+  def release() {
     if (listener != null) {
       listener.figureRemoved(new FigureChangeEvent(this))
     }
@@ -221,7 +221,7 @@ abstract class AbstractFigure extends Figure {
    * that the figure's current display box is invalid and should be
    * refreshed.
    */
-  def invalidate {
+  def invalidate() {
     if (listener != null) {
       val r = invalidateRectangle(displayBox)
       listener.figureInvalidated(new FigureChangeEvent(this, r))
@@ -242,7 +242,7 @@ abstract class AbstractFigure extends Figure {
    *
    * @see Figure#willChange
    */
-  def willChange {
+  def willChange() {
     invalidate
   }
 
@@ -252,7 +252,7 @@ abstract class AbstractFigure extends Figure {
    * @see FigureChangeEvent
    * @see Figure#changed
    */
-  def changed {
+  def changed() {
     invalidate
     if (listener != null) {
       listener.figureChanged(new FigureChangeEvent(this))

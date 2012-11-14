@@ -156,7 +156,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    * Updates the location whenever the figure changes itself.
    * @see org.shotdraw.framework.Figure#changed()
    */
-  override def changed {
+  override def changed() {
     super.changed
   }
 
@@ -216,7 +216,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
     new Dimension(fWidth, fHeight)
   }
 
-  protected def markDirty {
+  protected def markDirty() {
     fSizeIsDirty = true
   }
 
@@ -338,7 +338,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    * Updates the location relative to the connected figure.
    * The TextFigure is centered around the located point.
    */
-  protected def updateLocation {
+  protected def updateLocation() {
     if (getLocator != null) {
       val p = getLocator.locate(getObservedFigure)
       p.x -= size.width / 2 + fOriginX
@@ -352,7 +352,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
   /**
    * @see org.shotdraw.framework.Figure#release()
    */
-  override def release {
+  override def release() {
     super.release
     disconnect(getObservedFigure)
   }

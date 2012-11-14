@@ -109,7 +109,7 @@ class StandardDrawing extends CompositeFigure with Drawing {
   /**
    * Forces an update of the drawing change listeners.
    */
-  def fireDrawingTitleChanged {
+  def fireDrawingTitleChanged() {
     if (fListeners != null) {
       fListeners foreach {_.drawingTitleChanged(new DrawingChangeEvent(this, null))}
     }

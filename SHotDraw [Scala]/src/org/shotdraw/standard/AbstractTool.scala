@@ -35,27 +35,27 @@ object AbstractTool {
 
   class EventDispatcher(myObservedTool: Tool) {
 
-    def fireToolUsableEvent {
+    def fireToolUsableEvent() {
       myRegisteredListeners foreach { e => e.toolUsable(new EventObject(myObservedTool)) }
     }
 
-    def fireToolUnusableEvent {
+    def fireToolUnusableEvent() {
       myRegisteredListeners foreach { e => e.toolUnusable(new EventObject(myObservedTool)) }
     }
 
-    def fireToolActivatedEvent {
+    def fireToolActivatedEvent() {
       myRegisteredListeners foreach { e => e.toolActivated(new EventObject(myObservedTool)) }
     }
 
-    def fireToolDeactivatedEvent {
+    def fireToolDeactivatedEvent() {
       myRegisteredListeners foreach { e => e.toolDeactivated(new EventObject(myObservedTool)) }
     }
 
-    def fireToolEnabledEvent {
+    def fireToolEnabledEvent() {
       myRegisteredListeners foreach { e => e.toolEnabled(new EventObject(myObservedTool)) }
     }
 
-    def fireToolDisabledEvent {
+    def fireToolDisabledEvent() {
       myRegisteredListeners foreach { e => e.toolDisabled(new EventObject(myObservedTool)) }
     }
 
@@ -115,7 +115,7 @@ class AbstractTool(newDrawingEditor: DrawingEditor) extends Tool {
    * Tool should never be activated if the view is null.
    * Ideally, the dditor should take care of that.
    */
-  def activate {
+  def activate() {
     if (getActiveView != null) {
       getActiveView.clearSelection
       getActiveView.checkDamage
@@ -130,7 +130,7 @@ class AbstractTool(newDrawingEditor: DrawingEditor) extends Tool {
    * super.deactivate.
    * An inactive tool should never be deactivated
    */
-  def deactivate {
+  def deactivate() {
     if (isActive) {
       if (getActiveView != null) {
         getActiveView.setCursor(new AWTCursor(java.awt.Cursor.DEFAULT_CURSOR))
@@ -321,7 +321,7 @@ class AbstractTool(newDrawingEditor: DrawingEditor) extends Tool {
     }
   }
 
-  protected def checkUsable {
+  protected def checkUsable() {
     if (isEnabled) {
       setUsable((getActiveView != null) && getActiveView.isInteractive)
     }

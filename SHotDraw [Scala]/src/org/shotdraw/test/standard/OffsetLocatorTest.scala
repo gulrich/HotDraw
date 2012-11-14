@@ -42,7 +42,7 @@ class OffsetLocatorTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     offsetlocator = createInstance
   }
@@ -52,7 +52,7 @@ class OffsetLocatorTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     offsetlocator = null
     super.tearDown
   }
@@ -61,28 +61,28 @@ class OffsetLocatorTest(name: String) extends TestCase(name) {
    * Method testLocate is testing locate
    * @see org.shotdraw.standard.OffsetLocator#locate(org.shotdraw.framework.Figure)
    */
-  def testLocate {
+  def testLocate() {
   }
 
   /**
    * Method testMoveBy is testing moveBy
    * @see org.shotdraw.standard.OffsetLocator#moveBy(int, int)
    */
-  def testMoveBy {
+  def testMoveBy() {
   }
 
   /**
    * Method testWrite is testing write
    * @see org.shotdraw.standard.OffsetLocator#write(org.shotdraw.util.StorableOutput)
    */
-  def testWrite {
+  def testWrite() {
   }
 
   /**
    * Method testRead is testing read
    * @see org.shotdraw.standard.OffsetLocator#read(org.shotdraw.util.StorableInput)
    */
-  def testRead {
+  def testRead() {
   }
 
   /**
@@ -91,7 +91,7 @@ class OffsetLocatorTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var offsetlocator: OffsetLocator = null

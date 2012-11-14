@@ -117,7 +117,7 @@ class QuadTree(nMaxTreeDepth: Int, absoluteBoundingRectangle2D: Rectangle2D) ext
     }   
   }
 
-  def clear {
+  def clear() {
     _theHashtable.clear
     _outsideHashtable.clear
     if (_nMaxTreeDepth > 1) {

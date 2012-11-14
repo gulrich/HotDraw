@@ -42,7 +42,7 @@ class ChopBoxConnectorTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     chopboxconnector = createInstance
   }
@@ -52,7 +52,7 @@ class ChopBoxConnectorTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     chopboxconnector = null
     super.tearDown
   }
@@ -61,14 +61,14 @@ class ChopBoxConnectorTest(name: String) extends TestCase(name) {
    * Method testFindStart is testing findStart
    * @see org.shotdraw.standard.ChopBoxConnector#findStart(org.shotdraw.framework.ConnectionFigure)
    */
-  def testFindStart {
+  def testFindStart() {
   }
 
   /**
    * Method testFindEnd is testing findEnd
    * @see org.shotdraw.standard.ChopBoxConnector#findEnd(org.shotdraw.framework.ConnectionFigure)
    */
-  def testFindEnd {
+  def testFindEnd() {
   }
 
   /**
@@ -77,7 +77,7 @@ class ChopBoxConnectorTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var chopboxconnector: ChopBoxConnector = null

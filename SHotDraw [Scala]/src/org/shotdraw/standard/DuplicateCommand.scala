@@ -20,7 +20,7 @@ import org.shotdraw.util._
  */
 class DuplicateCommand(name: String, newDrawingEditor: DrawingEditor) extends FigureTransferCommand(name, newDrawingEditor) {
 
-  override def execute {
+  override def execute() {
     super.execute
     setUndoActivity(createUndoActivity)
     val selection = view.getFigureSelection

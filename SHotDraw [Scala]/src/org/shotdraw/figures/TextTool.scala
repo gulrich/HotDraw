@@ -120,7 +120,7 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
   /**
    * Terminates the editing of a text figure.
    */
-  override def deactivate {
+  override def deactivate() {
     endEdit
     super.deactivate
   }
@@ -128,7 +128,7 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
   /**
    * Sets the text cursor.
    */
-  override def activate {
+  override def activate() {
     super.activate
   }
 
@@ -152,7 +152,7 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
     setTypingTarget(figure)
   }
 
-  protected def endEdit {
+  protected def endEdit() {
     if (getTypingTarget != null) {
       if (getAddedFigure != null) {
         if (!isDeleteTextFigure) {

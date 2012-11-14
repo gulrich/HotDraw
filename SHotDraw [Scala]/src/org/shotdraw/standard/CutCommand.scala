@@ -85,7 +85,7 @@ object CutCommand {
     /**
      * @see org.shotdraw.util.UndoableAdapter#release()
      */
-    override def release {
+    override def release() {
       super.release
       getSelectedFigures foreach (_.release)
       setSelectedFigures(Seq[Figure]())
@@ -101,7 +101,7 @@ class CutCommand(name: String, newDrawingEditor: DrawingEditor) extends FigureTr
   /**
    * @see org.shotdraw.util.Command#execute()
    */
-  override def execute {
+  override def execute() {
     super.execute
     setUndoActivity(createUndoActivity)
     var fe = view.selection

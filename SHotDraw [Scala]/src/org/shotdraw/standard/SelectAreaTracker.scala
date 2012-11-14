@@ -50,7 +50,7 @@ class SelectAreaTracker(newDrawingEditor: DrawingEditor, fRubberBandColor: Color
     drawXORRect(fSelectGroup)
   }
 
-  private def eraseRubberBand {
+  private def eraseRubberBand() {
     drawXORRect(fSelectGroup)
   }
 

@@ -23,7 +23,7 @@ trait Layoutable extends Figure {
   /**
    * Layout the figure
    */
-  def layout
+  def layout()
 
   /**
    * Set the Layouter for this Layoutable

@@ -49,7 +49,7 @@ abstract class PaletteButton extends JButton with MouseListener with MouseMotion
 
   def name: String = ""
 
-  def reset {
+  def reset() {
     if (isEnabled) {
       fState = NORMAL
       setSelected(false)
@@ -57,7 +57,7 @@ abstract class PaletteButton extends JButton with MouseListener with MouseMotion
     }
   }
 
-  def select {
+  def select() {
     if (isEnabled) {
       fState = SELECTED
       setSelected(true)

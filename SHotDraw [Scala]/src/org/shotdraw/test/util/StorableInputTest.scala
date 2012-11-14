@@ -46,7 +46,7 @@ class StorableInputTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     storableinput = createInstance
   }
@@ -56,7 +56,7 @@ class StorableInputTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     storableinput = null
     super.tearDown
   }
@@ -65,49 +65,49 @@ class StorableInputTest(name: String) extends TestCase(name) {
    * Method testReadStorable is testing readStorable
    * @see org.shotdraw.util.StorableInput#readStorable()
    */
-  def testReadStorable {
+  def testReadStorable() {
   }
 
   /**
    * Method testReadString is testing readString
    * @see org.shotdraw.util.StorableInput#readString()
    */
-  def testReadString {
+  def testReadString() {
   }
 
   /**
    * Method testReadInt is testing readInt
    * @see org.shotdraw.util.StorableInput#readInt()
    */
-  def testReadInt {
+  def testReadInt() {
   }
 
   /**
    * Method testReadLong is testing readLong
    * @see org.shotdraw.util.StorableInput#readLong()
    */
-  def testReadLong {
+  def testReadLong() {
   }
 
   /**
    * Method testReadColor is testing readColor
    * @see org.shotdraw.util.StorableInput#readColor()
    */
-  def testReadColor {
+  def testReadColor() {
   }
 
   /**
    * Method testReadDouble is testing readDouble
    * @see org.shotdraw.util.StorableInput#readDouble()
    */
-  def testReadDouble {
+  def testReadDouble() {
   }
 
   /**
    * Method testReadBoolean is testing readBoolean
    * @see org.shotdraw.util.StorableInput#readBoolean()
    */
-  def testReadBoolean {
+  def testReadBoolean() {
   }
 
   /**
@@ -116,7 +116,7 @@ class StorableInputTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var storableinput: StorableInput = null

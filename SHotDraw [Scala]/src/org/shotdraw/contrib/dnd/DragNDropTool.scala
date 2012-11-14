@@ -103,12 +103,12 @@ class DragNDropTool(editor: DrawingEditor) extends AbstractTool(editor) {
    * Turn on drag by adding a DragGestureRegognizer to all Views which are
    * based on Components.
    */
-  override def activate {
+  override def activate() {
     super.activate
     setDragOn(true)
   }
 
-  override def deactivate {
+  override def deactivate() {
     setDragOn(false)
     super.deactivate
   }

@@ -42,7 +42,7 @@ class ArrowTipTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     arrowtip = createInstance
   }
@@ -52,7 +52,7 @@ class ArrowTipTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     arrowtip = null
     super.tearDown
   }
@@ -61,21 +61,21 @@ class ArrowTipTest(name: String) extends TestCase(name) {
    * Method testOutline is testing outline
    * @see org.shotdraw.figures.ArrowTip#outline(int, int, int, int)
    */
-  def testOutline {
+  def testOutline() {
   }
 
   /**
    * Method testWrite is testing write
    * @see org.shotdraw.figures.ArrowTip#write(org.shotdraw.util.StorableOutput)
    */
-  def testWrite {
+  def testWrite() {
   }
 
   /**
    * Method testRead is testing read
    * @see org.shotdraw.figures.ArrowTip#read(org.shotdraw.util.StorableInput)
    */
-  def testRead {
+  def testRead() {
   }
 
   /**
@@ -84,7 +84,7 @@ class ArrowTipTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var arrowtip: ArrowTip = null

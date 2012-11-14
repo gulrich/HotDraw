@@ -58,7 +58,7 @@ object PasteCommand {
 
 class PasteCommand(name: String, newDrawingEditor: DrawingEditor) extends FigureTransferCommand(name, newDrawingEditor) {
 
-  override def execute {
+  override def execute() {
     super.execute
     val selection = Clipboard.getClipboard.getContents.asInstanceOf[FigureSelection]
     if (selection != null) {

@@ -20,7 +20,7 @@ import org.shotdraw.framework._
  */
 class RedoCommand(name: String, newDrawingEditor: DrawingEditor) extends AbstractCommand(name, newDrawingEditor) {
 
-  override def execute {
+  override def execute() {
     super.execute
     val um = getDrawingEditor.getUndoManager
     if ((um == null) || !um.isRedoable) {

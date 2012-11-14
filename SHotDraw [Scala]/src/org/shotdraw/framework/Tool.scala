@@ -59,7 +59,7 @@ trait Tool {
    * reinitialize a tool.
    * Note, a valid view must be present in order for the tool to accept activation
    */
-  def activate
+  def activate()
 
   /**
    * Deactivates the tool. This method is called whenever the user
@@ -67,7 +67,7 @@ trait Tool {
    * when the tool is switched. Subclassers should always call
    * super.deactivate.
    */
-  def deactivate
+  def deactivate()
 
   /**
    * Handles mouse down events in the drawing view.

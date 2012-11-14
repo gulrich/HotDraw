@@ -36,7 +36,7 @@ trait Undoable {
   /**
    * Releases all resources related to an undoable activity
    */
-  def release
+  def release()
 
   def getDrawingView: DrawingView
 

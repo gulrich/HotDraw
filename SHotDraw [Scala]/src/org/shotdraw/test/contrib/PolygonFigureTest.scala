@@ -42,7 +42,7 @@ class PolygonFigureTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     polygonfigure = createInstance
   }
@@ -52,7 +52,7 @@ class PolygonFigureTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     polygonfigure = null
     super.tearDown
   }
@@ -61,203 +61,203 @@ class PolygonFigureTest(name: String) extends TestCase(name) {
    * Method testDisplayBox is testing displayBox
    * @see org.shotdraw.contrib.PolygonFigure#displayBox()
    */
-  def testDisplayBox {
+  def testDisplayBox() {
   }
 
   /**
    * Method testIsEmpty is testing isEmpty
    * @see org.shotdraw.contrib.PolygonFigure#isEmpty()
    */
-  def testIsEmpty {
+  def testIsEmpty() {
   }
 
   /**
    * Method testHandles is testing handles
    * @see org.shotdraw.contrib.PolygonFigure#handles()
    */
-  def testHandles {
+  def testHandles() {
   }
 
   /**
    * Method testBasicDisplayBox is testing basicDisplayBox
    * @see org.shotdraw.contrib.PolygonFigure#basicDisplayBox(java.awt.Point, java.awt.Point)
    */
-  def testBasicDisplayBox {
+  def testBasicDisplayBox() {
   }
 
   /**
    * Method testGetPolygon is testing getPolygon
    * @see org.shotdraw.contrib.PolygonFigure#getPolygon()
    */
-  def testGetPolygon {
+  def testGetPolygon() {
   }
 
   /**
    * Method testGetInternalPolygon is testing getInternalPolygon
    * @see org.shotdraw.contrib.PolygonFigure#getInternalPolygon()
    */
-  def testGetInternalPolygon {
+  def testGetInternalPolygon() {
   }
 
   /**
    * Method testCenter is testing center
    * @see org.shotdraw.contrib.PolygonFigure#center()
    */
-  def testCenter {
+  def testCenter() {
   }
 
   /**
    * Method testPoints is testing points
    * @see org.shotdraw.contrib.PolygonFigure#points()
    */
-  def testPoints {
+  def testPoints() {
   }
 
   /**
    * Method testPointCount is testing pointCount
    * @see org.shotdraw.contrib.PolygonFigure#pointCount()
    */
-  def testPointCount {
+  def testPointCount() {
   }
 
   /**
    * Method testBasicMoveBy is testing basicMoveBy
    * @see org.shotdraw.contrib.PolygonFigure#basicMoveBy(int, int)
    */
-  def testBasicMoveBy {
+  def testBasicMoveBy() {
   }
 
   /**
    * Method testDrawBackground is testing drawBackground
    * @see org.shotdraw.contrib.PolygonFigure#drawBackground(java.awt.Graphics)
    */
-  def testDrawBackground {
+  def testDrawBackground() {
   }
 
   /**
    * Method testDrawFrame is testing drawFrame
    * @see org.shotdraw.contrib.PolygonFigure#drawFrame(java.awt.Graphics)
    */
-  def testDrawFrame {
+  def testDrawFrame() {
   }
 
   /**
    * Method testContainsPoint is testing containsPoint
    * @see org.shotdraw.contrib.PolygonFigure#containsPoint(int, int)
    */
-  def testContainsPoint {
+  def testContainsPoint() {
   }
 
   /**
    * Method testConnectorAt is testing connectorAt
    * @see org.shotdraw.contrib.PolygonFigure#connectorAt(int, int)
    */
-  def testConnectorAt {
+  def testConnectorAt() {
   }
 
   /**
    * Method testAddPoint is testing addPoint
    * @see org.shotdraw.contrib.PolygonFigure#addPoint(int, int)
    */
-  def testAddPoint {
+  def testAddPoint() {
   }
 
   /**
    * Method testSetPointAt is testing setPointAt
    * @see org.shotdraw.contrib.PolygonFigure#setPointAt(java.awt.Point, int)
    */
-  def testSetPointAt {
+  def testSetPointAt() {
   }
 
   /**
    * Method testInsertPointAt is testing insertPointAt
    * @see org.shotdraw.contrib.PolygonFigure#insertPointAt(java.awt.Point, int)
    */
-  def testInsertPointAt {
+  def testInsertPointAt() {
   }
 
   /**
    * Method testRemovePointAt is testing removePointAt
    * @see org.shotdraw.contrib.PolygonFigure#removePointAt(int)
    */
-  def testRemovePointAt {
+  def testRemovePointAt() {
   }
 
   /**
    * Method testScaleRotate is testing scaleRotate
    * @see org.shotdraw.contrib.PolygonFigure#scaleRotate(java.awt.Point, java.awt.Polygon, java.awt.Point)
    */
-  def testScaleRotate {
+  def testScaleRotate() {
   }
 
   /**
    * Method testSmoothPoints is testing smoothPoints
    * @see org.shotdraw.contrib.PolygonFigure#smoothPoints()
    */
-  def testSmoothPoints {
+  def testSmoothPoints() {
   }
 
   /**
    * Method testSplitSegment is testing splitSegment
    * @see org.shotdraw.contrib.PolygonFigure#splitSegment(int, int)
    */
-  def testSplitSegment {
+  def testSplitSegment() {
   }
 
   /**
    * Method testPointAt is testing pointAt
    * @see org.shotdraw.contrib.PolygonFigure#pointAt(int)
    */
-  def testPointAt {
+  def testPointAt() {
   }
 
   /**
    * Method testOutermostPoint is testing outermostPoint
    * @see org.shotdraw.contrib.PolygonFigure#outermostPoint()
    */
-  def testOutermostPoint {
+  def testOutermostPoint() {
   }
 
   /**
    * Method testFindSegment is testing findSegment
    * @see org.shotdraw.contrib.PolygonFigure#findSegment(int, int)
    */
-  def testFindSegment {
+  def testFindSegment() {
   }
 
   /**
    * Method testChop is testing chop
    * @see org.shotdraw.contrib.PolygonFigure#chop(java.awt.Point)
    */
-  def testChop {
+  def testChop() {
   }
 
   /**
    * Method testWrite is testing write
    * @see org.shotdraw.contrib.PolygonFigure#write(org.shotdraw.util.StorableOutput)
    */
-  def testWrite {
+  def testWrite() {
   }
 
   /**
    * Method testRead is testing read
    * @see org.shotdraw.contrib.PolygonFigure#read(org.shotdraw.util.StorableInput)
    */
-  def testRead {
+  def testRead() {
   }
 
   /**
    * Method testLocator is testing locator
    * @see org.shotdraw.contrib.PolygonFigure#locator(int)
    */
-  def testLocator {
+  def testLocator() {
   }
 
   /**
    * Method testBounds is testing bounds
    * @see org.shotdraw.contrib.PolygonFigure#bounds(java.awt.Polygon)
    */
-  def testBounds {
+  def testBounds() {
   }
 
   /**
@@ -266,7 +266,7 @@ class PolygonFigureTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var polygonfigure: PolygonFigure = null

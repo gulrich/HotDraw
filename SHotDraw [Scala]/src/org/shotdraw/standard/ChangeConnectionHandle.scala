@@ -48,7 +48,7 @@ object ChangeConnectionHandle {
       true
     }
 
-    private def swapConnectors {
+    private def swapConnectors() {
       getAffectedFigures foreach (f => f match {
         case cf:ConnectionFigure =>
           setOldConnector(replaceConnector(cf))
@@ -84,7 +84,7 @@ abstract class ChangeConnectionHandle(owner: ConnectionFigure) extends AbstractH
   /**
    * Disconnects the connection.
    */
-  protected def disconnect
+  protected def disconnect()
 
   /**
    * Connect the connection with the given figure.

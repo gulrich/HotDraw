@@ -37,6 +37,6 @@ class HandleTracker(newDrawingEditor: DrawingEditor, fAnchorHandle: Handle) exte
     fAnchorHandle.invokeEnd(x, y, getAnchorX, getAnchorY, view)
   }
 
-  override def activate {}
+  override def activate() {}
 }
 

@@ -73,7 +73,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
   /**
    * Disconnects the start figure.
    */
-  def disconnectStart {
+  def disconnectStart() {
     startFigure.removeFigureChangeListener(this)
     startFigure.removeDependendFigure(this)
     setStartConnector(null)
@@ -82,7 +82,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
   /**
    * Disconnects the end figure.
    */
-  def disconnectEnd {
+  def disconnectEnd() {
     handleDisconnect(startFigure, endFigure)
     endFigure.removeFigureChangeListener(this)
     endFigure.removeDependendFigure(this)
@@ -225,7 +225,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
   /**
    * Updates the connection.
    */
-  def updateConnection {
+  def updateConnection() {
     if (getStartConnector != null) {
       val start = getStartConnector.findStart(this)
       if (start != null) {
@@ -244,7 +244,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    * Lays out the connection. This is called when the connection
    * itself changes. By default the connection is recalculated
    */
-  def layoutConnection {
+  def layoutConnection() {
     updateConnection
   }
 
@@ -264,7 +264,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
   def figureRequestUpdate(e: FigureChangeEvent) {
   }
 
-  override def release {
+  override def release() {
     super.release
     handleDisconnect(startFigure, endFigure)
     if (getStartConnector != null) {

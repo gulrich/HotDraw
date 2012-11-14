@@ -42,7 +42,7 @@ class GroupFigureTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     groupfigure = createInstance
   }
@@ -52,7 +52,7 @@ class GroupFigureTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     groupfigure = null
     super.tearDown
   }
@@ -61,42 +61,42 @@ class GroupFigureTest(name: String) extends TestCase(name) {
    * Method testCanConnect is testing canConnect
    * @see org.shotdraw.figures.GroupFigure#canConnect()
    */
-  def testCanConnect {
+  def testCanConnect() {
   }
 
   /**
    * Method testDisplayBox is testing displayBox
    * @see org.shotdraw.figures.GroupFigure#displayBox()
    */
-  def testDisplayBox {
+  def testDisplayBox() {
   }
 
   /**
    * Method testBasicDisplayBox is testing basicDisplayBox
    * @see org.shotdraw.figures.GroupFigure#basicDisplayBox(java.awt.Point, java.awt.Point)
    */
-  def testBasicDisplayBox {
+  def testBasicDisplayBox() {
   }
 
   /**
    * Method testDecompose is testing decompose
    * @see org.shotdraw.figures.GroupFigure#decompose()
    */
-  def testDecompose {
+  def testDecompose() {
   }
 
   /**
    * Method testHandles is testing handles
    * @see org.shotdraw.figures.GroupFigure#handles()
    */
-  def testHandles {
+  def testHandles() {
   }
 
   /**
    * Method testSetAttribute is testing setAttribute
    * @see org.shotdraw.figures.GroupFigure#setAttribute(java.lang.String, java.lang.Object)
    */
-  def testSetAttribute {
+  def testSetAttribute() {
   }
 
   /**
@@ -105,7 +105,7 @@ class GroupFigureTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var groupfigure: GroupFigure = null

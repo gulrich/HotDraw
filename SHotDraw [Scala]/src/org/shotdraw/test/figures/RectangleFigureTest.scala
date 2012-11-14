@@ -42,7 +42,7 @@ class RectangleFigureTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     rectanglefigure = createInstance
   }
@@ -52,7 +52,7 @@ class RectangleFigureTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     rectanglefigure = null
     super.tearDown
   }
@@ -61,49 +61,49 @@ class RectangleFigureTest(name: String) extends TestCase(name) {
    * Method testBasicDisplayBox is testing basicDisplayBox
    * @see org.shotdraw.figures.RectangleFigure#basicDisplayBox(java.awt.Point, java.awt.Point)
    */
-  def testBasicDisplayBox {
+  def testBasicDisplayBox() {
   }
 
   /**
    * Method testHandles is testing handles
    * @see org.shotdraw.figures.RectangleFigure#handles()
    */
-  def testHandles {
+  def testHandles() {
   }
 
   /**
    * Method testDisplayBox is testing displayBox
    * @see org.shotdraw.figures.RectangleFigure#displayBox()
    */
-  def testDisplayBox {
+  def testDisplayBox() {
   }
 
   /**
    * Method testDrawBackground is testing drawBackground
    * @see org.shotdraw.figures.RectangleFigure#drawBackground(java.awt.Graphics)
    */
-  def testDrawBackground {
+  def testDrawBackground() {
   }
 
   /**
    * Method testDrawFrame is testing drawFrame
    * @see org.shotdraw.figures.RectangleFigure#drawFrame(java.awt.Graphics)
    */
-  def testDrawFrame {
+  def testDrawFrame() {
   }
 
   /**
    * Method testWrite is testing write
    * @see org.shotdraw.figures.RectangleFigure#write(org.shotdraw.util.StorableOutput)
    */
-  def testWrite {
+  def testWrite() {
   }
 
   /**
    * Method testRead is testing read
    * @see org.shotdraw.figures.RectangleFigure#read(org.shotdraw.util.StorableInput)
    */
-  def testRead {
+  def testRead() {
   }
 
   /**
@@ -112,7 +112,7 @@ class RectangleFigureTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var rectanglefigure: RectangleFigure = null

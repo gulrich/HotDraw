@@ -22,10 +22,10 @@ import org.shotdraw.framework._
  */
 class NullTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDrawingEditor) {
 
-  override def activate {}
+  override def activate() {}
 
-  override def deactivate {}
+  override def deactivate() {}
 
-  override protected def checkUsable {}
+  override protected def checkUsable() {}
 }
 

@@ -43,7 +43,7 @@ class UndoManagerTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     undomanager = createInstance
   }
@@ -53,7 +53,7 @@ class UndoManagerTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     undomanager = null
     super.tearDown
   }
@@ -62,70 +62,70 @@ class UndoManagerTest(name: String) extends TestCase(name) {
    * Method testPushUndo is testing pushUndo
    * @see org.shotdraw.util.UndoManager#pushUndo(org.shotdraw.util.Undoable)
    */
-  def testPushUndo {
+  def testPushUndo() {
   }
 
   /**
    * Method testPushRedo is testing pushRedo
    * @see org.shotdraw.util.UndoManager#pushRedo(org.shotdraw.util.Undoable)
    */
-  def testPushRedo {
+  def testPushRedo() {
   }
 
   /**
    * Method testIsUndoable is testing isUndoable
    * @see org.shotdraw.util.UndoManager#isUndoable()
    */
-  def testIsUndoable {
+  def testIsUndoable() {
   }
 
   /**
    * Method testIsRedoable is testing isRedoable
    * @see org.shotdraw.util.UndoManager#isRedoable()
    */
-  def testIsRedoable {
+  def testIsRedoable() {
   }
 
   /**
    * Method testGetUndoSize is testing getUndoSize
    * @see org.shotdraw.util.UndoManager#getUndoSize()
    */
-  def testGetUndoSize {
+  def testGetUndoSize() {
   }
 
   /**
    * Method testGetRedoSize is testing getRedoSize
    * @see org.shotdraw.util.UndoManager#getRedoSize()
    */
-  def testGetRedoSize {
+  def testGetRedoSize() {
   }
 
   /**
    * Method testPopUndo is testing popUndo
    * @see org.shotdraw.util.UndoManager#popUndo()
    */
-  def testPopUndo {
+  def testPopUndo() {
   }
 
   /**
    * Method testPopRedo is testing popRedo
    * @see org.shotdraw.util.UndoManager#popRedo()
    */
-  def testPopRedo {
+  def testPopRedo() {
   }
 
   /**
    * Method testClearUndos is testing clearUndos
    * @see org.shotdraw.util.UndoManager#clearUndos()
    */
-  def testClearUndos {
+  def testClearUndos() {
   }
 
   /**
    * Method testClearRedos is testing clearRedos
    * @see org.shotdraw.util.UndoManager#clearRedos()
    */
-  def testClearRedos {
+  def testClearRedos() {
   }
 
   /**
@@ -134,7 +134,7 @@ class UndoManagerTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var undomanager: UndoManager = null

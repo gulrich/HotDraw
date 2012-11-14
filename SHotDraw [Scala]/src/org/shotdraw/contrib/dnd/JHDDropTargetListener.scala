@@ -56,7 +56,7 @@ object JHDDropTargetListener {
      * Since this is an add operation, figures can only be released if it
      * has been undone.
      */
-    override def release {
+    override def release() {
       if (undone == true) {
         getAffectedFigures foreach { f =>
           getDrawingView.drawing.remove(f)

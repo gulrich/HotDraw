@@ -97,9 +97,9 @@ class UndoManager(maxStackCapacity: Int) {
     lastUndoable
   }
 
-  def clearUndos {undoStack = ArrayBuffer()}
+  def clearUndos() {undoStack = ArrayBuffer()}
 
-  def clearRedos {redoStack = ArrayBuffer()}
+  def clearRedos() {redoStack = ArrayBuffer()}
 
   /**
    * Removes all undo activities that operate on the given DrawingView.

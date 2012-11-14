@@ -47,7 +47,7 @@ class ChangeConnectionEndHandle(owner: ConnectionFigure) extends ChangeConnectio
   /**
    * Disconnects the end figure.
    */
-  protected def disconnect {
+  protected def disconnect() {
     getConnection.disconnectEnd
   }
 

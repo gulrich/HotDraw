@@ -43,7 +43,7 @@ class FigureChangeEventTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     figurechangeevent = createInstance
   }
@@ -53,7 +53,7 @@ class FigureChangeEventTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     figurechangeevent = null
     super.tearDown
   }
@@ -62,21 +62,21 @@ class FigureChangeEventTest(name: String) extends TestCase(name) {
    * Method testGetFigure is testing getFigure
    * @see org.shotdraw.framework.FigureChangeEvent#getFigure()
    */
-  def testGetFigure {
+  def testGetFigure() {
   }
 
   /**
    * Method testGetInvalidatedRectangle is testing getInvalidatedRectangle
    * @see org.shotdraw.framework.FigureChangeEvent#getInvalidatedRectangle()
    */
-  def testGetInvalidatedRectangle {
+  def testGetInvalidatedRectangle() {
   }
 
   /**
    * Method testGetNestedEvent is testing getNestedEvent
    * @see org.shotdraw.framework.FigureChangeEvent#getNestedEvent()
    */
-  def testGetNestedEvent {
+  def testGetNestedEvent() {
   }
 
   /**
@@ -85,7 +85,7 @@ class FigureChangeEventTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var figurechangeevent: FigureChangeEvent = null

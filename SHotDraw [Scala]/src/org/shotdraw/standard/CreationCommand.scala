@@ -48,7 +48,7 @@ object CreationCommand {
 
 class CreationCommand(name: String, figure: Figure, newDrawingEditor: DrawingEditor) extends FigureTransferCommand(name, newDrawingEditor) {
 
-  override def execute {
+  override def execute() {
     super.execute
     setUndoActivity(createUndoActivity)
     getUndoActivity.setAffectedFigures(Seq(figure))

@@ -42,7 +42,7 @@ class RoundRectangleFigureTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     roundrectanglefigure = createInstance
   }
@@ -52,7 +52,7 @@ class RoundRectangleFigureTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     roundrectanglefigure = null
     super.tearDown
   }
@@ -61,77 +61,77 @@ class RoundRectangleFigureTest(name: String) extends TestCase(name) {
    * Method testBasicDisplayBox is testing basicDisplayBox
    * @see org.shotdraw.figures.RoundRectangleFigure#basicDisplayBox(java.awt.Point, java.awt.Point)
    */
-  def testBasicDisplayBox {
+  def testBasicDisplayBox() {
   }
 
   /**
    * Method testSetArc is testing setArc
    * @see org.shotdraw.figures.RoundRectangleFigure#setArc(int, int)
    */
-  def testSetArc {
+  def testSetArc() {
   }
 
   /**
    * Method testGetArc is testing getArc
    * @see org.shotdraw.figures.RoundRectangleFigure#getArc()
    */
-  def testGetArc {
+  def testGetArc() {
   }
 
   /**
    * Method testHandles is testing handles
    * @see org.shotdraw.figures.RoundRectangleFigure#handles()
    */
-  def testHandles {
+  def testHandles() {
   }
 
   /**
    * Method testDisplayBox is testing displayBox
    * @see org.shotdraw.figures.RoundRectangleFigure#displayBox()
    */
-  def testDisplayBox {
+  def testDisplayBox() {
   }
 
   /**
    * Method testDrawBackground is testing drawBackground
    * @see org.shotdraw.figures.RoundRectangleFigure#drawBackground(java.awt.Graphics)
    */
-  def testDrawBackground {
+  def testDrawBackground() {
   }
 
   /**
    * Method testDrawFrame is testing drawFrame
    * @see org.shotdraw.figures.RoundRectangleFigure#drawFrame(java.awt.Graphics)
    */
-  def testDrawFrame {
+  def testDrawFrame() {
   }
 
   /**
    * Method testConnectionInsets is testing connectionInsets
    * @see org.shotdraw.figures.RoundRectangleFigure#connectionInsets()
    */
-  def testConnectionInsets {
+  def testConnectionInsets() {
   }
 
   /**
    * Method testConnectorAt is testing connectorAt
    * @see org.shotdraw.figures.RoundRectangleFigure#connectorAt(int, int)
    */
-  def testConnectorAt {
+  def testConnectorAt() {
   }
 
   /**
    * Method testWrite is testing write
    * @see org.shotdraw.figures.RoundRectangleFigure#write(org.shotdraw.util.StorableOutput)
    */
-  def testWrite {
+  def testWrite() {
   }
 
   /**
    * Method testRead is testing read
    * @see org.shotdraw.figures.RoundRectangleFigure#read(org.shotdraw.util.StorableInput)
    */
-  def testRead {
+  def testRead() {
   }
 
   /**
@@ -140,7 +140,7 @@ class RoundRectangleFigureTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var roundrectanglefigure: RoundRectangleFigure = null

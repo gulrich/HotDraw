@@ -33,7 +33,7 @@ class UndoableTool extends Tool with ToolListener {
    * whenever the user switches to this tool. Use this method to
    * reinitialize a tool.
    */
-  def activate {
+  def activate() {
     getWrappedTool.activate
   }
 
@@ -43,7 +43,7 @@ class UndoableTool extends Tool with ToolListener {
    * when the tool is switched. Subclassers should always call
    * super.deactivate.
    */
-  def deactivate {
+  def deactivate() {
     getWrappedTool.deactivate
     val undoActivity = getWrappedTool.getUndoActivity
     if ((undoActivity != null) && (undoActivity.isUndoable)) {

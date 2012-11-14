@@ -73,7 +73,7 @@ class UndoableAdapter(newDrawingView: DrawingView) extends Undoable {
   /**
    * Releases all resources related to an undoable activity
    */
-  def release {
+  def release() {
     getAffectedFigures foreach { e => e release}
     setAffectedFigures(Seq())
   }
@@ -85,7 +85,7 @@ class UndoableAdapter(newDrawingView: DrawingView) extends Undoable {
    * observing container like CompositeFigure or DecoratorFigure.
    * Duplicating these figures re-establishes the dependencies.
    */
-  protected def duplicateAffectedFigures {
+  protected def duplicateAffectedFigures() {
     setAffectedFigures(StandardFigureSelection.duplicateFigures(getAffectedFigures, getAffectedFiguresCount))
   }
 

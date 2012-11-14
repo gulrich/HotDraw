@@ -42,7 +42,7 @@ class RelativeLocatorTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     relativelocator = createInstance
   }
@@ -52,7 +52,7 @@ class RelativeLocatorTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     relativelocator = null
     super.tearDown
   }
@@ -61,91 +61,91 @@ class RelativeLocatorTest(name: String) extends TestCase(name) {
    * Method testEquals is testing equals
    * @see org.shotdraw.standard.RelativeLocator#equals(java.lang.Object)
    */
-  def testEquals {
+  def testEquals() {
   }
 
   /**
    * Method testLocate is testing locate
    * @see org.shotdraw.standard.RelativeLocator#locate(org.shotdraw.framework.Figure)
    */
-  def testLocate {
+  def testLocate() {
   }
 
   /**
    * Method testWrite is testing write
    * @see org.shotdraw.standard.RelativeLocator#write(org.shotdraw.util.StorableOutput)
    */
-  def testWrite {
+  def testWrite() {
   }
 
   /**
    * Method testRead is testing read
    * @see org.shotdraw.standard.RelativeLocator#read(org.shotdraw.util.StorableInput)
    */
-  def testRead {
+  def testRead() {
   }
 
   /**
    * Method testEast is testing east
    * @see org.shotdraw.standard.RelativeLocator#east()
    */
-  def testEast {
+  def testEast() {
   }
 
   /**
    * Method testNorth is testing north
    * @see org.shotdraw.standard.RelativeLocator#north()
    */
-  def testNorth {
+  def testNorth() {
   }
 
   /**
    * Method testWest is testing west
    * @see org.shotdraw.standard.RelativeLocator#west()
    */
-  def testWest {
+  def testWest() {
   }
 
   /**
    * Method testNorthEast is testing northEast
    * @see org.shotdraw.standard.RelativeLocator#northEast()
    */
-  def testNorthEast {
+  def testNorthEast() {
   }
 
   /**
    * Method testNorthWest is testing northWest
    * @see org.shotdraw.standard.RelativeLocator#northWest()
    */
-  def testNorthWest {
+  def testNorthWest() {
   }
 
   /**
    * Method testSouth is testing south
    * @see org.shotdraw.standard.RelativeLocator#south()
    */
-  def testSouth {
+  def testSouth() {
   }
 
   /**
    * Method testSouthEast is testing southEast
    * @see org.shotdraw.standard.RelativeLocator#southEast()
    */
-  def testSouthEast {
+  def testSouthEast() {
   }
 
   /**
    * Method testSouthWest is testing southWest
    * @see org.shotdraw.standard.RelativeLocator#southWest()
    */
-  def testSouthWest {
+  def testSouthWest() {
   }
 
   /**
    * Method testCenter is testing center
    * @see org.shotdraw.standard.RelativeLocator#center()
    */
-  def testCenter {
+  def testCenter() {
   }
 
   /**
@@ -154,7 +154,7 @@ class RelativeLocatorTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var relativelocator: RelativeLocator = null

@@ -30,12 +30,12 @@ import scala.collection.mutable.ArrayBuffer
  */
 class ElbowConnection extends LineConnection {
 
-  override def updateConnection {
+  override def updateConnection() {
     super.updateConnection
     updatePoints
   }
 
-  override def layoutConnection {}
+  override def layoutConnection() {}
 
   /**
    * Gets the handles of the figure.
@@ -50,7 +50,7 @@ class ElbowConnection extends LineConnection {
 
   override def connectedTextLocator(f: Figure): Locator = new ElbowTextLocator
 
-  protected def updatePoints {
+  protected def updatePoints() {
     willChange
     val start = startPoint
     val end = endPoint

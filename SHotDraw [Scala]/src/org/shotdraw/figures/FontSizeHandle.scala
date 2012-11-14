@@ -48,7 +48,7 @@ object FontSizeHandle {
       }
     }
 
-    private[figures] def swapFont {
+    private[figures] def swapFont() {
       setOldFontSize(replaceFontSize)
       getAffectedFigures foreach ( f => f match {
         case tf: TextFigure => tf.setFont(getFont)

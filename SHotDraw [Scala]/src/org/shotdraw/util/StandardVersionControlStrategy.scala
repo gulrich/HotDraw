@@ -22,7 +22,7 @@ class StandardVersionControlStrategy(var myVersionRequester: VersionRequester) e
    * Define a strategy how to select those versions of JHotDraw
    * with which they are compatible.
    */
-  def assertCompatibleVersion {
+  def assertCompatibleVersion() {
     val requiredVersions = getVersionRequester.getRequiredVersions
     requiredVersions find(e => isCompatibleVersion(e)) match {
       case None => handleIncompatibleVersions
@@ -36,7 +36,7 @@ class StandardVersionControlStrategy(var myVersionRequester: VersionRequester) e
    * exception handling for this case. In the default implementation, a
    * JHotDrawRuntimeException is thrown.
    */
-  protected def handleIncompatibleVersions {
+  protected def handleIncompatibleVersions() {
     val requiredVersions = getVersionRequester.getRequiredVersions
     throw new JHotDrawRuntimeException("Incompatible version of JHotDraw found: " + VersionManagement.getJHotDrawVersion + " (expected: " +     requiredVersions.mkString("[",",","]") + ")")
   }

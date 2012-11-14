@@ -45,7 +45,7 @@ class StandardStorageFormatTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     standardstorageformat = createInstance
   }
@@ -55,7 +55,7 @@ class StandardStorageFormatTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     standardstorageformat = null
     super.tearDown
   }
@@ -67,7 +67,7 @@ class StandardStorageFormatTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.util.StandardStorageFormat#setFileExtension(java.lang.String)
    * @see org.shotdraw.util.StandardStorageFormat#getFileExtension()
    */
-  def testSetGetFileExtension {
+  def testSetGetFileExtension() {
     val tests = List("", " ", "a", "A", "�", "�", "0123456789", "012345678901234567890", "\n", null)
     
     tests foreach { e =>
@@ -80,7 +80,7 @@ class StandardStorageFormatTest(name: String) extends TestCase(name) {
    * Method testCreateFileDescription is testing createFileDescription
    * @see org.shotdraw.util.StandardStorageFormat#createFileDescription()
    */
-  def testCreateFileDescription {
+  def testCreateFileDescription() {
   }
 
   /**
@@ -90,7 +90,7 @@ class StandardStorageFormatTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.util.StandardStorageFormat#setFileDescription(java.lang.String)
    * @see org.shotdraw.util.StandardStorageFormat#getFileDescription()
    */
-  def testSetGetFileDescription {
+  def testSetGetFileDescription() {
     val tests = List("", " ", "a", "A", "�", "�", "0123456789", "012345678901234567890", "\n", null)
     
     tests foreach {e =>
@@ -106,7 +106,7 @@ class StandardStorageFormatTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.util.StandardStorageFormat#setFileFilter(javax.swing.filechooser.FileFilter)
    * @see org.shotdraw.util.StandardStorageFormat#getFileFilter()
    */
-  def testSetGetFileFilter {
+  def testSetGetFileFilter() {
     val tests = List(null, null)
     tests foreach { e =>
       standardstorageformat.setFileFilter(e)
@@ -118,21 +118,21 @@ class StandardStorageFormatTest(name: String) extends TestCase(name) {
    * Method testStore is testing store
    * @see org.shotdraw.util.StandardStorageFormat#store(java.lang.String, org.shotdraw.framework.Drawing)
    */
-  def testStore {
+  def testStore() {
   }
 
   /**
    * Method testRestore is testing restore
    * @see org.shotdraw.util.StandardStorageFormat#restore(java.lang.String)
    */
-  def testRestore {
+  def testRestore() {
   }
 
   /**
    * Method testEquals is testing equals
    * @see org.shotdraw.util.StandardStorageFormat#equals(java.lang.Object)
    */
-  def testEquals {
+  def testEquals() {
   }
 
   /**
@@ -141,7 +141,7 @@ class StandardStorageFormatTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var standardstorageformat: StandardStorageFormat = null

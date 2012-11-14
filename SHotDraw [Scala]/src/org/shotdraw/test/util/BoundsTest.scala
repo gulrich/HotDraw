@@ -46,7 +46,7 @@ class BoundsTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     bounds = createInstance
   }
@@ -56,7 +56,7 @@ class BoundsTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     bounds = null
     super.tearDown
   }
@@ -65,77 +65,77 @@ class BoundsTest(name: String) extends TestCase(name) {
    * Method testGetLesserX is testing getLesserX
    * @see org.shotdraw.util.Bounds#getLesserX()
    */
-  def testGetLesserX {
+  def testGetLesserX() {
   }
 
   /**
    * Method testGetGreaterX is testing getGreaterX
    * @see org.shotdraw.util.Bounds#getGreaterX()
    */
-  def testGetGreaterX {
+  def testGetGreaterX() {
   }
 
   /**
    * Method testGetLesserY is testing getLesserY
    * @see org.shotdraw.util.Bounds#getLesserY()
    */
-  def testGetLesserY {
+  def testGetLesserY() {
   }
 
   /**
    * Method testGetGreaterY is testing getGreaterY
    * @see org.shotdraw.util.Bounds#getGreaterY()
    */
-  def testGetGreaterY {
+  def testGetGreaterY() {
   }
 
   /**
    * Method testGetWest is testing getWest
    * @see org.shotdraw.util.Bounds#getWest()
    */
-  def testGetWest {
+  def testGetWest() {
   }
 
   /**
    * Method testGetEast is testing getEast
    * @see org.shotdraw.util.Bounds#getEast()
    */
-  def testGetEast {
+  def testGetEast() {
   }
 
   /**
    * Method testGetSouth is testing getSouth
    * @see org.shotdraw.util.Bounds#getSouth()
    */
-  def testGetSouth {
+  def testGetSouth() {
   }
 
   /**
    * Method testGetNorth is testing getNorth
    * @see org.shotdraw.util.Bounds#getNorth()
    */
-  def testGetNorth {
+  def testGetNorth() {
   }
 
   /**
    * Method testGetWidth is testing getWidth
    * @see org.shotdraw.util.Bounds#getWidth()
    */
-  def testGetWidth {
+  def testGetWidth() {
   }
 
   /**
    * Method testGetHeight is testing getHeight
    * @see org.shotdraw.util.Bounds#getHeight()
    */
-  def testGetHeight {
+  def testGetHeight() {
   }
 
   /**
    * Method testAsRectangle2D is testing asRectangle2D
    * @see org.shotdraw.util.Bounds#asRectangle2D()
    */
-  def testAsRectangle2D {
+  def testAsRectangle2D() {
   }
 
   /**
@@ -145,7 +145,7 @@ class BoundsTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.util.Bounds#setCenter(java.awt.geom.Point2D)
    * @see org.shotdraw.util.Bounds#getCenter()
    */
-  def testSetGetCenter {
+  def testSetGetCenter() {
     val tests = List(new Point2D.Double(2.0, 3.0))
     tests foreach {e =>
       bounds.setCenter(e)
@@ -159,7 +159,7 @@ class BoundsTest(name: String) extends TestCase(name) {
    *
    * @see org.shotdraw.util.Bounds#setCenter(java.awt.geom.Point2D)
    */
-  def testSetNullCenter {
+  def testSetNullCenter() {
     val original = bounds.getCenter
     try {
       bounds.setCenter(null)
@@ -176,140 +176,140 @@ class BoundsTest(name: String) extends TestCase(name) {
    * Method testZoomBy is testing zoomBy
    * @see org.shotdraw.util.Bounds#zoomBy(double)
    */
-  def testZoomBy {
+  def testZoomBy() {
   }
 
   /**
    * Method testShiftBy is testing shiftBy
    * @see org.shotdraw.util.Bounds#shiftBy(int, int)
    */
-  def testShiftBy {
+  def testShiftBy() {
   }
 
   /**
    * Method testOffset is testing offset
    * @see org.shotdraw.util.Bounds#offset(double, double)
    */
-  def testOffset {
+  def testOffset() {
   }
 
   /**
    * Method testExpandToRatio is testing expandToRatio
    * @see org.shotdraw.util.Bounds#expandToRatio(double)
    */
-  def testExpandToRatio {
+  def testExpandToRatio() {
   }
 
   /**
    * Method testIncludeXCoordinate is testing includeXCoordinate
    * @see org.shotdraw.util.Bounds#includeXCoordinate(double)
    */
-  def testIncludeXCoordinate {
+  def testIncludeXCoordinate() {
   }
 
   /**
    * Method testIncludeYCoordinate is testing includeYCoordinate
    * @see org.shotdraw.util.Bounds#includeYCoordinate(double)
    */
-  def testIncludeYCoordinate {
+  def testIncludeYCoordinate() {
   }
 
   /**
    * Method testIncludePoint is testing includePoint
    * @see org.shotdraw.util.Bounds#includePoint(double, double)
    */
-  def testIncludePoint {
+  def testIncludePoint() {
   }
 
   /**
    * Method testIncludeLine is testing includeLine
    * @see org.shotdraw.util.Bounds#includeLine(double, double, double, double)
    */
-  def testIncludeLine {
+  def testIncludeLine() {
   }
 
   /**
    * Method testIncludeBounds is testing includeBounds
    * @see org.shotdraw.util.Bounds#includeBounds(org.shotdraw.util.Bounds)
    */
-  def testIncludeBounds {
+  def testIncludeBounds() {
   }
 
   /**
    * Method testIncludeRectangle2D is testing includeRectangle2D
    * @see org.shotdraw.util.Bounds#includeRectangle2D(java.awt.geom.Rectangle2D)
    */
-  def testIncludeRectangle2D {
+  def testIncludeRectangle2D() {
   }
 
   /**
    * Method testIntersect is testing intersect
    * @see org.shotdraw.util.Bounds#intersect(org.shotdraw.util.Bounds)
    */
-  def testIntersect {
+  def testIntersect() {
   }
 
   /**
    * Method testIntersectsPoint is testing intersectsPoint
    * @see org.shotdraw.util.Bounds#intersectsPoint(double, double)
    */
-  def testIntersectsPoint {
+  def testIntersectsPoint() {
   }
 
   /**
    * Method testIntersectsLine is testing intersectsLine
    * @see org.shotdraw.util.Bounds#intersectsLine(double, double, double, double)
    */
-  def testIntersectsLine {
+  def testIntersectsLine() {
   }
 
   /**
    * Method testIntersectsBounds is testing intersectsBounds
    * @see org.shotdraw.util.Bounds#intersectsBounds(org.shotdraw.util.Bounds)
    */
-  def testIntersectsBounds {
+  def testIntersectsBounds() {
   }
 
   /**
    * Method testCompletelyContainsLine is testing completelyContainsLine
    * @see org.shotdraw.util.Bounds#completelyContainsLine(double, double, double, double)
    */
-  def testCompletelyContainsLine {
+  def testCompletelyContainsLine() {
   }
 
   /**
    * Method testIsCompletelyInside is testing isCompletelyInside
    * @see org.shotdraw.util.Bounds#isCompletelyInside(org.shotdraw.util.Bounds)
    */
-  def testIsCompletelyInside {
+  def testIsCompletelyInside() {
   }
 
   /**
    * Method testCropLine is testing cropLine
    * @see org.shotdraw.util.Bounds#cropLine(double, double, double, double)
    */
-  def testCropLine {
+  def testCropLine() {
   }
 
   /**
    * Method testEquals is testing equals
    * @see org.shotdraw.util.Bounds#equals(java.lang.Object)
    */
-  def testEquals {
+  def testEquals() {
   }
 
   /**
    * Method testHashCode is testing hashCode
    * @see org.shotdraw.util.Bounds#hashCode()
    */
-  def testHashCode {
+  def testHashCode() {
   }
 
   /**
    * Method testToString is testing toString
    * @see org.shotdraw.util.Bounds#toString()
    */
-  def testToString {
+  def testToString() {
   }
 
   /**
@@ -318,7 +318,7 @@ class BoundsTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var bounds: Bounds = null

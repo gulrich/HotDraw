@@ -56,7 +56,7 @@ class DeleteCommand(name: String, newDrawingEditor: DrawingEditor) extends Figur
   /**
    * @see org.shotdraw.util.Command#execute()
    */
-  override def execute {
+  override def execute() {
     super.execute
     setUndoActivity(createUndoActivity)
     var fe = view.selection

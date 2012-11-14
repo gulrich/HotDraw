@@ -43,7 +43,7 @@ class PolyLineFigureTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     polylinefigure = createInstance
   }
@@ -53,7 +53,7 @@ class PolyLineFigureTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     polylinefigure = null
     super.tearDown
   }
@@ -62,98 +62,98 @@ class PolyLineFigureTest(name: String) extends TestCase(name) {
    * Method testDisplayBox is testing displayBox
    * @see org.shotdraw.figures.PolyLineFigure#displayBox()
    */
-  def testDisplayBox {
+  def testDisplayBox() {
   }
 
   /**
    * Method testIsEmpty is testing isEmpty
    * @see org.shotdraw.figures.PolyLineFigure#isEmpty()
    */
-  def testIsEmpty {
+  def testIsEmpty() {
   }
 
   /**
    * Method testHandles is testing handles
    * @see org.shotdraw.figures.PolyLineFigure#handles()
    */
-  def testHandles {
+  def testHandles() {
   }
 
   /**
    * Method testBasicDisplayBox is testing basicDisplayBox
    * @see org.shotdraw.figures.PolyLineFigure#basicDisplayBox(java.awt.Point, java.awt.Point)
    */
-  def testBasicDisplayBox {
+  def testBasicDisplayBox() {
   }
 
   /**
    * Method testAddPoint is testing addPoint
    * @see org.shotdraw.figures.PolyLineFigure#addPoint(int, int)
    */
-  def testAddPoint {
+  def testAddPoint() {
   }
 
   /**
    * Method testPoints is testing points
    * @see org.shotdraw.figures.PolyLineFigure#points()
    */
-  def testPoints {
+  def testPoints() {
   }
 
   /**
    * Method testPointCount is testing pointCount
    * @see org.shotdraw.figures.PolyLineFigure#pointCount()
    */
-  def testPointCount {
+  def testPointCount() {
   }
 
   /**
    * Method testSetPointAt is testing setPointAt
    * @see org.shotdraw.figures.PolyLineFigure#setPointAt(java.awt.Point, int)
    */
-  def testSetPointAt {
+  def testSetPointAt() {
   }
 
   /**
    * Method testInsertPointAt is testing insertPointAt
    * @see org.shotdraw.figures.PolyLineFigure#insertPointAt(java.awt.Point, int)
    */
-  def testInsertPointAt {
+  def testInsertPointAt() {
   }
 
   /**
    * Method testRemovePointAt is testing removePointAt
    * @see org.shotdraw.figures.PolyLineFigure#removePointAt(int)
    */
-  def testRemovePointAt {
+  def testRemovePointAt() {
   }
 
   /**
    * Method testSplitSegment is testing splitSegment
    * @see org.shotdraw.figures.PolyLineFigure#splitSegment(int, int)
    */
-  def testSplitSegment {
+  def testSplitSegment() {
   }
 
   /**
    * Method testPointAt is testing pointAt
    * @see org.shotdraw.figures.PolyLineFigure#pointAt(int)
    */
-  def testPointAt {
+  def testPointAt() {
   }
 
   /**
    * Method testJoinSegments is testing joinSegments
    * @see org.shotdraw.figures.PolyLineFigure#joinSegments(int, int)
    */
-  def testJoinSegments {
+  def testJoinSegments() {
   }
 
   /**
    * Method testConnectorAt is testing connectorAt
    * @see org.shotdraw.figures.PolyLineFigure#connectorAt(int, int)
    */
-  def testConnectorAt {
+  def testConnectorAt() {
   }
 
   /**
@@ -163,7 +163,7 @@ class PolyLineFigureTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.figures.PolyLineFigure#setStartDecoration(org.shotdraw.figures.LineDecoration)
    * @see org.shotdraw.figures.PolyLineFigure#getStartDecoration()
    */
-  def testSetGetStartDecoration {
+  def testSetGetStartDecoration() {
     val tests = List(new ArrowTip, null)
     tests foreach { e => 
       polylinefigure.setStartDecoration(e)
@@ -178,7 +178,7 @@ class PolyLineFigureTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.figures.PolyLineFigure#setEndDecoration(org.shotdraw.figures.LineDecoration)
    * @see org.shotdraw.figures.PolyLineFigure#getEndDecoration()
    */
-  def testSetGetEndDecoration {
+  def testSetGetEndDecoration() {
     val tests = List(new ArrowTip, null)
     tests foreach { e => 
       polylinefigure.setEndDecoration(e)
@@ -190,56 +190,56 @@ class PolyLineFigureTest(name: String) extends TestCase(name) {
    * Method testDraw is testing draw
    * @see org.shotdraw.figures.PolyLineFigure#draw(java.awt.Graphics)
    */
-  def testDraw {
+  def testDraw() {
   }
 
   /**
    * Method testContainsPoint is testing containsPoint
    * @see org.shotdraw.figures.PolyLineFigure#containsPoint(int, int)
    */
-  def testContainsPoint {
+  def testContainsPoint() {
   }
 
   /**
    * Method testFindSegment is testing findSegment
    * @see org.shotdraw.figures.PolyLineFigure#findSegment(int, int)
    */
-  def testFindSegment {
+  def testFindSegment() {
   }
 
   /**
    * Method testGetAttribute is testing getAttribute
    * @see org.shotdraw.figures.PolyLineFigure#getAttribute(java.lang.String)
    */
-  def testGetAttribute {
+  def testGetAttribute() {
   }
 
   /**
    * Method testSetAttribute is testing setAttribute
    * @see org.shotdraw.figures.PolyLineFigure#setAttribute(java.lang.String, java.lang.Object)
    */
-  def testSetAttribute {
+  def testSetAttribute() {
   }
 
   /**
    * Method testWrite is testing write
    * @see org.shotdraw.figures.PolyLineFigure#write(org.shotdraw.util.StorableOutput)
    */
-  def testWrite {
+  def testWrite() {
   }
 
   /**
    * Method testRead is testing read
    * @see org.shotdraw.figures.PolyLineFigure#read(org.shotdraw.util.StorableInput)
    */
-  def testRead {
+  def testRead() {
   }
 
   /**
    * Method testLocator is testing locator
    * @see org.shotdraw.figures.PolyLineFigure#locator(int)
    */
-  def testLocator {
+  def testLocator() {
   }
 
   /**
@@ -248,7 +248,7 @@ class PolyLineFigureTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var polylinefigure: PolyLineFigure = null

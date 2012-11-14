@@ -35,7 +35,7 @@ class JHotDrawTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
   }
 
@@ -44,7 +44,7 @@ class JHotDrawTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     app = null
     super.tearDown
   }
@@ -53,7 +53,7 @@ class JHotDrawTest(name: String) extends TestCase(name) {
    * Method testMain is testing main
    * @see org.shotdraw.JHotDraw.nothing.NothingApp#main(java.lang.String[])
    */
-  def testMain {
+  def testMain() {
   }
 
   /**
@@ -62,7 +62,7 @@ class JHotDrawTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var app = JHotDraw

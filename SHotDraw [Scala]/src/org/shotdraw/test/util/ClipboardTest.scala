@@ -42,7 +42,7 @@ class ClipboardTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     clipboard = createInstance
   }
@@ -52,7 +52,7 @@ class ClipboardTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     clipboard = null
     super.tearDown
   }
@@ -61,7 +61,7 @@ class ClipboardTest(name: String) extends TestCase(name) {
    * Method testGetClipboard is testing getClipboard
    * @see org.shotdraw.util.Clipboard#getClipboard()
    */
-  def testGetClipboard {
+  def testGetClipboard() {
   }
 
   /**
@@ -71,7 +71,7 @@ class ClipboardTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.util.Clipboard#setContents(java.lang.Object)
    * @see org.shotdraw.util.Clipboard#getContents()
    */
-  def testSetGetContents {
+  def testSetGetContents() {
     val tests = List(new AnyRef, null)
     tests foreach {e =>
       clipboard.setContents(e)
@@ -85,7 +85,7 @@ class ClipboardTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var clipboard: Clipboard = null

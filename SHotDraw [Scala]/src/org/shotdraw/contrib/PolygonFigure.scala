@@ -281,7 +281,7 @@ class PolygonFigure extends AbstractFigure {
   /**
    * Remove points that are nearly colinear with others
    **/
-  def smoothPoints {
+  def smoothPoints() {
     willChange
     var removed = false
     var n = pointCount

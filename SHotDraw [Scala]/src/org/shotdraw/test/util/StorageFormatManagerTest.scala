@@ -43,7 +43,7 @@ class StorageFormatManagerTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     storageformatmanager = createInstance
   }
@@ -53,7 +53,7 @@ class StorageFormatManagerTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     storageformatmanager = null
     super.tearDown
   }
@@ -62,21 +62,21 @@ class StorageFormatManagerTest(name: String) extends TestCase(name) {
    * Method testAddStorageFormat is testing addStorageFormat
    * @see org.shotdraw.util.StorageFormatManager#addStorageFormat(org.shotdraw.util.StorageFormat)
    */
-  def testAddStorageFormat {
+  def testAddStorageFormat() {
   }
 
   /**
    * Method testRemoveStorageFormat is testing removeStorageFormat
    * @see org.shotdraw.util.StorageFormatManager#removeStorageFormat(org.shotdraw.util.StorageFormat)
    */
-  def testRemoveStorageFormat {
+  def testRemoveStorageFormat() {
   }
 
   /**
    * Method testContainsStorageFormat is testing containsStorageFormat
    * @see org.shotdraw.util.StorageFormatManager#containsStorageFormat(org.shotdraw.util.StorageFormat)
    */
-  def testContainsStorageFormat {
+  def testContainsStorageFormat() {
   }
 
   /**
@@ -86,7 +86,7 @@ class StorageFormatManagerTest(name: String) extends TestCase(name) {
    * @see org.shotdraw.util.StorageFormatManager#setDefaultStorageFormat(org.shotdraw.util.StorageFormat)
    * @see org.shotdraw.util.StorageFormatManager#getDefaultStorageFormat()
    */
-  def testSetGetDefaultStorageFormat {
+  def testSetGetDefaultStorageFormat() {
     val tests = List(new StandardStorageFormat, null)
     
     tests foreach { e =>
@@ -99,14 +99,14 @@ class StorageFormatManagerTest(name: String) extends TestCase(name) {
    * Method testRegisterFileFilters is testing registerFileFilters
    * @see org.shotdraw.util.StorageFormatManager#registerFileFilters(javax.swing.JFileChooser)
    */
-  def testRegisterFileFilters {
+  def testRegisterFileFilters() {
   }
 
   /**
    * Method testFindStorageFormat is testing findStorageFormat
    * @see org.shotdraw.util.StorageFormatManager#findStorageFormat(javax.swing.filechooser.FileFilter)
    */
-  def testFindStorageFormat {
+  def testFindStorageFormat() {
   }
 
   /**
@@ -115,7 +115,7 @@ class StorageFormatManagerTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var storageformatmanager: StorageFormatManager = null

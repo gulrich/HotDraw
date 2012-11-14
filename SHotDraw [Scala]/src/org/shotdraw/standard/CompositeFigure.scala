@@ -114,7 +114,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    * Removes all children.
    * @see #remove
    */
-  def removeAll {
+  def removeAll() {
     figures foreach (_.removeFromContainer(this))
     fFigures = ArrayBuffer()
     _clearQuadTree
@@ -471,7 +471,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
   /**
    * Releases the figure and all its children.
    */
-  override def release {
+  override def release() {
     figures foreach (_.release)
     super.release
   }
@@ -579,7 +579,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
     }
   }
 
-  private def _clearQuadTree {
+  private def _clearQuadTree() {
     if (_theQuadTree != null) {
       _theQuadTree.clear
     }

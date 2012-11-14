@@ -89,7 +89,7 @@ class FloatingTextField {
   /**
    * Removes the overlay.
    */
-  def endOverlay {
+  def endOverlay() {
     fContainer.requestFocus
     if (fEditWidget != null) {
       fEditWidget.setVisible(false)

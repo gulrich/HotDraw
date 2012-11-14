@@ -42,7 +42,7 @@ class LineConnectionTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     lineconnection = createInstance
   }
@@ -52,7 +52,7 @@ class LineConnectionTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     lineconnection = null
     super.tearDown
   }
@@ -61,189 +61,189 @@ class LineConnectionTest(name: String) extends TestCase(name) {
    * Method testCanConnect is testing canConnect
    * @see org.shotdraw.figures.LineConnection#canConnect()
    */
-  def testCanConnect {
+  def testCanConnect() {
   }
 
   /**
    * Method testConnectStart is testing connectStart
    * @see org.shotdraw.figures.LineConnection#connectStart(org.shotdraw.framework.Connector)
    */
-  def testConnectStart {
+  def testConnectStart() {
   }
 
   /**
    * Method testConnectEnd is testing connectEnd
    * @see org.shotdraw.figures.LineConnection#connectEnd(org.shotdraw.framework.Connector)
    */
-  def testConnectEnd {
+  def testConnectEnd() {
   }
 
   /**
    * Method testDisconnectStart is testing disconnectStart
    * @see org.shotdraw.figures.LineConnection#disconnectStart()
    */
-  def testDisconnectStart {
+  def testDisconnectStart() {
   }
 
   /**
    * Method testDisconnectEnd is testing disconnectEnd
    * @see org.shotdraw.figures.LineConnection#disconnectEnd()
    */
-  def testDisconnectEnd {
+  def testDisconnectEnd() {
   }
 
   /**
    * Method testConnectsSame is testing connectsSame
    * @see org.shotdraw.figures.LineConnection#connectsSame(org.shotdraw.framework.ConnectionFigure)
    */
-  def testConnectsSame {
+  def testConnectsSame() {
   }
 
   /**
    * Method testStartFigure is testing startFigure
    * @see org.shotdraw.figures.LineConnection#startFigure()
    */
-  def testStartFigure {
+  def testStartFigure() {
   }
 
   /**
    * Method testEndFigure is testing endFigure
    * @see org.shotdraw.figures.LineConnection#endFigure()
    */
-  def testEndFigure {
+  def testEndFigure() {
   }
 
   /**
    * Method testGetStartConnector is testing getStartConnector
    * @see org.shotdraw.figures.LineConnection#getStartConnector()
    */
-  def testGetStartConnector {
+  def testGetStartConnector() {
   }
 
   /**
    * Method testGetEndConnector is testing getEndConnector
    * @see org.shotdraw.figures.LineConnection#getEndConnector()
    */
-  def testGetEndConnector {
+  def testGetEndConnector() {
   }
 
   /**
    * Method testStartPoint is testing startPoint
    * @see org.shotdraw.figures.LineConnection#startPoint(int, int)
    */
-  def testStartPoint {
+  def testStartPoint() {
   }
 
   /**
    * Method testEndPoint is testing endPoint
    * @see org.shotdraw.figures.LineConnection#endPoint(int, int)
    */
-  def testEndPoint {
+  def testEndPoint() {
   }
 
   /**
    * Method testHandles is testing handles
    * @see org.shotdraw.figures.LineConnection#handles()
    */
-  def testHandles {
+  def testHandles() {
   }
 
   /**
    * Method testSetPointAt is testing setPointAt
    * @see org.shotdraw.figures.LineConnection#setPointAt(java.awt.Point, int)
    */
-  def testSetPointAt {
+  def testSetPointAt() {
   }
 
   /**
    * Method testInsertPointAt is testing insertPointAt
    * @see org.shotdraw.figures.LineConnection#insertPointAt(java.awt.Point, int)
    */
-  def testInsertPointAt {
+  def testInsertPointAt() {
   }
 
   /**
    * Method testRemovePointAt is testing removePointAt
    * @see org.shotdraw.figures.LineConnection#removePointAt(int)
    */
-  def testRemovePointAt {
+  def testRemovePointAt() {
   }
 
   /**
    * Method testUpdateConnection is testing updateConnection
    * @see org.shotdraw.figures.LineConnection#updateConnection()
    */
-  def testUpdateConnection {
+  def testUpdateConnection() {
   }
 
   /**
    * Method testLayoutConnection is testing layoutConnection
    * @see org.shotdraw.figures.LineConnection#layoutConnection()
    */
-  def testLayoutConnection {
+  def testLayoutConnection() {
   }
 
   /**
    * Method testFigureChanged is testing figureChanged
    * @see org.shotdraw.figures.LineConnection#figureChanged(org.shotdraw.framework.FigureChangeEvent)
    */
-  def testFigureChanged {
+  def testFigureChanged() {
   }
 
   /**
    * Method testFigureRemoved is testing figureRemoved
    * @see org.shotdraw.figures.LineConnection#figureRemoved(org.shotdraw.framework.FigureChangeEvent)
    */
-  def testFigureRemoved {
+  def testFigureRemoved() {
   }
 
   /**
    * Method testFigureRequestRemove is testing figureRequestRemove
    * @see org.shotdraw.figures.LineConnection#figureRequestRemove(org.shotdraw.framework.FigureChangeEvent)
    */
-  def testFigureRequestRemove {
+  def testFigureRequestRemove() {
   }
 
   /**
    * Method testFigureInvalidated is testing figureInvalidated
    * @see org.shotdraw.figures.LineConnection#figureInvalidated(org.shotdraw.framework.FigureChangeEvent)
    */
-  def testFigureInvalidated {
+  def testFigureInvalidated() {
   }
 
   /**
    * Method testFigureRequestUpdate is testing figureRequestUpdate
    * @see org.shotdraw.figures.LineConnection#figureRequestUpdate(org.shotdraw.framework.FigureChangeEvent)
    */
-  def testFigureRequestUpdate {
+  def testFigureRequestUpdate() {
   }
 
   /**
    * Method testRelease is testing release
    * @see org.shotdraw.figures.LineConnection#release()
    */
-  def testRelease {
+  def testRelease() {
   }
 
   /**
    * Method testWrite is testing write
    * @see org.shotdraw.figures.LineConnection#write(org.shotdraw.util.StorableOutput)
    */
-  def testWrite {
+  def testWrite() {
   }
 
   /**
    * Method testRead is testing read
    * @see org.shotdraw.figures.LineConnection#read(org.shotdraw.util.StorableInput)
    */
-  def testRead {
+  def testRead() {
   }
 
   /**
    * Method testVisit is testing visit
    * @see org.shotdraw.figures.LineConnection#visit(org.shotdraw.framework.FigureVisitor)
    */
-  def testVisit {
+  def testVisit() {
   }
 
   /**
@@ -252,7 +252,7 @@ class LineConnectionTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var lineconnection: LineConnection = null

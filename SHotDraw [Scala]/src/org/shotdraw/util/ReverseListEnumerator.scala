@@ -29,7 +29,7 @@ class ReverseListEnumerator(var myList: List[Figure]) extends Iterator[Figure] {
     case None => sys.error("ReverseListEnumerator: No such element exception")
   }
 
-  def remove {
+  def remove() {
     myList = myList.init
   }
 }

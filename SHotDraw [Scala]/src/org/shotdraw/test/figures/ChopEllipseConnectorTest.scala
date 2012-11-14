@@ -42,7 +42,7 @@ class ChopEllipseConnectorTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     chopellipseconnector = createInstance
   }
@@ -52,7 +52,7 @@ class ChopEllipseConnectorTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     chopellipseconnector = null
     super.tearDown
   }
@@ -63,7 +63,7 @@ class ChopEllipseConnectorTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var chopellipseconnector: ChopEllipseConnector = null

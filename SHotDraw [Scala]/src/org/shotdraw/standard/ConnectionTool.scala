@@ -195,7 +195,7 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
     editor.toolDone
   }
 
-  override def deactivate {
+  override def deactivate() {
     super.deactivate
     if (getTargetFigure != null) {
       getTargetFigure.connectorVisibility(false, null)

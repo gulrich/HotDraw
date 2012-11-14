@@ -89,7 +89,7 @@ abstract class DNDHelper(isDragSource: Boolean, isDropTarget: Boolean) {
     }
   }
 
-  def deinitialize {
+  def deinitialize() {
     if (getDragSourceListener != null) {
       destroyDragGestreRecognizer
       setDragSourceListener(null)
@@ -152,7 +152,7 @@ abstract class DNDHelper(isDragSource: Boolean, isDropTarget: Boolean) {
   /**
    * Used to destroy the gesture listener which ineffect turns off dragability.
    */
-  protected def destroyDragGestreRecognizer {
+  protected def destroyDragGestreRecognizer() {
     if (getDragGestureRecognizer != null) {
       getDragGestureRecognizer.removeDragGestureListener(getDragGestureListener)
       getDragGestureRecognizer.setComponent(null)

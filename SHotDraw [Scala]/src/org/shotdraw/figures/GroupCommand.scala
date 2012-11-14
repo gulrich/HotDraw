@@ -51,7 +51,7 @@ object GroupCommand {
       } else false
     }
 
-    def groupFigures {
+    def groupFigures() {
       getDrawingView.drawing.orphanAll(getAffectedFigures)
       getDrawingView.clearSelection
       val group = new GroupFigure
@@ -66,7 +66,7 @@ object GroupCommand {
 
 class GroupCommand(name: String, newDrawingEditor: DrawingEditor) extends AbstractCommand(name, newDrawingEditor) {
 
-  override def execute {
+  override def execute() {
     super.execute
     setUndoActivity(createUndoActivity)
     getUndoActivity.setAffectedFigures(view.selection)

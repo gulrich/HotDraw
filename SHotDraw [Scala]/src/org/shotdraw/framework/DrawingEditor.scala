@@ -46,7 +46,7 @@ trait DrawingEditor extends FigureSelectionListener {
    * Informs the editor that a tool has done its interaction.
    * This method can be used to switch back to the default tool.
    */
-  def toolDone
+  def toolDone()
 
   /**
    * Informs that the current figure selection has changed.

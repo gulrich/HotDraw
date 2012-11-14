@@ -88,7 +88,7 @@ class CommandMenu(name: String) extends JMenu(name) with ActionListener with Com
     }
   }
 
-  def checkEnabled {
+  def checkEnabled() {
     for(i <- 0 to getMenuComponentCount-1) {
       val c = getMenuComponent(i)
       c match {

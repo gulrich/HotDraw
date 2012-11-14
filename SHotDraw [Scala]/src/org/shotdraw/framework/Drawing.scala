@@ -38,7 +38,7 @@ trait Drawing extends Storable with FigureChangeListener with Serializable {
   /**
    * Releases the drawing and its contained figures.
    */
-  def release
+  def release()
 
   /**
    * Returns an enumeration to iterate in
@@ -291,12 +291,12 @@ trait Drawing extends Storable with FigureChangeListener with Serializable {
   /**
    * Acquires the drawing lock.
    */
-  def lock
+  def lock()
 
   /**
    * Releases the drawing lock.
    */
-  def unlock
+  def unlock()
 
   /**
    * Used to optimize rendering.  Rendering of many objects may

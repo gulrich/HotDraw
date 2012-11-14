@@ -42,7 +42,7 @@ class LineFigureTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     linefigure = createInstance
   }
@@ -52,7 +52,7 @@ class LineFigureTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     linefigure = null
     super.tearDown
   }
@@ -61,28 +61,28 @@ class LineFigureTest(name: String) extends TestCase(name) {
    * Method testStartPoint is testing startPoint
    * @see org.shotdraw.figures.LineFigure#startPoint()
    */
-  def testStartPoint {
+  def testStartPoint() {
   }
 
   /**
    * Method testEndPoint is testing endPoint
    * @see org.shotdraw.figures.LineFigure#endPoint()
    */
-  def testEndPoint {
+  def testEndPoint() {
   }
 
   /**
    * Method testSetPoints is testing setPoints
    * @see org.shotdraw.figures.LineFigure#setPoints(java.awt.Point, java.awt.Point)
    */
-  def testSetPoints {
+  def testSetPoints() {
   }
 
   /**
    * Method testBasicDisplayBox is testing basicDisplayBox
    * @see org.shotdraw.figures.LineFigure#basicDisplayBox(java.awt.Point, java.awt.Point)
    */
-  def testBasicDisplayBox {
+  def testBasicDisplayBox() {
   }
 
   /**
@@ -91,7 +91,7 @@ class LineFigureTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var linefigure: LineFigure = null

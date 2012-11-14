@@ -28,7 +28,7 @@ import java.awt.dnd.DragSourceListener
 trait DNDInterface {
   def DNDInitialize(dgl: DragGestureListener)
 
-  def DNDDeinitialize
+  def DNDDeinitialize()
 
   /**
    * When the DNDTool starts a drag action, it queries the interface for the

@@ -72,7 +72,7 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
   /**
    * Sets the cross hair cursor.
    */
-  override def activate {
+  override def activate() {
     super.activate
     if (isUsable) {
       getActiveView.setCursor(new AWTCursor(java.awt.Cursor.CROSSHAIR_CURSOR))
@@ -83,7 +83,7 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
   /**
    * @see org.shotdraw.framework.Tool#deactivate()
    */
-  override def deactivate {
+  override def deactivate() {
     setCreatedFigure(null)
     setAddedFigure(null)
     setAddedFigures(null)

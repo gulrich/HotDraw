@@ -44,7 +44,7 @@ class ChangeConnectionEndHandleTest(name: String) extends TestCase(name) {
    * prepare an instance of this TestCase for a single test.
    * It's called from the JUnit framework only.
    */
-  override protected def setUp {
+  override protected def setUp() {
     super.setUp
     changeconnectionendhandle = createInstance
   }
@@ -54,7 +54,7 @@ class ChangeConnectionEndHandleTest(name: String) extends TestCase(name) {
    * clean up after each single test of this TestCase.
    * It's called from the JUnit framework only.
    */
-  override protected def tearDown {
+  override protected def tearDown() {
     changeconnectionendhandle = null
     super.tearDown
   }
@@ -63,7 +63,7 @@ class ChangeConnectionEndHandleTest(name: String) extends TestCase(name) {
    * Method testLocate is testing locate
    * @see org.shotdraw.standard.ChangeConnectionEndHandle#locate()
    */
-  def testLocate {
+  def testLocate() {
   }
 
   /**
@@ -72,7 +72,7 @@ class ChangeConnectionEndHandleTest(name: String) extends TestCase(name) {
    * This way, no test gets lost when regenerating after renaming.
    * <b>Method testVault is supposed to be empty.</b>
    */
-  def testVault {
+  def testVault() {
   }
 
   private var changeconnectionendhandle: ChangeConnectionEndHandle = null

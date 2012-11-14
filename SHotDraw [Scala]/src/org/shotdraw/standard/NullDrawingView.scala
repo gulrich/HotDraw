@@ -170,7 +170,7 @@ class NullDrawingView(var myDrawingEditor: DrawingEditor) extends JPanel with Dr
   /**
    * Clears the current selection.
    */
-  def clearSelection {}
+  def clearSelection() {}
 
   /**
    * Gets the current selection as a FigureSelection. A FigureSelection
@@ -202,12 +202,12 @@ class NullDrawingView(var myDrawingEditor: DrawingEditor) extends JPanel with Dr
   /**
    * Checks whether the drawing has some accumulated damage
    */
-  def checkDamage {}
+  def checkDamage() {}
 
   /**
    * Repair the damaged area
    */
-  def repairDamage {}
+  def repairDamage() {}
 
   /**
    * Paints the drawing view. The actual drawing is delegated to
@@ -278,13 +278,13 @@ class NullDrawingView(var myDrawingEditor: DrawingEditor) extends JPanel with Dr
    * Freezes the view by acquiring the drawing lock.
    * @see Drawing#lock
    */
-  def freezeView {}
+  def freezeView() {}
 
   /**
    * Unfreezes the view by releasing the drawing lock.
    * @see Drawing#unlock
    */
-  def unfreezeView {}
+  def unfreezeView() {}
 
   /**
    * Add a listener for selection changes in this DrawingView.

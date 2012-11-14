@@ -34,7 +34,7 @@ trait Command {
   /**
    * Executes the command.
    */
-  def execute
+  def execute()
 
   /**
    * Tests if the command can be executed.
