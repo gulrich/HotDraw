@@ -36,9 +36,9 @@ class PolyLineConnector(fOwner: PolyLineFigure) extends ChopBoxConnector(fOwner)
       case x => sys.error(x.getClass + " found, PolyLineFigure expected")
     }
     val ctr = p.center
-    var cx: Int = -1
-    var cy: Int = -1
-    var len: Long = Long.MaxValue
+    var cx = -1
+    var cy = -1
+    var len = Long.MaxValue
     for(i <- 0 to p.pointCount - 2) {
       val p1 = p.pointAt(i)
       val p2 = p.pointAt(i + 1)

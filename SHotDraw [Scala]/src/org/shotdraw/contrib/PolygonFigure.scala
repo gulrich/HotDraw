@@ -51,10 +51,10 @@ object PolygonFigure {
    * replacement for builtin Polygon.getBounds that doesn't always update?
    */
   def bounds(p: Polygon): Rectangle = {
-    var minx: Int = Integer.MAX_VALUE
-    var miny: Int = Integer.MAX_VALUE
-    var maxx: Int = Integer.MIN_VALUE
-    var maxy: Int = Integer.MIN_VALUE
+    var minx = Integer.MAX_VALUE
+    var miny = Integer.MAX_VALUE
+    var maxx = Integer.MIN_VALUE
+    var maxy = Integer.MIN_VALUE
     for(x <- p.xpoints; y <- p.ypoints) {
       if (x > maxx) {
         maxx = x
@@ -73,17 +73,17 @@ object PolygonFigure {
   }
 
   def center(p: Polygon): Point = {
-    var sx: Long = p.xpoints.foldLeft(0)((x,y) => x+y)
-    var sy: Long = p.ypoints.foldLeft(0)((x,y) => x+y)
+    var sx = p.xpoints.foldLeft(0)((x,y) => x+y)
+    var sy = p.ypoints.foldLeft(0)((x,y) => x+y)
     val n = p.npoints
     new Point((sx / n).asInstanceOf[Int], (sy / n).asInstanceOf[Int])
   }
 
   def chop(poly: Polygon, p: Point): Point = {
     val ctr = center(poly)
-    var cx: Int = -1
-    var cy: Int = -1
-    var len: Long = Long.MaxValue
+    var cx = -1
+    var cy = -1
+    var len = Long.MaxValue
     for(i <- 0 to poly.npoints - 1) {
       val nxt = (i + 1) % poly.npoints
       val chop = Geom.intersect(poly.xpoints(i), poly.ypoints(i), poly.xpoints(nxt), poly.ypoints(nxt), p.x, p.y, ctr.x, ctr.y)
@@ -110,12 +110,12 @@ object PolygonFigure {
   /**
    * Distance threshold for smoothing away or locating points
    **/
-  private[contrib] final val TOO_CLOSE = 2
+  private[contrib] final val TOO_CLOSE: Double = 2
 }
 
 class PolygonFigure extends AbstractFigure {
   import PolygonFigure._
-  private var fPoly: Polygon = new Polygon
+  private var fPoly = new Polygon
   
   def this(x: Int, y: Int) {
     this()
@@ -132,7 +132,7 @@ class PolygonFigure extends AbstractFigure {
   override def isEmpty: Boolean = ((pointCount < 3) || ((size.width < TOO_CLOSE) && (size.height < TOO_CLOSE)))
 
   def handles: Seq[Handle] = {
-    var handles: ArrayBuffer[Handle] = ArrayBuffer[Handle]()
+    var handles = ArrayBuffer[Handle]()
     for(i <- 0 to pointCount-1) {
       handles += new PolygonHandle(this, locator(i), i) 
     }
@@ -141,7 +141,7 @@ class PolygonFigure extends AbstractFigure {
   }
 
   def basicDisplayBox(origin: Point, corner: Point) {
-    var r: Rectangle = displayBox
+    var r = displayBox
     val dx = origin.x - r.x
     val dy = origin.y - r.y
     getInternalPolygon.translate(dx, dy)
@@ -164,7 +164,7 @@ class PolygonFigure extends AbstractFigure {
   override def center: Point = PolygonFigure.center(getInternalPolygon)
 
   def points: Seq[Point] = {
-    var pts: ArrayBuffer[Point] = ArrayBuffer[Point]()
+    var pts = ArrayBuffer[Point]()
     for(i <- 0 to pointCount-1) {
       pts += new Point(getInternalPolygon.xpoints(i), getInternalPolygon.ypoints(i))
     }
@@ -283,11 +283,11 @@ class PolygonFigure extends AbstractFigure {
    **/
   def smoothPoints {
     willChange
-    var removed: Boolean = false
-    var n: Int = pointCount
+    var removed = false
+    var n = pointCount
     do {
       removed = false
-      var i: Int = 0
+      var i = 0
       while (i < n && n >= 3) {
         val nxt = (i + 1) % n
         val prv = (i - 1 + n) % n
@@ -328,8 +328,8 @@ class PolygonFigure extends AbstractFigure {
    **/
   def outermostPoint: Point = {
     val ctr = center
-    var outer: Int = 0
-    var dist: Long = 0
+    var outer = 0
+    var dist = 0l
     for(i <- 0 to pointCount - 1) {
       val d = Geom.length2(ctr.x, ctr.y, getInternalPolygon.xpoints(i), getInternalPolygon.ypoints(i))
       if (d > dist) {
@@ -345,8 +345,8 @@ class PolygonFigure extends AbstractFigure {
    * @return the index of the segment or -1 if no segment was hit.
    */
   def findSegment(x: Int, y: Int): Int = {
-    var dist: Double = TOO_CLOSE
-    var best: Int = -1
+    var dist = TOO_CLOSE
+    var best = -1
     for(i <- 0 to pointCount) {
       val n = (i + 1) % pointCount
       val d = Geom.distanceFromLine(getInternalPolygon.xpoints(i), getInternalPolygon.ypoints(i), getInternalPolygon.xpoints(n), getInternalPolygon.ypoints(n), x, y)

@@ -74,7 +74,7 @@ abstract class ChangeConnectionHandle(owner: ConnectionFigure) extends AbstractH
  
   private var fOriginalTarget: Connector = null
   private var myTarget: Figure = null
-  private var myConnection: ConnectionFigure = owner
+  private var myConnection = owner
   
   /**
    * Returns the target connector of the change.
@@ -119,7 +119,7 @@ abstract class ChangeConnectionHandle(owner: ConnectionFigure) extends AbstractH
    * Finds a new target of the connection.
    */
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    var p: Point = new Point(x, y)
+    var p = new Point(x, y)
     val f = findConnectableFigure(x, y, view.drawing)
     if (f ne getTargetFigure) {
       if (getTargetFigure != null) {
@@ -142,7 +142,7 @@ abstract class ChangeConnectionHandle(owner: ConnectionFigure) extends AbstractH
    * new target the connection reverts to its original one.
    */
   override def invokeEnd(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    var target: Connector = findConnectionTarget(x, y, view.drawing)
+    var target = findConnectionTarget(x, y, view.drawing)
     if (target == null) {
       target = fOriginalTarget
     }

@@ -36,16 +36,16 @@ class StandardStorageFormat extends StorageFormat {
   /**
    * File extension
    */
-  private var myFileExtension: String = createFileExtension
+  private var myFileExtension = createFileExtension
   /**
    * Description of the file type when displaying the FileFilter
    */
-  private var myFileDescription: String = createFileDescription
+  private var myFileDescription = createFileDescription
   /**
    * FileFilter for a javax.swing.JFileChooser which recognizes files with the
    * extension "draw"
    */
-  private var myFileFilter: FileFilter = createFileFilter
+  private var myFileFilter = createFileFilter
   /**
    * Factory method to create the file extension recognized by the FileFilter for this
    * StandardStorageFormat. The StandardStorageFormat has the file extension "draw"

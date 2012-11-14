@@ -44,7 +44,7 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
    * maintaining SHIFT down and clicking. However, this class still
    * maintains its normal behavior of creating only one figure.
    */
-  private var fAddedFigures: ArrayBuffer[Figure] = ArrayBuffer()
+  private var fAddedFigures = ArrayBuffer[Figure]()
   /**
    * the currently created figure
    */

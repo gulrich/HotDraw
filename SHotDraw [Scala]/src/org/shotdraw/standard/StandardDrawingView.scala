@@ -73,7 +73,7 @@ object StandardDrawingView {
   final val SCROLL_INCR = 100
   final val SCROLL_OFFSET = 10
   
-  private var count: Int = 0
+  private var count = 0
   def counter = {
     count = count+1
     count
@@ -88,12 +88,12 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * @see #tool
    */
   @transient
-  private var fEditor: DrawingEditor = newEditor
+  private var fEditor = newEditor
   /**
    * the registered listeners for selection changes
    */
   @transient
-  private var fSelectionListeners: ArrayBuffer[FigureSelectionListener] = ArrayBuffer[FigureSelectionListener]()
+  private var fSelectionListeners = ArrayBuffer[FigureSelectionListener]()
   /**
    * The shown drawing.
    */
@@ -107,12 +107,12 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * The list of currently selected figures.
    */
   @transient
-  private var fSelection: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
+  private var fSelection = ArrayBuffer[Figure]()
   /**
    * The shown selection handles.
    */
   @transient
-  private var fSelectionHandles: ArrayBuffer[Handle] = ArrayBuffer()
+  private var fSelectionHandles = ArrayBuffer[Handle]()
   /**
    * The position of the last mouse click
    * inside the view.
@@ -123,13 +123,13 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * view painters that are drawn before the contents,
    * that is in the background.
    */
-  private var fBackgrounds: ArrayBuffer[Painter] = ArrayBuffer()
+  private var fBackgrounds = ArrayBuffer[Painter]()
   /**
    * A List of optional foregrounds. The list contains
    * view painters that are drawn after the contents,
    * that is in the foreground.
    */
-  private var fForegrounds: ArrayBuffer[Painter] = ArrayBuffer()
+  private var fForegrounds = ArrayBuffer[Painter]()
   /**
    * The update strategy used to repair the view.
    */
@@ -139,7 +139,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * grid functionality.
    */
   private var fConstrainer: PointConstrainer = null
-  private var myCounter: Int = StandardDrawingView.counter
+  private var myCounter = StandardDrawingView.counter
   private var dndh: DNDHelper = null
   /**
    * Listener for mouse clicks.
@@ -157,9 +157,9 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * Reflects whether the drawing view is in read-only mode (from a user's
    * perspective).
    */
-  private var myIsReadOnly: Boolean = false
+  private var myIsReadOnly = false
   /** *** Autoscroll support *****/
-  private var ash: StandardDrawingView#ASH = new StandardDrawingView.this.ASH(10)
+  private var ash = new StandardDrawingView.this.ASH(10)
   
   setAutoscrolls(true)
   setPreferredSize(new Dimension(width, height))
@@ -277,7 +277,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     if (fe == null) {
       return Seq[Figure]()
     }
-    var vCF: ArrayBuffer[ConnectionFigure] = ArrayBuffer[ConnectionFigure]()
+    var vCF = ArrayBuffer[ConnectionFigure]()
     val visitor = new InsertIntoDrawingVisitor(drawing)
     fe foreach (f => f match {
       case cf: ConnectionFigure => vCF += cf
@@ -314,7 +314,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     if (inFigure == null || !inFigure.canConnect) {
       return null
     }
-    var result: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
+    var result = ArrayBuffer[Figure]()
     drawing.figures foreach (f => f match {
       case cf: ConnectionFigure if !(isFigureSelected(f)) =>
         if (cf.startFigure.includes(inFigure) || cf.endFigure.includes(inFigure)) result += f
@@ -375,7 +375,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   }
 
   protected def addToSelectionImpl(figure: Figure): Boolean = {
-    var changed: Boolean = false
+    var changed = false
     if (!isFigureSelected(figure) && drawing.includes(figure)) {
       fSelection += figure
       fSelectionHandles = null
@@ -396,7 +396,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * Adds a Seq[Figure] to the current selection.
    */
   def addToSelectionAll(fe: Seq[Figure]) {
-    var changed: Boolean = false
+    var changed = false
     fe foreach { f => changed |= addToSelectionImpl(f)}
     if (changed) {
       fireSelectionChanged
@@ -973,10 +973,10 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
      * one grid point in the cursor direction.
      */
     protected def handleCursorKey(key: Int) {
-      var dx: Int = 0
-      var dy: Int = 0
-      var stepX: Int = 1
-      var stepY: Int = 1
+      var dx = 0
+      var dy = 0
+      var stepX = 1
+      var stepY = 1
       if (fConstrainer != null) {
         stepX = fConstrainer.getStepX
         stepY = fConstrainer.getStepY
@@ -996,6 +996,6 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
 
     protected def createDeleteCommand: Command = new UndoableCommand(new DeleteCommand("Delete", editor))
 
-    private var deleteCmd: Command = createDeleteCommand
+    private var deleteCmd = createDeleteCommand
   }
 }

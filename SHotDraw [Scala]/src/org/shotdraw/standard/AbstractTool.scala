@@ -71,7 +71,7 @@ object AbstractTool {
       }
     }
 
-    private var myRegisteredListeners: ArrayBuffer[ToolListener] = ArrayBuffer()
+    private var myRegisteredListeners = ArrayBuffer[ToolListener]()
   }
 
 }
@@ -84,8 +84,8 @@ class AbstractTool(newDrawingEditor: DrawingEditor) extends Tool {
    * The position of the initial mouse down.
    * The anchor point is usually the first mouse click performed with this tool.
    */
-  private var myAnchorX: Int = 0
-  private var myAnchorY: Int = 0
+  private var myAnchorX = 0
+  private var myAnchorY = 0
   /**
    * A tool can have a drawing view on which it operates
    * independingly of the currently active drawing view.
@@ -94,11 +94,11 @@ class AbstractTool(newDrawingEditor: DrawingEditor) extends Tool {
   private var myDrawingView: DrawingView = null
   private var myUndoActivity: Undoable = null
   private var myEventDispatcher: AbstractTool.EventDispatcher = null
-  private var myIsUsable: Boolean = false
+  private var myIsUsable = false
   /**
    * Flag to indicate whether to perform usable checks or not
    */
-  private var myIsEnabled: Boolean = false
+  private var myIsEnabled = false
   
   setEditor(newDrawingEditor)
   setEventDispatcher(createEventDispatcher)

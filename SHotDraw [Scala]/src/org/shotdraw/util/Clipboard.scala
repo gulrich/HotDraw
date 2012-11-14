@@ -25,7 +25,7 @@ object Clipboard {
    */
   def getClipboard: Clipboard = fgClipboard
 
-  protected var fgClipboard: Clipboard = new Clipboard
+  protected var fgClipboard = new Clipboard
 }
 
 class Clipboard {

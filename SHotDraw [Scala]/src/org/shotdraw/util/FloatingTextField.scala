@@ -99,7 +99,7 @@ class FloatingTextField {
     }
   }
 
-  private var fEditWidget: JTextField = new JTextField(20)
+  private var fEditWidget = new JTextField(20)
   private var fContainer: Container = null
 }
 

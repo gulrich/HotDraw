@@ -34,7 +34,7 @@ object GroupCommand {
       }
       getDrawingView.clearSelection
       getDrawingView.drawing.orphanAll(getAffectedFigures)
-      var affectedFigures: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
+      var affectedFigures = ArrayBuffer[Figure]()
       getAffectedFigures foreach { f =>
         getDrawingView.drawing.addAll(f.figures)
         getDrawingView.addToSelectionAll(f.figures)

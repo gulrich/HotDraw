@@ -56,10 +56,10 @@ abstract class AutoscrollHelper {
    *
    */
   def autoscroll(location: Point) {
-    var top: Int = 0
-    var left: Int = 0
-    var bottom: Int = 0
-    var right: Int = 0
+    var top = 0
+    var left = 0
+    var bottom = 0
+    var right = 0
     val size = getSize
     val rect = getVisibleRect
     val bottomEdge = rect.y + rect.height
@@ -83,6 +83,6 @@ abstract class AutoscrollHelper {
     autoscrollInsets
   }
 
-  private var autoscrollMargin: Int = 20
-  private var autoscrollInsets: Insets = new Insets(0, 0, 0, 0)
+  private var autoscrollMargin = 20
+  private var autoscrollInsets = new Insets(0, 0, 0, 0)
 }

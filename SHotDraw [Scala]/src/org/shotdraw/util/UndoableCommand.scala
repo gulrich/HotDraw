@@ -23,7 +23,7 @@ import org.shotdraw.standard.AbstractCommand
  */
 class UndoableCommand extends Command with FigureSelectionListener with CommandListener {
   private var myWrappedCommand: Command = null
-  private var hasSelectionChanged: Boolean = false
+  private var hasSelectionChanged = false
   private var myEventDispatcher: AbstractCommand.EventDispatcher = null
   
   def this(newWrappedCommand: Command) {

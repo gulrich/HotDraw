@@ -22,10 +22,10 @@ import scala.collection.mutable.ArrayBuffer
  */
 class QuadTree(nMaxTreeDepth: Int, absoluteBoundingRectangle2D: Rectangle2D) extends Serializable {
   
-  private var _absoluteBoundingRectangle2D: Rectangle2D = new Rectangle2D.Double
-  private var _nMaxTreeDepth: Int = 0
-  private var _theHashtable: scala.collection.mutable.Map[Figure, Rectangle2D] = scala.collection.mutable.Map[Figure, Rectangle2D]()
-  private var _outsideHashtable: scala.collection.mutable.Map[Figure, Rectangle2D] = scala.collection.mutable.Map[Figure, Rectangle2D]()
+  private var _absoluteBoundingRectangle2D = new Rectangle2D.Double
+  private var _nMaxTreeDepth = 0
+  private var _theHashtable = scala.collection.mutable.Map[Figure, Rectangle2D]()
+  private var _outsideHashtable = scala.collection.mutable.Map[Figure, Rectangle2D]()
   private var _nwQuadTree: QuadTree = null
   private var _neQuadTree: QuadTree = null
   private var _swQuadTree: QuadTree = null
@@ -52,7 +52,7 @@ class QuadTree(nMaxTreeDepth: Int, absoluteBoundingRectangle2D: Rectangle2D) ext
     val bNE = absoluteBoundingRectangle2D.intersects(_neQuadTree.getAbsoluteBoundingRectangle2D)
     val bSW = absoluteBoundingRectangle2D.intersects(_swQuadTree.getAbsoluteBoundingRectangle2D)
     val bSE = absoluteBoundingRectangle2D.intersects(_seQuadTree.getAbsoluteBoundingRectangle2D)
-    var nCount: Int = 0
+    var nCount = 0
     if (bNW) {
       nCount += 1
     }
@@ -131,7 +131,7 @@ class QuadTree(nMaxTreeDepth: Int, absoluteBoundingRectangle2D: Rectangle2D) ext
   def getMaxTreeDepth: Int = _nMaxTreeDepth
 
   def getAllWithin(r: Rectangle2D): Seq[Figure] = {
-    var l: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
+    var l = ArrayBuffer[Figure]()
     _outsideHashtable foreach { case (fig,rect) =>
       if (rect.intersects(r)) l += fig
     }

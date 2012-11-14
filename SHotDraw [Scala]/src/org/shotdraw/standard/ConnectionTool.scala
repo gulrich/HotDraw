@@ -100,7 +100,7 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
   /**
    * the currently manipulated connection point
    */
-  private var fSplitPoint: Int = 0
+  private var fSplitPoint = 0
   /**
    * the currently edited connection
    */
@@ -152,7 +152,7 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
    * Adjust the created connection or split segment.
    */
   override def mouseDrag(e: MouseEvent, x: Int, y: Int) {
-    var p: Point = new Point(e.getX, e.getY)
+    var p = new Point(e.getX, e.getY)
     if (getConnection != null) {
       trackConnectors(e, x, y)
       if (getTargetConnector != null) {

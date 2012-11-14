@@ -116,9 +116,9 @@ class UndoManager(maxStackCapacity: Int) {
   /**
    * Collection of undo activities
    */
-  private var redoStack: ArrayBuffer[Undoable] = ArrayBuffer[Undoable]()
+  private var redoStack = ArrayBuffer[Undoable]()
   /**
    * Collection of undo activities
    */
-  private var undoStack: ArrayBuffer[Undoable] = ArrayBuffer[Undoable]()
+  private var undoStack = ArrayBuffer[Undoable]()
 }

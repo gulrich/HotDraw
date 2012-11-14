@@ -60,7 +60,7 @@ object AbstractCommand {
       }
     }
 
-    private var myRegisteredListeners: ArrayBuffer[CommandListener] = ArrayBuffer()
+    private var myRegisteredListeners = ArrayBuffer[CommandListener]()
   }
 
 }

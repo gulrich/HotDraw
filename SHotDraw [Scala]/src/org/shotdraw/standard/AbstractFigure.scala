@@ -411,7 +411,7 @@ abstract class AbstractFigure extends Figure {
   /**
    * The dependend figures which have been added to this container.
    */
-  private var myDependendFigures: ArrayBuffer[Figure] = ArrayBuffer()
-  private var _nZ: Int = 0
+  private var myDependendFigures = ArrayBuffer[Figure]()
+  private var _nZ = 0
 }
 

@@ -59,8 +59,8 @@ class DeleteCommand(name: String, newDrawingEditor: DrawingEditor) extends Figur
   override def execute {
     super.execute
     setUndoActivity(createUndoActivity)
-    var fe: Seq[Figure] = view.selection
-    var affected: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
+    var fe = view.selection
+    var affected = ArrayBuffer[Figure]()
     var f: Figure = null
     var dfe: Seq[Figure] = null
     fe foreach { f =>

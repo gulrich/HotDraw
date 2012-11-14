@@ -82,10 +82,10 @@ class ElbowHandle(owner: LineConnection, fSegment: Int) extends AbstractHandle(o
     val end = endFigure.displayBox
     val i1 = startFigure.connectionInsets
     val i2 = endFigure.connectionInsets
-    var r1x: Int = 0
-    var r1width: Int = 0
-    var r2x: Int = 0
-    var r2width: Int = 0
+    var r1x = 0
+    var r1width = 0
+    var r2x = 0
+    var r2width = 0
     r1x = start.x + i1.left
     r1width = start.width - i1.left - i1.right - 1
     r2x = end.x + i2.left
@@ -108,10 +108,10 @@ class ElbowHandle(owner: LineConnection, fSegment: Int) extends AbstractHandle(o
     val end = endFigure.displayBox
     val i1 = startFigure.connectionInsets
     val i2 = endFigure.connectionInsets
-    var r1y: Int = 0
-    var r1height: Int = 0
-    var r2y: Int = 0
-    var r2height: Int = 0
+    var r1y = 0
+    var r1height = 0
+    var r2y = 0
+    var r2height = 0
     r1y = start.y + i1.top
     r1height = start.height - i1.top - i1.bottom - 1
     r2y = end.y + i2.top
@@ -127,7 +127,7 @@ class ElbowHandle(owner: LineConnection, fSegment: Int) extends AbstractHandle(o
 
   private def ownerConnection: LineConnection =  owner
 
-  private var fLastX: Int = 0
-  private var fLastY: Int = 0
+  private var fLastX = 0
+  private var fLastY = 0
 }
 

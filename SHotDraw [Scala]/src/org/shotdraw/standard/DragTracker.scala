@@ -73,10 +73,10 @@ object DragTracker {
 }
 
 class DragTracker(newDrawingEditor: DrawingEditor, anchor: Figure) extends AbstractTool(newDrawingEditor) {
-  private var fAnchorFigure: Figure = anchor
-  private var fLastX: Int = 0
-  private var fLastY: Int = 0
-  private var fMoved: Boolean = false
+  private var fAnchorFigure = anchor
+  private var fLastX = 0
+  private var fLastY = 0
+  private var fMoved = false
 
   override def mouseDown(e: MouseEvent, x: Int, y: Int) {
     super.mouseDown(e, x, y)

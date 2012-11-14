@@ -31,7 +31,7 @@ class StorageFormatManager {
   /**
    * List containing all registered storage formats
    */
-  private var myStorageFormats: ArrayBuffer[StorageFormat] = ArrayBuffer[StorageFormat]()
+  private var myStorageFormats = ArrayBuffer[StorageFormat]()
   /**
    * Default storage format that should be selected in a javax.swing.JFileChooser
    */

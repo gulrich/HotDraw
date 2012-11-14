@@ -165,8 +165,8 @@ class StorableOutput(stream: OutputStream) {
     fStream.print(' ')
   }
 
-  private var fStream: PrintWriter = new PrintWriter(stream)
-  private var fMap: ArrayBuffer[Storable] = ArrayBuffer()
-  private var fIndent: Int = 0
+  private var fStream = new PrintWriter(stream)
+  private var fMap = ArrayBuffer[Storable]()
+  private var fIndent = 0
 }
 

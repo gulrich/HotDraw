@@ -58,7 +58,7 @@ object PolygonScaleHandle {
 
     def getPolygon: Polygon = myPolygon
 
-    private var myPolygon: Polygon = new Polygon
+    private var myPolygon = new Polygon
   }
 
 }

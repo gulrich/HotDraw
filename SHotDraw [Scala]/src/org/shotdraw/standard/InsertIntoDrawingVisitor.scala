@@ -41,6 +41,6 @@ class InsertIntoDrawingVisitor(var myDrawing: Drawing) extends FigureVisitor {
 
   def getInsertedFigures: Seq[Figure] = myInsertedFigures.foldLeft(List[Figure]())((x,y) => y::x)
 
-  private var myInsertedFigures: Set[Figure] = Set()
+  private var myInsertedFigures = Set[Figure]()
 }
 

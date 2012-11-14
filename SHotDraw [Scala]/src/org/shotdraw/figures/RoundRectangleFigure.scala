@@ -34,8 +34,8 @@ class RoundRectangleFigure(origin: Point, corner: Point) extends AbstractFigure 
   import RoundRectangleFigure._
   
   private var fDisplayBox: Rectangle = null
-  private var fArcWidth: Int = DEFAULT_ARC
-  private var fArcHeight: Int = DEFAULT_ARC
+  private var fArcWidth = DEFAULT_ARC
+  private var fArcHeight = DEFAULT_ARC
   basicDisplayBox(origin, corner)
   
   def this() {

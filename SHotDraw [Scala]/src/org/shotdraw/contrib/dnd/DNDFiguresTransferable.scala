@@ -19,7 +19,7 @@ import java.io._
  * @version <$CURRENT_VERSION$>
  */
 object DNDFiguresTransferable {
-  var DNDFiguresFlavor: DataFlavor = new DataFlavor(classOf[DNDFigures], "DNDFigures")
+  var DNDFiguresFlavor = new DataFlavor(classOf[DNDFigures], "DNDFigures")
 }
 
 class DNDFiguresTransferable(o: Any) extends Transferable with Serializable {

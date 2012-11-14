@@ -66,7 +66,7 @@ object JHDDropTargetListener {
       setAffectedFigures(Seq())
     }
 
-    private var undone: Boolean = false
+    private var undone = false
   }
 
 }
@@ -243,8 +243,8 @@ class JHDDropTargetListener(drawingEditor: DrawingEditor, drawingView: DrawingVi
 
   protected def getTargetUndoActivity: Undoable = targetUndoable
 
-  private var fLastX: Int = 0
-  private var fLastY: Int = 0
+  private var fLastX = 0
+  private var fLastY = 0
   private var targetUndoable: Undoable = null
 }
 

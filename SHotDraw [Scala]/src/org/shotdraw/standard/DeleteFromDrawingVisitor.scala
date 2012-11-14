@@ -21,8 +21,8 @@ import org.shotdraw.framework.Handle
  * @version <$CURRENT_VERSION$>
  */
 class DeleteFromDrawingVisitor(newDrawing: Drawing) extends FigureVisitor {
-  private var myDeletedFigures: Set[Figure] = Set[Figure]()
-  private var myDrawing: Drawing = newDrawing
+  private var myDeletedFigures = Set[Figure]()
+  private var myDrawing = newDrawing
 
   private def setDrawing(newDrawing: Drawing) {
     myDrawing = newDrawing

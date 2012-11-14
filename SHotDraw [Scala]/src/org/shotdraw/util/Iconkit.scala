@@ -38,7 +38,7 @@ import java.awt.image.ImageObserver
  * @version <$CURRENT_VERSION$>
  */
 object Iconkit {
-  private var fgDebug: Boolean = false
+  private var fgDebug = false
   private var fgIconkit: Iconkit = null
   
   def instance: Iconkit = fgIconkit
@@ -48,8 +48,8 @@ object Iconkit {
 
 class Iconkit(fComponent: Component) {
   import Iconkit._
-  private var fMap: Map[String, Image] = Map()
-  private var fRegisteredImages: ArrayBuffer[String] = ArrayBuffer()
+  private var fMap = Map[String, Image]()
+  private var fRegisteredImages = ArrayBuffer[String]()
 
   fgIconkit = this
   

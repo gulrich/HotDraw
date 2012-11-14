@@ -27,6 +27,6 @@ class DNDFigures(fe: List[Figure], newOrigin: Point) extends Serializable {
 
   def getOrigin: Point = origin
 
-  private var figures: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
+  private var figures = ArrayBuffer[Figure]()
   private var origin: Point = null
 }

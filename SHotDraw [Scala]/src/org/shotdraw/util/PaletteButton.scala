@@ -112,8 +112,8 @@ abstract class PaletteButton extends JButton with MouseListener with MouseMotion
   def mouseEntered(e: MouseEvent) {
   }
 
-  private var fState: Int = 0
-  private var fOldState: Int = 0
+  private var fState = 0
+  private var fOldState = 0
   private var fListener: PaletteListener = null
 }
 

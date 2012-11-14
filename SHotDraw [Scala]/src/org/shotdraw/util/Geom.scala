@@ -30,10 +30,10 @@ object Geom {
     if (!r.contains(px, py)) {
       return false
     }
-    var a: Double = .0
-    var b: Double = .0
-    var x: Double = .0
-    var y: Double = .0
+    var a = .0
+    var b = .0
+    var x = .0
+    var y = .0
     if (x1 == x2) {
       return (math.abs(px - x1) < 3)
     }
@@ -52,7 +52,7 @@ object Geom {
    * one point to another one.
    */
   def direction(x1: Int, y1: Int, x2: Int, y2: Int): Int = {
-    var direction: Int = 0
+    var direction = 0
     val vx = x2 - x1
     val vy = y2 - y1
     if (vy < vx && vx > -vy) {
@@ -162,8 +162,8 @@ object Geom {
     val si = math.sin(angle)
     val co = math.cos(angle)
     val e = 0.0001
-    var x: Int = 0
-    var y: Int = 0
+    var x = 0
+    var y = 0
     if (math.abs(si) > e) {
       x = ((1.0 + co / math.abs(si)) / 2.0 * r.width).toInt
       x = range(0, r.width, x)

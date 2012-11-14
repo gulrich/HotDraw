@@ -68,7 +68,7 @@ object JHDDragSourceListener {
       setAffectedFigures(Seq())
     }
 
-    private var undone: Boolean = false
+    private var undone = false
   }
 
 }
@@ -161,6 +161,6 @@ class JHDDragSourceListener(myEditor: DrawingEditor, newView: DrawingView) exten
   }
 
   private var sourceUndoable: Undoable = null
-  private var autoscrollState: Boolean = false
+  private var autoscrollState = false
 }
 

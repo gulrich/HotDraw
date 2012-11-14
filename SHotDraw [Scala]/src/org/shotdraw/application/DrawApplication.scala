@@ -10,52 +10,66 @@
  */
 package org.shotdraw.application
 
+import java.awt.Component._
+import java.awt.event.InputEvent
+import java.awt.event.WindowAdapter
+import java.awt.event.WindowEvent
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.Component
-import java.awt.Component._
 import java.awt.Dimension
 import java.awt.Font
 import java.awt.Graphics
 import java.awt.GraphicsEnvironment
 import java.awt.PrintJob
-import java.awt.event.InputEvent
-import java.awt.event.WindowAdapter
-import java.awt.event.WindowEvent
 import java.io.IOException
-import javax.swing.JFileChooser
-import javax.swing.JFrame
-import javax.swing.JMenu
-import javax.swing.JMenuBar
-import javax.swing.JMenuItem
-import javax.swing.JPanel
-import javax.swing.JTextField
-import javax.swing.JToolBar
-import javax.swing.KeyStroke
-import javax.swing.SwingUtilities
-import javax.swing.UIManager
-import javax.swing.WindowConstants
+import java.lang.reflect.InvocationTargetException
+
+import scala.collection.mutable.ArrayBuffer
+
 import org.shotdraw.contrib.Desktop
 import org.shotdraw.contrib.DesktopEvent
 import org.shotdraw.contrib.DesktopListener
 import org.shotdraw.contrib.JPanelDesktop
+import org.shotdraw.contrib.PolygonTool
+import org.shotdraw.figures.DiamondFigure
+import org.shotdraw.figures.ElbowConnection
+import org.shotdraw.figures.EllipseFigure
 import org.shotdraw.figures.GroupCommand
+import org.shotdraw.figures.LineConnection
+import org.shotdraw.figures.LineFigure
 import org.shotdraw.figures.PolyLineFigure
+import org.shotdraw.figures.RectangleFigure
+import org.shotdraw.figures.RoundRectangleFigure
+import org.shotdraw.figures.TextFigure
+import org.shotdraw.figures.TextTool
+import org.shotdraw.figures.TriangleFigure
 import org.shotdraw.figures.UngroupCommand
+import org.shotdraw.framework.ArrowMode
 import org.shotdraw.framework.Drawing
 import org.shotdraw.framework.DrawingEditor
 import org.shotdraw.framework.DrawingView
 import org.shotdraw.framework.FigureAttributeConstant
+import org.shotdraw.framework.FigureAttributeConstant
+import org.shotdraw.framework.FigureAttributeConstant
+import org.shotdraw.framework.FigureAttributeConstant
+import org.shotdraw.framework.FillColor
+import org.shotdraw.framework.FontName
+import org.shotdraw.framework.FontSize
+import org.shotdraw.framework.FontStyle
+import org.shotdraw.framework.FrameColor
+import org.shotdraw.framework.TextColor
 import org.shotdraw.framework.Tool
 import org.shotdraw.framework.ViewChangeListener
 import org.shotdraw.standard.AbstractCommand
 import org.shotdraw.standard.BringToFrontCommand
 import org.shotdraw.standard.ChangeAttributeCommand
+import org.shotdraw.standard.ConnectionTool
 import org.shotdraw.standard.CopyCommand
+import org.shotdraw.standard.CreationTool
 import org.shotdraw.standard.CutCommand
 import org.shotdraw.standard.DeleteCommand
 import org.shotdraw.standard.DuplicateCommand
-import org.shotdraw.standard.NullTool
 import org.shotdraw.standard.PasteCommand
 import org.shotdraw.standard.SelectAllCommand
 import org.shotdraw.standard.SelectionTool
@@ -64,7 +78,6 @@ import org.shotdraw.standard.StandardDrawing
 import org.shotdraw.standard.StandardDrawingView
 import org.shotdraw.standard.ToolButton
 import org.shotdraw.util.ColorMap
-import org.shotdraw.util.Command
 import org.shotdraw.util.CommandMenu
 import org.shotdraw.util.Iconkit
 import org.shotdraw.util.PaletteButton
@@ -81,32 +94,18 @@ import org.shotdraw.util.UndoableCommand
 import org.shotdraw.util.VersionControlStrategy
 import org.shotdraw.util.VersionManagement
 import org.shotdraw.util.VersionRequester
-import java.lang.reflect.InvocationTargetException
-import scala.collection.mutable.ArrayBuffer
-import java.util.ListIterator
-import org.shotdraw.framework.FillColor
-import org.shotdraw.framework.FrameColor
-import org.shotdraw.framework.TextColor
-import org.shotdraw.framework.FigureAttributeConstant
-import org.shotdraw.framework.ArrowMode
-import org.shotdraw.framework.FigureAttributeConstant
-import org.shotdraw.framework.FontName
-import org.shotdraw.framework.FontSize
-import org.shotdraw.framework.FontStyle
-import org.shotdraw.framework.FigureAttributeConstant
-import org.shotdraw.figures.TextTool
-import org.shotdraw.contrib.PolygonTool
-import org.shotdraw.standard.ConnectionTool
-import org.shotdraw.standard.CreationTool
-import org.shotdraw.figures.TextFigure
-import org.shotdraw.figures.EllipseFigure
-import org.shotdraw.figures.ElbowConnection
-import org.shotdraw.figures.DiamondFigure
-import org.shotdraw.figures.LineFigure
-import org.shotdraw.figures.RectangleFigure
-import org.shotdraw.figures.LineConnection
-import org.shotdraw.figures.TriangleFigure
-import org.shotdraw.figures.RoundRectangleFigure
+
+import javax.swing.JFileChooser
+import javax.swing.JFrame
+import javax.swing.JMenu
+import javax.swing.JMenuBar
+import javax.swing.JMenuItem
+import javax.swing.JPanel
+import javax.swing.JTextField
+import javax.swing.JToolBar
+import javax.swing.KeyStroke
+import javax.swing.SwingUtilities
+import javax.swing.UIManager
 
 
 /**
@@ -148,8 +147,8 @@ object DrawApplication {
 
 class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor with PaletteListener with VersionRequester {
 
-  protected var winCount: Int = 0
-  protected var fgUntitled: String = "untitled"
+  protected var winCount = 0
+  protected var fgUntitled = "untitled"
   
   private var fTool: Tool = null
   private var fIconkit: Iconkit = null
@@ -157,7 +156,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   private var fView: DrawingView = null
   private var fDefaultToolButton: ToolButton = null
   private var fSelectedToolButton: ToolButton = null
-  private var fApplicationName: String = DrawApplication.TITLE
+  private var fApplicationName = DrawApplication.TITLE
   private var fStorageFormatManager: StorageFormatManager = null
   private var myUndoManager: UndoManager = null
   /**
@@ -165,7 +164,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * safely synchronize the few methods that use this by synchronizing on
    * the List object itself.
    */
-  private var listeners: ArrayBuffer[ViewChangeListener] = ArrayBuffer()
+  private var listeners = ArrayBuffer[ViewChangeListener]()
   private var fDesktopListener: DesktopListener = null
   /**
    * This component acts as a desktop for the content.
@@ -301,7 +300,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    */
   protected def createFileMenu: JMenu = {
     val menu = new CommandMenu("File")
-    var cmd: Command = new AbstractCommand("New", this, false) {
+    var cmd = new AbstractCommand("New", this, false) {
       override def execute {
         promptNew
       }
@@ -806,7 +805,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     val openDialog = createOpenFileChooser
     getStorageFormatManager.registerFileFilters(openDialog)
     if (openDialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-      var foundFormat: StorageFormat = getStorageFormatManager.findStorageFormat(openDialog.getFileFilter)
+      var foundFormat = getStorageFormatManager.findStorageFormat(openDialog.getFileFilter)
       if (foundFormat == null) {
         foundFormat = getStorageFormatManager.findStorageFormat(openDialog.getSelectedFile)
       }
@@ -828,7 +827,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
       val saveDialog = createSaveFileChooser
       getStorageFormatManager.registerFileFilters(saveDialog)
       if (saveDialog.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-        var foundFormat: StorageFormat = getStorageFormatManager.findStorageFormat(saveDialog.getFileFilter)
+        var foundFormat = getStorageFormatManager.findStorageFormat(saveDialog.getFileFilter)
         if (foundFormat == null) {
           foundFormat = getStorageFormatManager.findStorageFormat(saveDialog.getSelectedFile)
         }

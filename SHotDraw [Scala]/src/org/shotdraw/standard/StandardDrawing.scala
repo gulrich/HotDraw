@@ -36,7 +36,7 @@ class StandardDrawing extends CompositeFigure with Drawing {
    * the registered listeners
    */
   @transient
-  private var fListeners: ArrayBuffer[DrawingChangeListener] = ArrayBuffer()
+  private var fListeners = ArrayBuffer[DrawingChangeListener]()
   /**
    * boolean that serves as a condition variable
    * to lock the access to the drawing.

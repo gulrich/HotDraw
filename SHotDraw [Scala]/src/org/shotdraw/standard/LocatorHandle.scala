@@ -41,7 +41,7 @@ class LocatorHandle(owner: Figure, private val fLocator: Locator) extends Abstra
    * @see org.shotdraw.framework.Handle#getCursor()
    */
   override def getCursor: Cursor = {
-    var c: Cursor = super.getCursor
+    var c = super.getCursor
     getLocator match {
       case rl: RelativeLocator =>
         if(rl == RelativeLocator.north) new AWTCursor(java.awt.Cursor.N_RESIZE_CURSOR)

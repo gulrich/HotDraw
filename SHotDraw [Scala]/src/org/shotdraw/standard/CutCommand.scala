@@ -91,7 +91,7 @@ object CutCommand {
       setSelectedFigures(Seq[Figure]())
     }
 
-    private var mySelectedFigures: ArrayBuffer[Figure] = ArrayBuffer()
+    private var mySelectedFigures = ArrayBuffer[Figure]()
   }
 
 }
@@ -104,8 +104,8 @@ class CutCommand(name: String, newDrawingEditor: DrawingEditor) extends FigureTr
   override def execute {
     super.execute
     setUndoActivity(createUndoActivity)
-    var fe: Seq[Figure] = view.selection
-    var affected: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
+    var fe = view.selection
+    var affected = ArrayBuffer[Figure]()
     var f: Figure = null
     var dfe: Seq[Figure] = null
     fe foreach {f =>

@@ -69,7 +69,7 @@ class StandardFigureSelection extends FigureSelection with Serializable {
   def getData(tpe: String): Seq[Figure] = {
     if (tpe == TYPE) {
       val input = new ByteArrayInputStream(fData)
-      var result: ArrayBuffer[Figure] = ArrayBuffer[Figure]()
+      var result = ArrayBuffer[Figure]()
       val reader = new StorableInput(input)
       val count = reader.readInt
       for(numRead <- 0 to count-1) {

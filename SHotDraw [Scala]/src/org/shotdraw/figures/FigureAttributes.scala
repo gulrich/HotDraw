@@ -29,13 +29,13 @@ import org.shotdraw.util.StorableOutput
 trait FigureAttributes extends Serializable {  
   import PolyLineFigure._
   
-  private var _frameColor: Color = Color.BLACK
-  private var _fillColor: Color = Color.BLUE
-  private var _textColor: Color = Color.BLACK
-  private var _arrowMode: ArrowType = ArrowTipBoth
-  private var _fontName: String = "Helvetica"
-  private var _fontSize: Int = 12
-  private var _fontStyle: Int = Font.PLAIN
+  private var _frameColor = Color.BLACK
+  private var _fillColor = Color.BLUE
+  private var _textColor = Color.BLACK
+  private var _arrowMode: PolyLineFigure.ArrowType = ArrowTipBoth
+  private var _fontName = "Helvetica"
+  private var _fontSize = 12
+  private var _fontStyle = Font.PLAIN
   
   
   def frameColor: Color = _frameColor

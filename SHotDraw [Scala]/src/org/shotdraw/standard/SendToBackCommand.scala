@@ -65,7 +65,7 @@ object SendToBackCommand {
       }
     }
 
-    private var myOriginalLayers: Map[Figure, Int] = Map[Figure, Int]()
+    private var myOriginalLayers = Map[Figure, Int]()
   }
 
 }

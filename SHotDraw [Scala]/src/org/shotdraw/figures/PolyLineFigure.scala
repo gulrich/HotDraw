@@ -50,7 +50,7 @@ object PolyLineFigure {
 class PolyLineFigure(fSize: Int) extends AbstractFigure {
   import PolyLineFigure._
   
-  protected var fPoints: ArrayBuffer[Point] = ArrayBuffer()
+  protected var fPoints = ArrayBuffer[Point]()
   protected var fStartDecoration: LineDecoration = null
   protected var fEndDecoration: LineDecoration = null
   
@@ -78,7 +78,7 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
   }
 
   def handles: Seq[Handle] = {
-    var handles: ArrayBuffer[Handle] = ArrayBuffer()
+    var handles = ArrayBuffer[Handle]()
     for(i <- 0 to fPoints.size-1) handles += new PolyLineHandle(this, locator(i), i)
     handles
   }

@@ -35,7 +35,7 @@ object NullDrawingView {
     }
   }
 
-  private var drawingViewManager: Map[DrawingEditor, DrawingView] = Map[DrawingEditor, DrawingView]()
+  private var drawingViewManager = Map[DrawingEditor, DrawingView]()
 }
 
 class NullDrawingView(var myDrawingEditor: DrawingEditor) extends JPanel with DrawingView {

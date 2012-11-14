@@ -333,7 +333,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
   def figures(viewRectangle: Rectangle): Seq[Figure] = {
     if (_theQuadTree != null) {
       val fe = _theQuadTree.getAllWithin(new Bounds(viewRectangle).asRectangle2D)
-      var l2: List[OrderedFigureElement] = List()
+      var l2 = List[OrderedFigureElement]()
       fe foreach(f => l2 ::= new OrderedFigureElement(f, f.getZValue))
       l2 = l2.sortWith((e1, e2) => e1.compareTo(e2) < 0)
       val l3 = l2.foldLeft(ArrayBuffer[Figure]())((x,y) => x+=y.getFigure)
@@ -625,10 +625,10 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    * @see #add
    * @see #remove
    */
-  protected var fFigures: ArrayBuffer[Figure] = ArrayBuffer()
+  protected var fFigures = ArrayBuffer[Figure]()
   @transient
   private var _theQuadTree: QuadTree = null
-  protected var _nLowestZ: Int = 0
-  protected var _nHighestZ: Int = 0
+  protected var _nLowestZ = 0
+  protected var _nHighestZ = 0
 }
 

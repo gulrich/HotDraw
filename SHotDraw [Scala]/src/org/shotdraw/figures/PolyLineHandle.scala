@@ -67,7 +67,7 @@ object PolyLineHandle {
     def getPointIndex: Int = myPointIndex
 
     private var myOldPoint: Point = null
-    private var myPointIndex: Int = 0
+    private var myPointIndex = 0
   }
 
 }

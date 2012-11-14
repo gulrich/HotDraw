@@ -226,7 +226,7 @@ class DragNDropTool(editor: DrawingEditor) extends AbstractTool(editor) {
           return
         }
         if (c.isInstanceOf[DrawingView]) {
-          var found: Boolean = false
+          var found = false
           val dv = c.asInstanceOf[DrawingView]
           val selectedElements = dv.selection.iterator
           if (!selectedElements.hasNext) {
@@ -249,6 +249,6 @@ class DragNDropTool(editor: DrawingEditor) extends AbstractTool(editor) {
 
   private var fChild: Tool = null
   private var dragGestureListener: DragGestureListener = null
-  private var dragOn: Boolean = false
+  private var dragOn = false
 }
 

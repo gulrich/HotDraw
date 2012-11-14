@@ -24,9 +24,9 @@ import scala.collection.mutable.ArrayBuffer
  */
 class UndoableAdapter(newDrawingView: DrawingView) extends Undoable {
   private var myDrawingView: DrawingView = null
-  private var myAffectedFigures: ArrayBuffer[Figure] = ArrayBuffer()
-  private var myIsUndoable: Boolean = false
-  private var myIsRedoable: Boolean = false
+  private var myAffectedFigures = ArrayBuffer[Figure]()
+  private var myIsUndoable = false
+  private var myIsRedoable = false
   setDrawingView(newDrawingView)
 
   /**

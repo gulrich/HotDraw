@@ -41,7 +41,7 @@ class ElbowConnection extends LineConnection {
    * Gets the handles of the figure.
    */
   override def handles: Seq[Handle] = {
-    var handles: ArrayBuffer[Handle] = ArrayBuffer(new ChangeConnectionStartHandle(this))
+    var handles = ArrayBuffer[Handle](new ChangeConnectionStartHandle(this))
     for(i <- 0 to fPoints.size - 2) handles += new NullHandle(this, PolyLineFigure.locator(i))
     handles += new ChangeConnectionEndHandle(this)
     for(i <- 0 to fPoints.size - 2) handles += new ElbowHandle(this, i)

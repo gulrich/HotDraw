@@ -31,8 +31,8 @@ import scala.collection.mutable.ArrayBuffer
  */
 class StorableInput(stream: InputStream) {
   
-  var fTokenizer: StreamTokenizer = new StreamTokenizer(new BufferedReader(new InputStreamReader(stream)))
-  private var fMap: ArrayBuffer[Storable] = ArrayBuffer()
+  var fTokenizer = new StreamTokenizer(new BufferedReader(new InputStreamReader(stream)))
+  private var fMap = ArrayBuffer[Storable]()
   
   fTokenizer.wordChars('$', '$')
 

@@ -190,7 +190,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    * start and end.
    */
   override def handles: Seq[Handle] = {
-    var handles: ArrayBuffer[Handle] = ArrayBuffer[Handle](new ChangeConnectionStartHandle(this))
+    var handles = ArrayBuffer[Handle](new ChangeConnectionStartHandle(this))
     for(i <- 0 to fPoints.size - 2) {
       handles += new PolyLineHandle(this, PolyLineFigure.locator(i), i)
     }

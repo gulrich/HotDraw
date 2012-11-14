@@ -24,7 +24,7 @@ object ChangeAttributeCommand {
 
   class UndoActivity[T](newDrawingView: DrawingView, var myUndoAttribute: FigureAttributeConstant[T], var myUndoValue: T) extends UndoableAdapter(newDrawingView) {
         
-    private var myOriginalValues: Map[Figure, T] = Map()
+    private var myOriginalValues = Map[Figure, T]()
     
     setUndoable(true)
     setRedoable(true)

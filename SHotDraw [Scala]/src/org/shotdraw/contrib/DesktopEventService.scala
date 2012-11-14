@@ -91,7 +91,7 @@ class DesktopEventService(var myDesktop: Desktop, var myContainer: Container) {
   protected def createDesktopEvent(oldView: DrawingView, newView: DrawingView): DesktopEvent = new DesktopEvent(getDesktop, newView, oldView)
 
   def getDrawingViews(comps: List[Component]): List[DrawingView] = {
-    var al: List[DrawingView] = List[DrawingView]()
+    var al = List[DrawingView]()
     comps foreach {c =>
       val dv = Helper.getDrawingView(c)
       if(dv != null) al ::= dv
@@ -142,7 +142,7 @@ class DesktopEventService(var myDesktop: Desktop, var myContainer: Container) {
    * Current usage of this List is not thread safe, nor should it need to be.
    * If it ever does we can synchronize on the List itself to provide safety.
    */
-  private var listeners: ArrayBuffer[DesktopListener] = ArrayBuffer()
+  private var listeners = ArrayBuffer[DesktopListener]()
   private var mySelectedView: DrawingView = null
 }
 

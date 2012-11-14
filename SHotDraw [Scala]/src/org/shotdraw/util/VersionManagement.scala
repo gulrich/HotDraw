@@ -119,7 +119,7 @@ object VersionManagement {
    * @return normalized package name
    */
   def normalizePackageName(toBeNormalized: String): String = {
-    var replaced: String = toBeNormalized.replace('/', '.')
+    var replaced = toBeNormalized.replace('/', '.')
     replaced = replaced.replace(File.pathSeparatorChar, '.')
     if (replaced.endsWith(".")) {
       val lastSeparator = replaced.lastIndexOf('.')
@@ -144,23 +144,23 @@ object VersionManagement {
     if (versionString.length == 0) {
       return ""
     }
-    var startIndex: Int = versionString.indexOf("\"")
+    var startIndex = versionString.indexOf("\"")
     if (startIndex < 0) {
       startIndex = 0
     }
     else {
       startIndex += 1
     }
-    var endIndex: Int = versionString.lastIndexOf("\"")
+    var endIndex = versionString.lastIndexOf("\"")
     if (endIndex < 0) {
       endIndex = versionString.length
     }
     versionString.substring(startIndex, endIndex)
   }
 
-  var JHOTDRAW_COMPONENT: String = "org.shotdraw/"
-  var JHOTDRAW_JAR: String = "jhotdraw.jar"
-  var packages: List[Package] = List(Package.getPackage("org.shotdraw.applet"), Package.getPackage("org.shotdraw.application"), Package.getPackage("org.shotdraw.contrib"), Package.getPackage("org.shotdraw.figures"), Package.getPackage("org.shotdraw.framework"), Package.getPackage("org.shotdraw.standard"), Package.getPackage("org.shotdraw.util"))
+  var JHOTDRAW_COMPONENT = "org.shotdraw/"
+  var JHOTDRAW_JAR = "jhotdraw.jar"
+  var packages = List(Package.getPackage("org.shotdraw.applet"), Package.getPackage("org.shotdraw.application"), Package.getPackage("org.shotdraw.contrib"), Package.getPackage("org.shotdraw.figures"), Package.getPackage("org.shotdraw.framework"), Package.getPackage("org.shotdraw.standard"), Package.getPackage("org.shotdraw.util"))
 }
 
 class VersionManagement

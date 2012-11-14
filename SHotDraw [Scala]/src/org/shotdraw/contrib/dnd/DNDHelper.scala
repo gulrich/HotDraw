@@ -69,7 +69,7 @@ object DNDHelper {
     receivedData
   }
 
-  var ASCIIFlavor: DataFlavor = new DataFlavor("text/plain; charset=ascii", "ASCII text")
+  var ASCIIFlavor = new DataFlavor("text/plain; charset=ascii", "ASCII text")
 }
 
 abstract class DNDHelper(isDragSource: Boolean, isDropTarget: Boolean) {

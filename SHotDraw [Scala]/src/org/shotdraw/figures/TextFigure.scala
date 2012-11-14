@@ -46,17 +46,17 @@ import org.shotdraw.standard.AbstractFigure
  */
 class TextFigure extends AbstractFigure with FigureChangeListener with TextHolder {
   fillColor = ColorMap.color("None")
-  private var fOriginX: Int = 0
-  private var fOriginY: Int = 0
+  private var fOriginX = 0
+  private var fOriginY = 0
   @transient
-  private var fSizeIsDirty: Boolean = true
+  private var fSizeIsDirty = true
   @transient
-  private var fWidth: Int = 0
+  private var fWidth = 0
   @transient
-  private var fHeight: Int = 0
-  private var fText: String = ""
-  private var fFont: Font = new Font(fontName, fontStyle, fontSize)
-  private var fIsReadOnly: Boolean = false
+  private var fHeight = 0
+  private var fText = ""
+  private var fFont = new Font(fontName, fontStyle, fontSize)
+  private var fIsReadOnly = false
   private var fObservedFigure: Figure = null
   private var fLocator: OffsetLocator = null
 
@@ -226,7 +226,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    */
   def overlayColumns: Int = {
     val length = getText.length
-    var columns: Int = 20
+    var columns = 20
     if (length != 0) {
       columns = getText.length + 3
     }
