@@ -22,7 +22,7 @@ HotDraw
     }
     }
    `
-  * Change the Java collections to Scala collections [done]
+  * Change the Java collections to Scala collections
   * Change the Java constructors into Scala constructors (cannot use super(...) in Scala)
 
 ##[SHotDraw](https://github.com/gulrich/HotDraw/tree/master/SHotDraw%20[Scala]) [Scala]##
@@ -42,5 +42,46 @@ HotDraw
   * There are quite few "import java.lang.Object" and "extends Object" clauses, which are not necessary.
   * See whether you can replace of the interface X, class AbstractX implements X pattern by a single trait X.
   * Some objects contain serialVersionUID some don't. I don't really know what it necessary here and what not.
-  * Look whether you can lift some of the static stuff. For example, Figure.EMPTY_RECTANGLE looks like it can be lifted into a Recangle.Empty object, since it can be useful not only in the context of Figures. There also is a Handle.HANDLESIZE. I guess that should not be hardcoded in the framework.
+  * Look whether you can lift some of the static stuff. For example, Figure.EMPTY_RECTANGLE looks like it can be lifted into a Recangle.Empty object _(not possible since Rectangle is a java.awt class)_, since it can be useful not only in the context of Figures. There also is a Handle.HANDLESIZE. I guess that should not be hardcoded in the framework.
   * The general pattern followed by many Scala users seems to be to put parenthesis for methods where the side effect is important. This is usually true for all methods returning Unit. For example, in ConnectionFigure, there are methods updateConnection, disconnectEnd and so on that should probably read: updateConnection()
+
+##Actions and inputs##
+* Figure creation
+  * Mouse (drag n' drop)
+* Figure move
+  * Mouse
+  * Keyboard (arrow keys or similar)
+  * Undo/Redo command
+  * External device (e.g. Kinect, Touch Screen)
+* Changing attribute
+  * Menu
+  * Keyboard
+  * Mouse
+* BringToFront/SendToBack
+  * Keyboard
+  * Menu
+* Arrow connection
+  * Mouse
+  * Keyboard (arrow keys or similar)
+  * Undo/Redo command
+  * External device (e.g. Kinect, Touch Screen)
+* Arrow move
+  * Mouse
+  * Keyboard (arrow keys or similar)
+  * Undo/Redo command
+  * External device (e.g. Kinect, Touch Screen)
+  * Another figure move
+
+##Interface bugs#
+* Inkscape
+  * Undo+move moves twice
+* Autodesk Sketchbook
+  * Undo during rotation doesn't remove rotation label at the bottom of the screeb
+* Google docs
+* LibreOffice
+* [Photoshop express editor](http://www.photoshop.com/tools/expresseditor?wf=editor)
+* Microsoft Offic 2007
+  * Undo+move duplicates the figure
+
+
+
