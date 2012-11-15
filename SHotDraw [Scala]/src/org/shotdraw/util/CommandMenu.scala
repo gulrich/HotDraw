@@ -109,7 +109,7 @@ class CommandMenu(name: String) extends JMenu(name) with ActionListener with Com
     val source = e.getSource
     hm foreach { case (mItem, cmd) =>
       if(source == mItem) {
-        cmd execute
+        cmd execute()
       } 
     }
   }

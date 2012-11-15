@@ -51,10 +51,10 @@ class RoundRectangleFigure(origin: Point, corner: Point) extends AbstractFigure 
    * Sets the arc's witdh and height.
    */
   def setArc(width: Int, height: Int) {
-    willChange
+    willChange()
     fArcWidth = width
     fArcHeight = height
-    changed
+    changed()
   }
 
   /**

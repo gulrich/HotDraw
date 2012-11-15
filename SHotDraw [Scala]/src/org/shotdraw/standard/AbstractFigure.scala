@@ -59,9 +59,9 @@ abstract class AbstractFigure extends Figure {
    * Moves the figure by the given offset.
    */
   def moveBy(dx: Int, dy: Int) {
-    willChange
+    willChange()
     basicMoveBy(dx, dy)
-    changed
+    changed()
   }
 
   /**
@@ -81,9 +81,9 @@ abstract class AbstractFigure extends Figure {
    * @see #displayBox
    */
   def displayBox(origin: Point, corner: Point) {
-    willChange
+    willChange()
     basicDisplayBox(origin, corner)
-    changed
+    changed()
   }
 
   /**
@@ -174,7 +174,7 @@ abstract class AbstractFigure extends Figure {
    */
   def addToContainer(c: FigureChangeListener) {
     addFigureChangeListener(c)
-    invalidate
+    invalidate()
   }
 
   /**
@@ -182,7 +182,7 @@ abstract class AbstractFigure extends Figure {
    * it as a change listener.
    */
   def removeFromContainer(c: FigureChangeListener) {
-    invalidate
+    invalidate()
     removeFigureChangeListener(c)
   }
 
@@ -208,7 +208,7 @@ abstract class AbstractFigure extends Figure {
   /**
    * A figure is released from the drawing. You never call this
    * method directly. Release notifies its listeners.
-   * @see Figure#release
+   * @see Figure#release()
    */
   def release() {
     if (listener != null) {
@@ -240,20 +240,20 @@ abstract class AbstractFigure extends Figure {
    * Informes that a figure is about to change something that
    * affects the contents of its display box.
    *
-   * @see Figure#willChange
+   * @see Figure#willChange()
    */
   def willChange() {
-    invalidate
+    invalidate()
   }
 
   /**
    * Informs that a figure changed the area of its display box.
    *
    * @see FigureChangeEvent
-   * @see Figure#changed
+   * @see Figure#changed()
    */
   def changed() {
-    invalidate
+    invalidate()
     if (listener != null) {
       listener.figureChanged(new FigureChangeEvent(this))
     }
@@ -311,7 +311,7 @@ abstract class AbstractFigure extends Figure {
     try {
       val writer = new ObjectOutputStream(output)
       writer.writeObject(this)
-      writer.close
+      writer.close()
     } catch {
       case e: IOException => {
         System.err.println("Class not found: " + e)
@@ -402,9 +402,9 @@ abstract class AbstractFigure extends Figure {
   /**
    * The listeners for a figure's changes.
    * It is only one listener but this one can be a (chained) MultiCastFigureChangeListener
-   * @see #invalidate
-   * @see #changed
-   * @see #willChange
+   * @see #invalidate()
+   * @see #changed()
+   * @see #willChange()
    */
   @transient
   private var fListener: FigureChangeListener = null

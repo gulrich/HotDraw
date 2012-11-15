@@ -36,7 +36,7 @@ object JHDDropTargetListener {
       val deleteVisitor = new DeleteFromDrawingVisitor(getDrawingView.drawing)
       getAffectedFigures foreach { f => f.visit(deleteVisitor)}
       setAffectedFigures(deleteVisitor.getDeletedFigures)
-      getDrawingView.clearSelection
+      getDrawingView.clearSelection()
       undone = true
       true
     }
@@ -46,7 +46,7 @@ object JHDDropTargetListener {
         return false
       }
       log("AddUndoActivity redo")
-      getDrawingView.clearSelection
+      getDrawingView.clearSelection()
       setAffectedFigures(getDrawingView.insertFigures(getAffectedFigures, 0, 0, false))
       undone = false
       true
@@ -60,7 +60,7 @@ object JHDDropTargetListener {
       if (undone == true) {
         getAffectedFigures foreach { f =>
           getDrawingView.drawing.remove(f)
-          f.release
+          f.release()
         }
       }
       setAffectedFigures(Seq())
@@ -134,7 +134,7 @@ class JHDDropTargetListener(drawingEditor: DrawingEditor, drawingView: DrawingVi
           val ff = DNDHelper.processReceivedData(DNDFiguresTransferable.DNDFiguresFlavor, dtde.getTransferable).asInstanceOf[DNDFigures]
           getTargetUndoActivity.setAffectedFigures(ff.getFigures)
           val theO = ff.getOrigin
-          view.clearSelection
+          view.clearSelection()
           val newP = dtde.getLocation
           val dx = newP.x - theO.x
           val dy = newP.y - theO.y
@@ -144,9 +144,9 @@ class JHDDropTargetListener(drawingEditor: DrawingEditor, drawingView: DrawingVi
           if (dtde.getDropAction == DnDConstants.ACTION_MOVE) {
             view.addToSelectionAll(getTargetUndoActivity.getAffectedFigures)
           }
-          view.checkDamage
+          view.checkDamage()
           editor.getUndoManager.pushUndo(getTargetUndoActivity)
-          editor.getUndoManager.clearRedos
+          editor.getUndoManager.clearRedos()
           editor.figureSelectionChanged(view)
           dtde.dropComplete(true)
         } catch {

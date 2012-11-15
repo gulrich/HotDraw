@@ -36,7 +36,7 @@ object CutCommand {
      */
     override def undo: Boolean = {
       if (super.undo && !getAffectedFigures.isEmpty) {
-        getDrawingView.clearSelection
+        getDrawingView.clearSelection()
         myCommand.insertFigures(getAffectedFiguresReversed, 0, 0)
         true
       } else false
@@ -86,7 +86,7 @@ object CutCommand {
      * @see org.shotdraw.util.UndoableAdapter#release()
      */
     override def release() {
-      super.release
+      super.release()
       getSelectedFigures foreach (_.release)
       setSelectedFigures(Seq[Figure]())
     }
@@ -102,7 +102,7 @@ class CutCommand(name: String, newDrawingEditor: DrawingEditor) extends FigureTr
    * @see org.shotdraw.util.Command#execute()
    */
   override def execute() {
-    super.execute
+    super.execute()
     setUndoActivity(createUndoActivity)
     var fe = view.selection
     var affected = ArrayBuffer[Figure]()
@@ -121,7 +121,7 @@ class CutCommand(name: String, newDrawingEditor: DrawingEditor) extends FigureTr
     ua.setSelectedFigures(view.selection)
     copyFigures(ua.getSelectedFigures, ua.getSelectedFiguresCount)
     deleteFigures(getUndoActivity.getAffectedFigures)
-    view.checkDamage
+    view.checkDamage()
   }
 
   /**

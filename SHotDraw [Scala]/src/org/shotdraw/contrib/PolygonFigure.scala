@@ -194,24 +194,24 @@ class PolygonFigure extends AbstractFigure {
    */
   def addPoint(x: Int, y: Int) {
     getInternalPolygon.addPoint(x, y)
-    changed
+    changed()
   }
 
   /**
    * Changes the position of a node.
    */
   def setPointAt(p: Point, i: Int) {
-    willChange
+    willChange()
     getInternalPolygon.xpoints(i) = p.x
     getInternalPolygon.ypoints(i) = p.y
-    changed
+    changed()
   }
 
   /**
    * Insert a node at the given point.
    */
   def insertPointAt(p: Point, i: Int) {
-    willChange
+    willChange()
     val n = pointCount + 1
     val xs = new Array[Int](n)
     val ys = new Array[Int](n)
@@ -227,11 +227,11 @@ class PolygonFigure extends AbstractFigure {
       ys(j + 1) = getInternalPolygon.ypoints(j)
     }
     setInternalPolygon(new Polygon(xs, ys, n))
-    changed
+    changed()
   }
 
   def removePointAt(i: Int) {
-    willChange
+    willChange()
     val n = pointCount - 1
     val xs = new Array[Int](n)
     val ys = new Array[Int](n)
@@ -245,14 +245,14 @@ class PolygonFigure extends AbstractFigure {
       ys(j) = getInternalPolygon.ypoints(j + 1)
     }
     setInternalPolygon(new Polygon(xs, ys, n))
-    changed
+    changed()
   }
 
   /**
    * Scale and rotate relative to anchor
    **/
   def scaleRotate(anchor: Point, originalPolygon: Polygon, p: Point) {
-    willChange
+    willChange()
     val ctr = PolygonFigure.center(originalPolygon)
     val anchorLen = Geom.length(ctr.x, ctr.y, anchor.x, anchor.y)
     if (anchorLen > 0.0) {
@@ -275,14 +275,14 @@ class PolygonFigure extends AbstractFigure {
       }
       setInternalPolygon(new Polygon(xs, ys, n))
     }
-    changed
+    changed()
   }
 
   /**
    * Remove points that are nearly colinear with others
    **/
   def smoothPoints() {
-    willChange
+    willChange()
     var removed = false
     var n = pointCount
     do {
@@ -306,7 +306,7 @@ class PolygonFigure extends AbstractFigure {
     if (n != pointCount) {
       setInternalPolygon(new Polygon(getInternalPolygon.xpoints, getInternalPolygon.ypoints, n))
     }
-    changed
+    changed()
   }
 
   /**

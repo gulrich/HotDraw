@@ -30,7 +30,7 @@ object JHDDragSourceListener {
       if (isUndoable) {
         if (getAffectedFigures.iterator.hasNext) {
           log("RemoveUndoActivity undo")
-          getDrawingView.clearSelection
+          getDrawingView.clearSelection()
           setAffectedFigures(getDrawingView.insertFigures(getAffectedFigures, 0, 0, false))
           undone = true
           return true
@@ -46,7 +46,7 @@ object JHDDragSourceListener {
         getAffectedFigures foreach { f =>
           f.visit(deleteVisitor)
         }
-        getDrawingView.clearSelection
+        getDrawingView.clearSelection()
         setAffectedFigures(deleteVisitor.getDeletedFigures)
         undone = false
         return true
@@ -62,7 +62,7 @@ object JHDDragSourceListener {
       if (undone == false) {
         getAffectedFigures foreach { f =>
           getDrawingView.drawing.remove(f)
-          f.release
+          f.release()
         }
       }
       setAffectedFigures(Seq())
@@ -92,10 +92,10 @@ class JHDDragSourceListener(myEditor: DrawingEditor, newView: DrawingView) exten
         getSourceUndoActivity.setAffectedFigures(df.getFigures)
         val deleteVisitor = new DeleteFromDrawingVisitor(view.drawing)
         getSourceUndoActivity.getAffectedFigures foreach { f => f.visit(deleteVisitor)}
-        view.clearSelection
-        view.checkDamage
+        view.clearSelection()
+        view.checkDamage()
         myEditor.getUndoManager.pushUndo(getSourceUndoActivity)
-        myEditor.getUndoManager.clearRedos
+        myEditor.getUndoManager.clearRedos()
         myEditor.figureSelectionChanged(view)
       } else if (dsde.getDropAction == DnDConstants.ACTION_COPY) {
         log("DragSourceDropEvent-ACTION_COPY")

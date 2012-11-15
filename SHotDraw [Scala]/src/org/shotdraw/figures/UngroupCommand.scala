@@ -30,7 +30,7 @@ object UngroupCommand {
 
     override def undo: Boolean = {
       if (!super.undo) return false      
-      getDrawingView.clearSelection
+      getDrawingView.clearSelection()
       getAffectedFigures foreach { f =>
         getDrawingView.drawing.orphanAll(f.figures)
         val figure = getDrawingView.drawing.add(f)
@@ -42,8 +42,8 @@ object UngroupCommand {
     override def redo: Boolean = {
       if (isRedoable) {
         getDrawingView.drawing.orphanAll(getAffectedFigures)
-        getDrawingView.clearSelection
-        ungroupFigures
+        getDrawingView.clearSelection()
+        ungroupFigures()
         true
       } else false
     }
@@ -62,12 +62,12 @@ object UngroupCommand {
 class UngroupCommand(name: String, newDrawingEditor: DrawingEditor) extends AbstractCommand(name, newDrawingEditor) {
 
   override def execute() {
-    super.execute
+    super.execute()
     setUndoActivity(createUndoActivity)
     getUndoActivity.setAffectedFigures(view.selection)
-    view.clearSelection
-    (getUndoActivity.asInstanceOf[UngroupCommand.UndoActivity]).ungroupFigures
-    view.checkDamage
+    view.clearSelection()
+    (getUndoActivity.asInstanceOf[UngroupCommand.UndoActivity]).ungroupFigures()
+    view.checkDamage()
   }
 
   override def isExecutableWithView: Boolean = {

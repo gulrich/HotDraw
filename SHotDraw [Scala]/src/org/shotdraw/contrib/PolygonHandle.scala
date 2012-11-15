@@ -35,7 +35,7 @@ object PolygonHandle {
       val figure = fe.next.asInstanceOf[PolygonFigure]
       val backupPoint = figure.pointAt(getPointIndex)
       figure.setPointAt(getOldPoint, getPointIndex)
-      figure.smoothPoints
+      figure.smoothPoints()
       setOldPoint(backupPoint)
       true
     }
@@ -57,7 +57,7 @@ class PolygonHandle(owner: PolygonFigure, fLocator: Locator, fIndex: Int) extend
   }
 
   override def invokeEnd(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    myOwner.smoothPoints
+    myOwner.smoothPoints()
     if ((x == anchorX) && (y == anchorY)) {
       setUndoActivity(null)
     }

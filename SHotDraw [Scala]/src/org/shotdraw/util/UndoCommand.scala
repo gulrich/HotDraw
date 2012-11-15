@@ -27,7 +27,7 @@ import org.shotdraw.framework._
 class UndoCommand(name: String, newDrawingEditor: DrawingEditor) extends AbstractCommand(name, newDrawingEditor) {
 
   override def execute() {
-    super.execute
+    super.execute()
     val um = getDrawingEditor.getUndoManager
     if ((um == null) || !um.isUndoable) {
       return
@@ -37,7 +37,7 @@ class UndoCommand(name: String, newDrawingEditor: DrawingEditor) extends Abstrac
     if (hasBeenUndone && lastUndoable.isRedoable) {
       um.pushRedo(lastUndoable)
     }
-    lastUndoable.getDrawingView.checkDamage
+    lastUndoable.getDrawingView.checkDamage()
     getDrawingEditor.figureSelectionChanged(lastUndoable.getDrawingView)
   }
 

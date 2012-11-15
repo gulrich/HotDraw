@@ -178,7 +178,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   def newWindow(initialDrawing: Drawing) {
     val window = new DrawApplication
     if (initialDrawing == null) {
-      window.open
+      window.open()
     }
     else {
       window.open(window.createDrawingView(initialDrawing))
@@ -200,7 +200,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * Opens a new window with a drawing view.
    */
   protected def open(newDrawingView: DrawingView) {
-    getVersionControlStrategy.assertCompatibleVersion
+    getVersionControlStrategy.assertCompatibleVersion()
     setUndoManager(new UndoManager)
     setIconkit(createIconkit)
     getContentPane.setLayout(new BorderLayout)
@@ -228,7 +228,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     } else {
       setSize(mb.getPreferredSize.width, d.height)
     }
-    addListeners
+    addListeners()
     setStorageFormatManager(createStorageFormatManager)
     setVisible(true)
     val r = new Runnable {
@@ -236,7 +236,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
         if (newDrawingView.isInteractive) {
           getDesktop.addToDesktop(newDrawingView, Desktop.PRIMARY)
         }
-        toolDone
+        toolDone()
       }
     }
     if (java.awt.EventQueue.isDispatchThread == false) {
@@ -245,17 +245,17 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
       } catch {
         case ie: InterruptedException => {
           System.err.println(ie.getMessage)
-          exit
+          exit()
         }
         case ite: InvocationTargetException => {
           System.err.println(ite.getMessage)
-          exit
+          exit()
         }
       }
     } else {
-      r.run
+      r.run()
     }
-    toolDone
+    toolDone()
   }
 
   /**
@@ -264,7 +264,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   protected def addListeners() {
     addWindowListener(new WindowAdapter {
       override def windowClosing(event: WindowEvent) {
-        endApp
+        endApp()
       }
 
       override def windowOpened(event: WindowEvent) {
@@ -302,33 +302,33 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     val menu = new CommandMenu("File")
     var cmd = new AbstractCommand("New", this, false) {
       override def execute() {
-        promptNew
+        promptNew()
       }
     }
     menu.add(cmd, KeyStroke.getKeyStroke('N', InputEvent.CTRL_DOWN_MASK))
     cmd = new AbstractCommand("Open...", this, false) {
       override def execute() {
-        promptOpen
+        promptOpen()
       }
     }
     menu.add(cmd, KeyStroke.getKeyStroke('O', InputEvent.CTRL_DOWN_MASK))
     cmd = new AbstractCommand("Save As...", this, true) {
       override def execute() {
-        promptSaveAs
+        promptSaveAs()
       }
     }
     menu.add(cmd, KeyStroke.getKeyStroke('S', InputEvent.CTRL_DOWN_MASK))
     menu.addSeparator
     cmd = new AbstractCommand("Print...", this, true) {
       override def execute() {
-        print
+        print()
       }
     }
     menu.add(cmd, KeyStroke.getKeyStroke('P', InputEvent.CTRL_DOWN_MASK))
     menu.addSeparator
     cmd = new AbstractCommand("Quit", this, true) {
       override def execute() {
-        endApp
+        endApp()
       }
     }
     menu.add(cmd, KeyStroke.getKeyStroke('Q', InputEvent.CTRL_DOWN_MASK))
@@ -674,7 +674,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * @see DrawingEditor
    */
   def figureSelectionChanged(view: DrawingView) {
-    checkCommandMenus
+    checkCommandMenus()
   }
 
   protected def checkCommandMenus() {
@@ -689,7 +689,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
   }
 
   protected def checkCommandMenu(cm: CommandMenu) {
-    cm.checkEnabled
+    cm.checkEnabled()
     for (i <- 0 to cm.getItemCount-1) { 
       cm.getItem(i) match {
         case jmi: CommandMenu => checkCommandMenu(jmi)
@@ -749,22 +749,22 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    */
   def setTool(t: Tool, name: String) {
     if ((tool != null) && (tool.isActive)) {
-      tool.deactivate
+      tool.deactivate()
     }
     fTool = t
     if (tool != null) {
       showStatus(name)
-      tool.activate
+      tool.activate()
     }
   }
 
   private def setSelected(button: ToolButton) {
     if (fSelectedToolButton != null) {
-      fSelectedToolButton.reset
+      fSelectedToolButton.reset()
     }
     fSelectedToolButton = button
     if (fSelectedToolButton != null) {
-      fSelectedToolButton.select
+      fSelectedToolButton.select()
     }
   }
 
@@ -772,20 +772,20 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * Exits the application. You should never override this method
    */
   def exit() {
-    destroy
-    dispose
+    destroy()
+    dispose()
   }
 
   protected def closeQuery: Boolean = true
 
   protected def endApp() {
     if (closeQuery == true) {
-      exit
+      exit()
     }
   }
 
   /**
-   * Handles additional clean up operations. Override to destroy
+   * Handles additional clean up operations. Override to destroy()
    * or release drawing editor resources.
    */
   protected def destroy() {}
@@ -801,7 +801,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * Shows a file dialog and opens a drawing.
    */
   def promptOpen() {
-    toolDone
+    toolDone()
     val openDialog = createOpenFileChooser
     getStorageFormatManager.registerFileFilters(openDialog)
     if (openDialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -823,7 +823,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    */
   def promptSaveAs() {
     if (view != null) {
-      toolDone
+      toolDone()
       val saveDialog = createSaveFileChooser
       getStorageFormatManager.registerFileFilters(saveDialog)
       if (saveDialog.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -867,17 +867,17 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
    * Prints the drawing.
    */
   def print() {
-    tool.deactivate
+    tool.deactivate()
     val printJob = getToolkit.getPrintJob(this, "Print Drawing", null)
     if (printJob != null) {
       val pg = printJob.getGraphics
       if (pg != null) {
         (view.asInstanceOf[StandardDrawingView]).printAll(pg)
-        pg.dispose
+        pg.dispose()
       }
       printJob.end
     }
-    tool.activate
+    tool.activate()
   }
 
   /**
@@ -1013,13 +1013,13 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
         getUndoManager.clearUndos(dv)
         getUndoManager.clearRedos(dv)
         fireViewDestroyingEvent(dv)
-        checkCommandMenus
+        checkCommandMenus()
       }
 
       def drawingViewSelected(dpe: DesktopEvent) {
         val dv = dpe.getDrawingView
         if (dv != null) {
-          if (dv.drawing != null) dv.unfreezeView
+          if (dv.drawing != null) dv.unfreezeView()
         }
         setView(dv)
       }

@@ -79,14 +79,14 @@ class LineConnectionTest(name: String) extends TestCase(name) {
   }
 
   /**
-   * Method testDisconnectStart is testing disconnectStart
+   * Method testDisconnectStart is testing disconnectStart()
    * @see org.shotdraw.figures.LineConnection#disconnectStart()
    */
   def testDisconnectStart() {
   }
 
   /**
-   * Method testDisconnectEnd is testing disconnectEnd
+   * Method testDisconnectEnd is testing disconnectEnd()
    * @see org.shotdraw.figures.LineConnection#disconnectEnd()
    */
   def testDisconnectEnd() {
@@ -170,14 +170,14 @@ class LineConnectionTest(name: String) extends TestCase(name) {
   }
 
   /**
-   * Method testUpdateConnection is testing updateConnection
+   * Method testUpdateConnection is testing updateConnection()
    * @see org.shotdraw.figures.LineConnection#updateConnection()
    */
   def testUpdateConnection() {
   }
 
   /**
-   * Method testLayoutConnection is testing layoutConnection
+   * Method testLayoutConnection is testing layoutConnection()
    * @see org.shotdraw.figures.LineConnection#layoutConnection()
    */
   def testLayoutConnection() {
@@ -219,7 +219,7 @@ class LineConnectionTest(name: String) extends TestCase(name) {
   }
 
   /**
-   * Method testRelease is testing release
+   * Method testRelease is testing release()
    * @see org.shotdraw.figures.LineConnection#release()
    */
   def testRelease() {

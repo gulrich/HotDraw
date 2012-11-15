@@ -29,7 +29,7 @@ object SelectAllCommand {
       if (!super.undo) {
         return false
       }
-      getDrawingView.clearSelection
+      getDrawingView.clearSelection()
       getDrawingView.addToSelectionAll(getAffectedFigures)
       true
     }
@@ -48,11 +48,11 @@ object SelectAllCommand {
 class SelectAllCommand(name: String, newDrawingEditor: DrawingEditor) extends AbstractCommand(name, newDrawingEditor) {
 
   override def execute() {
-    super.execute
+    super.execute()
     setUndoActivity(createUndoActivity)
     getUndoActivity.setAffectedFigures(view.selection)
     view.addToSelectionAll(view.drawing.figures)
-    view.checkDamage
+    view.checkDamage()
   }
 
   /**

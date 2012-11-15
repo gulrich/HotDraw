@@ -64,12 +64,12 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    * @see org.shotdraw.framework.Figure#moveBy(int, int)
    */
   override def moveBy(x: Int, y: Int) {
-    willChange
+    willChange()
     basicMoveBy(x, y)
     if (getLocator != null) {
       getLocator.moveBy(x, y)
     }
-    changed
+    changed()
   }
 
   protected def basicMoveBy(x: Int, y: Int) {
@@ -131,10 +131,10 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    * Sets the font.
    */
   def setFont(newFont: Font) {
-    willChange
+    willChange()
     fFont = newFont
-    markDirty
-    changed
+    markDirty()
+    changed()
   }
   
   override def fontStyle_=(value: Int) {
@@ -157,7 +157,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    * @see org.shotdraw.framework.Figure#changed()
    */
   override def changed() {
-    super.changed
+    super.changed()
   }
 
 
@@ -173,10 +173,10 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    */
   def setText(newText: String) {
     if (newText == null || !(newText == fText)) {
-      willChange
+      willChange()
       fText = newText
-      markDirty
-      changed
+      markDirty()
+      changed()
     }
   }
 
@@ -265,7 +265,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    */
   override def read(dr: StorableInput) {
     super.read(dr)
-    markDirty
+    markDirty()
     basicDisplayBox(new Point(dr.readInt, dr.readInt), null)
     setText(dr.readString)
     fFont = new Font(dr.readString, dr.readInt, dr.readInt)
@@ -282,7 +282,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
     if (getObservedFigure != null) {
       getObservedFigure.addFigureChangeListener(this)
     }
-    markDirty
+    markDirty()
   }
 
   /**
@@ -295,18 +295,18 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
     setObservedFigure(figure)
     setLocator(new OffsetLocator(getObservedFigure.connectedTextLocator(this)))
     getObservedFigure.addFigureChangeListener(this)
-    willChange
-    updateLocation
-    changed
+    willChange()
+    updateLocation()
+    changed()
   }
 
   /**
    * @see org.shotdraw.framework.FigureChangeListener#figureChanged(org.shotdraw.framework.FigureChangeEvent)
    */
   def figureChanged(e: FigureChangeEvent) {
-    willChange
-    updateLocation
-    changed
+    willChange()
+    updateLocation()
+    changed()
   }
 
   /**
@@ -353,7 +353,7 @@ class TextFigure extends AbstractFigure with FigureChangeListener with TextHolde
    * @see org.shotdraw.framework.Figure#release()
    */
   override def release() {
-    super.release
+    super.release()
     disconnect(getObservedFigure)
   }
 

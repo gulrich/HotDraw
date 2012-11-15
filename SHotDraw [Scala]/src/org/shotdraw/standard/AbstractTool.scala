@@ -103,7 +103,7 @@ class AbstractTool(newDrawingEditor: DrawingEditor) extends Tool {
   setEditor(newDrawingEditor)
   setEventDispatcher(createEventDispatcher)
   setEnabled(true)
-  checkUsable
+  checkUsable()
   editor.addViewChangeListener(createViewChangeListener)
 
   /**
@@ -117,9 +117,9 @@ class AbstractTool(newDrawingEditor: DrawingEditor) extends Tool {
    */
   def activate() {
     if (getActiveView != null) {
-      getActiveView.clearSelection
-      getActiveView.checkDamage
-      getEventDispatcher.fireToolActivatedEvent
+      getActiveView.clearSelection()
+      getActiveView.checkDamage()
+      getEventDispatcher.fireToolActivatedEvent()
     }
   }
 
@@ -135,7 +135,7 @@ class AbstractTool(newDrawingEditor: DrawingEditor) extends Tool {
       if (getActiveView != null) {
         getActiveView.setCursor(new AWTCursor(java.awt.Cursor.DEFAULT_CURSOR))
       }
-      getEventDispatcher.fireToolDeactivatedEvent
+      getEventDispatcher.fireToolDeactivatedEvent()
     }
   }
 
@@ -146,10 +146,10 @@ class AbstractTool(newDrawingEditor: DrawingEditor) extends Tool {
    */
   protected def viewSelectionChanged(oldView: DrawingView, newView: DrawingView) {
     if (isActive) {
-      deactivate
-      activate
+      deactivate()
+      activate()
     }
-    checkUsable
+    checkUsable()
   }
 
   /**
@@ -227,9 +227,9 @@ class AbstractTool(newDrawingEditor: DrawingEditor) extends Tool {
     if (isUsable != newIsUsable) {
       myIsUsable = newIsUsable
       if (isUsable) {
-        getEventDispatcher.fireToolUsableEvent
+        getEventDispatcher.fireToolUsableEvent()
       } else {
-        getEventDispatcher.fireToolUnusableEvent
+        getEventDispatcher.fireToolUnusableEvent()
       }
     }
   }
@@ -238,11 +238,11 @@ class AbstractTool(newDrawingEditor: DrawingEditor) extends Tool {
     if (isEnabled != newIsEnabled) {
       myIsEnabled = newIsEnabled
       if (isEnabled) {
-        getEventDispatcher.fireToolEnabledEvent
+        getEventDispatcher.fireToolEnabledEvent()
       } else {
-        getEventDispatcher.fireToolDisabledEvent
+        getEventDispatcher.fireToolDisabledEvent()
         setUsable(false)
-        deactivate
+        deactivate()
       }
     }
   }

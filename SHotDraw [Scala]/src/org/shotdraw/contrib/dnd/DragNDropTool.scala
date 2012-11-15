@@ -94,7 +94,7 @@ class DragNDropTool(editor: DrawingEditor) extends AbstractTool(editor) {
   override protected def viewDestroying(view: DrawingView) {
     if (classOf[DNDInterface].isInstance(view)) {
       val dndi = view.asInstanceOf[DNDInterface]
-      dndi.DNDDeinitialize
+      dndi.DNDDeinitialize()
     }
     super.viewDestroying(view)
   }
@@ -104,13 +104,13 @@ class DragNDropTool(editor: DrawingEditor) extends AbstractTool(editor) {
    * based on Components.
    */
   override def activate() {
-    super.activate
+    super.activate()
     setDragOn(true)
   }
 
   override def deactivate() {
     setDragOn(false)
-    super.deactivate
+    super.deactivate()
   }
 
   /**
@@ -136,7 +136,7 @@ class DragNDropTool(editor: DrawingEditor) extends AbstractTool(editor) {
       fChild = null
     }
     setDragOn(true)
-    view.unfreezeView
+    view.unfreezeView()
   }
 
   /**
@@ -148,7 +148,7 @@ class DragNDropTool(editor: DrawingEditor) extends AbstractTool(editor) {
     if (fChild != null) {
       return
     }
-    view.freezeView
+    view.freezeView()
     val handle = view.findHandle(getAnchorX, getAnchorY)
     if (handle != null) {
       setDragOn(false)
@@ -162,14 +162,14 @@ class DragNDropTool(editor: DrawingEditor) extends AbstractTool(editor) {
           view.toggleSelection(figure)
         }
         else if (!view.isFigureSelected(figure)) {
-          view.clearSelection
+          view.clearSelection()
           view.addToSelection(figure)
         }
       }
       else {
         setDragOn(false)
         if (!e.isShiftDown) {
-          view.clearSelection
+          view.clearSelection()
         }
         fChild = createAreaTracker
       }

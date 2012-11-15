@@ -202,14 +202,14 @@ trait Drawing extends Storable with FigureChangeListener with Serializable {
   /**
    * Removes a list of figures .
    *
-   * @see #remove
+   * @see #remove()
    * @deprecated use removeAll(Seq[Figure]) instead
    */
   def removeAll(figures: List[Figure])
 
   /**
    * Removes a Seq[Figure] of figures.
-   * @see #remove
+   * @see #remove()
    */
   def removeAll(fe: Seq[Figure])
 

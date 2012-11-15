@@ -66,7 +66,7 @@ class UndoableAdapter(newDrawingView: DrawingView) extends Undoable {
   def getAffectedFiguresCount: Int = myAffectedFigures.size
 
   protected def rememberFigures(toBeRemembered: Seq[Figure]) {
-    myAffectedFigures.clear
+    myAffectedFigures.clear()
     myAffectedFigures appendAll toBeRemembered
   }
 

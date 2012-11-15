@@ -114,7 +114,7 @@ class UndoableHandle extends Handle {
     val undoableActivity = getWrappedHandle.getUndoActivity
     if ((undoableActivity != null) && (undoableActivity.isUndoable)) {
       view.editor.getUndoManager.pushUndo(undoableActivity)
-      view.editor.getUndoManager.clearRedos
+      view.editor.getUndoManager.clearRedos()
     }
   }
 

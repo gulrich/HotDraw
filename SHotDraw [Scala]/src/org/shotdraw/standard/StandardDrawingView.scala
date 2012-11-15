@@ -139,7 +139,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    * grid functionality.
    */
   private var fConstrainer: PointConstrainer = null
-  private var myCounter = StandardDrawingView.counter
+  private var myCounter = StandardDrawingView.counter()
   private var dndh: DNDHelper = null
   /**
    * Listener for mouse clicks.
@@ -224,14 +224,14 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    */
   def setDrawing(d: Drawing) {
     if (drawing != null) {
-      clearSelection
+      clearSelection()
       drawing.removeDrawingChangeListener(this)
     }
     fDrawing = d
     if (drawing != null) {
       drawing.addDrawingChangeListener(this)
     }
-    checkMinimumSize
+    checkMinimumSize()
     this.repaint()
   }
 
@@ -297,7 +297,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
           if (fEndConnector != null && fStartConnector != null) {
             cf.connectStart(fStartConnector)
             cf.connectEnd(fEndConnector)
-            cf.updateConnection
+            cf.updateConnection()
           }
         }
         cf.visit(visitor)
@@ -370,7 +370,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    */
   def addToSelection(figure: Figure) {
     if (addToSelectionImpl(figure) == true) {
-      fireSelectionChanged
+      fireSelectionChanged()
     }
   }
 
@@ -379,7 +379,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     if (!isFigureSelected(figure) && drawing.includes(figure)) {
       fSelection += figure
       fSelectionHandles = null
-      figure.invalidate
+      figure.invalidate()
       changed = true
     }
     changed
@@ -399,7 +399,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     var changed = false
     fe foreach { f => changed |= addToSelectionImpl(f)}
     if (changed) {
-      fireSelectionChanged
+      fireSelectionChanged()
     }
   }
 
@@ -410,8 +410,8 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     if (isFigureSelected(figure)) {
       fSelection = fSelection diff List(figure)
       fSelectionHandles = null
-      figure.invalidate
-      fireSelectionChanged
+      figure.invalidate()
+      fireSelectionChanged()
     }
   }
 
@@ -425,7 +425,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     } else {
       addToSelection(figure)
     }
-    fireSelectionChanged
+    fireSelectionChanged()
   }
 
   /**
@@ -436,11 +436,11 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
       return
     }
     selection foreach { f =>
-      f.invalidate
+      f.invalidate()
     }
     fSelection = ArrayBuffer[Figure]()
     fSelectionHandles = null
-    fireSelectionChanged
+    fireSelectionChanged()
   }
 
   /**
@@ -526,7 +526,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
 
   private def moveSelection(dx: Int, dy: Int) {
     selection.foreach (f => f.moveBy(dx, dy))
-    checkDamage
+    checkDamage()
   }
 
   /**
@@ -535,7 +535,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   def checkDamage() {
     val each = drawing.drawingChangeListeners
     each foreach (l => l match {
-      case dv: DrawingView => dv.repairDamage
+      case dv: DrawingView => dv.repairDamage()
       case _ =>
     })
   }
@@ -559,7 +559,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   }
 
   def drawingRequestUpdate(e: DrawingChangeEvent) {
-    repairDamage
+    repairDamage()
   }
 
   def drawingTitleChanged(e: DrawingChangeEvent) {}
@@ -694,18 +694,18 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   
   /**
    * Freezes the view by acquiring the drawing lock.
-   * @see Drawing#lock
+   * @see Drawing#lock()
    */
   def freezeView() {
-    drawing.lock
+    drawing.lock()
   }
 
   /**
    * Unfreezes the view by releasing the drawing lock.
-   * @see Drawing#unlock
+   * @see Drawing#unlock()
    */
   def unfreezeView() {
-    drawing.unlock
+    drawing.unlock()
   }
 
   private def readObject(s: ObjectInputStream) {
@@ -813,7 +813,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   }
 
   def DNDDeinitialize() {
-    getDNDHelper.deinitialize
+    getDNDHelper.deinitialize()
   }
 
   /**
@@ -889,7 +889,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
         val p = constrainPoint(new Point(e.getX, e.getY))
         setLastClick(new Point(e.getX, e.getY))
         tool.mouseDown(e, p.x, p.y)
-        checkDamage
+        checkDamage()
       } catch {
         case t: Throwable => {
           handleMouseEventException(t)
@@ -905,7 +905,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
       try {
         val p = constrainPoint(new Point(e.getX, e.getY))
         tool.mouseUp(e, p.x, p.y)
-        checkDamage
+        checkDamage()
       } catch {
         case t: Throwable => {
           handleMouseEventException(t)
@@ -923,7 +923,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
       try {
         val p = constrainPoint(new Point(e.getX, e.getY))
         tool.mouseDrag(e, p.x, p.y)
-        checkDamage
+        checkDamage()
       } catch {
         case t: Throwable => {
           handleMouseEventException(t)
@@ -958,14 +958,14 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
       val modifiers = e.getModifiers
       if (modifiers == 0 && ((code == KeyEvent.VK_BACK_SPACE) || (code == KeyEvent.VK_DELETE))) {
         if (deleteCmd.isExecutable) {
-          deleteCmd.execute
+          deleteCmd.execute()
         }
       } else if (modifiers == 0 && ((code == KeyEvent.VK_DOWN) || (code == KeyEvent.VK_UP) || (code == KeyEvent.VK_RIGHT) || (code == KeyEvent.VK_LEFT))) {
         handleCursorKey(code)
       } else {
         tool.keyDown(e, code)
       }
-      checkDamage
+      checkDamage()
     }
 
     /**

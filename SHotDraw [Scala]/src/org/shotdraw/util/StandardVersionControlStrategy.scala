@@ -25,7 +25,7 @@ class StandardVersionControlStrategy(var myVersionRequester: VersionRequester) e
   def assertCompatibleVersion() {
     val requiredVersions = getVersionRequester.getRequiredVersions
     requiredVersions find(e => isCompatibleVersion(e)) match {
-      case None => handleIncompatibleVersions
+      case None => handleIncompatibleVersions()
       case _ =>
     }
   }

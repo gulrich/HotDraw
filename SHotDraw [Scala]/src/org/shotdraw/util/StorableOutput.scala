@@ -33,21 +33,21 @@ class StorableOutput(stream: OutputStream) {
   def writeStorable(storable: Storable) {
     if (storable == null) {
       fStream.print("NULL")
-      space
+      space()
       return
     }
     if (mapped(storable)) {
       writeRef(storable)
       return
     }
-    incrementIndent
-    startNewLine
+    incrementIndent()
+    startNewLine()
     map(storable)
     fStream.print(storable.getClass.getName)
-    space
+    space()
     storable.write(this)
-    space
-    decrementIndent
+    space()
+    decrementIndent()
   }
 
   /**
@@ -55,7 +55,7 @@ class StorableOutput(stream: OutputStream) {
    */
   def writeInt(i: Int) {
     fStream.print(i)
-    space
+    space()
   }
 
   /**
@@ -63,7 +63,7 @@ class StorableOutput(stream: OutputStream) {
    */
   def writeLong(l: Long) {
     fStream.print(l)
-    space
+    space()
   }
 
   def writeColor(c: Color) {
@@ -77,7 +77,7 @@ class StorableOutput(stream: OutputStream) {
    */
   def writeDouble(d: Double) {
     fStream.print(d)
-    space
+    space()
   }
 
   /**
@@ -90,7 +90,7 @@ class StorableOutput(stream: OutputStream) {
     else {
       fStream.print(0)
     }
-    space
+    space()
   }
 
   /**
@@ -119,14 +119,14 @@ class StorableOutput(stream: OutputStream) {
       }
     }
     fStream.print('"')
-    space
+    space()
   }
 
   /**
    * Closes a storable output stream.
    */
   def close() {
-    fStream.close
+    fStream.close()
   }
 
   private def mapped(storable: Storable): Boolean = {
@@ -142,9 +142,9 @@ class StorableOutput(stream: OutputStream) {
   private def writeRef(storable: Storable) {
     val ref = fMap.indexOf(storable)
     fStream.print("REF")
-    space
+    space()
     fStream.print(ref)
-    space
+    space()
   }
 
   private def incrementIndent() {
@@ -158,7 +158,7 @@ class StorableOutput(stream: OutputStream) {
 
   private def startNewLine() {
     fStream.println
-    for (i <- 0 to fIndent-1) space
+    for (i <- 0 to fIndent-1) space()
   }
 
   private def space() {

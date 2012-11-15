@@ -100,7 +100,7 @@ class StandardDrawingTest(name: String) extends TestCase(name) {
   }
 
   /**
-   * Method testFireDrawingTitleChanged is testing fireDrawingTitleChanged
+   * Method testFireDrawingTitleChanged is testing fireDrawingTitleChanged()
    * @see org.shotdraw.standard.StandardDrawing#fireDrawingTitleChanged()
    */
   def testFireDrawingTitleChanged() {
@@ -135,14 +135,14 @@ class StandardDrawingTest(name: String) extends TestCase(name) {
   }
 
   /**
-   * Method testLock is testing lock
+   * Method testLock is testing lock()
    * @see org.shotdraw.standard.StandardDrawing#lock()
    */
   def testLock() {
   }
 
   /**
-   * Method testUnlock is testing unlock
+   * Method testUnlock is testing unlock()
    * @see org.shotdraw.standard.StandardDrawing#unlock()
    */
   def testUnlock() {

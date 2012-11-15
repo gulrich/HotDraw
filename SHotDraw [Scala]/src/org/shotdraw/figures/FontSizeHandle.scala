@@ -34,7 +34,7 @@ object FontSizeHandle {
     override def undo: Boolean = {
       if (!super.undo) false
       else {
-        swapFont
+        swapFont()
         true
       }
     }
@@ -43,7 +43,7 @@ object FontSizeHandle {
       if (!isRedoable) {
         false
       } else {
-        swapFont
+        swapFont()
         true
       }
     }

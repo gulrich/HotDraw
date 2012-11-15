@@ -115,14 +115,14 @@ class UndoManagerTest(name: String) extends TestCase(name) {
   }
 
   /**
-   * Method testClearUndos is testing clearUndos
+   * Method testClearUndos is testing clearUndos()
    * @see org.shotdraw.util.UndoManager#clearUndos()
    */
   def testClearUndos() {
   }
 
   /**
-   * Method testClearRedos is testing clearRedos
+   * Method testClearRedos is testing clearRedos()
    * @see org.shotdraw.util.UndoManager#clearRedos()
    */
   def testClearRedos() {

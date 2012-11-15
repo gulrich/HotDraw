@@ -73,7 +73,7 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
    * Sets the cross hair cursor.
    */
   override def activate() {
-    super.activate
+    super.activate()
     if (isUsable) {
       getActiveView.setCursor(new AWTCursor(java.awt.Cursor.CROSSHAIR_CURSOR))
     }
@@ -87,7 +87,7 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
     setCreatedFigure(null)
     setAddedFigure(null)
     setAddedFigures(null)
-    super.deactivate
+    super.deactivate()
   }
 
   /**
@@ -135,7 +135,7 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
     } else {
       newDrawingEditor.getUndoManager.pushUndo(createUndoActivity)      
     }
-    editor.toolDone
+    editor.toolDone()
   }
 
   /**

@@ -45,9 +45,9 @@ object PolygonScaleHandle {
       }
       val figure = fe.next.asInstanceOf[PolygonFigure]
       val backupPolygon = figure.getPolygon
-      figure.willChange
+      figure.willChange()
       figure.setInternalPolygon(getPolygon)
-      figure.changed
+      figure.changed()
       setPolygon(backupPolygon)
       true
     }
@@ -99,7 +99,7 @@ class PolygonScaleHandle(owner: PolygonFigure) extends AbstractHandle(owner) {
    * @param anchorY the y position where the interaction started
    */
   override def invokeEnd(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    ((owner).asInstanceOf[PolygonFigure]).smoothPoints
+    ((owner).asInstanceOf[PolygonFigure]).smoothPoints()
     if ((fCurrent.x == anchorX) && (fCurrent.y == anchorY)) {
       setUndoActivity(null)
     }

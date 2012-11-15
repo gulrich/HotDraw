@@ -24,7 +24,7 @@ trait FigureChangeListener extends EventListener {
   def figureInvalidated(e: FigureChangeEvent)
 
   /**
-   * Sent when a figure changed
+   * Sent when a figure changed()
    */
   def figureChanged(e: FigureChangeEvent)
 

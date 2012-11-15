@@ -44,7 +44,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    */
   protected override def basicMoveBy(dx: Int, dy: Int) {
     for(i <- 0 to fPoints.size - 2) pointAt(i).translate(dx, dy)
-    updateConnection
+    updateConnection()
   }
 
   /**
@@ -150,20 +150,20 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    * Sets the start point.
    */
   def startPoint(x: Int, y: Int) {
-    willChange
+    willChange()
     if (fPoints.size == 0) fPoints += new Point(x, y)
     else fPoints = fPoints.updated(0, new Point(x, y))    
-    changed
+    changed()
   }
 
   /**
    * Sets the end point.
    */
   def endPoint(x: Int, y: Int) {
-    willChange
+    willChange()
     if (fPoints.size < 2) fPoints += new Point(x, y)
     else fPoints = fPoints.updated(fPoints.size-1, new Point(x, y)) 
-    changed
+    changed()
   }
 
   /**
@@ -203,7 +203,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    */
   override def setPointAt(p: Point, i: Int) {
     super.setPointAt(p, i)
-    layoutConnection
+    layoutConnection()
   }
 
   /**
@@ -211,7 +211,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    */
   override def insertPointAt(p: Point, i: Int) {
     super.insertPointAt(p, i)
-    layoutConnection
+    layoutConnection()
   }
 
   /**
@@ -219,7 +219,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    */
   override def removePointAt(i: Int) {
     super.removePointAt(i)
-    layoutConnection
+    layoutConnection()
   }
 
   /**
@@ -245,11 +245,11 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    * itself changes. By default the connection is recalculated
    */
   def layoutConnection() {
-    updateConnection
+    updateConnection()
   }
 
   def figureChanged(e: FigureChangeEvent) {
-    updateConnection
+    updateConnection()
   }
 
   def figureRemoved(e: FigureChangeEvent) {
@@ -265,7 +265,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
   }
 
   override def release() {
-    super.release
+    super.release()
     handleDisconnect(startFigure, endFigure)
     if (getStartConnector != null) {
       startFigure.removeFigureChangeListener(this)
@@ -294,7 +294,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
       connectEnd(end)
     }
     if ((start != null) && (end != null)) {
-      updateConnection
+      updateConnection()
     }
   }
 
@@ -317,7 +317,7 @@ class LineConnection extends PolyLineFigure(4) with ConnectionFigure {
    */
   override def removeFromContainer(c: FigureChangeListener) {
     super.removeFromContainer(c)
-    release
+    release()
   }
 
 }

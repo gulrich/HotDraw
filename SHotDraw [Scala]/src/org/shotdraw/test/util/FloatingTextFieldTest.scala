@@ -101,7 +101,7 @@ class FloatingTextFieldTest(name: String) extends TestCase(name) {
   }
 
   /**
-   * Method testEndOverlay is testing endOverlay
+   * Method testEndOverlay is testing endOverlay()
    * @see org.shotdraw.util.FloatingTextField#endOverlay()
    */
   def testEndOverlay() {

@@ -91,7 +91,7 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
    */
   def addPoint(x: Int, y: Int) {
     fPoints += new Point(x, y)
-    changed
+    changed()
   }
 
   def points: Iterator[Point] = fPoints.iterator
@@ -106,9 +106,9 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
    * Changes the position of a node.
    */
   def setPointAt(p: Point, i: Int) {
-    willChange
+    willChange()
     fPoints = fPoints.updated(i, p)
-    changed
+    changed()
   }
 
   /**
@@ -116,13 +116,13 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
    */
   def insertPointAt(p: Point, i: Int) {
     fPoints.insert(i,p)
-    changed
+    changed()
   }
 
   def removePointAt(i: Int) {
     willChange    
     fPoints.remove(i)
-    changed
+    changed()
   }
 
   /**
@@ -178,7 +178,7 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
   
   override def arrowMode_=(value: ArrowType): Unit = {
     super.arrowMode = value
-    willChange
+    willChange()
     value match {
       case ArrowTipNone =>
         setStartDecoration(null)
@@ -193,7 +193,7 @@ class PolyLineFigure(fSize: Int) extends AbstractFigure {
         setStartDecoration(new ArrowTip)
         setEndDecoration(new ArrowTip)
     }
-    changed
+    changed()
   }
 
   /**

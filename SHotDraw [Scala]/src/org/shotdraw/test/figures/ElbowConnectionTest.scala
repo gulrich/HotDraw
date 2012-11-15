@@ -58,14 +58,14 @@ class ElbowConnectionTest(name: String) extends TestCase(name) {
   }
 
   /**
-   * Method testUpdateConnection is testing updateConnection
+   * Method testUpdateConnection is testing updateConnection()
    * @see org.shotdraw.figures.ElbowConnection#updateConnection()
    */
   def testUpdateConnection() {
   }
 
   /**
-   * Method testLayoutConnection is testing layoutConnection
+   * Method testLayoutConnection is testing layoutConnection()
    * @see org.shotdraw.figures.ElbowConnection#layoutConnection()
    */
   def testLayoutConnection() {

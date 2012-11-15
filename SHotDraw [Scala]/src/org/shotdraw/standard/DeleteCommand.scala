@@ -32,7 +32,7 @@ object DeleteCommand {
      */
     override def undo: Boolean = {
       if (super.undo && !getAffectedFigures.isEmpty) {
-        getDrawingView.clearSelection
+        getDrawingView.clearSelection()
         setAffectedFigures(myCommand.insertFigures(getAffectedFiguresReversed, 0, 0))
         true
       } else false
@@ -44,7 +44,7 @@ object DeleteCommand {
     override def redo: Boolean = {
       if (isRedoable) {
         myCommand.deleteFigures(getAffectedFigures)
-        getDrawingView.clearSelection
+        getDrawingView.clearSelection()
         true
       } else false
     }
@@ -57,7 +57,7 @@ class DeleteCommand(name: String, newDrawingEditor: DrawingEditor) extends Figur
    * @see org.shotdraw.util.Command#execute()
    */
   override def execute() {
-    super.execute
+    super.execute()
     setUndoActivity(createUndoActivity)
     var fe = view.selection
     var affected = ArrayBuffer[Figure]()
@@ -74,7 +74,7 @@ class DeleteCommand(name: String, newDrawingEditor: DrawingEditor) extends Figur
     }
     getUndoActivity.setAffectedFigures(affected)
     deleteFigures(getUndoActivity.getAffectedFigures)
-    view.checkDamage
+    view.checkDamage()
   }
 
   /**

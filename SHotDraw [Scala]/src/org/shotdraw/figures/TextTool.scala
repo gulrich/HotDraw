@@ -43,7 +43,7 @@ object TextTool {
       if (!super.undo) {
         return false
       }
-      getDrawingView.clearSelection
+      getDrawingView.clearSelection()
       setText(getOriginalText)
       true
     }
@@ -52,7 +52,7 @@ object TextTool {
       if (!super.redo) {
         return false
       }
-      getDrawingView.clearSelection
+      getDrawingView.clearSelection()
       setText(getBackupText)
       true
     }
@@ -91,7 +91,7 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
   override def mouseDown(e: MouseEvent, x: Int, y: Int) {
     setView(e.getSource.asInstanceOf[DrawingView])
     if (getTypingTarget != null) {
-      editor.toolDone
+      editor.toolDone()
       return
     }
     var textHolder: TextHolder = null
@@ -104,7 +104,7 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
       beginEdit(textHolder)
     } else {
       super.mouseDown(e, x, y)
-      view.checkDamage
+      view.checkDamage()
       beginEdit(getCreatedFigure.getTextHolder)
     }
   }
@@ -113,7 +113,7 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
 
   override def mouseUp(e: MouseEvent, x: Int, y: Int) {
     if (!isActive) {
-      editor.toolDone
+      editor.toolDone()
     }
   }
 
@@ -121,15 +121,15 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
    * Terminates the editing of a text figure.
    */
   override def deactivate() {
-    endEdit
-    super.deactivate
+    endEdit()
+    super.deactivate()
   }
 
   /**
    * Sets the text cursor.
    */
   override def activate() {
-    super.activate
+    super.activate()
   }
 
   /**
@@ -145,7 +145,7 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
       setFloatingTextField(createFloatingTextField)
     }
     if (figure != getTypingTarget && getTypingTarget != null) {
-      endEdit
+      endEdit()
     }
     getFloatingTextField.createOverlay(view.asInstanceOf[Container], figure.getFont)
     getFloatingTextField.setBounds(fieldBounds(figure), figure.getText)
@@ -171,7 +171,7 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
         (getUndoActivity.asInstanceOf[TextTool.UndoActivity]).setBackupText(getTypingTarget.getText)
       }
       setTypingTarget(null)
-      getFloatingTextField.endOverlay
+      getFloatingTextField.endOverlay()
     } else {
       setUndoActivity(null)
     }

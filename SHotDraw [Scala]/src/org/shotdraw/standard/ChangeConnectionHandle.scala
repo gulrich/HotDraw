@@ -36,7 +36,7 @@ object ChangeConnectionHandle {
       if (!super.undo) {
         return false
       }
-      swapConnectors
+      swapConnectors()
       true
     }
 
@@ -44,7 +44,7 @@ object ChangeConnectionHandle {
       if (!isRedoable) {
         return false
       }
-      swapConnectors
+      swapConnectors()
       true
     }
 
@@ -52,7 +52,7 @@ object ChangeConnectionHandle {
       getAffectedFigures foreach (f => f match {
         case cf:ConnectionFigure =>
           setOldConnector(replaceConnector(cf))
-          cf.updateConnection
+          cf.updateConnection()
         case _ =>
       })
     }
@@ -112,7 +112,7 @@ abstract class ChangeConnectionHandle(owner: ConnectionFigure) extends AbstractH
     fOriginalTarget = target
     setUndoActivity(createUndoActivity(view))
     (getUndoActivity.asInstanceOf[ChangeConnectionHandle.UndoActivity]).setOldConnector(target)
-    disconnect
+    disconnect()
   }
 
   /**
@@ -148,7 +148,7 @@ abstract class ChangeConnectionHandle(owner: ConnectionFigure) extends AbstractH
     }
     setPoint(x, y)
     connect(target)
-    getConnection.updateConnection
+    getConnection.updateConnection()
     val oldConnector = (getUndoActivity.asInstanceOf[ChangeConnectionHandle.UndoActivity]).getOldConnector
     if ((oldConnector == null) || (target == null) || (oldConnector.owner eq target.owner)) {
       setUndoActivity(null)

@@ -34,20 +34,20 @@ class PolygonTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDrawi
   private var myAddedFigure: Figure = null
   
   override def activate() {
-    super.activate
+    super.activate()
     fPolygon = null
   }
 
   override def deactivate() {
     if (fPolygon != null) {
-      fPolygon.smoothPoints
+      fPolygon.smoothPoints()
       if (fPolygon.pointCount < 3 || fPolygon.size.width < 4 || fPolygon.size.height < 4) {
         getActiveView.drawing.remove(fPolygon)
         setUndoActivity(null)
       }
     }
     fPolygon = null
-    super.deactivate
+    super.deactivate()
   }
 
   private def addPoint(x: Int, y: Int) {
@@ -67,10 +67,10 @@ class PolygonTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDrawi
     done = false
     if (e.getClickCount >= 2) {
       if (fPolygon != null) {
-        fPolygon.smoothPoints
+        fPolygon.smoothPoints()
         setUndoActivity(createUndoActivity)
         getUndoActivity.setAffectedFigures(List(getAddedFigure))
-        editor.toolDone
+        editor.toolDone()
       }
       fPolygon = null
     } else {
@@ -83,7 +83,7 @@ class PolygonTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDrawi
       if (fPolygon != null) {
         if (fPolygon.pointCount > 1) {
           fPolygon.setPointAt(new Point(x, y), fPolygon.pointCount - 1)
-          getActiveView.checkDamage
+          getActiveView.checkDamage()
         }
       }
     }
@@ -96,7 +96,7 @@ class PolygonTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDrawi
   override def mouseUp(e: MouseEvent, x: Int, y: Int) {
     done = true
     newDrawingEditor.getUndoManager.pushUndo(createUndoActivity)      
-    editor.toolDone
+    editor.toolDone()
   }
 
   /**

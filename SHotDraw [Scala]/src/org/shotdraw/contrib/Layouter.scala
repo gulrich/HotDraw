@@ -15,7 +15,7 @@ import java.io.Serializable
 import java.awt._
 
 /**
- * A Layouter encapsulates a algorithm to layout
+ * A Layouter encapsulates a algorithm to layout()
  * a figure. It is passed on to a figure which delegates the 
  * layout task to the Layouter's layout method. 
  * The Layouter might need access to some information 
@@ -35,8 +35,8 @@ trait Layouter extends Serializable with Storable {
    * subelements. The layout is not actually performed but just
    * its dimensions are calculated.
    *
-   * @param origin start point for the layout
-   * @param corner minimum corner point for the layout
+   * @param origin start point for the layout()
+   * @param corner minimum corner point for the layout()
    * @return size including space for insets
    */
   def calculateLayout(origin: Point, corner: Point): Rectangle
@@ -46,8 +46,8 @@ trait Layouter extends Serializable with Storable {
    * if a layout task is to be performed. Implementing classes
    * specify a certain layout algorithm in this method.
    *
-   * @param origin start point for the layout
-   * @param corner minimum corner point for the layout
+   * @param origin start point for the layout()
+   * @param corner minimum corner point for the layout()
    */
   def layout(origin: Point, corner: Point): Rectangle
 

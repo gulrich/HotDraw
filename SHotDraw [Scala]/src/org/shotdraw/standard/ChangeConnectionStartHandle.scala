@@ -44,7 +44,7 @@ class ChangeConnectionStartHandle(owner: ConnectionFigure) extends ChangeConnect
    * Disconnects the start figure.
    */
   protected def disconnect() {
-    getConnection.disconnectStart
+    getConnection.disconnectStart()
   }
 
   /**

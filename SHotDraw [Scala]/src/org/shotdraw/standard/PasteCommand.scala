@@ -40,7 +40,7 @@ object PasteCommand {
       getAffectedFigures foreach {
         _.visit(deleteVisitor)
       }
-      getDrawingView.clearSelection
+      getDrawingView.clearSelection()
       true
     }
 
@@ -48,7 +48,7 @@ object PasteCommand {
       if (!isRedoable) {
         return false
       }
-      getDrawingView.clearSelection
+      getDrawingView.clearSelection()
       setAffectedFigures(getDrawingView.insertFigures(getAffectedFigures, 0, 0, false))
       true
     }
@@ -59,7 +59,7 @@ object PasteCommand {
 class PasteCommand(name: String, newDrawingEditor: DrawingEditor) extends FigureTransferCommand(name, newDrawingEditor) {
 
   override def execute() {
-    super.execute
+    super.execute()
     val selection = Clipboard.getClipboard.getContents.asInstanceOf[FigureSelection]
     if (selection != null) {
       setUndoActivity(createUndoActivity)
@@ -69,10 +69,10 @@ class PasteCommand(name: String, newDrawingEditor: DrawingEditor) extends Figure
         return
       }
       val r = getBounds(getUndoActivity.getAffectedFigures)
-      view.clearSelection
+      view.clearSelection()
       val fe = insertFigures(getUndoActivity.getAffectedFigures, r.x + 20, r.y + 20)
       getUndoActivity.setAffectedFigures(fe)
-      view.checkDamage
+      view.checkDamage()
     }
   }
 

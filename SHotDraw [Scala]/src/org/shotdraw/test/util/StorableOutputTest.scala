@@ -111,7 +111,7 @@ class StorableOutputTest(name: String) extends TestCase(name) {
   }
 
   /**
-   * Method testClose is testing close
+   * Method testClose is testing close()
    * @see org.shotdraw.util.StorableOutput#close()
    */
   def testClose() {

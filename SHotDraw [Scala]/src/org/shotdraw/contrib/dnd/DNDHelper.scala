@@ -91,7 +91,7 @@ abstract class DNDHelper(isDragSource: Boolean, isDropTarget: Boolean) {
 
   def deinitialize() {
     if (getDragSourceListener != null) {
-      destroyDragGestreRecognizer
+      destroyDragGestreRecognizer()
       setDragSourceListener(null)
     }
     if (getDropTargetListener != null) {

@@ -59,7 +59,7 @@ class JPanelDesktop extends JPanel with Desktop {
   }
 
   def removeAllFromDesktop(location: Int) {
-    getDesktopEventService.removeAllComponents
+    getDesktopEventService.removeAllComponents()
     container.validate
   }
 

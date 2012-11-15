@@ -150,7 +150,7 @@ class StandardStorageFormat extends StorageFormat {
     val stream = new FileOutputStream(adjustFileName(fileName))
     val output = new StorableOutput(stream)
     output.writeStorable(saveDrawing)
-    output.close
+    output.close()
     adjustFileName(fileName)
   }
 

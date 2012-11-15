@@ -39,11 +39,11 @@ class UndoableCommand extends Command with FigureSelectionListener with CommandL
   def execute() {
     hasSelectionChanged = false
     view.addFigureSelectionListener(this)
-    getWrappedCommand.execute
+    getWrappedCommand.execute()
     val undoableCommand = getWrappedCommand.getUndoActivity
     if ((undoableCommand != null) && (undoableCommand.isUndoable)) {
       getDrawingEditor.getUndoManager.pushUndo(undoableCommand)
-      getDrawingEditor.getUndoManager.clearRedos
+      getDrawingEditor.getUndoManager.clearRedos()
     }
     if (!hasSelectionChanged || (getDrawingEditor.getUndoManager.getUndoSize == 1)) {
       getDrawingEditor.figureSelectionChanged(view)
@@ -100,15 +100,15 @@ class UndoableCommand extends Command with FigureSelectionListener with CommandL
   }
 
   def commandExecuted(commandEvent: EventObject) {
-    getEventDispatcher.fireCommandExecutedEvent
+    getEventDispatcher.fireCommandExecutedEvent()
   }
 
   def commandExecutable(commandEvent: EventObject) {
-    getEventDispatcher.fireCommandExecutableEvent
+    getEventDispatcher.fireCommandExecutableEvent()
   }
 
   def commandNotExecutable(commandEvent: EventObject) {
-    getEventDispatcher.fireCommandNotExecutableEvent
+    getEventDispatcher.fireCommandNotExecutableEvent()
   }
 
 }

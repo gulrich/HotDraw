@@ -73,13 +73,13 @@ object SendToBackCommand {
 class SendToBackCommand(name: String, newDrawingEditor: DrawingEditor) extends AbstractCommand(name, newDrawingEditor) {
 
   override def execute() {
-    super.execute
+    super.execute()
     super.setUndoActivity(createUndoActivity)
     super.getUndoActivity.setAffectedFigures(view.selectionZOrdered)
     super.getUndoActivity.getAffectedFigures foreach {
       super.view.drawing.sendToBack(_)
     }
-    super.view.checkDamage
+    super.view.checkDamage()
   }
 
   override protected def isExecutableWithView: Boolean = view.selectionCount > 0

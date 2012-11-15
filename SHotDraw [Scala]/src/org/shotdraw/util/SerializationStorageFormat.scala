@@ -52,7 +52,7 @@ class SerializationStorageFormat extends StandardStorageFormat {
     val stream = new FileOutputStream(adjustFileName(fileName))
     val output = new ObjectOutputStream(stream)
     output.writeObject(saveDrawing)
-    output.close
+    output.close()
     adjustFileName(fileName)
   }
 

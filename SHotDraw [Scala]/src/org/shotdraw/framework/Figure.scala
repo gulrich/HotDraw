@@ -222,8 +222,8 @@ trait Figure extends FigureAttributes with Storable with Cloneable {
    * changed();
    * }
    * </pre>
-   * @see #invalidate
-   * @see #changed
+   * @see #invalidate()
+   * @see #changed()
    */
   def willChange()
 
@@ -231,8 +231,8 @@ trait Figure extends FigureAttributes with Storable with Cloneable {
    * Informes that a figure has changed its display box.
    * This method also triggers an update call for its
    * registered observers.
-   * @see #invalidate
-   * @see #willChange
+   * @see #invalidate()
+   * @see #willChange()
    *
    */
   def changed()

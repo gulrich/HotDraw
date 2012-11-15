@@ -32,7 +32,7 @@ object GroupCommand {
       if (!super.undo) {
         return false
       }
-      getDrawingView.clearSelection
+      getDrawingView.clearSelection()
       getDrawingView.drawing.orphanAll(getAffectedFigures)
       var affectedFigures = ArrayBuffer[Figure]()
       getAffectedFigures foreach { f =>
@@ -46,14 +46,14 @@ object GroupCommand {
 
     override def redo: Boolean = {
       if (isRedoable) {
-        groupFigures
+        groupFigures()
         true
       } else false
     }
 
     def groupFigures() {
       getDrawingView.drawing.orphanAll(getAffectedFigures)
-      getDrawingView.clearSelection
+      getDrawingView.clearSelection()
       val group = new GroupFigure
       group.addAll(getAffectedFigures)
       val figure = getDrawingView.drawing.add(group)
@@ -67,11 +67,11 @@ object GroupCommand {
 class GroupCommand(name: String, newDrawingEditor: DrawingEditor) extends AbstractCommand(name, newDrawingEditor) {
 
   override def execute() {
-    super.execute
+    super.execute()
     setUndoActivity(createUndoActivity)
     getUndoActivity.setAffectedFigures(view.selection)
-    (getUndoActivity.asInstanceOf[GroupCommand.UndoActivity]).groupFigures
-    view.checkDamage
+    (getUndoActivity.asInstanceOf[GroupCommand.UndoActivity]).groupFigures()
+    view.checkDamage()
   }
 
   override def isExecutableWithView: Boolean = view.selectionCount > 1

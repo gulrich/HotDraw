@@ -22,7 +22,7 @@ trait DrawingChangeListener {
   def drawingInvalidated(e: DrawingChangeEvent)
 
   /**
-   * Sent when the drawing Title has changed
+   * Sent when the drawing Title has changed()
    */
   def drawingTitleChanged(e: DrawingChangeEvent)
 

@@ -82,12 +82,12 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    *
    * @param figure that is part of the drawing and should be removed
    * @return the figure that has been removed (might be different from the figure specified)
-   * @see #removeAll
+   * @see #removeAll()
    */
   def remove(figure: Figure): Figure = {
     val orphanedFigure = orphan(figure)
     if (orphanedFigure != null) {
-      orphanedFigure.release
+      orphanedFigure.release()
     }
     orphanedFigure
   }
@@ -95,7 +95,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
   /**
    * Removes a list of figures.
    *
-   * @see #remove
+   * @see #remove()
    * @deprecated use removeAll(Seq[Figure]) instead
    */
   def removeAll(figures: List[Figure]) {
@@ -104,7 +104,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
 
   /**
    * Removes a Seq[Figure] of figures.
-   * @see #remove
+   * @see #remove()
    */
   def removeAll(fe: Seq[Figure]) {
     fe foreach(remove(_))
@@ -112,7 +112,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
 
   /**
    * Removes all children.
-   * @see #remove
+   * @see #remove()
    */
   def removeAll() {
     figures foreach (_.removeFromContainer(this))
@@ -166,8 +166,8 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
       replacement.addToContainer(this)
       figure.removeFromContainer(this)
       fFigures = fFigures.updated(index, replacement)
-      figure.changed
-      replacement.changed
+      figure.changed()
+      replacement.changed()
     }
     replacement
   }
@@ -183,7 +183,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
       fFigures = ArrayBuffer(figure) ++ fFigures
       _nLowestZ -= 1
       figure.setZValue(_nLowestZ)
-      figure.changed
+      figure.changed()
     }
   }
 
@@ -198,7 +198,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
       fFigures += figure
       _nHighestZ += 1
       figure.setZValue(_nHighestZ)
-      figure.changed
+      figure.changed()
     }
   }
 
@@ -237,7 +237,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
       fFigures -= figure
       fFigures.insert(nr, figure) 
       figure.setZValue(layerFigureZValue)
-      figure.changed
+      figure.changed()
     }
   }
 
@@ -473,7 +473,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
    */
   override def release() {
     figures foreach (_.release)
-    super.release
+    super.release()
   }
 
   /**
@@ -581,7 +581,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
 
   private def _clearQuadTree() {
     if (_theQuadTree != null) {
-      _theQuadTree.clear
+      _theQuadTree.clear()
     }
   }
   
@@ -623,7 +623,7 @@ abstract class CompositeFigure extends AbstractFigure with FigureChangeListener 
   /**
    * The figures that this figure is composed of
    * @see #add
-   * @see #remove
+   * @see #remove()
    */
   protected var fFigures = ArrayBuffer[Figure]()
   @transient

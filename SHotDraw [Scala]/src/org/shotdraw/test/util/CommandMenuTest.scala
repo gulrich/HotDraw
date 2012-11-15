@@ -73,7 +73,7 @@ class CommandMenuTest(name: String) extends TestCase(name) {
   }
 
   /**
-   * Method testRemove is testing remove
+   * Method testRemove is testing remove()
    * @see org.shotdraw.util.CommandMenu#remove(org.shotdraw.util.Command)
    */
   def testRemove() {
@@ -87,7 +87,7 @@ class CommandMenuTest(name: String) extends TestCase(name) {
   }
 
   /**
-   * Method testCheckEnabled is testing checkEnabled
+   * Method testCheckEnabled is testing checkEnabled()
    * @see org.shotdraw.util.CommandMenu#checkEnabled()
    */
   def testCheckEnabled() {

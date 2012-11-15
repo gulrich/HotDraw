@@ -36,11 +36,11 @@ object BringToFrontCommand {
 class BringToFrontCommand(name: String, newDrawingEditor: DrawingEditor) extends AbstractCommand(name, newDrawingEditor) {
 
   override def execute() {
-    super.execute
+    super.execute()
     setUndoActivity(createUndoActivity)
     getUndoActivity.setAffectedFigures(view.selection)
     getUndoActivity.getAffectedFigures foreach {view.drawing.bringToFront(_) }
-    view.checkDamage
+    view.checkDamage()
   }
 
   override def isExecutableWithView: Boolean = view.selectionCount > 0

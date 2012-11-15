@@ -51,7 +51,7 @@ class StandardFigureSelection extends FigureSelection with Serializable {
     fe foreach {
       writer.writeStorable(_)
     }
-    writer.close
+    writer.close()
     fData = output.toByteArray
   }
 

@@ -34,12 +34,12 @@ class SelectAreaTracker(newDrawingEditor: DrawingEditor, fRubberBandColor: Color
 
   override def mouseDrag(e: MouseEvent, x: Int, y: Int) {
     super.mouseDrag(e, x, y)
-    eraseRubberBand
+    eraseRubberBand()
     rubberBand(getAnchorX, getAnchorY, x, y)
   }
 
   override def mouseUp(e: MouseEvent, x: Int, y: Int) {
-    eraseRubberBand
+    eraseRubberBand()
     selectGroup(e.isShiftDown)
     super.mouseUp(e, x, y)
   }
@@ -68,7 +68,7 @@ class SelectAreaTracker(newDrawingEditor: DrawingEditor, fRubberBandColor: Color
         g.setColor(fRubberBandColor)
         g.drawRect(r.x, r.y, r.width, r.height)
       } finally {
-        g.dispose
+        g.dispose()
       }
     }
   }

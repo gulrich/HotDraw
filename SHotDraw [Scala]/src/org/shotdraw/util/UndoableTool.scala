@@ -34,7 +34,7 @@ class UndoableTool extends Tool with ToolListener {
    * reinitialize a tool.
    */
   def activate() {
-    getWrappedTool.activate
+    getWrappedTool.activate()
   }
 
   /**
@@ -44,11 +44,11 @@ class UndoableTool extends Tool with ToolListener {
    * super.deactivate.
    */
   def deactivate() {
-    getWrappedTool.deactivate
+    getWrappedTool.deactivate()
     val undoActivity = getWrappedTool.getUndoActivity
     if ((undoActivity != null) && (undoActivity.isUndoable)) {
       editor.getUndoManager.pushUndo(undoActivity)
-      editor.getUndoManager.clearRedos
+      editor.getUndoManager.clearRedos()
       editor.figureSelectionChanged(getActiveView)
     }
   }

@@ -61,7 +61,7 @@ class Iconkit(fComponent: Component) {
     val tracker = new MediaTracker(component)
     for (s <- fRegisteredImages if basicGetImage(s) != NoImage)
       tracker.addImage(loadImage(s), Iconkit.ID)
-//    fRegisteredImages.clear
+//    fRegisteredImages.clear()
     try {
       tracker.waitForAll
     }

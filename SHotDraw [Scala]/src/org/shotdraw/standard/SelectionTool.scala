@@ -41,7 +41,7 @@ class SelectionTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDra
     if (getDelegateTool != null) {
       return
     }
-    view.freezeView
+    view.freezeView()
     val handle = view.findHandle(e.getX, e.getY)
     if (handle != null) {
       setDelegateTool(createHandleTracker(view, handle))
@@ -51,12 +51,12 @@ class SelectionTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDra
         setDelegateTool(createDragTracker(figure))
       } else {
         if (!e.isShiftDown) {
-          view.clearSelection
+          view.clearSelection()
         }
         setDelegateTool(createAreaTracker)
       }
     }
-    getDelegateTool.activate
+    getDelegateTool.activate()
     getDelegateTool.mouseDown(e, x, y)
   }
 
@@ -87,11 +87,11 @@ class SelectionTool(newDrawingEditor: DrawingEditor) extends AbstractTool(newDra
   override def mouseUp(e: MouseEvent, x: Int, y: Int) {
     if (getDelegateTool != null) {
       getDelegateTool.mouseUp(e, x, y)
-      getDelegateTool.deactivate
+      getDelegateTool.deactivate()
       setDelegateTool(null)
     }
     if (view != null) {
-      view.unfreezeView
+      view.unfreezeView()
       editor.figureSelectionChanged(view)
     }
   }

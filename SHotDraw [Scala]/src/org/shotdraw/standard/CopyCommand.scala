@@ -22,7 +22,7 @@ import org.shotdraw.framework.DrawingEditor
 class CopyCommand(name: String, newDrawingEditor: DrawingEditor) extends FigureTransferCommand(name, newDrawingEditor) {
 
   override def execute() {
-    super.execute
+    super.execute()
     copyFigures(view.selection, view.selectionCount)
   }
 

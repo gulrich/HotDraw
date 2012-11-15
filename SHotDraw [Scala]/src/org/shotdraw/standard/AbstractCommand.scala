@@ -93,9 +93,9 @@ class AbstractCommand(var myName: String, var myDrawingEditor: DrawingEditor, va
       val isOldViewInteractive = (oldView != null) && oldView.isInteractive
       val isNewViewInteractive = (newView != null) && newView.isInteractive
       if (!isOldViewInteractive && isNewViewInteractive) {
-        getEventDispatcher.fireCommandExecutableEvent
+        getEventDispatcher.fireCommandExecutableEvent()
       } else if (isOldViewInteractive && !isNewViewInteractive) {
-        getEventDispatcher.fireCommandNotExecutableEvent
+        getEventDispatcher.fireCommandNotExecutableEvent()
       }
     }
   }

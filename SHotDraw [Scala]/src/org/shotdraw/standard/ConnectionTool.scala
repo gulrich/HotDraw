@@ -50,10 +50,10 @@ object ConnectionTool {
       if (!super.undo) {
         return false
       }
-      getConnection.disconnectStart
-      getConnection.disconnectEnd
+      getConnection.disconnectStart()
+      getConnection.disconnectEnd()
       getAffectedFigures foreach (getDrawingView.drawing.orphan(_))
-      getDrawingView.clearSelection
+      getDrawingView.clearSelection()
       true
     }
 
@@ -63,7 +63,7 @@ object ConnectionTool {
       }
       getConnection.connectStart(myStartConnector)
       getConnection.connectEnd(myEndConnector)
-      getConnection.updateConnection
+      getConnection.updateConnection()
       getDrawingView.insertFigures(getAffectedFigures, 0, 0, false)
       true
     }
@@ -179,7 +179,7 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
       if (getEndConnector != null) {
         getConnection.connectStart(getStartConnector)
         getConnection.connectEnd(getEndConnector)
-        getConnection.updateConnection
+        getConnection.updateConnection()
         setUndoActivity(createUndoActivity)
         getUndoActivity.setAffectedFigures(Seq[Figure](getAddedFigure))
         newDrawingEditor.getUndoManager.pushUndo(createUndoActivity)      
@@ -192,11 +192,11 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
     setStartConnector(null)
     setEndConnector(null)
     setAddedFigure(null)
-    editor.toolDone
+    editor.toolDone()
   }
 
   override def deactivate() {
-    super.deactivate
+    super.deactivate()
     if (getTargetFigure != null) {
       getTargetFigure.connectorVisibility(false, null)
     }
@@ -275,7 +275,7 @@ class ConnectionTool(newDrawingEditor: DrawingEditor, fPrototype: ConnectionFigu
     if (cc ne getTargetConnector) {
       setTargetConnector(cc)
     }
-    getActiveView.checkDamage
+    getActiveView.checkDamage()
   }
 
   protected def findConnector(x: Int, y: Int, f: Figure): Connector = f.connectorAt(x, y)

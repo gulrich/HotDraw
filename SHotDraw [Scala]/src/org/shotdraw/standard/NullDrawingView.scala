@@ -276,13 +276,13 @@ class NullDrawingView(var myDrawingEditor: DrawingEditor) extends JPanel with Dr
 
   /**
    * Freezes the view by acquiring the drawing lock.
-   * @see Drawing#lock
+   * @see Drawing#lock()
    */
   def freezeView() {}
 
   /**
    * Unfreezes the view by releasing the drawing lock.
-   * @see Drawing#unlock
+   * @see Drawing#unlock()
    */
   def unfreezeView() {}
 

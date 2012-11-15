@@ -86,7 +86,7 @@ class DragTracker(newDrawingEditor: DrawingEditor, anchor: Figure) extends Abstr
       getActiveView.toggleSelection(getAnchorFigure)
       setAnchorFigure(null)
     } else if (!getActiveView.isFigureSelected(getAnchorFigure)) {
-      getActiveView.clearSelection
+      getActiveView.clearSelection()
       getActiveView.addToSelection(getAnchorFigure)
     }
     setUndoActivity(createUndoActivity)

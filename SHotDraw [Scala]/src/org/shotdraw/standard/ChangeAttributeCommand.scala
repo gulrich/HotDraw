@@ -75,7 +75,7 @@ object ChangeAttributeCommand {
     def getBackupValue: T = myUndoValue
 
     override def release() {
-      super.release
+      super.release()
       myOriginalValues = Map()
     }
 
@@ -96,7 +96,7 @@ object ChangeAttributeCommand {
 class ChangeAttributeCommand[T](name: String, fAttribute: FigureAttributeConstant[T], fValue: T, newDrawingEditor: DrawingEditor) extends AbstractCommand(name, newDrawingEditor) {
 
   override def execute() {
-    super.execute
+    super.execute()
     setUndoActivity(createUndoActivity)
     getUndoActivity.setAffectedFigures(view.selection)
     getUndoActivity.getAffectedFigures foreach(f => fAttribute.setAttribute(f,fValue))

@@ -54,7 +54,7 @@ class UndoManager(maxStackCapacity: Int) {
    */
   private def removeFirstElementInFullList(l: ArrayBuffer[Undoable]): ArrayBuffer[Undoable] = {
     if (l.size >= maxStackCapacity) {
-      l.head.release
+      l.head.release()
       l.tail
     }
     l

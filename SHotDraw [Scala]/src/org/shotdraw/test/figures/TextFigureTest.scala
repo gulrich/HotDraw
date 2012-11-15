@@ -123,7 +123,7 @@ class TextFigureTest(name: String) extends TestCase(name) {
   }
 
   /**
-   * Method testChanged is testing changed
+   * Method testChanged is testing changed()
    * @see org.shotdraw.figures.TextFigure#changed()
    */
   def testChanged() {
@@ -250,14 +250,14 @@ class TextFigureTest(name: String) extends TestCase(name) {
   }
 
   /**
-   * Method testRelease is testing release
+   * Method testRelease is testing release()
    * @see org.shotdraw.figures.TextFigure#release()
    */
   def testRelease() {
   }
 
   /**
-   * Method testDisconnect is testing disconnect
+   * Method testDisconnect is testing disconnect()
    * @see org.shotdraw.figures.TextFigure#disconnect(org.shotdraw.framework.Figure)
    */
   def testDisconnect() {

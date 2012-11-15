@@ -191,7 +191,7 @@ class PolygonFigureTest(name: String) extends TestCase(name) {
   }
 
   /**
-   * Method testSmoothPoints is testing smoothPoints
+   * Method testSmoothPoints is testing smoothPoints()
    * @see org.shotdraw.contrib.PolygonFigure#smoothPoints()
    */
   def testSmoothPoints() {

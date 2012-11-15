@@ -21,14 +21,14 @@ import org.shotdraw.util._
 class DuplicateCommand(name: String, newDrawingEditor: DrawingEditor) extends FigureTransferCommand(name, newDrawingEditor) {
 
   override def execute() {
-    super.execute
+    super.execute()
     setUndoActivity(createUndoActivity)
     val selection = view.getFigureSelection
     val figures = selection.getData(StandardFigureSelection.TYPE).asInstanceOf[Seq[Figure]]
     getUndoActivity.setAffectedFigures(figures)
-    view.clearSelection
+    view.clearSelection()
     getUndoActivity.setAffectedFigures(insertFigures(getUndoActivity.getAffectedFigures, 10, 10))
-    view.checkDamage
+    view.checkDamage()
   }
 
   protected override def isExecutableWithView: Boolean = view.selectionCount > 0

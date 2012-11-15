@@ -50,7 +50,7 @@ class DesktopEventService(var myDesktop: Desktop, var myContainer: Container) {
   }
 
   def removeAllComponents() {
-    getContainer.removeAll
+    getContainer.removeAll()
   }
 
   def addDesktopListener(dpl: DesktopListener) {
@@ -76,7 +76,7 @@ class DesktopEventService(var myDesktop: Desktop, var myContainer: Container) {
   }
 
   /**
-   * This method is only called if the selected drawingView has actually changed
+   * This method is only called if the selected drawingView has actually changed()
    */
   protected def fireDrawingViewSelectedEvent(oldView: DrawingView, newView: DrawingView) {
     val dpe = createDesktopEvent(oldView, newView)
