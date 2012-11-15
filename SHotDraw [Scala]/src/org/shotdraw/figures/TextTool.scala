@@ -91,6 +91,7 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
   override def mouseDown(e: MouseEvent, x: Int, y: Int) {
     setView(e.getSource.asInstanceOf[DrawingView])
     if (getTypingTarget != null) {
+      newDrawingEditor.getUndoManager.pushUndo(createCreationUndoActivity)
       editor.toolDone()
       return
     }
@@ -113,6 +114,7 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
 
   override def mouseUp(e: MouseEvent, x: Int, y: Int) {
     if (!isActive) {
+      newDrawingEditor.getUndoManager.pushUndo(createCreationUndoActivity)
       editor.toolDone()
     }
   }
@@ -220,6 +222,8 @@ class TextTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends Creat
    * Factory method for undo activity
    */
   override protected def createUndoActivity: Undoable = new TextTool.UndoActivity(view, getTypingTarget.getText)
+  
+  private def createCreationUndoActivity: Undoable = new CreationCommand("figure", getAddedFigure, newDrawingEditor).createUndoActivity
 
   private var myTextField: FloatingTextField = null
   private var myTypingTarget: TextHolder = null
