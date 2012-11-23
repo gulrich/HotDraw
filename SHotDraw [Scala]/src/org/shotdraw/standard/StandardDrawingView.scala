@@ -954,6 +954,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
      * currently active tool.
      */
     def keyPressed(e: KeyEvent) {
+      println(e)
       val code = e.getKeyCode
       val modifiers = e.getModifiers
       if (modifiers == 0 && ((code == KeyEvent.VK_BACK_SPACE) || (code == KeyEvent.VK_DELETE))) {
