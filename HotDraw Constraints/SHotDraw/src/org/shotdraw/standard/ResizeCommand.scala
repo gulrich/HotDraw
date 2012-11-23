@@ -198,10 +198,7 @@ class ResizeDialog(origin: Point, width: Int, height: Int) {
     val ratioCb = new JCheckBox("Preserve ratio")
     ratioCb.addActionListener(new ActionListener {
       override def actionPerformed(e: ActionEvent) {
-        if(ratioCb.isSelected) {
-          solver.removeConstraint(ratio)
-          //Question here
-        }
+        if(!ratioCb.isSelected) solver.removeConstraint(ratio)
         else ensure(ratio)
       }
     })
