@@ -40,6 +40,8 @@ import java.awt.event.MouseListener
 import java.awt.event.MouseEvent
 import java.awt.event.FocusListener
 import java.awt.event.FocusEvent
+import org.shotdraw.framework.DrawingView
+import java.awt.Rectangle
 
 /**
  * Command to delete the selection.
@@ -48,33 +50,37 @@ import java.awt.event.FocusEvent
  */
 object ResizeCommand {
 
-  class UndoActivity(myCommand: FigureTransferCommand) extends UndoableAdapter(myCommand.view) {
+  class UndoActivity(newDrawingView: DrawingView, originalDisplayBox: Rectangle) extends UndoableAdapter(newDrawingView) {
+    private var backupDisplayBox: Rectangle = null
     setUndoable(true)
     setRedoable(true)
 
-    /**
-     * @see org.shotdraw.util.Undoable#undo()
-     */
     override def undo: Boolean = {
-      if (super.undo && !getAffectedFigures.isEmpty) {
-        getDrawingView.clearSelection()
-        setAffectedFigures(myCommand.insertFigures(getAffectedFiguresReversed, 0, 0))
-        true
-      } else false
+      if (!super.undo) {
+        return false
+      }
+      getAffectedFigures match {
+        case Seq(f: AbstractFigure) => f.displayBox(originalDisplayBox)
+        case _ => 
+      }
+      true
     }
 
-    /**
-     * @see org.shotdraw.util.Undoable#redo()
-     */
     override def redo: Boolean = {
-      if (isRedoable) {
-        myCommand.deleteFigures(getAffectedFigures)
-        getDrawingView.clearSelection()
-        true
-      } else false
+      if (!super.redo) {
+        return false
+      }
+      getAffectedFigures match {
+        case Seq(f: AbstractFigure) => f.displayBox(backupDisplayBox)
+        case _ => 
+      }
+      true
+    }
+
+    def setBackup(newBackup: Rectangle) {
+      backupDisplayBox = newBackup
     }
   }
-
 }
 
 class ResizeCommand(name: String, newDrawingEditor: DrawApplication) extends FigureTransferCommand(name, newDrawingEditor) {
@@ -83,16 +89,16 @@ class ResizeCommand(name: String, newDrawingEditor: DrawApplication) extends Fig
    */
   override def execute() {
     super.execute()
-    setUndoActivity(createUndoActivity)
     var fe = view.selection
     fe match {
       case Seq(f: AbstractFigure) =>
-        getUndoActivity.setAffectedFigures(Seq(f))
         val origin = new Point(f.displayBox.x,f.displayBox.y)
         val newPoint = new ResizeDialog(origin, f.displayBox.width,f.displayBox.height).showDialog
+        setUndoActivity(createUndoActivity(f))
+        getUndoActivity.setAffectedFigures(Seq(f))
         if(newPoint != null) {
-          println(newPoint)
           f.displayBox(origin, newPoint)
+          getUndoActivity.asInstanceOf[ResizeCommand.UndoActivity].setBackup(f.displayBox)
         }
         view.checkDamage()
       case _ => JOptionPane.showMessageDialog(newDrawingEditor,"Cannot resize more than one figure at a time.")
@@ -108,7 +114,7 @@ class ResizeCommand(name: String, newDrawingEditor: DrawApplication) extends Fig
    * Factory method for undo activity
    * @return Undoable
    */
-  protected def createUndoActivity: Undoable = new ResizeCommand.UndoActivity(this)
+  protected def createUndoActivity(f: AbstractFigure): Undoable = new ResizeCommand.UndoActivity(this.view, f.displayBox)
 }
 
 class ResizeDialog(origin: Point, width: Int, height: Int) {
