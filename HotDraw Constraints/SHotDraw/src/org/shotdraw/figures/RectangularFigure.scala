@@ -4,72 +4,78 @@ import java.awt.Graphics
 import java.awt.Point
 import java.awt.Rectangle
 import org.shotdraw.framework.CRectangle
-import org.shotdraw.framework.Locator
 import org.shotdraw.standard.AbstractFigure
-import org.shotdraw.standard.LocatorHandle
+import org.shotdraw.standard.BoxHandleKit
 import org.shotdraw.util.StorableInput
 import org.shotdraw.util.StorableOutput
-import ch.epfl.lamp.cassowary.CVar
 import ch.epfl.lamp.cassowary.Constraint
 import ch.epfl.lamp.cassowary.SimplexSolver
-import org.shotdraw.standard.BoxHandleKit
+import ch.epfl.lamp.cassowary.CVar
+import ch.epfl.lamp.cassowary.Strength
 
 abstract class RectangularFigure(origin: Point, corner: Point) extends AbstractFigure {
-  private var db: CRectangle = new CRectangle(origin, corner)
+  private var solver = new SimplexSolver
+  private var db: CRectangle = new CRectangle(origin, corner, solver)
   private val h = List(
-      DraggableBox.north,
-      DraggableBox.northEast,
-      DraggableBox.east,
-      DraggableBox.southEast,
-      DraggableBox.south,
-      DraggableBox.southWest,
-      DraggableBox.west,
-      DraggableBox.northWest)
-  private val solver = new SimplexSolver
-    
+      North(solver),
+      NorthEast(solver),
+      East(solver),
+      SouthEast(solver),
+      South(solver),
+      SouthWest(solver),
+      West(solver),
+      NorthWest(solver))
+
+  solver.addStay(db.cx, Strength.Required)
+  solver.addStay(db.cy, Strength.Required)
   
+  ensure(h(0).cx :== (h(5).cx+h(1).cx)/2)
+  ensure(h(4).cx :== h(0).cx)
   
-//  ensure(h(0).cx :== (db.cx+db.cx+db.cwidth)/2)
-//  ensure(h(0).cy :== db.cy)
-//  ensure(h(1).cx :== db.cx+db.cwidth)
-//  ensure(h(1).cy :== db.cy)
-//  ensure(h(2).cx :== db.cx+db.cwidth)
-//  ensure(h(2).cy :== (db.cy+db.cheight)/2)
-//  ensure(h(3).cx :== db.cx+db.cwidth)
-//  ensure(h(3).cy :== db.cy+db.cheight)
-//  ensure(h(4).cx :== (db.cx+db.cx+db.cwidth)/2)
-//  ensure(h(4).cy :== db.cy+db.cheight)
-//  ensure(h(5).cx :== db.cx)
-//  ensure(h(5).cy :== db.cy+db.cheight)
-//  ensure(h(6).cx :== db.cx)
-//  ensure(h(6).cy :== (db.cy+db.cheight)/2)
-//  ensure(h(7).cx :== db.cx)
-//  ensure(h(7).cy :== db.cy)
+  ensure(h(2).cy :== (h(0).cy+h(3).cy)/2)
+  ensure(h(6).cy :== h(2).cy)
   
+  ensure(h(1).cx :== db.cx+db.cwidth)
+  ensure(h(2).cx :== h(1).cx)
+  ensure(h(3).cx :== h(1).cx)
+
+  ensure(h(5).cx :== db.cx)
+  ensure(h(6).cx :== h(5).cx)
+  ensure(h(7).cx :== h(5).cx)
+  
+  ensure(h(0).cy :== db.cy)
+  ensure(h(1).cy :== h(0).cy)
+  ensure(h(7).cy :== h(0).cy)
+  
+  ensure(h(3).cy :== db.cy+db.cheight)
+  ensure(h(4).cy :== h(3).cy)
+  ensure(h(5).cy :== h(3).cy)
+     
   def ensure(c: Constraint): Unit = solver.addConstraint(c)
   
   override def displayBox(origin: Point, corner: Point) {
-    
-//    solver.addEditVar(db.cx).beginEdit.addEditVar(db.cy).addEditVar(db.cwidth).addEditVar(db.cheight).beginEdit
-//    solver.suggestValue(db.cx, origin.x).suggestValue(db.cy, origin.y).suggestValue(db.cwidth, corner.x-origin.x).suggestValue(db.cheight, corner.y-origin.y).resolve
-//    solver.endEdit
-//    println("DB:"+db.cx + " " + db.cy + " " + db.cwidth + " " + db.cheight)
-//    h foreach {f => println(f.id + "= ("+f.cx + " " +f.cy+")")}
+    solver = new SimplexSolver
+    solver.addEditVar(db.cx).beginEdit.addEditVar(db.cy).addEditVar(db.cwidth).addEditVar(db.cheight).beginEdit
+    solver.suggestValue(db.cx, origin.x).suggestValue(db.cy, origin.y).suggestValue(db.cwidth, corner.x-origin.x).suggestValue(db.cheight, corner.y-origin.y).resolve
+    solver.endEdit
+    println("DB:"+db.cx + " " + db.cy + " " + db.cwidth + " " + db.cheight)
+    h foreach {f => println(f.id + "= ("+f.cx + " " +f.cy+")")}
     willChange()
-    
-    db.cx.value = origin.x
-    db.cy.value = origin.y
-    db.cwidth.value = corner.x-origin.x
-    db.cheight.value = corner.y-origin.y
-    
-    h(0).cx.value = db.x+db.width/2
-    h(0).cy.value = db.y
-    
+//    
+//    db.cx.value = origin.x
+//    db.cy.value = origin.y
+//    db.cwidth.value = corner.x-origin.x
+//    db.cheight.value = corner.y-origin.y
+//    
+//    h(0).cx.value = db.x+db.width/2
+//    h(0).cy.value = db.y   
     changed()
   }
   
+  def newFigure(origin: Point, corner: Point): RectangularFigure
+  
   def basicDisplayBox(origin: Point, corner: Point) {
-    db = new CRectangle(origin, corner)
+    db = new CRectangle(origin, corner, solver)
   }
 
   override def handles = BoxHandleKit.addHandles(this,List())
@@ -81,7 +87,7 @@ abstract class RectangularFigure(origin: Point, corner: Point) extends AbstractF
   }
 
   protected def basicMoveBy(x: Int, y: Int) {
-    db = new CRectangle(db.x+x, db.y+y, db.width, db.height)
+    db = new CRectangle(db.x+x, db.y+y, db.width, db.height, solver)
   }
   
   override def write(dw: StorableOutput) {
@@ -94,25 +100,41 @@ abstract class RectangularFigure(origin: Point, corner: Point) extends AbstractF
 
   override def read(dr: StorableInput) {
     super.read(dr)
-    db = new CRectangle(dr.readInt, dr.readInt, dr.readInt, dr.readInt)
+    db = new CRectangle(dr.readInt, dr.readInt, dr.readInt, dr.readInt, solver)
   } 
 }
 
-object DraggableBox {
-  def north = new DraggableBox(0)
-  def northEast = new DraggableBox(1)
-  def east = new DraggableBox(2)
-  def southEast = new DraggableBox(3)
-  def south = new DraggableBox(4)
-  def southWest = new DraggableBox(5)
-  def west = new DraggableBox(6)
-  def northWest = new DraggableBox(7)
+sealed trait DragBox
+
+object North extends DragBox {
+  def apply(solver: SimplexSolver) = new DraggableBox(0,solver)
+}
+object NorthEast extends DragBox {
+  def apply(solver: SimplexSolver) = new DraggableBox(1,solver)
+}
+object East extends DragBox {
+  def apply(solver: SimplexSolver) = new DraggableBox(2,solver)
+}
+object SouthEast extends DragBox {
+  def apply(solver: SimplexSolver) = new DraggableBox(3,solver)
+}
+object South extends DragBox {
+  def apply(solver: SimplexSolver) = new DraggableBox(4,solver)
+}
+object SouthWest extends DragBox {
+  def apply(solver: SimplexSolver) = new DraggableBox(5,solver)
+}
+object West extends DragBox {
+  def apply(solver: SimplexSolver) = new DraggableBox(6,solver)
+}
+object NorthWest extends DragBox {
+  def apply(solver: SimplexSolver) = new DraggableBox(7,solver)
 }
 
-class DraggableBox(val id: Int) extends Serializable {
+class DraggableBox(val id: Int, solver: SimplexSolver) extends Serializable {
   private val width, height = 8
-  val cx = CVar(0)
-  val cy = CVar(0)
+  val cx = CVar(0, solver)
+  val cy = CVar(0, solver)
   
   def x = cx.value.toInt
   def y = cy.value.toInt

@@ -15,10 +15,10 @@ import java.awt.{Graphics, Event, Color}
 import ch.epfl.lamp.cassowary._
 
 class QuadDemo extends Applet {
-  private val db = Array.tabulate(8) { i => new DraggableBox(i) }
+  private val solver: SimplexSolver = new SimplexSolver
+  private val db = Array.tabulate(8) { i => new DraggableBox(i, solver) }
   private val mp = Array.tabulate(4) { i => db(i + 4) }
   private var dbDragging = -1
-  private val solver: SimplexSolver = new SimplexSolver
 
   def constrain(cn: Constraint) = solver.addConstraint(cn)
 

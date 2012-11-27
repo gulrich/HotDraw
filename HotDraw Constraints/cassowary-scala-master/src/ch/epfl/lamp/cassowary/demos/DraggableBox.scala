@@ -12,8 +12,8 @@ package ch.epfl.lamp.cassowary.demos
 import java.awt.Graphics
 import ch.epfl.lamp.cassowary._
 
-class DraggableBox(idx: Int) {
-  private val center = new CPoint(0, 0, idx)
+class DraggableBox(idx: Int, solver: SimplexSolver) {
+  private val center = new CPoint(0, 0, idx, solver)
   private val width, height = 6
 
   def sx = center.x.value.toInt

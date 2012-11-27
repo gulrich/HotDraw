@@ -16,18 +16,18 @@ final class Tests {
 
   @Test
   def simple1 {
-    val x = CVar(167)
-    val y = CVar(2)
     val solver = new SimplexSolver
+    val x = CVar(167, solver)
+    val y = CVar(2, solver)
     solver.addConstraint(x :== y)
     assertEquals(x.value, y.value, 0)
   }
 
   @Test
   def justStay1 {
-    val x = CVar(5)
-    val y = CVar(10)
     val solver = new SimplexSolver
+    val x = CVar(5, solver)
+    val y = CVar(10, solver)
     solver.addStay(x)
     solver.addStay(y)
     assertTrue(approx(x, 5))
@@ -36,8 +36,8 @@ final class Tests {
 
   @Test
   def addDelete1 {
-    val x = CVar("x")
     val solver = new SimplexSolver
+    val x = CVar("x", solver)
     solver.addConstraint(Strength.Weak(x :== 100))
     val c10 = x :<= 10.0
     val c20 = x :<= 20.0
@@ -64,9 +64,9 @@ final class Tests {
 
   @Test
   def addDelete2 {
-    val x = CVar("x")
-    val y = CVar("y")
     val solver = new SimplexSolver
+    val x = CVar("x", solver)
+    val y = CVar("y", solver)
     solver.addConstraint(Strength.Weak(x :== 100.0)).addConstraint(Strength.Strong(y :== 120.0))
     val c10 = (x :<= 10.0)
     val c20 = (x :<= 20.0)
@@ -95,9 +95,9 @@ final class Tests {
 
   @Test
   def casso1 {
-    val x = CVar("x")
-    val y = CVar("y")
     val solver = new SimplexSolver
+    val x = CVar("x", solver)
+    val y = CVar("y", solver)    
     solver.addConstraint(x :<= y)
       .addConstraint(y :== x + 3.0)
       .addConstraint(Strength.Weak(x :== 10.0))
@@ -108,27 +108,27 @@ final class Tests {
 
   @Test(expected = classOf[RequiredFailureException])
   def inconsistent1 {
-    var x = CVar("x")
-    var solver = new SimplexSolver
+    val solver = new SimplexSolver
+    var x = CVar("x", solver)    
     solver.addConstraint(x :== 10.0).addConstraint(x :== 5.0)
     fail()
   }
 
   @Test(expected = classOf[RequiredFailureException])
   def inconsistent2 {
-    val x = CVar("x")
     val solver = new SimplexSolver
+    val x = CVar("x", solver)
     solver.addConstraint(x :>= 10.0).addConstraint(x :<= 5.0)
     fail()
   }
 
   @Test
   def multiedit {
-    val x = CVar("x")
-    val y = CVar("y")
-    val w = CVar("w")
-    val h = CVar("h")
     val solver = new SimplexSolver
+    val x = CVar("x", solver)
+    val y = CVar("y", solver)
+    val w = CVar("w", solver)
+    val h = CVar("h", solver)
     solver.addStay(x).addStay(y).addStay(w).addStay(h)
     solver.addEditVar(x).addEditVar(y).beginEdit
     solver.suggestValue(x, 10).suggestValue(y, 20).resolve
@@ -148,11 +148,11 @@ final class Tests {
 
   @Test(expected = classOf[RequiredFailureException])
   def inconsistent3 {
-    var w = CVar("w")
-    var x = CVar("x")
-    var y = CVar("y")
-    var z = CVar("z")
-    var solver = new SimplexSolver
+    val solver = new SimplexSolver
+    var w = CVar("w", solver)
+    var x = CVar("x", solver)
+    var y = CVar("y", solver)
+    var z = CVar("z", solver)
     solver.addConstraint(w :>= 10.0)
       .addConstraint(x :>= w)
       .addConstraint(y :>= x)
@@ -220,7 +220,7 @@ final class Tests {
     timer.start
     val solver = new SimplexSolver
     val cvars = Array.tabulate(nVars) { i =>
-      val v = CVar("x" + i)
+      val v = CVar("x" + i,solver)
       solver.addStay(v)
       v
     }

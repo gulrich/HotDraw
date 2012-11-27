@@ -102,9 +102,9 @@ abstract class AbstractHandle(fOwner: Figure) extends Handle {
    * Gets the display box of the handle.
    * @see org.shotdraw.framework.Handle#displayBox()
    */
-  def displayBox: CRectangle = {
+  def displayBox: Rectangle = {
     val p = locate
-    new CRectangle(p.x - HANDLESIZE / 2, p.y - HANDLESIZE / 2, HANDLESIZE, HANDLESIZE)
+    new Rectangle(p.x - HANDLESIZE / 2, p.y - HANDLESIZE / 2, HANDLESIZE, HANDLESIZE)
   }
 
   /**

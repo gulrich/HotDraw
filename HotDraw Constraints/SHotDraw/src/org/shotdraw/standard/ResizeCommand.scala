@@ -121,14 +121,14 @@ class ResizeDialog(origin: Point, width: Int, height: Int) {
   var point = new Point(width,height)
   private var solver = new SimplexSolver
   
-  private val cwidth = CVar(width)
-  private val cheight = CVar(height)
-  private val pwidth = CVar(100)
-  private val pheight = CVar(100)
+  private val cwidth = CVar(width, solver)
+  private val cheight = CVar(height, solver)
+  private val pwidth = CVar(100, solver)
+  private val pheight = CVar(100, solver)
   private val ratio = pwidth :== pheight
   
-  solver.addStay(pwidth)
-  solver.addStay(pheight)
+  pwidth.stay
+  pheight.stay
   ensure(cwidth :== pwidth*width/100)
   ensure(cheight :== pheight*height/100)
   ensure(ratio)

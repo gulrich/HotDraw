@@ -41,5 +41,7 @@ class RectangleFigure(origin: Point, corner: Point) extends RectangularFigure(or
     val r = displayBox
     g.drawRect(r.x, r.y, r.width - 1, r.height - 1)
   }  
+  
+  override def newFigure(origin: Point, corner: Point) = new RectangleFigure(origin, corner)
 }
 

@@ -19,6 +19,7 @@ import org.shotdraw.util.Undoable
 import scala.collection.mutable.ArrayBuffer
 import org.shotdraw.util.UndoableCommand
 import org.shotdraw.figures.RectangularFigure
+import org.shotdraw.figures.RectangleFigure
 
 /**
  * A tool to create new figures. The figure to be
@@ -108,7 +109,10 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
     if (getPrototypeFigure == null) {
       throw new JHotDrawRuntimeException("No protoype defined")
     }
-    getPrototypeFigure.clone.asInstanceOf[Figure]
+    getPrototypeFigure match {
+      case rf: RectangleFigure => rf.newFigure(new Point(getAnchorX, getAnchorY),new Point(getAnchorX+100,getAnchorY+100))
+      case _ => getPrototypeFigure.clone.asInstanceOf[Figure]
+    } 
   }
 
   /**
@@ -116,7 +120,10 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
    */
   override def mouseDrag(e: MouseEvent, x: Int, y: Int) {
     if (getAddedFigure != null) {
-      getAddedFigure.displayBox(new Point(getAnchorX, getAnchorY), new Point(x, y))
+      getAddedFigure match {
+        case rf: RectangleFigure => 
+        case _ => getAddedFigure.displayBox(new Point(getAnchorX, getAnchorY), new Point(x, y))
+      }
     }
   }
 
@@ -126,15 +133,19 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
    * @see Figure#isEmpty
    */
   override def mouseUp(e: MouseEvent, x: Int, y: Int) {
-    if (getAddedFigure != null && !getCreatedFigure.isEmpty) {
-      fAddedFigures += getAddedFigure
-    } else {
-      getActiveView.remove(getAddedFigure)
-    }
-    if (getAddedFigures.isEmpty) {
-      setUndoActivity(null)
-    } else {
-      newDrawingEditor.getUndoManager.pushUndo(createUndoActivity)      
+    getAddedFigure match {
+      case rf: RectangularFigure =>
+      case _ =>
+        if (getAddedFigure != null && !getCreatedFigure.isEmpty) {
+          fAddedFigures += getAddedFigure
+        } else {
+          getActiveView.remove(getAddedFigure)
+        }
+        if (getAddedFigures.isEmpty) {
+          setUndoActivity(null)
+        } else {
+          newDrawingEditor.getUndoManager.pushUndo(createUndoActivity)      
+        }
     }
     editor.toolDone()
   }

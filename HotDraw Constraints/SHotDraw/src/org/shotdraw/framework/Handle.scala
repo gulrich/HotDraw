@@ -100,7 +100,7 @@ trait Handle {
   /**
    * Gets the display box of the handle.
    */
-  def displayBox: CRectangle
+  def displayBox: Rectangle
 
   /**
    * Tests if a point is contained in the handle.

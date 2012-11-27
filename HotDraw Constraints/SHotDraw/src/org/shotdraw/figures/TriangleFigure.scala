@@ -56,6 +56,9 @@ class TriangleFigure(origin: Point, corner: Point) extends RectangularFigure(ori
     g2d.draw(path)
   }
 
+  override def newFigure(origin: Point, corner: Point) = new TriangleFigure(origin, corner)
+
+  
   override def connectionInsets: Insets = {
     val r = displayBox
     val cx = r.width / 2

@@ -53,15 +53,18 @@ private[cassowary] final class SlackVar(name: String) extends AbstractVar(name) 
 }
 
 object CVar {
-  def apply(name: String, value: Double): CVar = new StdCVar(name, value)
-  def apply(value: Double): CVar = apply(AbstractVar.newName(), value)
-  def apply(name: String): CVar = apply(name, 0d)
+  def apply(name: String, value: Double, solver: SimplexSolver): CVar = new StdCVar(name, value, solver)
+  def apply(value: Double, solver: SimplexSolver): CVar = apply(AbstractVar.newName(), value, solver)
+  def apply(name: String, solver: SimplexSolver): CVar = apply(name, 0d, solver)
 }
 
-abstract class CVar(name: String) extends AbstractVar(name) with Serializable {
+abstract class CVar(name: String, solver: SimplexSolver) extends AbstractVar(name) with Serializable {
   def value: Double
   def value_=(v: Double): Unit
 
+  def stay = solver.addStay(this, Strength.Required)
+  def stay(strength: Strength) = solver.addStay(this, strength)
+  
   /**
    * Called by solver internally.
    */
@@ -88,7 +91,7 @@ abstract class CVar(name: String) extends AbstractVar(name) with Serializable {
   override def toString: String = "[" + name + "=" + value + "]"
 }
 
-class StdCVar(name: String, private var _value: Double) extends CVar(name) {
+class StdCVar(name: String, private var _value: Double, solver: SimplexSolver) extends CVar(name, solver) {
   def value = _value
   def value_=(v: Double) = _value = v
 }

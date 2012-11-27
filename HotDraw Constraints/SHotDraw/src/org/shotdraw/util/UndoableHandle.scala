@@ -138,7 +138,7 @@ class UndoableHandle extends Handle {
    * Gets the display box of the handle.
    * @see org.shotdraw.framework.Handle#displayBox()
    */
-  def displayBox: CRectangle = getWrappedHandle.displayBox
+  def displayBox: Rectangle = getWrappedHandle.displayBox
 
   /**
    * Tests if a point is contained in the handle.
