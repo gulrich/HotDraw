@@ -4,7 +4,7 @@
  * Project:		JHotdraw - a GUI framework for technical drawings
  *				http://www.jhotdraw.org
  *				http://jhotdraw.sourceforge.net
- * Copyright:	� by the original author(s) and all contributors
+ * Copyright:	��� by the original author(s) and all contributors
  * License:		Lesser GNU Public License (LGPL)
  *				http://www.opensource.org/licenses/lgpl-license.html
  */
@@ -110,7 +110,7 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
       throw new JHotDrawRuntimeException("No protoype defined")
     }
     getPrototypeFigure match {
-      case rf: RectangleFigure => rf.newFigure(new Point(getAnchorX, getAnchorY),new Point(getAnchorX+100,getAnchorY+100))
+      case rf: RectangleFigure => rf.newFigure(new Point(getAnchorX, getAnchorY),new Point(getAnchorX+100,getAnchorY+100), view.solver)
       case _ => getPrototypeFigure.clone.asInstanceOf[Figure]
     } 
   }

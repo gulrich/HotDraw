@@ -19,7 +19,7 @@ object Strength {
   }
 }
 
-sealed class Strength(val w1: Double, val w2: Double, val w3: Double) {
+sealed class Strength(val w1: Double, val w2: Double, val w3: Double) extends Serializable {
   def apply(e: LinearEquation) = new LinearEquation(e.expression, this, e.weight)
   def apply(e: LinearInequality) = new LinearInequality(e.expression, this, e.weight)
 

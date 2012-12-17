@@ -54,6 +54,7 @@ import scala.collection.mutable.ArrayBuffer
 import java.awt.Graphics2D
 import java.awt.RenderingHints
 import org.shotdraw.figures.RectangularFigure
+import ch.epfl.lamp.cassowary.SimplexSolver
 
 /**
  * The standard implementation of DrawingView.
@@ -161,6 +162,8 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
   /** *** Autoscroll support *****/
   private var ash = new StandardDrawingView.this.ASH(10)
   
+  private val _solver: SimplexSolver = new SimplexSolver
+  
   setAutoscrolls(true)
   setPreferredSize(new Dimension(width, height))
   fSelectionListeners = ArrayBuffer[FigureSelectionListener]()
@@ -181,6 +184,7 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     this(editor, StandardDrawingView.MINIMUM_WIDTH, StandardDrawingView.MINIMUM_HEIGHT)
   }
 
+  override def solver = _solver
 
   protected def createMouseListener: MouseListener = {
     myMouseListener = new StandardDrawingView.this.DrawingViewMouseListener
@@ -623,12 +627,6 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
    */
   def drawHandles(g: Graphics) {
     selectionHandles foreach (_.draw(g))
-    selection foreach ( f => f match {
-      case rf: RectangularFigure =>
-        println(rf.getHandles)
-        rf.getHandles foreach {_.draw(g)}
-      case _ =>
-    })
   }
 
   /**

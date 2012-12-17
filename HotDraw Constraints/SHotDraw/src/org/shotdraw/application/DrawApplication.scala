@@ -4,13 +4,15 @@
  * Project:		JHotdraw - a GUI framework for technical drawings
  *				http://www.jhotdraw.org
  *				http://jhotdraw.sourceforge.net
- * Copyright:	� by the original author(s) and all contributors
+ * Copyright:	��� by the original author(s) and all contributors
  * License:		Lesser GNU Public License (LGPL)
  *				http://www.opensource.org/licenses/lgpl-license.html
  */
 package org.shotdraw.application
 
 import java.awt.Component._
+import java.awt.event.ActionEvent
+import java.awt.event.ActionListener
 import java.awt.event.InputEvent
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
@@ -43,6 +45,8 @@ import org.shotdraw.figures.TextFigure
 import org.shotdraw.figures.TextTool
 import org.shotdraw.figures.TriangleFigure
 import org.shotdraw.figures.UngroupCommand
+import org.shotdraw.framework.align.AlignCommand
+import org.shotdraw.framework.align.AlignManager
 import org.shotdraw.framework.ArrowMode
 import org.shotdraw.framework.Drawing
 import org.shotdraw.framework.DrawingEditor
@@ -69,6 +73,7 @@ import org.shotdraw.standard.CutCommand
 import org.shotdraw.standard.DeleteCommand
 import org.shotdraw.standard.DuplicateCommand
 import org.shotdraw.standard.PasteCommand
+import org.shotdraw.standard.ResizeCommand
 import org.shotdraw.standard.SelectAllCommand
 import org.shotdraw.standard.SelectionTool
 import org.shotdraw.standard.SendToBackCommand
@@ -103,7 +108,9 @@ import javax.swing.JToolBar
 import javax.swing.KeyStroke
 import javax.swing.SwingUtilities
 import javax.swing.UIManager
-import org.shotdraw.standard.ResizeCommand
+import org.shotdraw.framework.align.LeftAlign
+import org.shotdraw.framework.align.TopAlign
+import org.shotdraw.framework.align.FrontFigureAlign
 
 
 /**
@@ -284,6 +291,7 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     addMenuIfPossible(mb, createFileMenu)
     addMenuIfPossible(mb, createEditMenu)
     addMenuIfPossible(mb, createAttributesMenu)
+    addMenuIfPossible(mb, createAlignMenu)
   }
 
   protected def addMenuIfPossible(mb: JMenuBar, newMenu: JMenu) {
@@ -437,7 +445,21 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     menu
   }
 
-
+  protected def createAlignMenu: JMenu = {
+    val menu = new CommandMenu("Align")
+    menu.add(new UndoableCommand(new AlignCommand("Left", new LeftAlign(view), this)))
+    menu.add(new UndoableCommand(new AlignCommand("Top", new TopAlign(view), this)))
+    menu.add(new UndoableCommand(new AlignCommand("Front figure", new FrontFigureAlign(view), this)))
+    val show = new JMenuItem("Show aligns")
+    show.addActionListener(new ActionListener {
+      def actionPerformed(e: ActionEvent) {
+        AlignManager.show
+      }
+    })
+    menu.add(show)
+    menu
+  }
+  
   /**
    * Creates the tool palette.
    */
@@ -458,13 +480,13 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     palette.add(fDefaultToolButton)
     var tool: Tool = new TextTool(this, new TextFigure)
     palette.add(createToolButton(DrawApplication.IMAGES + "TEXT", "Text Tool", tool))
-    tool = new CreationTool(this, new RectangleFigure)
+    tool = new CreationTool(this, new RectangleFigure(view.solver))
     palette.add(createToolButton(DrawApplication.IMAGES + "RECT", "Rectangle Tool", tool))
     tool = new CreationTool(this, new RoundRectangleFigure)
     palette.add(createToolButton(DrawApplication.IMAGES + "RRECT", "Round Rectangle Tool", tool))
     tool = new CreationTool(this, new EllipseFigure)
     palette.add(createToolButton(DrawApplication.IMAGES + "ELLIPSE", "Ellipse Tool", tool))
-    tool = new CreationTool(this, new TriangleFigure)
+    tool = new CreationTool(this, new TriangleFigure(view.solver))
     palette.add(createToolButton(DrawApplication.IMAGES + "TRIANGLE", "Triangle Tool", tool))
     tool = new CreationTool(this, new DiamondFigure)
     palette.add(createToolButton(DrawApplication.IMAGES + "DIAMOND", "Diamond Tool", tool))

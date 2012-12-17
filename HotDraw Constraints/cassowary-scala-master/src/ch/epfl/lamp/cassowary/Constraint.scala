@@ -2,7 +2,7 @@ package ch.epfl.lamp.cassowary
 
 import scala.collection.mutable.FastSet
 
-abstract class Constraint(val strength: Strength, val weight: Double) {
+abstract class Constraint(val strength: Strength, val weight: Double) extends Serializable {
 
   private[cassowary] var markerVar: AbstractVar = _
   private[cassowary] var errorVars: FastSet[AbstractVar] = null

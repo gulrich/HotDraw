@@ -129,7 +129,10 @@ final class Tests {
     val y = CVar("y", solver)
     val w = CVar("w", solver)
     val h = CVar("h", solver)
-    solver.addStay(x).addStay(y).addStay(w).addStay(h)
+    solver.addStay(x)
+    solver.addStay(y)
+    solver.addStay(w)
+    solver.addStay(h)
     solver.addEditVar(x).addEditVar(y).beginEdit
     solver.suggestValue(x, 10).suggestValue(y, 20).resolve
     println("x = " + x.value + "; y = " + y.value)

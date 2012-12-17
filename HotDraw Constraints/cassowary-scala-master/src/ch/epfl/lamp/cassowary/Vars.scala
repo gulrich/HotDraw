@@ -59,12 +59,20 @@ object CVar {
 }
 
 abstract class CVar(name: String, solver: SimplexSolver) extends AbstractVar(name) with Serializable {
+  private var cn: Constraint = null
+
   def value: Double
   def value_=(v: Double): Unit
 
-  def stay = solver.addStay(this, Strength.Required)
-  def stay(strength: Strength) = solver.addStay(this, strength)
+  def require(): Unit = this.stay(Strength.Required)
+  def stay(): Unit = this.stay(Strength.Weak)
+  def stay(strength: Strength) {cn = solver.addStay(this, strength)}
   
+  def disable = if(cn != null) {
+    solver.removeConstraint(cn)
+    cn = null
+  }
+
   /**
    * Called by solver internally.
    */

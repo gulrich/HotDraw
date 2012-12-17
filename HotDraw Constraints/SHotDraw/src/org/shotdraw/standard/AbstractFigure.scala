@@ -4,7 +4,7 @@
  * Project:		JHotdraw - a GUI framework for technical drawings
  *				http://www.jhotdraw.org
  *				http://jhotdraw.sourceforge.net
- * Copyright:	� by the original author(s) and all contributors
+ * Copyright:	��� by the original author(s) and all contributors
  * License:		Lesser GNU Public License (LGPL)
  *				http://www.opensource.org/licenses/lgpl-license.html
  */
@@ -56,13 +56,20 @@ import org.shotdraw.figures.DraggableBox
  */
 abstract class AbstractFigure extends Figure {
   
+  private var _aligned = true
+  
+  def aligned = _aligned
+  def aligned_=(b: Boolean) {_aligned=b}
+  
   /**
    * Moves the figure by the given offset.
    */
   def moveBy(dx: Int, dy: Int) {
-    willChange()
-    basicMoveBy(dx, dy)
-    changed()
+    if(aligned) {
+      willChange()
+      basicMoveBy(dx, dy)
+      changed()
+    }
   }
 
   /**

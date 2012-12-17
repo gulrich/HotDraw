@@ -4,7 +4,7 @@
  * Project:		JHotdraw - a GUI framework for technical drawings
  *				http://www.jhotdraw.org
  *				http://jhotdraw.sourceforge.net
- * Copyright:	� by the original author(s) and all contributors
+ * Copyright:	��� by the original author(s) and all contributors
  * License:		Lesser GNU Public License (LGPL)
  *				http://www.opensource.org/licenses/lgpl-license.html
  */
@@ -16,6 +16,7 @@ import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Image
 import java.awt.Point
+import ch.epfl.lamp.cassowary.SimplexSolver
 
 /**
  * DrawingView renders a Drawing and listens to its changes.
@@ -42,6 +43,9 @@ import java.awt.Point
  * @version <$CURRENT_VERSION$>
  */
 trait DrawingView extends ImageObserver with DrawingChangeListener {
+  
+  def solver: SimplexSolver
+  
   /**
    * Sets the view's editor.
    */

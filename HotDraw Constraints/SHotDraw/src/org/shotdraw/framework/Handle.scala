@@ -33,7 +33,7 @@ object Handle {
   val HANDLESIZE = 8
 }
 
-trait Handle {
+trait Handle extends Serializable {
   /**
    * Locates the handle on the figure. The handle is drawn
    * centered around the returned point.

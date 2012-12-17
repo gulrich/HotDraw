@@ -4,7 +4,7 @@
  * Project:		JHotdraw - a GUI framework for technical drawings
  *				http://www.jhotdraw.org
  *				http://jhotdraw.sourceforge.net
- * Copyright:	� by the original author(s) and all contributors
+ * Copyright:	��� by the original author(s) and all contributors
  * License:		Lesser GNU Public License (LGPL)
  *				http://www.opensource.org/licenses/lgpl-license.html
  */
@@ -13,6 +13,7 @@ package org.shotdraw.standard
 import java.awt._
 import javax.swing.JPanel
 import org.shotdraw.framework._
+import ch.epfl.lamp.cassowary.SimplexSolver
 
 /**
  * This DrawingView provides a very basic implementation. It does not perform any
@@ -319,6 +320,8 @@ class NullDrawingView(var myDrawingEditor: DrawingEditor) extends JPanel with Dr
 
   def isInteractive: Boolean = false
 
+  override def solver = new SimplexSolver
+  
   private var myDrawing: Drawing = new StandardDrawing
   private var myUpdateStrategy: Painter = null
   private var myBackgroundColor: Color = null

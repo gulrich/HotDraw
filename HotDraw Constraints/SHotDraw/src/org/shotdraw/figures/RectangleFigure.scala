@@ -4,7 +4,7 @@
  * Project:		JHotdraw - a GUI framework for technical drawings
  *				http://www.jhotdraw.org
  *				http://jhotdraw.sourceforge.net
- * Copyright:	� by the original author(s) and all contributors
+ * Copyright:	��� by the original author(s) and all contributors
  * License:		Lesser GNU Public License (LGPL)
  *				http://www.opensource.org/licenses/lgpl-license.html
  */
@@ -27,9 +27,9 @@ import ch.epfl.lamp.cassowary.Constraint
  *
  * @version <$CURRENT_VERSION$>
  */
-class RectangleFigure(origin: Point, corner: Point) extends RectangularFigure(origin, corner) {
-  def this() {
-    this(new Point(0, 0), new Point(0, 0))
+class RectangleFigure(origin: Point, corner: Point, solver: SimplexSolver) extends RectangularFigure(origin, corner, solver: SimplexSolver) {
+  def this(solver: SimplexSolver) {
+    this(new Point(0, 0), new Point(0, 0), solver)
   }
   
   override def drawBackground(g: Graphics) {
@@ -42,6 +42,6 @@ class RectangleFigure(origin: Point, corner: Point) extends RectangularFigure(or
     g.drawRect(r.x, r.y, r.width - 1, r.height - 1)
   }  
   
-  override def newFigure(origin: Point, corner: Point) = new RectangleFigure(origin, corner)
+  override def newFigure(origin: Point, corner: Point, solver: SimplexSolver) = new RectangleFigure(origin, corner, solver)
 }
 

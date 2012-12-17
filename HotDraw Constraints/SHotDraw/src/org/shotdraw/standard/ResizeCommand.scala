@@ -42,6 +42,7 @@ import java.awt.event.FocusListener
 import java.awt.event.FocusEvent
 import org.shotdraw.framework.DrawingView
 import java.awt.Rectangle
+import ch.epfl.lamp.cassowary.Strength
 
 /**
  * Command to delete the selection.
@@ -118,8 +119,8 @@ class ResizeCommand(name: String, newDrawingEditor: DrawApplication) extends Fig
 }
 
 class ResizeDialog(origin: Point, width: Int, height: Int) {
-  var point = new Point(width,height)
-  private var solver = new SimplexSolver
+  private var point = new Point(width,height)
+  private val solver = new SimplexSolver
   
   private val cwidth = CVar(width, solver)
   private val cheight = CVar(height, solver)

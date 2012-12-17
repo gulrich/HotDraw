@@ -98,12 +98,18 @@ final class SimplexSolver extends Tableau with Serializable {
   def removeAllEditVars(): this.type = removeEditVarsTo(0)
 
   def removeEditVarsTo(n: Int): this.type = {
+    println("##############  "+n+"  ##############")
+    println(_editVarMap.size)
+    println("##############################")
     for (v <- new FastSet[CVar] ++ _editVarMap.keySet) {
       val cei = _editVarMap(v)
       if (cei.index >= n) {
         removeEditVar(v)
       }
     }
+    println("##############################")
+    println(_editVarMap.size)
+    println("##############################")
     assert(_editVarMap.size == n)
     this
   }
@@ -124,6 +130,7 @@ final class SimplexSolver extends Tableau with Serializable {
   def addPointStay(vx: CVar, vy: CVar, weight: Double): this.type = {
     addStay(vx, Strength.Weak, weight)
     addStay(vy, Strength.Weak, weight)
+    this
   }
 
   def addPointStay(vx: CVar, vy: CVar): this.type =
@@ -132,19 +139,21 @@ final class SimplexSolver extends Tableau with Serializable {
   def addPointStay(clp: CPoint, weight: Double): this.type = {
     addStay(clp.x, Strength.Weak, weight)
     addStay(clp.y, Strength.Weak, weight)
+    this
   }
 
   def addPointStay(clp: CPoint): SimplexSolver =
     addPointStay(clp, 1.0)
 
-  def addStay(v: CVar, strength: Strength, weight: Double): this.type = {
+  def addStay(v: CVar, strength: Strength, weight: Double): Constraint = {
     val cn = new StayConstraint(v, strength, weight)
     addConstraint(cn)
+    cn
   }
 
-  def addStay(v: CVar, strength: Strength): this.type = addStay(v, strength, 1.0)
+  def addStay(v: CVar, strength: Strength): Constraint = addStay(v, strength, 1.0)
 
-  def addStay(v: CVar): this.type = addStay(v, Strength.Weak, 1.0)
+  def addStay(v: CVar): Constraint = addStay(v, Strength.Weak, 1.0)
 
   def removeConstraint(cn: Constraint): this.type = {
     fnenterprint("removeConstraint: " + cn)

@@ -29,6 +29,8 @@ abstract class AbstractHandle(fOwner: Figure) extends Handle {
   
   private var myUndoableActivity: Undoable = null
   
+  def this() = this(null)
+  
   /**
    * @param x the x position where the interaction started
    * @param y the y position where the interaction started
