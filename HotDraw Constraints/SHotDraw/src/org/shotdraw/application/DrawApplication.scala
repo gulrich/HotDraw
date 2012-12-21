@@ -110,7 +110,10 @@ import javax.swing.SwingUtilities
 import javax.swing.UIManager
 import org.shotdraw.framework.align.LeftAlign
 import org.shotdraw.framework.align.TopAlign
-import org.shotdraw.framework.align.FrontFigureAlign
+import org.shotdraw.framework.align.factory.TopAlignFactory
+import org.shotdraw.framework.align.factory.BackFigureAlignFactory
+import org.shotdraw.framework.align.factory.LeftAlignFactory
+import org.shotdraw.framework.align.factory.VerticalAlignFactory
 
 
 /**
@@ -447,9 +450,10 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
 
   protected def createAlignMenu: JMenu = {
     val menu = new CommandMenu("Align")
-    menu.add(new UndoableCommand(new AlignCommand("Left", new LeftAlign(view), this)))
-    menu.add(new UndoableCommand(new AlignCommand("Top", new TopAlign(view), this)))
-    menu.add(new UndoableCommand(new AlignCommand("Front figure", new FrontFigureAlign(view), this)))
+    menu.add(new UndoableCommand(new AlignCommand("Left", LeftAlignFactory, this)))
+    menu.add(new UndoableCommand(new AlignCommand("Top", TopAlignFactory, this)))
+    menu.add(new UndoableCommand(new AlignCommand("Back figure", BackFigureAlignFactory, this)))
+    menu.add(new UndoableCommand(new AlignCommand("Vertical", VerticalAlignFactory, this)))
     val show = new JMenuItem("Show aligns")
     show.addActionListener(new ActionListener {
       def actionPerformed(e: ActionEvent) {

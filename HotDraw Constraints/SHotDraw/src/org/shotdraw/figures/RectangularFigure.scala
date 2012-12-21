@@ -26,7 +26,7 @@ import ch.epfl.lamp.cassowary.Constraint
 
 object Printer {
   def println(s: String) {
-    val output:PrintWriter = new PrintWriter(new FileOutputStream(new File("output"), true))
+    val output:PrintWriter = new PrintWriter(new FileOutputStream(new File("output"), false))
     output.println(s)
     output.close()
   }
@@ -95,11 +95,19 @@ abstract class RectangularFigure(origin: Point, corner: Point, solver: SimplexSo
     h foreach {f => Printer.println(h.indexOf(f) + "= ("+f.cx + " " +f.cy+")")}
   }
   
+  def resize(width: Int, height: Int) {
+    willChange()
+    solver.addEditVar(db.cwidth).addEditVar(db.cheight).beginEdit
+    solver.suggestValue(db.cwidth, width).suggestValue(db.cheight, height).resolve
+    solver.endEdit
+    changed()
+  }
+  
   override def displayBox(origin: Point, corner: Point) {
     willChange()
-//    solver.addEditVar(db.cx).beginEdit.addEditVar(db.cy).addEditVar(db.cwidth).addEditVar(db.cheight).beginEdit
-//    solver.suggestValue(db.cx, origin.x).suggestValue(db.cy, origin.y).suggestValue(db.cwidth, corner.x-origin.x).suggestValue(db.cheight, corner.y-origin.y).resolve
-//    solver.endEdit
+    solver.addEditVar(db.cx).beginEdit.addEditVar(db.cy).addEditVar(db.cwidth).addEditVar(db.cheight).beginEdit
+    solver.suggestValue(db.cx, origin.x).suggestValue(db.cy, origin.y).suggestValue(db.cwidth, corner.x-origin.x).suggestValue(db.cheight, corner.y-origin.y).resolve
+    solver.endEdit
     changed()
   }
   
@@ -205,7 +213,7 @@ abstract class RectangularFigure(origin: Point, corner: Point, solver: SimplexSo
     h(7).cy.stay
   }
   
-  private def reset() {
+  def reset() {
     db.cwidth.disable
     db.cheight.disable
     db.cx.disable
@@ -242,8 +250,7 @@ abstract class RectangularFigure(origin: Point, corner: Point, solver: SimplexSo
   }
 
   protected def basicMoveBy(x: Int, y: Int) {
-    db.cx.disable
-    db.cy.disable
+    Printer.println("X: "+(x)+", Y: "+(y))
     solver.addEditVar(db.cx).addEditVar(db.cy).beginEdit
     solver.suggestValue(db.cx, db.x+x).suggestValue(db.cy, db.y+y).resolve
     solver.endEdit
@@ -312,6 +319,7 @@ class DraggableBox(solver: SimplexSolver, owner: RectangularFigure, direction: D
   def y = cy.value.toInt
 
   override def invokeStart(x: Int, y: Int, view: DrawingView) {
+    owner.reset()
     direction match {
       case DraggableBox.North => owner.northMove()
       case DraggableBox.NorthEast => owner.northEastMove() 
@@ -328,7 +336,7 @@ class DraggableBox(solver: SimplexSolver, owner: RectangularFigure, direction: D
 
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
     solver.suggestValue(cx, x).suggestValue(cy, y)
-    Printer.println("invokeStep")
+    Printer.println("invokeStep: ("+x+","+y+")")
   }
 
   override def invokeEnd(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {

@@ -55,21 +55,14 @@ import org.shotdraw.figures.DraggableBox
  * @version <$CURRENT_VERSION$>
  */
 abstract class AbstractFigure extends Figure {
-  
-  private var _aligned = true
-  
-  def aligned = _aligned
-  def aligned_=(b: Boolean) {_aligned=b}
-  
+    
   /**
    * Moves the figure by the given offset.
    */
   def moveBy(dx: Int, dy: Int) {
-    if(aligned) {
       willChange()
       basicMoveBy(dx, dy)
       changed()
-    }
   }
 
   /**

@@ -98,18 +98,12 @@ final class SimplexSolver extends Tableau with Serializable {
   def removeAllEditVars(): this.type = removeEditVarsTo(0)
 
   def removeEditVarsTo(n: Int): this.type = {
-    println("##############  "+n+"  ##############")
-    println(_editVarMap.size)
-    println("##############################")
     for (v <- new FastSet[CVar] ++ _editVarMap.keySet) {
       val cei = _editVarMap(v)
       if (cei.index >= n) {
         removeEditVar(v)
       }
     }
-    println("##############################")
-    println(_editVarMap.size)
-    println("##############################")
     assert(_editVarMap.size == n)
     this
   }

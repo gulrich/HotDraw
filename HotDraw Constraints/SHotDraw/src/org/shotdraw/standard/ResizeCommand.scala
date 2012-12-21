@@ -4,7 +4,7 @@
  * Project:		JHotdraw - a GUI framework for technical drawings
  *				http://www.jhotdraw.org
  *				http://jhotdraw.sourceforge.net
- * Copyright:	� by the original author(s) and all contributors
+ * Copyright:	��� by the original author(s) and all contributors
  * License:		Lesser GNU Public License (LGPL)
  *				http://www.opensource.org/licenses/lgpl-license.html
  */
@@ -98,7 +98,10 @@ class ResizeCommand(name: String, newDrawingEditor: DrawApplication) extends Fig
         setUndoActivity(createUndoActivity(f))
         getUndoActivity.setAffectedFigures(Seq(f))
         if(newPoint != null) {
-          f.displayBox(origin, newPoint)
+          f match {
+            case rf: RectangularFigure => rf.resize(newPoint.x-origin.x, newPoint.y-origin.y)
+            case _ => f.displayBox(origin, newPoint) 
+          }
           getUndoActivity.asInstanceOf[ResizeCommand.UndoActivity].setBackup(f.displayBox)
         }
         view.checkDamage()
