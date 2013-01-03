@@ -4,7 +4,7 @@
  * Project:		JHotdraw - a GUI framework for technical drawings
  *				http://www.jhotdraw.org
  *				http://jhotdraw.sourceforge.net
- * Copyright:	� by the original author(s) and all contributors
+ * Copyright:	��� by the original author(s) and all contributors
  * License:		Lesser GNU Public License (LGPL)
  *				http://www.opensource.org/licenses/lgpl-license.html
  */
@@ -18,6 +18,8 @@ import java.awt.Insets
 import java.awt.Rectangle
 import java.awt.Point
 import java.awt.Graphics
+import RoundRectangleFigure._
+import ch.epfl.lamp.cassowary.SimplexSolver
 
 /**
  * A round rectangle figure.
@@ -30,23 +32,14 @@ object RoundRectangleFigure {
   private final val DEFAULT_ARC = 8
 }
 
-class RoundRectangleFigure(origin: Point, corner: Point) extends AbstractFigure {
-  import RoundRectangleFigure._
-  
-  private var fDisplayBox: Rectangle = null
+class RoundRectangleFigure(origin: Point, corner: Point, solver: SimplexSolver) extends RectangularFigure(origin, corner, solver) {
   private var fArcWidth = DEFAULT_ARC
   private var fArcHeight = DEFAULT_ARC
-  basicDisplayBox(origin, corner)
   
-  def this() {
-    this(new Point(0, 0), new Point(0, 0))
+  def this(solver: SimplexSolver) {
+    this(new Point(0, 0), new Point(0, 0), solver)
   }
-
-  def basicDisplayBox(origin: Point, corner: Point) {
-    fDisplayBox = new Rectangle(origin)
-    fDisplayBox.add(corner)
-  }
-
+  
   /**
    * Sets the arc's witdh and height.
    */
@@ -62,14 +55,6 @@ class RoundRectangleFigure(origin: Point, corner: Point) extends AbstractFigure 
    */
   def getArc: Point = new Point(fArcWidth, fArcHeight)
 
-  def handles: Seq[Handle] = BoxHandleKit.addHandles(this, List()) ::: List(new RadiusHandle(this))
-
-  def displayBox: Rectangle = new Rectangle(fDisplayBox.x, fDisplayBox.y, fDisplayBox.width, fDisplayBox.height)
-
-  protected def basicMoveBy(x: Int, y: Int) {
-    fDisplayBox.translate(x, y)
-  }
-
   override def drawBackground(g: Graphics) {
     val r = displayBox
     g.fillRoundRect(r.x, r.y, r.width, r.height, fArcWidth, fArcHeight)
@@ -84,19 +69,18 @@ class RoundRectangleFigure(origin: Point, corner: Point) extends AbstractFigure 
 
   override def connectorAt(x: Int, y: Int): Connector = new ShortestDistanceConnector(this)
 
+  override def handles = new RadiusHandle(this) :: super.handles
+  
+  override def newFigure(origin: Point, corner: Point, solver: SimplexSolver) = new RoundRectangleFigure(origin, corner, solver)
+  
   override def write(dw: StorableOutput) {
     super.write(dw)
-    dw.writeInt(fDisplayBox.x)
-    dw.writeInt(fDisplayBox.y)
-    dw.writeInt(fDisplayBox.width)
-    dw.writeInt(fDisplayBox.height)
     dw.writeInt(fArcWidth)
     dw.writeInt(fArcHeight)
   }
 
   override def read(dr: StorableInput) {
     super.read(dr)
-    fDisplayBox = new Rectangle(dr.readInt, dr.readInt, dr.readInt, dr.readInt)
     fArcWidth = dr.readInt
     fArcHeight = dr.readInt
   }

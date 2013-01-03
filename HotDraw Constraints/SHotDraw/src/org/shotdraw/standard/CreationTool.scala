@@ -110,7 +110,7 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
       throw new JHotDrawRuntimeException("No protoype defined")
     }
     getPrototypeFigure match {
-      case rf: RectangleFigure => rf.newFigure(new Point(getAnchorX, getAnchorY),new Point(getAnchorX+100,getAnchorY+100), view.solver)
+      case rf: RectangularFigure => rf.newFigure(new Point(getAnchorX, getAnchorY),new Point(getAnchorX+100,getAnchorY+100), view.solver)
       case _ => getPrototypeFigure.clone.asInstanceOf[Figure]
     } 
   }
@@ -121,7 +121,7 @@ class CreationTool(newDrawingEditor: DrawingEditor, prototype: Figure) extends A
   override def mouseDrag(e: MouseEvent, x: Int, y: Int) {
     if (getAddedFigure != null) {
       getAddedFigure match {
-        case rf: RectangleFigure => 
+        case rf: RectangularFigure => 
         case _ => getAddedFigure.displayBox(new Point(getAnchorX, getAnchorY), new Point(x, y))
       }
     }

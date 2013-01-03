@@ -59,14 +59,6 @@ class TriangleFigure(origin: Point, corner: Point, solver: SimplexSolver) extend
 
   override def newFigure(origin: Point, corner: Point, solver: SimplexSolver) = new TriangleFigure(origin, corner, solver)
 
-  
-  override def connectionInsets: Insets = {
-    val r = displayBox
-    val cx = r.width / 2
-    val cy = r.height / 2
-    new Insets(cy, cx, cy, cx)
-  }
-
   override def connectorAt(x: Int, y: Int): Connector =  new ShortestDistanceConnector(this)
 }
 

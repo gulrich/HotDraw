@@ -4,7 +4,7 @@
  * Project:		JHotdraw - a GUI framework for technical drawings
  *				http://www.jhotdraw.org
  *				http://jhotdraw.sourceforge.net
- * Copyright:	� by the original author(s) and all contributors
+ * Copyright:	��� by the original author(s) and all contributors
  * License:		Lesser GNU Public License (LGPL)
  *				http://www.opensource.org/licenses/lgpl-license.html
  */
@@ -18,31 +18,16 @@ import java.awt.Insets
 import java.awt.Rectangle
 import java.awt.Point
 import java.awt.Graphics
+import ch.epfl.lamp.cassowary.SimplexSolver
 
 /**
  * An ellipse figure.
  *
  * @version <$CURRENT_VERSION$>
  */
-class EllipseFigure(origin: Point, corner: Point) extends AbstractFigure {
-  private var fDisplayBox: Rectangle = null
-  basicDisplayBox(origin, corner)
-  
-  def this() {
-    this(new Point(0, 0), new Point(0, 0))
-  }
-
-  def handles: Seq[Handle] = BoxHandleKit.addHandles(this, List())  
-
-  def basicDisplayBox(origin: Point, corner: Point) {
-    fDisplayBox = new Rectangle(origin)
-    fDisplayBox.add(corner)
-  }
-
-  def displayBox: Rectangle = new Rectangle(fDisplayBox.x, fDisplayBox.y, fDisplayBox.width, fDisplayBox.height)
-
-  protected def basicMoveBy(x: Int, y: Int) {
-    fDisplayBox.translate(x, y)
+class EllipseFigure(origin: Point, corner: Point, solver: SimplexSolver) extends RectangularFigure(origin, corner, solver) {
+  def this(solver: SimplexSolver) {
+    this(new Point(0, 0), new Point(0, 0), solver)
   }
 
   override def drawBackground(g: Graphics) {
@@ -56,25 +41,13 @@ class EllipseFigure(origin: Point, corner: Point) extends AbstractFigure {
   }
 
   override def connectionInsets: Insets = {
-    val r = fDisplayBox
+    val r = displayBox
     val cx = r.width / 2
     val cy = r.height / 2
     new Insets(cy, cx, cy, cx)
   }
+  override def newFigure(origin: Point, corner: Point, solver: SimplexSolver) = new EllipseFigure(origin, corner, solver)
 
   override def connectorAt(x: Int, y: Int): Connector = new ChopEllipseConnector(this)
-
-  override def write(dw: StorableOutput) {
-    super.write(dw)
-    dw.writeInt(fDisplayBox.x)
-    dw.writeInt(fDisplayBox.y)
-    dw.writeInt(fDisplayBox.width)
-    dw.writeInt(fDisplayBox.height)
-  }
-
-  override def read(dr: StorableInput) {
-    super.read(dr)
-    fDisplayBox = new Rectangle(dr.readInt, dr.readInt, dr.readInt, dr.readInt)
-  }
 }
 

@@ -23,6 +23,7 @@ import java.io.PrintWriter
 import java.io.FileOutputStream
 import java.io.File
 import ch.epfl.lamp.cassowary.Constraint
+import org.shotdraw.framework.Handle
 
 object Printer {
   def println(s: String) {
@@ -105,9 +106,9 @@ abstract class RectangularFigure(origin: Point, corner: Point, solver: SimplexSo
   
   override def displayBox(origin: Point, corner: Point) {
     willChange()
-    solver.addEditVar(db.cx).beginEdit.addEditVar(db.cy).addEditVar(db.cwidth).addEditVar(db.cheight).beginEdit
-    solver.suggestValue(db.cx, origin.x).suggestValue(db.cy, origin.y).suggestValue(db.cwidth, corner.x-origin.x).suggestValue(db.cheight, corner.y-origin.y).resolve
-    solver.endEdit
+//    solver.addEditVar(db.cx).beginEdit.addEditVar(db.cy).addEditVar(db.cwidth).addEditVar(db.cheight).beginEdit
+//    solver.suggestValue(db.cx, origin.x).suggestValue(db.cy, origin.y).suggestValue(db.cwidth, corner.x-origin.x).suggestValue(db.cheight, corner.y-origin.y).resolve
+//    solver.endEdit
     changed()
   }
   
@@ -243,7 +244,7 @@ abstract class RectangularFigure(origin: Point, corner: Point, solver: SimplexSo
     db = new CRectangle(origin, corner, solver)
   }
 
-  override def handles = h
+  override def handles: List[Handle] = h
   
   def displayBox: Rectangle = {
     new Rectangle(db.x, db.y, db.width, db.height)

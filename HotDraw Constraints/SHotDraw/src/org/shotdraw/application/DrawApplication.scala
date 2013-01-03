@@ -114,6 +114,7 @@ import org.shotdraw.framework.align.factory.TopAlignFactory
 import org.shotdraw.framework.align.factory.BackFigureAlignFactory
 import org.shotdraw.framework.align.factory.LeftAlignFactory
 import org.shotdraw.framework.align.factory.VerticalAlignFactory
+import org.shotdraw.framework.align.factory.HorizontalAlignFactory
 
 
 /**
@@ -452,8 +453,9 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     val menu = new CommandMenu("Align")
     menu.add(new UndoableCommand(new AlignCommand("Left", LeftAlignFactory, this)))
     menu.add(new UndoableCommand(new AlignCommand("Top", TopAlignFactory, this)))
-    menu.add(new UndoableCommand(new AlignCommand("Back figure", BackFigureAlignFactory, this)))
     menu.add(new UndoableCommand(new AlignCommand("Vertical", VerticalAlignFactory, this)))
+    menu.add(new UndoableCommand(new AlignCommand("Horizontal", HorizontalAlignFactory, this)))
+    menu.addSeparator()
     val show = new JMenuItem("Show aligns")
     show.addActionListener(new ActionListener {
       def actionPerformed(e: ActionEvent) {
@@ -486,13 +488,13 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     palette.add(createToolButton(DrawApplication.IMAGES + "TEXT", "Text Tool", tool))
     tool = new CreationTool(this, new RectangleFigure(view.solver))
     palette.add(createToolButton(DrawApplication.IMAGES + "RECT", "Rectangle Tool", tool))
-    tool = new CreationTool(this, new RoundRectangleFigure)
+    tool = new CreationTool(this, new RoundRectangleFigure(view.solver))
     palette.add(createToolButton(DrawApplication.IMAGES + "RRECT", "Round Rectangle Tool", tool))
-    tool = new CreationTool(this, new EllipseFigure)
+    tool = new CreationTool(this, new EllipseFigure(view.solver))
     palette.add(createToolButton(DrawApplication.IMAGES + "ELLIPSE", "Ellipse Tool", tool))
     tool = new CreationTool(this, new TriangleFigure(view.solver))
     palette.add(createToolButton(DrawApplication.IMAGES + "TRIANGLE", "Triangle Tool", tool))
-    tool = new CreationTool(this, new DiamondFigure)
+    tool = new CreationTool(this, new DiamondFigure(view.solver))
     palette.add(createToolButton(DrawApplication.IMAGES + "DIAMOND", "Diamond Tool", tool))
     tool = new CreationTool(this, new LineFigure)
     palette.add(createToolButton(DrawApplication.IMAGES + "LINE", "Line Tool", tool))
