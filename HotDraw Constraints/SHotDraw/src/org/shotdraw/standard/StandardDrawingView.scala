@@ -546,7 +546,8 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
 
   def repairDamage() {
     if (getDamage != null) {
-      repaint(getDamage.x, getDamage.y, getDamage.width, getDamage.height)
+//      repaint(getDamage.x, getDamage.y, getDamage.width, getDamage.height)
+      repaint()
       setDamage(null)
     }
   }

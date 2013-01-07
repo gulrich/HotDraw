@@ -11,18 +11,18 @@
 package org.shotdraw.standard
 
 import java.awt.Dimension
+import java.awt.Graphics
 import java.awt.Insets
 import java.awt.Point
 import java.awt.Rectangle
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.IOException
-import java.io.InputStream
-import java.io.ObjectInput
 import java.io.ObjectInputStream
-import java.io.ObjectOutput
 import java.io.ObjectOutputStream
+
 import scala.collection.mutable.ArrayBuffer
+
 import org.shotdraw.framework.ConnectionFigure
 import org.shotdraw.framework.Connector
 import org.shotdraw.framework.Figure
@@ -31,11 +31,9 @@ import org.shotdraw.framework.FigureChangeListener
 import org.shotdraw.framework.FigureVisitor
 import org.shotdraw.framework.Handle
 import org.shotdraw.framework.Locator
-import org.shotdraw.util.Geom
+import org.shotdraw.standard.TextHolder
 import org.shotdraw.util.ColorMap
-import java.awt.Color
-import java.awt.Graphics
-import org.shotdraw.figures.DraggableBox
+import org.shotdraw.util.Geom
 
 /**
  * AbstractFigure provides default implementations for
