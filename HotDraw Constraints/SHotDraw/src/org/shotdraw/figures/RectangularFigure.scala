@@ -113,129 +113,61 @@ abstract class RectangularFigure(origin: Point, corner: Point, solver: SimplexSo
   }
   
   def southEastMove() {
-    reset()
-    h(7).cx.stay
-    h(6).cx.stay
-    h(5).cx.stay
-    
-    h(7).cy.stay
-    h(0).cy.stay
-    h(1).cy.stay
+    h(7).cx.require
+    h(7).cy.require
   }
   
   def southWestMove() {
-    reset()
-    h(1).cx.stay
-    h(2).cx.stay
-    h(3).cx.stay
-    
-    h(7).cy.stay
-    h(0).cy.stay
-    h(1).cy.stay
+    h(1).cx.require
+    h(1).cy.require
   }
   
   def northWestMove() {
-    reset()
-    h(1).cx.stay
-    h(2).cx.stay
-    h(3).cx.stay
-    
-    h(3).cy.stay
-    h(4).cy.stay
-    h(5).cy.stay
+    h(3).cx.require
+    h(3).cy.require
   }
   
   def northEastMove() {
-    reset()
-    h(7).cx.stay
-    h(6).cx.stay
-    h(5).cx.stay
-    
-    h(3).cy.stay
-    h(4).cy.stay
-    h(5).cy.stay
+    h(5).cx.require
+    h(5).cy.require
   }
   
   def northMove() {
-    reset()
-    verticalMove()
-    
-    h(3).cy.stay
-    h(4).cy.stay
-    h(5).cy.stay
+    h(2).cx.require
+    h(4).cy.require
+    h(6).cx.require
   }
   
   def southMove() {
-    reset()
-    verticalMove()
-    
-    h(3).cy.stay
-    h(4).cy.stay
-    h(5).cy.stay
+    h(0).cy.require
+    h(2).cx.require
+    h(6).cx.require
   }
   
   def eastMove() {
-    reset()
-    horizontalMove()
-    
-    h(1).cx.stay
-    h(2).cx.stay
-    h(3).cx.stay
+    h(0).cy.require
+    h(4).cy.require
+    h(6).cx.require
   }
   
-  def westMove() {
-    reset()
-    horizontalMove()
-    
-    h(5).cx.stay
-    h(6).cx.stay
-    h(7).cx.stay
-  }
-    
-  private def verticalMove() {
-    h(0).cx.stay
-    h(1).cx.stay
-    h(2).cx.stay
-    h(3).cx.stay
-    h(4).cx.stay
-    h(5).cx.stay
-    h(6).cx.stay
-    h(7).cx.stay
+  def westMove() {  
+    h(0).cy.require
+    h(2).cx.require
+    h(4).cy.require
   }
   
-  private def horizontalMove() {
-    h(0).cy.stay
-    h(1).cy.stay
-    h(2).cy.stay
-    h(3).cy.stay
-    h(4).cy.stay
-    h(5).cy.stay
-    h(6).cy.stay
-    h(7).cy.stay
-  }
-  
-  def reset() {
+  def startResizing() {
     db.cwidth.disable
     db.cheight.disable
-    db.cx.disable
-    db.cy.disable
-    
-    h(0).cx.disable
-    h(0).cy.disable
-    h(1).cx.disable
-    h(1).cy.disable
-    h(2).cx.disable
-    h(2).cy.disable
-    h(3).cx.disable
-    h(3).cy.disable
-    h(4).cx.disable
-    h(4).cy.disable
-    h(5).cx.disable
-    h(5).cy.disable
-    h(6).cx.disable
-    h(6).cy.disable
-    h(7).cx.disable
-    h(7).cy.disable
+  }
+  
+  def stopResizing() {
+    db.cwidth.require
+    db.cheight.require
+    h foreach { handle =>
+      handle.cx.disable
+      handle.cy.disable
+    }
   }
   
   def newFigure(origin: Point, corner: Point, solver: SimplexSolver): RectangularFigure
@@ -320,7 +252,6 @@ class DraggableBox(solver: SimplexSolver, owner: RectangularFigure, direction: D
   def y = cy.value.toInt
 
   override def invokeStart(x: Int, y: Int, view: DrawingView) {
-    owner.reset()
     direction match {
       case DraggableBox.North => owner.northMove()
       case DraggableBox.NorthEast => owner.northEastMove() 
@@ -332,18 +263,13 @@ class DraggableBox(solver: SimplexSolver, owner: RectangularFigure, direction: D
       case DraggableBox.NorthWest => owner.northWestMove()
     }
     solver.addEditVar(cx).beginEdit.addEditVar(cy).beginEdit
-    Printer.println("invokeStart")
-  }
-
-  override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    solver.suggestValue(cx, x).suggestValue(cy, y)
-    Printer.println("invokeStep: ("+x+","+y+")")
   }
 
   override def invokeEnd(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
+    solver.suggestValue(cx, x).suggestValue(cy, y)
     solver.endEdit()
-    Printer.println("invokeEnd")
-    owner.printVar
+    owner.stopResizing()
+    owner.changed()
   }
   
   override def locate = new Point(x,y)
