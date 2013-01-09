@@ -65,9 +65,7 @@ abstract class RectangularFigure(origin: Point, corner: Point, solver: SimplexSo
   ensure(h(2).cy :== h(1).cy+h(3).cy-h(2).cy)
   ensure(h(6).cy :== h(2).cy)
 
-  ensure(h(1).cx :== db.cx+db.cwidth)
-  ensure(h(1).cx :== h(2).cx)
-  
+  ensure(h(1).cx :== db.cx+db.cwidth) 
   ensure(h(2).cx :== h(1).cx)
   ensure(h(3).cx :== h(1).cx)
 
