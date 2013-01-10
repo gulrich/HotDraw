@@ -114,6 +114,8 @@ import javax.swing.SwingUtilities
 import javax.swing.UIManager
 import org.shotdraw.framework.align.factory.BottomAlignFactory
 import org.shotdraw.framework.align.factory.RightAlignFactory
+import org.shotdraw.framework.align.factory.SideBySideAlignFactory
+import org.shotdraw.framework.align.factory.StackAlignFactory
 
 
 /**
@@ -456,6 +458,8 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     menu.add(new UndoableCommand(new AlignCommand("Right", RightAlignFactory, this)))
     menu.add(new UndoableCommand(new AlignCommand("Width", WidthAlignFactory, this)))
     menu.add(new UndoableCommand(new AlignCommand("Height", HeightAlignFactory, this)))
+    menu.add(new UndoableCommand(new AlignCommand("Side by side", SideBySideAlignFactory, this)))
+    menu.add(new UndoableCommand(new AlignCommand("Stack", StackAlignFactory, this)))
     menu.addSeparator()
     val show = new JMenuItem("Show aligns")
     show.addActionListener(new ActionListener {

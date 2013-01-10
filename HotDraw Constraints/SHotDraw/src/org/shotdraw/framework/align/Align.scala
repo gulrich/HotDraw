@@ -9,13 +9,13 @@ import org.shotdraw.standard.AbstractFigure
 abstract class Align(name: String, view: DrawingView) {
 
   private var enabled_ = false
-  private var consts: List[Constraint] = null
+  private var consts: List[Constraint]= List()
   
   def constraints: List[Constraint]
   def enabled = enabled_
   
   def enable() {
-    if(consts == null) consts = constraints
+    if(consts isEmpty) consts = constraints
     consts foreach {c => view.solver.addConstraint(c) }
     enabled_ = true
   }
