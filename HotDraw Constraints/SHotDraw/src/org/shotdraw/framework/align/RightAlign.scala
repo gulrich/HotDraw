@@ -9,14 +9,14 @@ import org.shotdraw.framework.Figure
 import ch.epfl.lamp.cassowary.Constraint
 
 
-class HorizontalAlign(view: DrawingView) extends Align("Horizontal", view) {
+class RightAlign(view: DrawingView) extends Align("Right", view) {
 
   private var figure: RectangularFigure = view.selection(0).asInstanceOf[RectangularFigure] //TODO Change that
   
    
   override def constraints = view.selection.foldLeft(List[Constraint]())((l,f) => f match {
-    case rf: RectangularFigure => l ::: List(rf.db.cx :== figure.db.cx)
+    case rf: RectangularFigure => l ::: List(rf.db.cx :== figure.db.cx+figure.db.cwidth-rf.db.cwidth)
     case _ => l
   })
-    
+
 }

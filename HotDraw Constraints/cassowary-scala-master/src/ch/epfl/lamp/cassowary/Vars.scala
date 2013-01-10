@@ -66,7 +66,10 @@ abstract class CVar(name: String, solver: SimplexSolver) extends AbstractVar(nam
 
   def require(): Unit = this.stay(Strength.Required)
   def stay(): Unit = this.stay(Strength.Weak)
-  def stay(strength: Strength) {cn = solver.addStay(this, strength)}
+  def stay(strength: Strength) {
+    if(cn != null) solver.removeConstraint(cn)
+    cn = solver.addStay(this, strength)
+  }
   
   def disable {
     if(cn != null) solver.removeConstraint(cn)

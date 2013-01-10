@@ -95,11 +95,13 @@ abstract class RectangularFigure(origin: Point, corner: Point, solver: SimplexSo
   }
   
   def resize(width: Int, height: Int) {
+//    startResizing()
     willChange()
     solver.addEditVar(db.cwidth).addEditVar(db.cheight).beginEdit
     solver.suggestValue(db.cwidth, width).suggestValue(db.cheight, height).resolve
     solver.endEdit
     changed()
+//    stopResizing()
   }
   
   override def displayBox(origin: Point, corner: Point) {
@@ -260,10 +262,10 @@ class DraggableBox(solver: SimplexSolver, owner: RectangularFigure, direction: D
       case DraggableBox.West => owner.westMove()
       case DraggableBox.NorthWest => owner.northWestMove()
     }
-    solver.addEditVar(cx).beginEdit.addEditVar(cy).beginEdit
   }
 
   override def invokeEnd(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
+    solver.addEditVar(cx).beginEdit.addEditVar(cy).beginEdit
     solver.suggestValue(cx, x).suggestValue(cy, y)
     solver.endEdit()
     owner.stopResizing()

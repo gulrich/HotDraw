@@ -26,9 +26,7 @@ import java.awt.GraphicsEnvironment
 import java.awt.PrintJob
 import java.io.IOException
 import java.lang.reflect.InvocationTargetException
-
 import scala.collection.mutable.ArrayBuffer
-
 import org.shotdraw.contrib.Desktop
 import org.shotdraw.contrib.DesktopEvent
 import org.shotdraw.contrib.DesktopListener
@@ -48,10 +46,8 @@ import org.shotdraw.figures.TextTool
 import org.shotdraw.figures.TriangleFigure
 import org.shotdraw.figures.UngroupCommand
 import org.shotdraw.framework.align.factory.HeightAlignFactory
-import org.shotdraw.framework.align.factory.HorizontalAlignFactory
 import org.shotdraw.framework.align.factory.LeftAlignFactory
 import org.shotdraw.framework.align.factory.TopAlignFactory
-import org.shotdraw.framework.align.factory.VerticalAlignFactory
 import org.shotdraw.framework.align.factory.WidthAlignFactory
 import org.shotdraw.framework.align.AlignCommand
 import org.shotdraw.framework.align.AlignManager
@@ -105,7 +101,6 @@ import org.shotdraw.util.UndoableCommand
 import org.shotdraw.util.VersionControlStrategy
 import org.shotdraw.util.VersionManagement
 import org.shotdraw.util.VersionRequester
-
 import javax.swing.JFileChooser
 import javax.swing.JFrame
 import javax.swing.JMenu
@@ -117,6 +112,8 @@ import javax.swing.JToolBar
 import javax.swing.KeyStroke
 import javax.swing.SwingUtilities
 import javax.swing.UIManager
+import org.shotdraw.framework.align.factory.BottomAlignFactory
+import org.shotdraw.framework.align.factory.RightAlignFactory
 
 
 /**
@@ -455,8 +452,8 @@ class DrawApplication extends JFrame(DrawApplication.TITLE) with DrawingEditor w
     val menu = new CommandMenu("Align")
     menu.add(new UndoableCommand(new AlignCommand("Left", LeftAlignFactory, this)))
     menu.add(new UndoableCommand(new AlignCommand("Top", TopAlignFactory, this)))
-    menu.add(new UndoableCommand(new AlignCommand("Vertical", VerticalAlignFactory, this)))
-    menu.add(new UndoableCommand(new AlignCommand("Horizontal", HorizontalAlignFactory, this)))
+    menu.add(new UndoableCommand(new AlignCommand("Bottom", BottomAlignFactory, this)))
+    menu.add(new UndoableCommand(new AlignCommand("Right", RightAlignFactory, this)))
     menu.add(new UndoableCommand(new AlignCommand("Width", WidthAlignFactory, this)))
     menu.add(new UndoableCommand(new AlignCommand("Height", HeightAlignFactory, this)))
     menu.addSeparator()

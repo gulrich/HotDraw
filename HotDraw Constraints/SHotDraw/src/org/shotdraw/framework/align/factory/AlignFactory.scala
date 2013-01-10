@@ -3,12 +3,12 @@ import org.shotdraw.framework.align.Align
 import org.shotdraw.framework.align.Align
 import org.shotdraw.framework.align.Align
 import org.shotdraw.framework.align.HeightAlign
-import org.shotdraw.framework.align.HorizontalAlign
 import org.shotdraw.framework.align.LeftAlign
 import org.shotdraw.framework.align.TopAlign
-import org.shotdraw.framework.align.VerticalAlign
 import org.shotdraw.framework.align.WidthAlign
 import org.shotdraw.framework.DrawingView
+import org.shotdraw.framework.align.RightAlign
+import org.shotdraw.framework.align.BottomAlign
 
 sealed trait AlignFactory {
   def instance(view: DrawingView): Align
@@ -22,12 +22,12 @@ object LeftAlignFactory extends AlignFactory {
   override def instance(view: DrawingView) = new LeftAlign(view)
 }
 
-object VerticalAlignFactory extends AlignFactory {
-  override def instance(view: DrawingView) = new VerticalAlign(view)
+object BottomAlignFactory extends AlignFactory {
+  override def instance(view: DrawingView) = new BottomAlign(view)
 }
 
-object HorizontalAlignFactory extends AlignFactory {
-  override def instance(view: DrawingView) = new HorizontalAlign(view)
+object RightAlignFactory extends AlignFactory {
+  override def instance(view: DrawingView) = new RightAlign(view)
 }
 
 object WidthAlignFactory extends AlignFactory {
