@@ -238,14 +238,18 @@ object NorthWest extends DragBox {
 object DraggableBox {
     
   sealed trait Direction
-  case object North extends Direction
-  case object NorthEast extends Direction
-  case object East extends Direction
-  case object SouthEast extends Direction
-  case object South extends Direction
-  case object SouthWest extends Direction
-  case object West extends Direction
-  case object NorthWest extends Direction
+  abstract class Horizontal extends Direction
+  abstract class Vertical extends Direction
+  abstract class Both extends Direction
+  
+  case object North extends Vertical
+  case object NorthEast extends Both
+  case object East extends Horizontal
+  case object SouthEast extends Both
+  case object South extends Vertical
+  case object SouthWest extends Both
+  case object West extends Horizontal
+  case object NorthWest extends Both
 }
 
 class DraggableBox(solver: SimplexSolver, owner: RectangularFigure, direction: DraggableBox.Direction) extends AbstractHandle(owner) {
@@ -267,11 +271,27 @@ class DraggableBox(solver: SimplexSolver, owner: RectangularFigure, direction: D
       case DraggableBox.West => owner.westMove()
       case DraggableBox.NorthWest => owner.northWestMove()
     }
-    solver.addEditVar(cx).beginEdit.addEditVar(cy).beginEdit
+    try {
+      direction match {
+        case _:DraggableBox.Both => solver.addEditVar(cx).beginEdit.addEditVar(cy).beginEdit
+        case _:DraggableBox.Horizontal => solver.addEditVar(cx).beginEdit.beginEdit
+        case _:DraggableBox.Vertical => solver.addEditVar(cy).beginEdit.beginEdit
+      }
+    } catch {
+      case ex: LinearEquation => ex.printStackTrace
+    }
   }
 
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    solver.suggestValue(cx, x).suggestValue(cy, y).resolve
+    try {
+      direction match {
+        case _:DraggableBox.Both => solver.suggestValue(cx, x).suggestValue(cy, y).resolve
+        case _:DraggableBox.Horizontal => solver.suggestValue(cx, x).resolve
+        case _:DraggableBox.Vertical => solver.suggestValue(cy, y).resolve
+      }
+    } catch {
+      case ex: LinearEquation => ex.printStackTrace
+    }
     owner.changed()
   }
   
@@ -279,7 +299,8 @@ class DraggableBox(solver: SimplexSolver, owner: RectangularFigure, direction: D
     try {
       solver.endEdit
     } catch {
-      case ex: LinearEquation => ex.printStackTrace
+      case ex: LinearEquation =>
+        ex.printStackTrace
     }
     owner.stopResizing()
     owner.changed()

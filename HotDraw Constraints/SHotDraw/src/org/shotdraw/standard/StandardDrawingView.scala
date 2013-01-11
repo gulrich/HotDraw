@@ -285,6 +285,11 @@ class StandardDrawingView(var newEditor: DrawingEditor, width: Int, height: Int)
     val visitor = new InsertIntoDrawingVisitor(drawing)
     fe foreach (f => f match {
       case cf: ConnectionFigure => vCF += cf
+      case rf: RectangularFigure if rf != null =>
+        rf.startMoving()
+        rf.moveBy(dx, dy)
+        rf.endMoving()
+        rf.visit(visitor)
       case _ if f != null => 
         f.moveBy(dx, dy)
         f.visit(visitor)
