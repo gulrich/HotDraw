@@ -24,6 +24,7 @@ import java.io.FileOutputStream
 import java.io.File
 import ch.epfl.lamp.cassowary.Constraint
 import org.shotdraw.framework.Handle
+import ch.epfl.lamp.cassowary.LinearEquation
 
 object Printer {
   def println(s: String) {
@@ -266,12 +267,20 @@ class DraggableBox(solver: SimplexSolver, owner: RectangularFigure, direction: D
       case DraggableBox.West => owner.westMove()
       case DraggableBox.NorthWest => owner.northWestMove()
     }
+    solver.addEditVar(cx).beginEdit.addEditVar(cy).beginEdit
   }
 
+  override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
+    solver.suggestValue(cx, x).suggestValue(cy, y).resolve
+    owner.changed()
+  }
+  
   override def invokeEnd(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    solver.addEditVar(cx).beginEdit.addEditVar(cy).beginEdit
-    solver.suggestValue(cx, x).suggestValue(cy, y)
-    solver.endEdit()
+    try {
+      solver.endEdit
+    } catch {
+      case ex: LinearEquation => ex.printStackTrace
+    }
     owner.stopResizing()
     owner.changed()
   }
