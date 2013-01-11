@@ -64,9 +64,13 @@ object DragTracker {
 
     def moveAffectedFigures(startPoint: Point, endPoint: Point) {
       val figures = getAffectedFigures
-      figures foreach {f =>
-        f.moveBy(endPoint.x - startPoint.x, endPoint.y - startPoint.y)
-      }
+      figures foreach (f => f match {
+        case rf: RectangularFigure =>
+          rf.startMoving()
+          rf.moveBy(endPoint.x - startPoint.x, endPoint.y - startPoint.y)
+          rf.endMoving()
+        case _ => f.moveBy(endPoint.x - startPoint.x, endPoint.y - startPoint.y)
+      })
     }
 
   }

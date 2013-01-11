@@ -653,7 +653,7 @@ final class SimplexSolver extends Tableau with Serializable {
     addRow(entryVar, rhs)
   }
 
-  protected def resetStayConstants(): Unit = {
+  def resetStayConstants(): Unit = {
     fnenterprint("resetStayConstants")
     var i = 0
     while (i < _stayPlusErrorVars.size) {

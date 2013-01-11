@@ -160,12 +160,10 @@ abstract class RectangularFigure(origin: Point, corner: Point, solver: SimplexSo
   }
   
   def stopResizing() {
-    db.cwidth.require
-    db.cheight.require
-    h foreach { handle =>
-      handle.cx.disable
-      handle.cy.disable
-    }
+    db.cx.stay
+    db.cy.stay
+    db.cwidth.stay
+    db.cheight.stay
   }
   
   def newFigure(origin: Point, corner: Point, solver: SimplexSolver): RectangularFigure
@@ -261,6 +259,7 @@ class DraggableBox(solver: SimplexSolver, owner: RectangularFigure, direction: D
   def y = cy.value.toInt
 
   override def invokeStart(x: Int, y: Int, view: DrawingView) {
+    solver.resetStayConstants()
     direction match {
       case DraggableBox.North => owner.northMove()
       case DraggableBox.NorthEast => owner.northEastMove() 
@@ -271,38 +270,25 @@ class DraggableBox(solver: SimplexSolver, owner: RectangularFigure, direction: D
       case DraggableBox.West => owner.westMove()
       case DraggableBox.NorthWest => owner.northWestMove()
     }
-    try {
-      direction match {
-        case _:DraggableBox.Both => solver.addEditVar(cx).beginEdit.addEditVar(cy).beginEdit
-        case _:DraggableBox.Horizontal => solver.addEditVar(cx).beginEdit.beginEdit
-        case _:DraggableBox.Vertical => solver.addEditVar(cy).beginEdit.beginEdit
-      }
-    } catch {
-      case ex: LinearEquation => ex.printStackTrace
+    direction match {
+      case _:DraggableBox.Both => solver.addEditVar(cx).beginEdit.addEditVar(cy).beginEdit
+      case _:DraggableBox.Horizontal => solver.addEditVar(cx).beginEdit.beginEdit
+      case _:DraggableBox.Vertical => solver.addEditVar(cy).beginEdit.beginEdit
     }
   }
 
   override def invokeStep(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    try {
-      direction match {
-        case _:DraggableBox.Both => solver.suggestValue(cx, x).suggestValue(cy, y).resolve
-        case _:DraggableBox.Horizontal => solver.suggestValue(cx, x).resolve
-        case _:DraggableBox.Vertical => solver.suggestValue(cy, y).resolve
-      }
-    } catch {
-      case ex: LinearEquation => ex.printStackTrace
+    direction match {
+      case _:DraggableBox.Both => solver.suggestValue(cx, x).suggestValue(cy, y).resolve
+      case _:DraggableBox.Horizontal => solver.suggestValue(cx, x).resolve
+      case _:DraggableBox.Vertical => solver.suggestValue(cy, y).resolve
     }
     owner.changed()
   }
   
   override def invokeEnd(x: Int, y: Int, anchorX: Int, anchorY: Int, view: DrawingView) {
-    try {
-      solver.endEdit
-    } catch {
-      case ex: LinearEquation =>
-        ex.printStackTrace
-    }
-    owner.stopResizing()
+    solver.endEdit
+    solver.resetStayConstants()
     owner.changed()
   }
   
