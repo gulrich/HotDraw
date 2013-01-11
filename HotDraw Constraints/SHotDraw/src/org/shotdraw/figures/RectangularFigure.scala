@@ -106,9 +106,6 @@ abstract class RectangularFigure(origin: Point, corner: Point, solver: SimplexSo
   
   override def displayBox(origin: Point, corner: Point) {
     willChange()
-//    solver.addEditVar(db.cx).beginEdit.addEditVar(db.cy).addEditVar(db.cwidth).addEditVar(db.cheight).beginEdit
-//    solver.suggestValue(db.cx, origin.x).suggestValue(db.cy, origin.y).suggestValue(db.cwidth, corner.x-origin.x).suggestValue(db.cheight, corner.y-origin.y).resolve
-//    solver.endEdit
     changed()
   }
   
@@ -182,11 +179,18 @@ abstract class RectangularFigure(origin: Point, corner: Point, solver: SimplexSo
     new Rectangle(db.x, db.y, db.width, db.height)
   }
 
-  protected def basicMoveBy(x: Int, y: Int) {
-    Printer.println("X: "+(x)+", Y: "+(y))
+  def startMoving() {
     solver.addEditVar(db.cx).addEditVar(db.cy).beginEdit
-    solver.suggestValue(db.cx, db.x+x).suggestValue(db.cy, db.y+y).resolve
+  }
+  
+  def endMoving() {
     solver.endEdit
+    changed()
+  }
+  
+  protected def basicMoveBy(x: Int, y: Int) {
+    solver.suggestValue(db.cx, db.x+x).suggestValue(db.cy, db.y+y).resolve
+    changed()
   }
   
   override def write(dw: StorableOutput) {
