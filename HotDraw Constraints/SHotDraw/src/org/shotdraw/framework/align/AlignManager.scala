@@ -39,13 +39,14 @@ object AlignManager {
   
   def show {
     val frame = new JFrame
+    frame.setLayout(new BorderLayout)
     frame.setSize(200,100)
     val panel = new JPanel
     panel.setLayout(new GridBagLayout)
     var gbc = new GridBagConstraints(0,GridBagConstraints.RELATIVE,1,1,1,0,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1,1,1,1),0 ,0)
     constraints foreach { c => panel.add(createPanel(c),gbc) }
     val pane = new JScrollPane(panel)
-    frame.add(pane)
+    frame.add(pane, BorderLayout.NORTH)
     frame.setVisible(true)
   }
   
