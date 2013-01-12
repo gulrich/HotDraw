@@ -85,5 +85,7 @@ class RoundRectangleFigure(origin: Point, corner: Point, solver: SimplexSolver) 
     fArcHeight = dr.readInt
   }
 
+  override def toString: String = "Round rectangle"
+  
 }
 

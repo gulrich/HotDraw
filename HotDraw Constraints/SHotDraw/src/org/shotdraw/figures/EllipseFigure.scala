@@ -49,5 +49,7 @@ class EllipseFigure(origin: Point, corner: Point, solver: SimplexSolver) extends
   override def newFigure(origin: Point, corner: Point, solver: SimplexSolver) = new EllipseFigure(origin, corner, solver)
 
   override def connectorAt(x: Int, y: Int): Connector = new ChopEllipseConnector(this)
+  
+  override def toString: String = "Ellipse"
 }
 

@@ -69,5 +69,7 @@ class DiamondFigure(origin: Point, corner: Point, solver: SimplexSolver) extends
   override def newFigure(origin: Point, corner: Point, solver: SimplexSolver) = new DiamondFigure(origin, corner, solver)
 
   override def connectorAt(x: Int, y: Int): Connector =  new ShortestDistanceConnector(this)
+  
+  override def toString: String = "Diamond"
 }
 

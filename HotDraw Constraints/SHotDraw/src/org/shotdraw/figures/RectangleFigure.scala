@@ -43,5 +43,7 @@ class RectangleFigure(origin: Point, corner: Point, solver: SimplexSolver) exten
   }  
   
   override def newFigure(origin: Point, corner: Point, solver: SimplexSolver) = new RectangleFigure(origin, corner, solver)
+  
+  override def toString: String = "Rectangle"
 }
 

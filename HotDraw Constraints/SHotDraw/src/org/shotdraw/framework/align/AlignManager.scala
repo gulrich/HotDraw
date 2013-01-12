@@ -13,6 +13,7 @@ import java.awt.FlowLayout
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
+import org.shotdraw.framework.align.alignments.Align
 
 object AlignManager {
 
@@ -53,7 +54,9 @@ object AlignManager {
     frame.setSize(200,100)
     val pan = new JPanel
     pan.setLayout(new BorderLayout)
-    pan.add(new JLabel(a.toString), BorderLayout.WEST)
+    val label = new JLabel(a.name + " alignment")
+    label.setToolTipText(a.toString())
+    pan.add(label, BorderLayout.WEST)
     val box = new JCheckBox
     box.setSelected(a.enabled);
     box.addActionListener(new ActionListener {

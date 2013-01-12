@@ -1,4 +1,4 @@
-package org.shotdraw.framework.align
+package org.shotdraw.framework.align.alignments
 
 import org.shotdraw.figures.RectangularFigure
 import org.shotdraw.framework.DrawingView

@@ -16,6 +16,7 @@ import org.shotdraw.util.Undoable
 import org.shotdraw.standard.ChangeAttributeCommand
 import org.shotdraw.standard.AbstractCommand
 import org.shotdraw.framework.align.factory.AlignFactory
+import org.shotdraw.framework.align.alignments.Align
 
 
 /**

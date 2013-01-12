@@ -60,5 +60,7 @@ class TriangleFigure(origin: Point, corner: Point, solver: SimplexSolver) extend
   override def newFigure(origin: Point, corner: Point, solver: SimplexSolver) = new TriangleFigure(origin, corner, solver)
 
   override def connectorAt(x: Int, y: Int): Connector =  new ShortestDistanceConnector(this)
+  
+  override def toString: String = "Triangle"
 }
 

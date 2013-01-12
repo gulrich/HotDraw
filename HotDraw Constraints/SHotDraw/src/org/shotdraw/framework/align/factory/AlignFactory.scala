@@ -1,17 +1,14 @@
 package org.shotdraw.framework.align.factory
-import org.shotdraw.framework.align.Align
-import org.shotdraw.framework.align.Align
-import org.shotdraw.framework.align.Align
-import org.shotdraw.framework.align.HeightAlign
-import org.shotdraw.framework.align.LeftAlign
-import org.shotdraw.framework.align.TopAlign
-import org.shotdraw.framework.align.WidthAlign
+import org.shotdraw.framework.align.alignments.Align
+import org.shotdraw.framework.align.alignments.BottomAlign
+import org.shotdraw.framework.align.alignments.HeightAlign
+import org.shotdraw.framework.align.alignments.LeftAlign
+import org.shotdraw.framework.align.alignments.RightAlign
+import org.shotdraw.framework.align.alignments.SideBySideAlign
+import org.shotdraw.framework.align.alignments.StackAlign
+import org.shotdraw.framework.align.alignments.TopAlign
+import org.shotdraw.framework.align.alignments.WidthAlign
 import org.shotdraw.framework.DrawingView
-import org.shotdraw.framework.align.RightAlign
-import org.shotdraw.framework.align.BottomAlign
-import org.shotdraw.framework.align.SideBySideAlign
-import org.shotdraw.framework.align.Align
-import org.shotdraw.framework.align.StackAlign
 
 sealed trait AlignFactory {
   def instance(view: DrawingView): Align

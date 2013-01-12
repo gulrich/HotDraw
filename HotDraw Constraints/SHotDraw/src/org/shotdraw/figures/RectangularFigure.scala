@@ -203,6 +203,8 @@ abstract class RectangularFigure(origin: Point, corner: Point, solver: SimplexSo
     super.read(dr)
     db = new CRectangle(dr.readInt, dr.readInt, dr.readInt, dr.readInt, solver)
   } 
+  
+  override def toString: String
 }
 
 sealed trait DragBox
