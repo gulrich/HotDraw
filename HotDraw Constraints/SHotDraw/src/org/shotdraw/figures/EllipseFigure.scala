@@ -38,7 +38,7 @@ class EllipseFigure(origin: Point, corner: Point, solver: SimplexSolver) extends
   override def drawFrame(g: Graphics) {
     val r = displayBox
     g.drawOval(r.x, r.y, r.width - 1, r.height - 1)
-  }
+  }  
 
   override def connectionInsets: Insets = {
     val r = displayBox

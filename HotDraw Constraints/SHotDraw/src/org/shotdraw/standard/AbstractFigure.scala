@@ -31,7 +31,6 @@ import org.shotdraw.framework.FigureChangeListener
 import org.shotdraw.framework.FigureVisitor
 import org.shotdraw.framework.Handle
 import org.shotdraw.framework.Locator
-import org.shotdraw.standard.TextHolder
 import org.shotdraw.util.ColorMap
 import org.shotdraw.util.Geom
 

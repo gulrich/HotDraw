@@ -25,6 +25,8 @@ import java.io.File
 import ch.epfl.lamp.cassowary.Constraint
 import org.shotdraw.framework.Handle
 import ch.epfl.lamp.cassowary.LinearEquation
+import java.awt.geom.GeneralPath
+import java.awt.Graphics2D
 
 object Printer {
   def println(s: String) {
@@ -113,52 +115,47 @@ abstract class RectangularFigure(origin: Point, corner: Point, solver: SimplexSo
   }
   
   def southEastMove() {
-    h(7).cx.require
-    h(7).cy.require
+    h(7).cx.stay
+    h(7).cy.stay
   }
   
   def southWestMove() {
-    h(1).cx.require
-    h(1).cy.require
+    h(1).cx.stay
+    h(1).cy.stay
   }
   
   def northWestMove() {
-    h(3).cx.require
-    h(3).cy.require
+    h(3).cx.stay
+    h(3).cy.stay
   }
   
   def northEastMove() {
-    h(5).cx.require
-    h(5).cy.require
+    h(5).cx.stay
+    h(5).cy.stay
   }
   
   def northMove() {
-    h(2).cx.require
+    h(2).cx.stay
     h(4).cy.require
-    h(6).cx.require
+    h(6).cx.stay
   }
   
   def southMove() {
     h(0).cy.require
-    h(2).cx.require
-    h(6).cx.require
+    h(2).cx.stay
+    h(6).cx.stay
   }
   
   def eastMove() {
-    h(0).cy.require
-    h(4).cy.require
+    h(0).cy.stay
+    h(4).cy.stay
     h(6).cx.require
   }
   
   def westMove() {  
-    h(0).cy.require
+    h(0).cy.stay
     h(2).cx.require
-    h(4).cy.require
-  }
-  
-  def startResizing() {
-    db.cwidth.disable
-    db.cheight.disable
+    h(4).cy.stay
   }
   
   def stopResizing() {
@@ -273,9 +270,9 @@ class DraggableBox(solver: SimplexSolver, owner: RectangularFigure, direction: D
       case DraggableBox.NorthWest => owner.northWestMove()
     }
     direction match {
-      case _:DraggableBox.Both => solver.addEditVar(cx).beginEdit.addEditVar(cy).beginEdit
-      case _:DraggableBox.Horizontal => solver.addEditVar(cx).beginEdit.beginEdit
-      case _:DraggableBox.Vertical => solver.addEditVar(cy).beginEdit.beginEdit
+      case _:DraggableBox.Both => solver.addEditVar(cx).addEditVar(cy).beginEdit
+      case _:DraggableBox.Horizontal => solver.addEditVar(cx).beginEdit
+      case _:DraggableBox.Vertical => solver.addEditVar(cy).beginEdit
     }
   }
 
