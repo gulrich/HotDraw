@@ -59,6 +59,8 @@ abstract class RectangularFigure(origin: Point, corner: Point, solver: SimplexSo
   db.cwidth.stay
   db.cheight.stay
   
+  ensure(db.cwidth :>= 0)
+  ensure(db.cheight :>= 0)
   
   ensure(h(0).cx :== h(7).cx+h(1).cx-h(0).cx)
   ensure(h(4).cx :== h(0).cx)
