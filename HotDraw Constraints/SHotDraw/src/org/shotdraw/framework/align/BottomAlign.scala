@@ -11,11 +11,12 @@ import ch.epfl.lamp.cassowary.Constraint
 
 class BottomAlign(view: DrawingView) extends Align("Bottom", view) {
 
-  private var figure: RectangularFigure = view.selection(0).asInstanceOf[RectangularFigure] //TODO Change that
-  
   override def constraints = view.selection.foldLeft(List[Constraint]())((l,f) => f match {
-    case rf: RectangularFigure => l ::: List(rf.db.cy :== figure.db.cy+figure.db.cheight-rf.db.cheight)
+    case rf: RectangularFigure => l :::
+      view.selection.foldLeft(List[Constraint]())((l,f) => f match {
+        case rff: RectangularFigure if rff != rf => (rf.db.cy :== rff.db.cy+rff.db.cheight-rf.db.cheight) :: l
+        case _ => l
+      })
     case _ => l
   })
-  
 }

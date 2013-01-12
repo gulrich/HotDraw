@@ -11,20 +11,24 @@ import ch.epfl.lamp.cassowary.Constraint
 
 class WidthAlign(view: DrawingView) extends Align("Width", view) {
 
-  private var figure: RectangularFigure = view.selection(0).asInstanceOf[RectangularFigure] //TODO Change that
-   
   override def constraints = view.selection.foldLeft(List[Constraint]())((l,f) => f match {
-    case rf: RectangularFigure => l ::: List(rf.db.cwidth :== figure.db.cwidth)
+    case rf: RectangularFigure => l :::
+      view.selection.foldLeft(List[Constraint]())((l,f) => f match {
+        case rff: RectangularFigure if rff != rf => (rf.db.cwidth :== rff.db.cwidth) :: l
+        case _ => l
+      })
     case _ => l
   })
 }
 
 class HeightAlign(view: DrawingView) extends Align("Height", view) {
 
-  private var figure: RectangularFigure = view.selection(0).asInstanceOf[RectangularFigure] //TODO Change that
-   
   override def constraints = view.selection.foldLeft(List[Constraint]())((l,f) => f match {
-    case rf: RectangularFigure => l ::: List(rf.db.cheight :== figure.db.cheight)
+    case rf: RectangularFigure => l :::
+      view.selection.foldLeft(List[Constraint]())((l,f) => f match {
+        case rff: RectangularFigure if rff != rf => (rf.db.cheight :== rff.db.cheight) :: l
+        case _ => l
+      })
     case _ => l
   })
 }
